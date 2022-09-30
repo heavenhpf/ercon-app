@@ -5,7 +5,7 @@ const Joi = require('joi')
 class _user {
     listUser = async () => {
         try {
-            const list = await prisma.user.findMany({
+            const list = await prisma.auth_user.findMany({
                 where: {
                     deleted_at: null
                 }
@@ -53,7 +53,7 @@ class _user {
 
             body.password = bcrypt.hashSync(body.password, 10)
 
-            const addUser = await prisma.user.create({
+            const addUser = await prisma.auth_user.create({
                 data: {
                     username: body.username,
                     password: body.password,
@@ -61,7 +61,7 @@ class _user {
                 }
             }).finally(prisma.$disconnect())
 
-            const addCompany = await prisma.company.create({
+            const addCompany = await prisma.s_company.create({
                 data: {
                     id_user: addUser.id_user,
                     name: body.name,
@@ -104,7 +104,7 @@ class _user {
                 }
             }
 
-            const check = await prisma.user.findFirst({
+            const check = await prisma.auth_user.findFirst({
                 where: {
                     OR: [
                         {
@@ -127,7 +127,7 @@ class _user {
                 }
             }
 
-            const del = await prisma.user.update({
+            const del = await prisma.auth_user.update({
                 where: {
                     id_user: id
                 },

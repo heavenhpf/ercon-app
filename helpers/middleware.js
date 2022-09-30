@@ -11,7 +11,7 @@ const userSession = async (req, res, next) => {
   
         const decoded = jwt.verify(token, config.jwt.secret)
 
-        const user = await prisma.user.findFirst({
+        const user = await prisma.auth_user.findFirst({
           where: {
             id_user: decoded.id
           },

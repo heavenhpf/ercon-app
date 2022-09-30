@@ -24,7 +24,7 @@ class _auth {
                 }
             }
 
-            const checkUser = await prisma.user.findFirst({
+            const checkUser = await prisma.auth_user.findFirst({
                 where: {
                     username: body.username
                 },

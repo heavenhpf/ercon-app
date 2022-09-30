@@ -20,7 +20,7 @@ class _item {
                 }
             }
     
-            const check = await prisma.company.findFirst({
+            const check = await prisma.s_company.findFirst({
                 where: {
                     id_company: id
                 },
@@ -37,7 +37,7 @@ class _item {
                 }
             }
 
-            const list = await prisma.item.findMany({
+            const list = await prisma.d_item.findMany({
                 where: {
                     id_user: check.id_user,
                     deleted_at: null
@@ -87,7 +87,7 @@ class _item {
                 }
             }
     
-            const add = await prisma.item.create({
+            const add = await prisma.d_item.create({
                 data: {
                     id_user: body.id,
                     id_unit: body.id_unit,
@@ -99,7 +99,7 @@ class _item {
                 }
             }).finally(prisma.$disconnect())
 
-            const addDetail = await prisma.item_detail.create({
+            const addDetail = await prisma.d_item_detail.create({
                 data: {
                     id_item: add.id_item,
                     quantity: add.quantity
@@ -139,7 +139,7 @@ class _item {
                 }
             }
 
-            const check = await prisma.item.findUnique({
+            const check = await prisma.d_item.findUnique({
                 where: {
                     id_item: id
                 }
@@ -153,12 +153,18 @@ class _item {
                 }
             }
 
-            const del = await prisma.item.update({
+            const del = await prisma.d_item.update({
                 where: {
                     id_item: id
                 },
                 data: {
                     deleted_at: new Date(Date.now())
+                }
+            }).finally(prisma.$disconnect())
+
+            const delDetail = await prisma.d_item_detail.deleteMany({
+                where: {
+                    id_item: id
                 }
             }).finally(prisma.$disconnect())
             
@@ -206,7 +212,7 @@ class _item {
                 }
             }
 
-            const check = await prisma.item.findFirst({
+            const check = await prisma.d_item.findFirst({
                 where: {
                     id_item: body.id
                 }
@@ -220,7 +226,7 @@ class _item {
                 }
             }
 
-            const edit = await prisma.item.update({
+            const edit = await prisma.d_item.update({
                 where: {
                     id_item: body.id
                 },

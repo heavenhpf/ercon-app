@@ -1,19 +1,12 @@
 const prisma = require('../helpers/database')
 const Joi = require('joi')
 
-class _company {
-    listCompany = async () => {
+class _unit {
+    listUnit = async () => {
         try {
-            const list = await prisma.s_company.findMany({
+            const list = await prisma.ref_unit.findMany({
                 where: {
                     deleted_at: null
-                },
-                include: {
-                    auth_user: {
-                        select: {
-                            username: true
-                        }
-                    }
                 }
             }).finally(prisma.$disconnect())
 
@@ -22,7 +15,7 @@ class _company {
                 data: list
             }
         } catch (error) {
-            console.error('listCompany user module Error ', error)
+            console.error('listUnit user module Error ', error)
 
             return {
                 status: false,
@@ -31,18 +24,10 @@ class _company {
         }
     }
 
-    editCompany = async (id, body) => {
+    addUnit = async (body) => {
         try {
-            body = {
-                id: parseInt(id),
-                ...body
-            }
-
             const schema = Joi.object({
-                id: Joi.number(),
-                name: Joi.string(),
-                address: Joi.string(),
-                phone: Joi.string()
+                name: Joi.string().required()
             })
 
             const validation = schema.validate(body)
@@ -57,9 +42,52 @@ class _company {
                 }
             }
 
-            const check = await prisma.s_company.findFirst({
+            const add = await prisma.ref_unit.create({
+                data: {
+                    name: body.name,
+                }
+            }).finally(prisma.$disconnect())
+
+            return {
+                status: true,
+                data: add
+            }
+        } catch (error) {
+            console.error('addUnit user module Error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
+    editUnit = async (id, body) => {
+        try {
+            body = {
+                id: parseInt(id),
+                ...body
+            }
+            const schema = Joi.object({
+                id: Joi.number().required(),
+                name: Joi.string().required()
+            })
+
+            const validation = schema.validate(body)
+
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            const check = await prisma.ref_unit.findFirst({
                 where: {
-                    id_company: body.id
+                    id_unit: body.id
                 }
             }).finally(prisma.$disconnect())
 
@@ -71,14 +99,12 @@ class _company {
                 }
             }
 
-            const edit = await prisma.s_company.update({
+            const edit = await prisma.ref_unit.update({
                 where: {
-                    id_company: body.id
+                    id_unit: body.id
                 },
                 data: {
                     name: body.name,
-                    address: body.address,
-                    phone: body.phone
                 }
             }).finally(prisma.$disconnect())
 
@@ -87,7 +113,7 @@ class _company {
                 data: edit
             }
         } catch (error) {
-            console.error('editCompany user module Error: ', error)
+            console.error('editUnit user module Error: ', error)
 
             return {
                 status: false,
@@ -96,7 +122,7 @@ class _company {
         }
     }
 
-    deleteCompany = async (id) => {
+    deleteUnit = async (id) => {
         try {
             id = parseInt(id)
             const schema = Joi.number().required()
@@ -113,9 +139,9 @@ class _company {
                 }
             }
 
-            const check = await prisma.s_company.findFirst({
+            const check = await prisma.ref_unit.findFirst({
                 where: {
-                    id_company: id
+                    id_unit: id
                 }
             }).finally(prisma.$disconnect())
 
@@ -127,9 +153,9 @@ class _company {
                 }
             }
 
-            const del = await prisma.s_company.update({
+            const del = await prisma.ref_unit.update({
                 where: {
-                    id_company: id
+                    id_unit: id
                 },
                 data: {
                     deleted_at: new Date(Date.now())
@@ -141,7 +167,7 @@ class _company {
                 data: del
             }
         } catch (error) {
-            console.error('deleteUser module error: ', error)
+            console.error('deleteUnit module error: ', error)
 
             return {
                 status: false,
@@ -151,4 +177,4 @@ class _company {
     }
 }
 
-module.exports = new _company()
+module.exports = new _unit

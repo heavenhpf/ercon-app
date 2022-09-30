@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2022 at 06:37 AM
+-- Generation Time: Sep 30, 2022 at 08:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -64,6 +64,21 @@ CREATE TABLE `d_dn_detail` (
   `id_order` int(11) NOT NULL,
   `note` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `d_doc`
+--
+
+CREATE TABLE `d_doc` (
+  `id_doc` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `data` varbinary(65000) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -153,26 +168,24 @@ CREATE TABLE `d_po_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ref_doc`
+-- Table structure for table `ref_category`
 --
 
-CREATE TABLE `ref_doc` (
-  `id_doc` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  `data` varbinary(65000) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
+CREATE TABLE `ref_category` (
+  `id_category` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `s_category`
+-- Table structure for table `ref_unit`
 --
 
-CREATE TABLE `s_category` (
-  `id_category` int(11) NOT NULL,
+CREATE TABLE `ref_unit` (
+  `id_unit` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
@@ -190,19 +203,6 @@ CREATE TABLE `s_company` (
   `name` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `s_unit`
---
-
-CREATE TABLE `s_unit` (
-  `id_unit` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -234,6 +234,12 @@ ALTER TABLE `d_dn_detail`
   ADD PRIMARY KEY (`id_dn_detail`),
   ADD KEY `id_dn` (`id_dn`),
   ADD KEY `id_order` (`id_order`);
+
+--
+-- Indexes for table `d_doc`
+--
+ALTER TABLE `d_doc`
+  ADD PRIMARY KEY (`id_doc`);
 
 --
 -- Indexes for table `d_item`
@@ -282,16 +288,16 @@ ALTER TABLE `d_po_detail`
   ADD KEY `id_order` (`id_order`);
 
 --
--- Indexes for table `ref_doc`
+-- Indexes for table `ref_category`
 --
-ALTER TABLE `ref_doc`
-  ADD PRIMARY KEY (`id_doc`);
+ALTER TABLE `ref_category`
+  ADD PRIMARY KEY (`id_category`);
 
 --
--- Indexes for table `s_category`
+-- Indexes for table `ref_unit`
 --
-ALTER TABLE `s_category`
-  ADD PRIMARY KEY (`id_category`);
+ALTER TABLE `ref_unit`
+  ADD PRIMARY KEY (`id_unit`);
 
 --
 -- Indexes for table `s_company`
@@ -299,12 +305,6 @@ ALTER TABLE `s_category`
 ALTER TABLE `s_company`
   ADD PRIMARY KEY (`id_company`),
   ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `s_unit`
---
-ALTER TABLE `s_unit`
-  ADD PRIMARY KEY (`id_unit`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -327,6 +327,12 @@ ALTER TABLE `d_dn`
 --
 ALTER TABLE `d_dn_detail`
   MODIFY `id_dn_detail` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `d_doc`
+--
+ALTER TABLE `d_doc`
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `d_item`
@@ -359,28 +365,22 @@ ALTER TABLE `d_po_detail`
   MODIFY `id_po_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ref_doc`
+-- AUTO_INCREMENT for table `ref_category`
 --
-ALTER TABLE `ref_doc`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ref_category`
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `s_category`
+-- AUTO_INCREMENT for table `ref_unit`
 --
-ALTER TABLE `s_category`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ref_unit`
+  MODIFY `id_unit` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `s_company`
 --
 ALTER TABLE `s_company`
   MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `s_unit`
---
-ALTER TABLE `s_unit`
-  MODIFY `id_unit` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -390,7 +390,7 @@ ALTER TABLE `s_unit`
 -- Constraints for table `d_dn`
 --
 ALTER TABLE `d_dn`
-  ADD CONSTRAINT `d_dn_ibfk_1` FOREIGN KEY (`id_doc`) REFERENCES `ref_doc` (`id_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `d_dn_ibfk_1` FOREIGN KEY (`id_doc`) REFERENCES `d_doc` (`id_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_dn_ibfk_2` FOREIGN KEY (`id_po`) REFERENCES `d_po` (`id_po`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_dn_ibfk_3` FOREIGN KEY (`order_from`) REFERENCES `s_company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_dn_ibfk_4` FOREIGN KEY (`order_to`) REFERENCES `s_company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -407,8 +407,8 @@ ALTER TABLE `d_dn_detail`
 --
 ALTER TABLE `d_item`
   ADD CONSTRAINT `d_item_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `auth_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `d_item_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `s_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `d_item_ibfk_3` FOREIGN KEY (`id_category`) REFERENCES `s_category` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `d_item_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `d_item_ibfk_3` FOREIGN KEY (`id_category`) REFERENCES `ref_category` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `d_item_detail`
@@ -429,7 +429,7 @@ ALTER TABLE `d_order`
 -- Constraints for table `d_po`
 --
 ALTER TABLE `d_po`
-  ADD CONSTRAINT `d_po_ibfk_2` FOREIGN KEY (`id_doc`) REFERENCES `ref_doc` (`id_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `d_po_ibfk_2` FOREIGN KEY (`id_doc`) REFERENCES `d_doc` (`id_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_po_ibfk_3` FOREIGN KEY (`order_from`) REFERENCES `s_company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_po_ibfk_4` FOREIGN KEY (`order_to`) REFERENCES `s_company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE;
 
