@@ -1,0 +1,186 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id_category Int       @id @default(autoincrement())
+  name        String    @db.VarChar(20)
+  created_at  DateTime  @default(now()) @db.DateTime(0)
+  deleted_at  DateTime? @db.DateTime(0)
+  item        item[]
+}
+
+model company {
+  id_company                      Int       @id @default(autoincrement())
+  id_user                         Int
+  name                            String    @db.VarChar(50)
+  address                         String    @db.VarChar(100)
+  phone                           String    @db.VarChar(20)
+  created_at                      DateTime  @default(now()) @db.DateTime(0)
+  deleted_at                      DateTime? @db.DateTime(0)
+  user                            user      @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "company_ibfk_1")
+  dn_companyTodn_order_from       dn[]      @relation("companyTodn_order_from")
+  dn_companyTodn_order_to         dn[]      @relation("companyTodn_order_to")
+  order_companyToorder_order_from order[]   @relation("companyToorder_order_from")
+  order_companyToorder_order_to   order[]   @relation("companyToorder_order_to")
+
+  @@index([id_user], map: "id_user")
+}
+
+model dn {
+  id_dn                          Int         @id @default(autoincrement())
+  id_po                          Int
+  id_doc                         Int
+  order_from                     Int
+  order_to                       Int
+  created_at                     DateTime    @default(now()) @db.DateTime(0)
+  deleted_at                     DateTime?   @db.DateTime(0)
+  doc                            doc         @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "dn_ibfk_1")
+  po                             po          @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "dn_ibfk_2")
+  company_companyTodn_order_from company     @relation("companyTodn_order_from", fields: [order_from], references: [id_company], onDelete: Cascade, map: "dn_ibfk_3")
+  company_companyTodn_order_to   company     @relation("companyTodn_order_to", fields: [order_to], references: [id_company], onDelete: Cascade, map: "dn_ibfk_4")
+  dn_detail                      dn_detail[]
+
+  @@index([id_doc], map: "id_doc")
+  @@index([id_po], map: "id_po")
+  @@index([order_from], map: "order_from")
+  @@index([order_to], map: "order_to")
+}
+
+model dn_detail {
+  id_dn_detail Int       @id @default(autoincrement())
+  id_dn        Int
+  id_item      Int
+  quantity     Float     @db.Float
+  desc         String    @db.Text
+  created_at   DateTime  @default(now()) @db.DateTime(0)
+  deleted_at   DateTime? @db.DateTime(0)
+  item         item      @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "dn_detail_ibfk_1")
+  dn           dn        @relation(fields: [id_dn], references: [id_dn], onDelete: Cascade, map: "dn_detail_ibfk_2")
+
+  @@index([id_dn], map: "id_dn")
+  @@index([id_item], map: "id_item")
+}
+
+model doc {
+  id_doc     Int       @id @default(autoincrement())
+  name       String?   @db.VarChar(50)
+  type       String?   @db.VarChar(50)
+  data       Bytes?    @db.VarBinary(65000)
+  created_at DateTime? @default(now()) @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+  dn         dn[]
+  po         po[]
+}
+
+model item {
+  id_item       Int           @id @default(autoincrement())
+  id_user       Int
+  id_unit       Int
+  id_category   Int
+  name          String        @db.VarChar(50)
+  desc          String        @db.Text
+  serial_number String        @db.VarChar(50)
+  quantity      Float         @db.Float
+  created_at    DateTime      @default(now()) @db.DateTime(0)
+  deleted_at    DateTime?     @db.DateTime(0)
+  user          user          @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "item_ibfk_1")
+  unit          unit          @relation(fields: [id_unit], references: [id_unit], onDelete: Cascade, map: "item_ibfk_2")
+  category      category      @relation(fields: [id_category], references: [id_category], onDelete: Cascade, map: "item_ibfk_3")
+  dn_detail     dn_detail[]
+  item_detail   item_detail[]
+  order         order[]
+  po_detail     po_detail[]
+
+  @@index([id_category], map: "id_category")
+  @@index([id_unit], map: "id_unit")
+  @@index([id_user], map: "id_user")
+}
+
+model order {
+  id_order                          Int       @id @default(autoincrement())
+  order_from                        Int
+  order_to                          Int
+  id_item                           Int
+  quantity                          Float     @db.Float
+  desc                              String    @db.Text
+  processed                         Boolean
+  created_at                        DateTime  @default(now()) @db.DateTime(0)
+  deleted_at                        DateTime? @db.DateTime(0)
+  item                              item      @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "order_ibfk_1")
+  company_companyToorder_order_from company   @relation("companyToorder_order_from", fields: [order_from], references: [id_company], onDelete: Cascade, map: "order_ibfk_2")
+  company_companyToorder_order_to   company   @relation("companyToorder_order_to", fields: [order_to], references: [id_company], onDelete: Cascade, map: "order_ibfk_3")
+  po                                po[]
+
+  @@index([id_item], map: "id_item")
+  @@index([order_from], map: "order_from")
+  @@index([order_to], map: "order_to")
+}
+
+model po {
+  id_po       Int           @id @default(autoincrement())
+  id_doc      Int
+  id_order    Int
+  status      Int           @db.TinyInt
+  created_at  DateTime      @default(now()) @db.DateTime(0)
+  deleted_at  DateTime      @db.DateTime(0)
+  order       order         @relation(fields: [id_order], references: [id_order], onDelete: Cascade, map: "po_ibfk_1")
+  doc         doc           @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "po_ibfk_2")
+  dn          dn[]
+  item_detail item_detail[]
+  po_detail   po_detail[]
+
+  @@index([id_doc], map: "id_doc")
+  @@index([id_order], map: "id_order")
+}
+
+model po_detail {
+  id_po_detail Int       @id @default(autoincrement())
+  id_po        Int
+  id_item      Int
+  quantity     Float     @db.Float
+  desc         String    @db.Text
+  created_at   DateTime  @default(now()) @db.DateTime(0)
+  deleted_at   DateTime? @db.DateTime(0)
+  po           po        @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "po_detail_ibfk_1")
+  item         item      @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "po_detail_ibfk_2")
+
+  @@index([id_item], map: "id_item")
+  @@index([id_po], map: "id_po")
+}
+
+model unit {
+  id_unit    Int       @id @default(autoincrement())
+  name       String    @db.VarChar(20)
+  created_at DateTime  @default(now()) @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+  item       item[]
+}
+
+model user {
+  id_user    Int       @id @default(autoincrement())
+  username   String    @db.VarChar(50)
+  password   String    @db.VarChar(100)
+  created_at DateTime  @default(now()) @db.DateTime(0)
+  deleted_at DateTime? @db.DateTime(0)
+  level      Int       @db.TinyInt
+  company    company[]
+  item       item[]
+}
+
+model item_detail {
+  id_item_detail Int   @id @default(autoincrement())
+  id_item        Int
+  id_po          Int?
+  quantity       Float @db.Float
+  item           item  @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "item_detail_ibfk_1")
+  po             po?   @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "item_detail_ibfk_2")
+
+  @@index([id_item], map: "id_item")
+  @@index([id_po], map: "id_po")
+}
