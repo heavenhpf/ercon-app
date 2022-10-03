@@ -165,8 +165,7 @@ model s_company {
 model d_doc {
   id_doc     Int       @id @default(autoincrement())
   name       String?   @db.VarChar(50)
-  type       String?   @db.VarChar(50)
-  data       Bytes?    @db.VarBinary(65000)
+  data       Bytes?
   created_at DateTime? @default(now()) @db.DateTime(0)
   deleted_at DateTime? @db.DateTime(0)
   d_dn       d_dn[]

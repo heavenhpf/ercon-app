@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2022 at 08:57 AM
+-- Generation Time: Oct 03, 2022 at 04:22 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -76,8 +76,7 @@ CREATE TABLE `d_dn_detail` (
 CREATE TABLE `d_doc` (
   `id_doc` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  `data` varbinary(65000) DEFAULT NULL,
+  `data` longblob DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
