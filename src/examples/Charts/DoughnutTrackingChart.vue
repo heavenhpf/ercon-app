@@ -39,7 +39,7 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-xs font-weight-bold">55%</span>
+                    <span class="text-xs font-weight-bold">60%</span>
                   </td>
                 </tr>
                 <tr>
@@ -52,7 +52,7 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-xs font-weight-bold">25%</span>
+                    <span class="text-xs font-weight-bold">20%</span>
                   </td>
                 </tr>
                 <tr>
@@ -104,7 +104,7 @@ export default {
               "#2dce89",
             ],
 
-            data: [55, 25, 20],
+            data: [60, 20, 20],
             fill: false,
           },
         ],

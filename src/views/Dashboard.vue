@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid mt-3">
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
@@ -8,43 +8,58 @@
             <h4 class="font-weight-bolder text-white">Admin PT TMMIN</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card
-              :title="stats.po.title"
-              :value="stats.po.value"
-              :iconClass="stats.po.iconClass"
-              :iconBackground="stats.po.iconBackground"
-              directionReverse
-            ></card>
+            <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
+              :iconBackground="stats.po.iconBackground" directionReverse></card>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card
-              :title="stats.dn.title"
-              :value="stats.dn.value"
-              :iconClass="stats.dn.iconClass"
-              :iconBackground="stats.dn.iconBackground"
-              directionReverse
-            ></card>
+            <card :title="stats.dn.title" :value="stats.dn.value" :iconClass="stats.dn.iconClass"
+              :iconBackground="stats.dn.iconBackground" directionReverse></card>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card
-              :title="stats.supplier.title"
-              :value="stats.supplier.value"
-              :iconClass="stats.supplier.iconClass"
-              :iconBackground="stats.supplier.iconBackground"
-              directionReverse
-            ></card>
+            <card :title="stats.supplier.title" :value="stats.supplier.value" :iconClass="stats.supplier.iconClass"
+              :iconBackground="stats.supplier.iconBackground" directionReverse></card>
           </div>
           <div class="mb-5">
             <doughnut-tracking-chart />
           </div>
-          <div class="col">
-
+          <div class="pb-0 row">
+            <div class="row mb-0">
+              <div class="col-10">
+                <div class="pb-0 text-start">
+                  <h5 class="text-black font-weight-bolder">Update Tracking</h5>
+                </div>
+              </div>
+              <div class="col-2 d-flex justify-content-end mt-1">
+                <div class="pb-0 text-start">
+                  <p class="text-primary font-weight-bolder">Lihat Semua</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="pb-0 text-start mb-3">
-            <h5 class="text-black font-weight-bolder">Update Tracking</h5>
+          <div>
+            <tracking-table />
+          </div>
+          <div class="pb-0 row">
+            <div class="pb-0 text-start mb-2">
+              <h5 class="text-black font-weight-bolder">Item Monitoring</h5>
+            </div>
+            <div class="col-lg-4 col-md-3 mb-2">
+                <span>
+                    <div class="input-group">
+                        <span class="input-group-text text-body">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" class="form-control" :placeholder="
+                        'Cari..'
+                        " />
+                    </div>
+                </span>
+            </div>
+          </div>
+          <div>
+            <monitoring-table />
           </div>
         </div>
-        
         <div class="row">
           <div class="col-lg-7 mb-lg">
             <!-- line chart -->
@@ -117,6 +132,8 @@ import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import DoughnutTrackingChart from "@/examples/Charts/DoughnutTrackingChart.vue";
 import Carousel from "./components/Carousel.vue";
 import CategoriesCard from "./components/CategoriesCard.vue";
+import TrackingTable from "./components/TrackingTable.vue";
+import MonitoringTable from "./components/MonitoringTable.vue";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
@@ -183,6 +200,8 @@ export default {
     Card,
     GradientLineChart,
     DoughnutTrackingChart,
+    TrackingTable,
+    MonitoringTable,
     Carousel,
     CategoriesCard,
   },

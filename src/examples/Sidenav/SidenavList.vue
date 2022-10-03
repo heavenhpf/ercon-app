@@ -17,6 +17,17 @@
       </li>
       <li class="nav-item">
         <sidenav-item
+          url="/tracking"
+          :class="getRoute() === 'tracking' ? 'active' : ''"
+          :navText="this.$store.state.isRTL ? 'لوحة القيادة' : 'Tracking'"
+        >
+          <template v-slot:icon>
+            <i class="fa fa-location-arrow mb-1 text-success text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item
           url="/user"
           :class="getRoute() === 'user' ? 'active' : ''"
           :navText="this.$store.state.isRTL ? 'الجداول' : 'List User'"
