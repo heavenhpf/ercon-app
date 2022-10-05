@@ -1,27 +1,86 @@
 <template>
   <div class="py-4 container-fluid">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="p-4 col-lg-12 mb-3">
         <div class="row">
           <div class="col-lg-4 col-md-6 col-12">
-            <card2 :title="stats.belum.title" :value="stats.belum.value" :cardBackground="stats.belum.cardBackground"></card2>
+            <card2 :title="stats.belum.title" :value="stats.belum.value" :cardBackground="stats.belum.cardBackground">
+            </card2>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card2 :title="stats.lewat.title" :value="stats.lewat.value" :cardBackground="stats.lewat.cardBackground"></card2>
+            <card2 :title="stats.lewat.title" :value="stats.lewat.value" :cardBackground="stats.lewat.cardBackground">
+            </card2>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card2 :title="stats.selesai.title" :value="stats.selesai.value" :cardBackground="stats.selesai.cardBackground"></card2>
+            <card2 :title="stats.selesai.title" :value="stats.selesai.value"
+              :cardBackground="stats.selesai.cardBackground"></card2>
           </div>
         </div>
+      </div>
+      <div class="pb-0 row mb-lg-3 mb-2">
+        <div class="col-lg-4 col-md-4">
+          <select class="form-select" id="inputGroupSelect01">
+            <option selected>Sortir Berdasarkan Timeline</option>
+            <option value="1">Belum Deadline</option>
+            <option value="2">Melewati Deadline</option>
+            <option value="3">Progress Selesai</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-4 me-6">
+          <select class="form-select" id="inputGroupSelect01">
+            <option selected>Pilih Tier</option>
+            <option value="1">Tier 1</option>
+            <option value="2">Tier 2</option>
+            <option value="3">Tier 3</option>
+          </select>
+        </div>  
+        <div class="col-lg-5 col-md-6 align-items-end">
+          <span>
+            <div class="input-group">
+              <span class="input-group-text text-body">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+              <input type="text" class="form-control" :placeholder="
+              'Cari..'
+              " />
+            </div>
+          </span>
+        </div>
+      </div>
+      <!-- <DataTable :data="data" class="display">
+          <thead>
+              <tr>
+                  <th>A</th>
+                  <th>B</th>
+              </tr>
+          </thead>
+      </DataTable> -->
+      
+      <div>
+        <tracking-table />
       </div>
     </div>
   </div>
 </template>
+
+<!-- <style>
+  @import 'datatables.net-dt';
+  @import 'bootstrap';
+  @import 'datatables.net-bs5';
+</style> -->
+
 <script>
+// import DataTable from 'datatables.net-vue3'
+// import DataTableBs5 from 'datatables.net-bs5';
+ 
+// DataTable.use(DataTableBs5);
+
+
 import Card2 from "@/examples/Cards/Card2.vue";
 import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "./components/Carousel.vue";
 import CategoriesCard from "./components/CategoriesCard.vue";
+import TrackingTable from "./components/TrackingTable.vue";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
@@ -79,6 +138,7 @@ export default {
           flag: BR,
         },
       },
+      data: [],
     };
   },
   components: {
@@ -86,6 +146,9 @@ export default {
     GradientLineChart,
     Carousel,
     CategoriesCard,
+    TrackingTable,
+    // DataTable,
+    // DataTableBs5,
   },
 };
 </script>

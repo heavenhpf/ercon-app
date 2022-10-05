@@ -4,8 +4,8 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="pb-0 text-start mb-3">
-            <h5 class="text-white">Selamat Pagi,</h5>
-            <h4 class="font-weight-bolder text-white">Admin PT TMMIN</h4>
+            <h5 class="text-dark">Selamat Pagi,</h5>
+            <h4 class="font-weight-bolder text-dark">Admin PT TMMIN</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -26,7 +26,24 @@
             <div class="row mb-0">
               <div class="col-10">
                 <div class="pb-0 text-start">
-                  <h5 class="text-black font-weight-bolder">Update Tracking</h5>
+                  <h5 class="text-black font-weight-bolder">Deadline PO Terdekat</h5>
+                </div>
+              </div>
+              <div class="col-2 d-flex justify-content-end mt-1">
+                <div class="pb-0 text-start">
+                  <p class="text-primary font-weight-bolder">Lihat Semua</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <tracking-table />
+          </div>
+          <div class="pb-0 row">
+            <div class="row mb-0">
+              <div class="col-10">
+                <div class="pb-0 text-start">
+                  <h5 class="text-black font-weight-bolder">PO Selesai Terbaru</h5>
                 </div>
               </div>
               <div class="col-2 d-flex justify-content-end mt-1">

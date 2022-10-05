@@ -22,7 +22,44 @@
                             <td>
                                 <div class="d-flex px-3">
                                     <div class="my-auto">
-                                        <h6 class="mb-0 text-sm">PO00014578 - 1</h6>
+                                        <h6 class="mb-0 text-sm">PO00014578</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-dark text-xs font-weight-bold mb-1">PT Toyota Manucfacturing</p>
+                                <p class="text-xs text-danger mb-0">Deadline 30 September 2022</p>
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <span class="me-2 text-xs font-weight-bold">60%</span>
+                                    <div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-gradient-info" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 60%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="text-primary text-xs font-weight-bold">Belum Deadline</span>
+                            </td>
+                            <td class="align-middle">
+                                <router-link to="/tracking/po-detail" tag="button">
+                                    <span>
+                                        <argon-button size="md" color="warning">
+                                            Detail
+                                        </argon-button>
+                                    </span>
+                                </router-link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex px-3">
+                                    <div class="my-auto">
+                                        <h6 class="mb-0 text-sm">PO00014578</h6>
                                     </div>
                                 </div>
                             </td>
@@ -47,7 +84,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>
@@ -57,42 +94,7 @@
                             <td>
                                 <div class="d-flex px-3">
                                     <div class="my-auto">
-                                        <h6 class="mb-0 text-sm">PO00014578 - 1</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-dark text-xs font-weight-bold mb-1">PT Toyota Manucfacturing</p>
-                                <p class="text-xs text-danger mb-0">Deadline 30 September 2022</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <span class="me-2 text-xs font-weight-bold">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-info" role="progressbar"
-                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-danger text-xs font-weight-bold">Melewati Deadline</span>
-                            </td>
-                            <td class="align-middle">
-                                <span>
-                                    <argon-button size="md" color="primary">
-                                        Detail
-                                    </argon-button>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex px-3">
-                                    <div class="my-auto">
-                                        <h6 class="mb-0 text-sm">PO00014578 - 1</h6>
+                                        <h6 class="mb-0 text-sm">PO00014578</h6>
                                     </div>
                                 </div>
                             </td>
@@ -117,7 +119,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>
@@ -127,7 +129,7 @@
                             <td>
                                 <div class="d-flex px-3">
                                     <div class="my-auto">
-                                        <h6 class="mb-0 text-sm">PO00014578 - 1</h6>
+                                        <h6 class="mb-0 text-sm">PO00014578</h6>
                                     </div>
                                 </div>
                             </td>
@@ -152,7 +154,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>

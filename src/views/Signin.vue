@@ -16,10 +16,10 @@
                 <div class="card-body">
                   <form role="form">
                     <div class="mb-3">
-                      <argon-input type="username" placeholder="Username" name="username" size="lg" />
+                      <argon-input type="username" placeholder="Username" name="username" size="lg" isRequired="required" />
                     </div>
                     <div class="mb-3">
-                      <argon-input type="password" placeholder="Password" name="password" size="lg" />
+                      <argon-input type="password" placeholder="Password" name="password" size="lg" isRequired="required" />
                     </div>
                     <div class="row">
                       <div class="col-6">

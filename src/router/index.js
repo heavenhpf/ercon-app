@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
 import Tracking from "../views/Tracking.vue";
+import PO from "../views/PO.vue";
 import User from "../views/User.vue";
 import Tables from "../views/Tables.vue";
 import Billing from "../views/Billing.vue";
@@ -25,6 +26,11 @@ const routes = [
     path: "/tracking",
     name: "Tracking",
     component: Tracking,
+  },
+  {
+    path: "/tracking/po-detail",
+    name: "PO",
+    component: PO,
   },
   {
     path: "/user",

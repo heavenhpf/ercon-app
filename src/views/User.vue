@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="pb-0 card-body text-start mb-4">
-                        <h4 class="font-weight-bolder text-white">List User</h4>
+                        <h4 class="font-weight-bolder text-dark">List User</h4>
                     </div>
                     <div class="pb-0 row mb-lg-3 mb-2">
                         <div class="col-lg-8 col-md-9 mb-2">

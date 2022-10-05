@@ -1,4 +1,5 @@
-import { createApp } from "vue";
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
@@ -8,6 +9,7 @@ import ArgonDashboard from "./argon-dashboard";
 
 const appInstance = createApp(App);
 appInstance.use(store);
+appInstance.use(createPinia());
 appInstance.use(router);
 appInstance.use(ArgonDashboard);
 appInstance.mount("#app");

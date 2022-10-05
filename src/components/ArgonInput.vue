@@ -40,7 +40,7 @@ export default {
     value: String,
     placeholder: String,
     type: String,
-    isRequired: Boolean,
+    isRequired: String,
   },
   methods: {
     getClasses: (size, valid) => {

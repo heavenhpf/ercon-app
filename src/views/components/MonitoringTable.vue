@@ -36,7 +36,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>
@@ -60,7 +60,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>
@@ -84,7 +84,7 @@
                             </td>
                             <td class="align-middle">
                                 <span>
-                                    <argon-button size="md" color="primary">
+                                    <argon-button size="md" color="warning">
                                         Detail
                                     </argon-button>
                                 </span>

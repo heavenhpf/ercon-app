@@ -10,6 +10,8 @@
                             <th class="text-dark text-sm font-weight-bolder ps-2">
                                 Nama Perusahaan</th>
                             <th class="text-dark text-sm font-weight-bolder ps-2">
+                                Tier</th>
+                            <th class="text-dark text-sm font-weight-bolder ps-2">
                                 Username</th>
                             <th class="text-dark text-sm font-weight-bolder ps-2">
                                 Alamat
@@ -32,6 +34,11 @@
                                 <p class="text-xs font-weight-bold mb-0">PT Sugiti Indonesia</p>
                             </td>
                             <td>
+                                <div class="d-flex px-2">
+                                        <span class="mb-0 text-xs font-weight-bold">1</span>
+                                </div>
+                            </td>
+                            <td>
                                 <span class="text-xs font-weight-bold">sugitibisa</span>
                             </td>
                             <td>
@@ -56,6 +63,11 @@
                                 <p class="text-xs font-weight-bold mb-0">PT Sugiti Indonesia</p>
                             </td>
                             <td>
+                                <div class="d-flex px-2">
+                                        <span class="mb-0 text-xs font-weight-bold">1</span>
+                                </div>
+                            </td>
+                            <td>
                                 <span class="text-xs font-weight-bold">sugitibisa</span>
                             </td>
                             <td>
@@ -80,6 +92,11 @@
                                 <p class="text-xs font-weight-bold mb-0">PT Sugiti Indonesia</p>
                             </td>
                             <td>
+                                <div class="d-flex px-2">
+                                        <span class="mb-0 text-xs font-weight-bold">1</span>
+                                </div>
+                            </td>
+                            <td>
                                 <span class="text-xs font-weight-bold">sugitibisa</span>
                             </td>
                             <td>
@@ -102,6 +119,11 @@
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">PT Sugiti Indonesia</p>
+                            </td>
+                            <td>
+                                <div class="d-flex px-2">
+                                        <span class="mb-0 text-xs font-weight-bold">1</span>
+                                </div>
                             </td>
                             <td>
                                 <span class="text-xs font-weight-bold">sugitibisa</span>
