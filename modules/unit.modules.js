@@ -70,7 +70,7 @@ class _unit {
             }
             const schema = Joi.object({
                 id: Joi.number().required(),
-                name: Joi.string().required()
+                name: Joi.string()
             })
 
             const validation = schema.validate(body)
@@ -87,7 +87,8 @@ class _unit {
 
             const check = await prisma.ref_unit.findFirst({
                 where: {
-                    id_unit: body.id
+                    id_unit: body.id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 
@@ -141,7 +142,8 @@ class _unit {
 
             const check = await prisma.ref_unit.findFirst({
                 where: {
-                    id_unit: id
+                    id_unit: id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 

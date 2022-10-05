@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2022 at 04:22 AM
+-- Generation Time: Oct 04, 2022 at 05:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -31,9 +31,9 @@ CREATE TABLE `auth_user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `level` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` datetime DEFAULT NULL,
-  `level` tinyint(4) NOT NULL
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -89,7 +89,7 @@ CREATE TABLE `d_doc` (
 
 CREATE TABLE `d_item` (
   `id_item` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_company` int(11) NOT NULL,
   `id_unit` int(11) NOT NULL,
   `id_category` int(11) NOT NULL,
   `serial_number` varchar(50) NOT NULL,
@@ -145,7 +145,8 @@ CREATE TABLE `d_po` (
   `po_number` varchar(50) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` datetime NOT NULL
+  `finished_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -214,7 +215,8 @@ CREATE TABLE `s_company` (
 -- Indexes for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `d_dn`
@@ -245,8 +247,7 @@ ALTER TABLE `d_doc`
 --
 ALTER TABLE `d_item`
   ADD PRIMARY KEY (`id_item`),
-  ADD UNIQUE KEY `serial_number` (`serial_number`),
-  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_user` (`id_company`),
   ADD KEY `id_unit` (`id_unit`),
   ADD KEY `id_category` (`id_category`);
 
@@ -272,7 +273,6 @@ ALTER TABLE `d_order`
 --
 ALTER TABLE `d_po`
   ADD PRIMARY KEY (`id_po`),
-  ADD UNIQUE KEY `po_number` (`po_number`),
   ADD KEY `id_doc` (`id_doc`),
   ADD KEY `order_from` (`order_from`),
   ADD KEY `order_to` (`order_to`);
@@ -282,7 +282,6 @@ ALTER TABLE `d_po`
 --
 ALTER TABLE `d_po_detail`
   ADD PRIMARY KEY (`id_po_detail`),
-  ADD UNIQUE KEY `po_detail_number` (`po_detail_number`),
   ADD KEY `id_po` (`id_po`),
   ADD KEY `id_order` (`id_order`);
 
@@ -405,7 +404,7 @@ ALTER TABLE `d_dn_detail`
 -- Constraints for table `d_item`
 --
 ALTER TABLE `d_item`
-  ADD CONSTRAINT `d_item_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `auth_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `d_item_ibfk_1` FOREIGN KEY (`id_company`) REFERENCES `s_company` (`id_company`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_item_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `ref_unit` (`id_unit`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `d_item_ibfk_3` FOREIGN KEY (`id_category`) REFERENCES `ref_category` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
 

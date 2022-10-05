@@ -10,7 +10,7 @@ app.get('/', userSession, async (req, res, next) => {
 })
 
 app.put('/:id', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.editCompany(req.params.id, req.body))
+    response.sendResponse(res, await modules.editCompany(req.user.id, req.params.id, req.body))
 })
 
 app.delete('/:id', userSession, async (req, res, next) => {

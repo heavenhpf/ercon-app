@@ -4,15 +4,16 @@ const CompanyController = require('./controllers/CompanyController')
 const ItemController = require('./controllers/ItemController')
 const CategoryController = require('./controllers/CategoryController')
 const UnitController = require('./controllers/UnitController')
+const OrderController = require('./controllers/OrderController')
 
 const _routes = [
     ['/login', AuthController],
     ['/users', UserController],
     ['/companies', CompanyController],
     ['/items', ItemController],
-    ['/category', CategoryController],
-    ['/unit', UnitController],
-
+    ['/categories', CategoryController],
+    ['/units', UnitController],
+    ['/orders', OrderController],
 ]
 
 const routes = (app) => {

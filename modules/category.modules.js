@@ -2,6 +2,28 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _category {
+    listCategory = async () => {
+        try {
+            const list = await prisma.ref_category.findMany({
+                where: {
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            return {
+                status: true,
+                data: list
+            }
+        } catch (error) {
+            console.error('listCategory user module Error ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
     addCategory = async (body) => {
         try {
             const schema = Joi.object({
@@ -40,28 +62,6 @@ class _category {
         }
     }
 
-    listCategory = async () => {
-        try {
-            const list = await prisma.ref_category.findMany({
-                where: {
-                    deleted_at: null
-                }
-            }).finally(prisma.$disconnect())
-
-            return {
-                status: true,
-                data: list
-            }
-        } catch (error) {
-            console.error('listCategory user module Error ', error)
-
-            return {
-                status: false,
-                error
-            }
-        }
-    }
-
     deleteCategory = async (id) => {
         try {
             id = parseInt(id)
@@ -81,7 +81,8 @@ class _category {
 
             const check = await prisma.ref_category.findFirst({
                 where: {
-                    id_category: id
+                    id_category: id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 
@@ -124,7 +125,7 @@ class _category {
             }
             const schema = Joi.object({
                 id: Joi.number().required(),
-                name: Joi.string().required()
+                name: Joi.string()
             })
 
             const validation = schema.validate(body)
@@ -141,7 +142,8 @@ class _category {
 
             const check = await prisma.ref_category.findFirst({
                 where: {
-                    id_category: body.id
+                    id_category: body.id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 

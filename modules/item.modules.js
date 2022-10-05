@@ -22,10 +22,8 @@ class _item {
     
             const check = await prisma.s_company.findFirst({
                 where: {
-                    id_company: id
-                },
-                select: {
-                    id_user: true
+                    id_company: id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
     
@@ -39,7 +37,7 @@ class _item {
 
             const list = await prisma.d_item.findMany({
                 where: {
-                    id_user: check.id_user,
+                    id_company: id,
                     deleted_at: null
                 }
             }).finally(prisma.$disconnect())
@@ -50,6 +48,67 @@ class _item {
             }
         } catch (error) {
             console.error('listItem user module Error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
+    getItem = async (id_company, id_item) => {
+        try {
+            const body = {
+                id_company: parseInt(id_company),
+                id_item: parseInt(id_item)
+            }
+
+            const schema = Joi.object({
+                id_company: Joi.number().required(),
+                id_item: Joi.number().required()
+            })
+
+            const validation = schema.validate(body)
+    
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+    
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            const checkCompany = await prisma.s_company.findFirst({
+                where: {
+                    id_company: body.id_company,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_company: body.id_company,
+                    id_item: body.id_item,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+    
+            if (!(checkCompany && checkItem)) {
+                return {
+                    status: false,
+                    code: 404,
+                    error: "Data not found"
+                }
+            }
+
+            return {
+                status: true,
+                data: checkItem
+            }
+        } catch (error) {
+            console.error('getItem user module Error: ', error)
 
             return {
                 status: false,
@@ -71,7 +130,7 @@ class _item {
                 id_category: Joi.number().required(),
                 name: Joi.string().required(),
                 desc: Joi.string().required(),
-                serial_number: Joi.string(),
+                serial_number: Joi.string().required(),
                 quantity: Joi.number().required()
             })
     
@@ -86,10 +145,42 @@ class _item {
                     error: errorDetails.join(', ')
                 }
             }
+
+            const checkCompany = await prisma.s_company.findFirst({
+                where: {
+                    id_user: body.id,
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkUnit = await prisma.ref_unit.findFirst({
+                where: {
+                    id_unit: body.id_unit,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkCategory = await prisma.ref_category.findFirst({
+                where: {
+                    id_category: body.id_category,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            if (!(checkCompany && checkUnit && checkCategory)) {
+                return {
+                    status: false,
+                    code: 404,
+                    error: "Data not found"
+                }
+            }
     
             const add = await prisma.d_item.create({
                 data: {
-                    id_user: body.id,
+                    id_company: checkCompany.id_company,
                     id_unit: body.id_unit,
                     id_category: body.id_category,
                     name: body.name,
@@ -99,7 +190,7 @@ class _item {
                 }
             }).finally(prisma.$disconnect())
 
-            const addDetail = await prisma.d_item_detail.create({
+            await prisma.d_item_detail.create({
                 data: {
                     id_item: add.id_item,
                     quantity: add.quantity
@@ -108,10 +199,7 @@ class _item {
 
             return {
                 status: true,
-                data: {
-                    ...add,
-                    item_detail: addDetail
-                }
+                data: add
             }
         } catch (error) {
             console.error('addItem user module Error: ', error)
@@ -123,11 +211,19 @@ class _item {
         }
     }
 
-    deleteItem = async (id) => {
+    deleteItem = async (id_user, id_item) => {
         try {
-            id = parseInt(id)
-            const schema = Joi.number().required()
-            const validation = schema.validate(id)
+            const body = {
+                id_user: parseInt(id_user),
+                id_item: parseInt(id_item)
+            }
+
+            const schema = Joi.object({
+                id_user: Joi.number().required(),
+                id_item: Joi.number().required()
+            })
+
+            const validation = schema.validate(body)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -139,13 +235,25 @@ class _item {
                 }
             }
 
-            const check = await prisma.d_item.findUnique({
+            const checkCompany = await prisma.s_company.findFirst({
                 where: {
-                    id_item: id
+                    id_user: body.id_user,
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_company: checkCompany.id_company,
+                    id_item: body.id_item,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
             
-            if (!check) {
+            if (!(checkCompany && checkItem)) {
                 return {
                     status: false,
                     code: 404,
@@ -155,16 +263,16 @@ class _item {
 
             const del = await prisma.d_item.update({
                 where: {
-                    id_item: id
+                    id_item: body.id_item
                 },
                 data: {
                     deleted_at: new Date(Date.now())
                 }
             }).finally(prisma.$disconnect())
 
-            const delDetail = await prisma.d_item_detail.deleteMany({
+            await prisma.d_item_detail.deleteMany({
                 where: {
-                    id_item: id
+                    id_item: body.id_item
                 }
             }).finally(prisma.$disconnect())
             
@@ -183,21 +291,22 @@ class _item {
         }
     }
 
-    editItem = async (id, body) => {
+    editItem = async (id_user, id_item, body) => {
         try {
             body = {
-                id: parseInt(id),
+                id_user: parseInt(id_user),
+                id_item: parseInt(id_item),
                 ...body
             }
 
             const schema = Joi.object({
-                id: Joi.number(),
-                id_unit: Joi.number(),
-                id_category: Joi.number(),
-                name: Joi.string().required(),
-                desc: Joi.string().required(),
-                serial_number: Joi.string().required(),
-                quantity: Joi.number().required()
+                id_user: Joi.number().required(),
+                id_item: Joi.number().required(),
+                id_unit: Joi.number().required(),
+                id_category: Joi.number().required(),
+                name: Joi.string(),
+                desc: Joi.string(),
+                serial_number: Joi.string()
             })
 
             const validation = schema.validate(body)
@@ -212,13 +321,39 @@ class _item {
                 }
             }
 
-            const check = await prisma.d_item.findFirst({
+            const checkCompany = await prisma.s_company.findFirst({
                 where: {
-                    id_item: body.id
+                    id_user: body.id_user,
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
                 }
             }).finally(prisma.$disconnect())
 
-            if (!check) {
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_company: checkCompany.id_company,
+                    id_item: body.id_item,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkUnit = await prisma.ref_unit.findFirst({
+                where: {
+                    id_unit: body.id_unit,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+
+            const checkCategory = await prisma.ref_category.findFirst({
+                where: {
+                    id_category: body.id_category,
+                    deleted_at: null
+                }
+            }).finally(prisma.$disconnect())
+            
+            if (!(checkCompany && checkItem && checkUnit && checkCategory)) {
                 return {
                     status: false,
                     code: 404,
@@ -228,16 +363,14 @@ class _item {
 
             const edit = await prisma.d_item.update({
                 where: {
-                    id_item: body.id
+                    id_item: body.id_item
                 },
                 data: {
                     id_unit: body.id_unit,
                     id_category: body.id_category,
                     name: body.name,
                     desc: body.desc,
-                    serial_number: body.serial_number,
-                    quantity: body.quantity
-
+                    serial_number: body.serial_number
                 }
             }).finally(prisma.$disconnect())
 

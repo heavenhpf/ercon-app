@@ -31,15 +31,17 @@ class _company {
         }
     }
 
-    editCompany = async (id, body) => {
+    editCompany = async (id_user, id_company, body) => {
         try {
             body = {
-                id: parseInt(id),
+                id_user: parseInt(id_user),
+                id_company: parseInt(id_company),
                 ...body
             }
 
             const schema = Joi.object({
-                id: Joi.number(),
+                id_user: Joi.number().required(),
+                id_company: Joi.number().required(),
                 name: Joi.string(),
                 address: Joi.string(),
                 phone: Joi.string()
@@ -59,7 +61,9 @@ class _company {
 
             const check = await prisma.s_company.findFirst({
                 where: {
-                    id_company: body.id
+                    id_user: body.id_user,
+                    id_company: body.id_company,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 
@@ -73,7 +77,7 @@ class _company {
 
             const edit = await prisma.s_company.update({
                 where: {
-                    id_company: body.id
+                    id_company: body.id_company
                 },
                 data: {
                     name: body.name,
@@ -115,7 +119,8 @@ class _company {
 
             const check = await prisma.s_company.findFirst({
                 where: {
-                    id_company: id
+                    id_company: id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 

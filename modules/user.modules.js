@@ -51,6 +51,20 @@ class _user {
                 }
             }
 
+            const check = await prisma.auth_user.findUnique({
+                where: {
+                    username: body.username
+                }
+            }).finally(prisma.$disconnect())
+
+            if (check) {
+                return {
+                    status: false,
+                    code: 409,
+                    error: "Data duplicate found"
+                }
+            }
+
             body.password = bcrypt.hashSync(body.password, 10)
 
             const addUser = await prisma.auth_user.create({
@@ -104,22 +118,23 @@ class _user {
                 }
             }
 
-            const check = await prisma.auth_user.findFirst({
+            const checkUser = await prisma.auth_user.findFirst({
                 where: {
-                    OR: [
-                        {
-                            id_user: id
-                        },
-                        // {
-                        //     company: null
-                        // }
-                    ]
+                    id_user: id,
+                    deleted_at: null
                 }
             }).finally(prisma.$disconnect())
 
-            console.log(check.company)
+            const checkCompany = await prisma.s_company.findFirst({
+                where: {
+                    id_user: id,
+                    deleted_at: {
+                        not: null
+                    }
+                }
+            }).finally(prisma.$disconnect())
 
-            if (!check) {
+            if (!(checkUser && checkCompany)) {
                 return {
                     status: false,
                     code: 404,

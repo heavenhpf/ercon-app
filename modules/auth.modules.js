@@ -26,7 +26,8 @@ class _auth {
 
             const checkUser = await prisma.auth_user.findFirst({
                 where: {
-                    username: body.username
+                    username: body.username,
+                    deleted_at: null
                 },
                 select: {
                     id_user: true,

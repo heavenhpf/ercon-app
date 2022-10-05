@@ -13,7 +13,8 @@ const userSession = async (req, res, next) => {
 
         const user = await prisma.auth_user.findFirst({
           where: {
-            id_user: decoded.id
+            id_user: decoded.id,
+            deleted_at: null
           },
           select: {
             id_user: true,
