@@ -2,7 +2,7 @@
   <div class="card bg-transparent shadow-xl">
     <div
       class="overflow-hidden position-relative border-radius-xl"
-      :style="{backgroundImage: 'url(' + require('../../assets/img/card-visa.jpg') + ')'}"
+      :style="{backgroundImage: `url(${img})`}"
     >
       <span class="mask bg-gradient-dark"></span>
       <div class="card-body position-relative z-index-1 p-3">
@@ -12,7 +12,7 @@
         >4562&nbsp;&nbsp;&nbsp;1122&nbsp;&nbsp;&nbsp;4594&nbsp;&nbsp;&nbsp;7852</h5>
         <div class="d-flex">
           <div class="d-flex">
-            <div :class="this.$store.state.isRTL ? 'ms-4' : 'me-4'">
+            <div class="me-4">
               <p class="text-white text-sm opacity-8 mb-0">{{ cardHolderText }}</p>
               <h6 class="text-white mb-0">{{ name }}</h6>
             </div>
@@ -22,8 +22,7 @@
             </div>
           </div>
           <div
-            class="w-20 d-flex align-items-end justify-content-end"
-            :class="this.$store.state.isRTL ? 'me-auto' : 'ms-auto'"
+            class="w-20 d-flex align-items-end justify-content-end ms-auto"
           >
             <argon-avatar class="w-60 mt-2" :img="img1" alt="logo" />
           </div>

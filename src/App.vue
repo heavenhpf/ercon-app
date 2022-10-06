@@ -19,10 +19,7 @@ Coded by www.creative-tim.com
   ></div>
   <sidenav
     :custom_class="this.$store.state.mcolor"
-    :class="[
-      this.$store.state.isTransparent,
-      this.$store.state.isRTL ? 'fixed-end' : 'fixed-start'
-    ]"
+    :class="[this.$store.state.isTransparent, 'fixed-start']"
     v-if="this.$store.state.showSidenav"
   />
   <main
@@ -43,44 +40,50 @@ Coded by www.creative-tim.com
       :toggle="toggleConfigurator"
       :class="[
         this.$store.state.showConfig ? 'show' : '',
-        this.$store.state.hideConfigButton ? 'd-none' : ''
+        this.$store.state.hideConfigButton ? 'd-none' : '',
       ]"
     />
   </main>
 </template>
 <script>
-import Sidenav from "./examples/Sidenav";
-import Configurator from "@/examples/Configurator.vue";
-import Navbar from "@/examples/Navbars/Navbar.vue";
-import AppFooter from "@/examples/Footer.vue";
-import { mapMutations } from "vuex";
+import d$auth from '@/stores/auth.d';
+import Sidenav from '@/examples/Sidenav/index.vue';
+import Configurator from '@/examples/Configurator.vue';
+import Navbar from '@/examples/Navbars/Navbar.vue';
+import AppFooter from '@/examples/Footer.vue';
+import { mapMutations } from 'vuex';
+import { mapActions } from 'pinia';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Sidenav,
     Configurator,
     Navbar,
-    AppFooter
+    AppFooter,
   },
   methods: {
-    ...mapMutations(["toggleConfigurator", "navbarMinimize"])
+    ...mapMutations(['toggleConfigurator', 'navbarMinimize']),
+    ...mapActions(d$auth, ['a$setUser']),
   },
   computed: {
     navClasses() {
       return {
-        "position-sticky bg-white left-auto top-2 z-index-sticky":
+        'position-sticky bg-white left-auto top-2 z-index-sticky':
           this.$store.state.isNavFixed && !this.$store.state.darkMode,
-        "position-sticky bg-default left-auto top-2 z-index-sticky":
+        'position-sticky bg-default left-auto top-2 z-index-sticky':
           this.$store.state.isNavFixed && this.$store.state.darkMode,
-        "position-absolute px-4 mx-0 w-100 z-index-2": this.$store.state
-          .isAbsolute,
-        "px-0 mx-4": !this.$store.state.isAbsolute
+        'position-absolute px-4 mx-0 w-100 z-index-2':
+          this.$store.state.isAbsolute,
+        'px-0 mx-4': !this.$store.state.isAbsolute,
       };
-    }
+    },
   },
   beforeMount() {
-    this.$store.state.isTransparent = "bg-transparent";
-  }
+    this.$store.state.isTransparent = 'bg-transparent';
+  },
+  mounted() {
+    this.a$setUser();
+  },
 };
 </script>

@@ -1,7 +1,7 @@
-import { baseApi } from '@/services';
+import { baseApi } from '@/utils/axios';
 
-const api = `/auth`;
+const api = `/`;
 
-const login = (body) => baseApi.post(`${api}/login`, body);
+const login = (body) => baseApi.post(`${api}login`, body);
 
 export { login };

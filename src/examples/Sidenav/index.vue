@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="this.$store.state.layout === 'default'"
-    class="h-100 w-100"
+    class="position-absolute w-100"
     :class="`${this.$store.state.darkMode ? 'bg-transparent' : 'bg-gray-100'}`"
   />
   <aside
@@ -24,7 +24,7 @@
         aria-hidden="true"
         id="iconSidenav"
       ></i>
-      <router-link class="m-0 navbar-brand" to="/dashboard-default">
+      <router-link class="m-0 navbar-brand" :to="{ name: 'Default' }">
         <!-- <img
           :src="
             this.$store.state.darkMode ||
@@ -34,10 +34,9 @@
           "
           class="navbar-brand-img h-100"
           alt="main_logo"
-        />
-        <span class="ms-2 font-weight-bold me-2">Ercon</span> -->
+        /> -->
         <div class="p-2 bg-white text-white rounded-pill">
-          <img src="./../../assets/img/ercon-logo.png" class="rounded mx-auto w-75 d-block m-0 w-60">
+          <img src="@/assets/img/ercon-logo.png" class="rounded mx-auto w-75 d-block m-0 w-60">
         </div>
       </router-link>
     </div>

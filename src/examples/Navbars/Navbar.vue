@@ -1,9 +1,6 @@
 <template>
   <nav
     class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
-    :class="
-      this.$store.state.isRTL ? 'top-0 position-sticky z-index-sticky' : ''
-    "
     v-bind="$attrs"
     id="navbarBlur"
     data-scroll="true"
@@ -13,35 +10,25 @@
 
       <div
         class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4"
-        :class="this.$store.state.isRTL ? 'px-0' : 'me-sm-4'"
         id="navbar"
       >
-        <div
-          class="pe-md-3 d-flex align-items-center"
-          :class="this.$store.state.isRTL ? 'me-md-auto' : 'ms-md-auto'"
-        >
+        <div class="pe-md-3 d-flex align-items-center ms-md-auto">
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
             <router-link
-              :to="{ name: 'Signin' }"
+              :to="{ name: 'LogIn' }"
               class="px-0 nav-link font-weight-bold text-dark"
             >
-              <i
-                class="fa fa-user"
-                :class="this.$store.state.isRTL ? 'ms-sm-2' : 'me-sm-2'"
-              ></i>
-              <span v-if="this.$store.state.isRTL" class="d-sm-inline d-none"
-                >يسجل دخول</span
-              >
-              <span v-else class="d-sm-inline d-none">Sign Out</span>
+              <i class="fa fa-user me-sm-2"></i>
+              <span class="d-sm-inline d-none">Log Out</span>
             </router-link>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a
               href="#"
               @click="toggleSidebar"
-              class="p-0 nav-link "
+              class="p-0 nav-link text-dark"
               id="iconNavbarSidenav"
             >
               <div class="sidenav-toggler-inner">
@@ -52,13 +39,12 @@
             </a>
           </li>
           <li class="px-3 nav-item d-flex align-items-center">
-            <a class="p-0 nav-link" @click="toggleConfigurator">
+            <a class="p-0 nav-link text-dark" @click="toggleConfigurator">
               <i class="cursor-pointer fa fa-cog fixed-plugin-button-nav"></i>
             </a>
           </li>
           <li
-            class="nav-item dropdown d-flex align-items-center"
-            :class="this.$store.state.isRTL ? 'ps-2' : 'pe-2'"
+            class="nav-item dropdown d-flex align-items-center pe-2"
           >
             <a
               href="#"

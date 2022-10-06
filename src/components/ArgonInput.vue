@@ -10,9 +10,10 @@
         :class="getClasses(size, valid)"
         :name="name"
         :id="id"
-        :value="value"
         :placeholder="placeholder"
         :isRequired="isRequired"
+        v-model="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
@@ -23,11 +24,11 @@
 
 <script>
 export default {
-  name: "argon-input",
+  name: 'argon-input',
   props: {
     size: {
       type: String,
-      default: "default",
+      default: 'default',
     },
     valid: {
       type: Boolean,
@@ -37,10 +38,10 @@ export default {
     iconDir: String,
     name: String,
     id: String,
-    value: String,
+    modelValue: String,
     placeholder: String,
     type: String,
-    isRequired: String,
+    isRequired: Boolean,
   },
   methods: {
     getClasses: (size, valid) => {
@@ -48,12 +49,12 @@ export default {
 
       sizeValue = size ? `form-control-${size}` : null;
 
-      isValidValue = valid ? `${valid}` : "invalid";
+      isValidValue = valid ? `${valid}` : 'invalid';
 
       return `${sizeValue} ${isValidValue}`;
     },
     getIcon: (icon) => (icon ? icon : null),
-    hasIcon: (icon) => (icon ? "input-group" : null),
+    hasIcon: (icon) => (icon ? 'input-group' : null),
   },
 };
 </script>
