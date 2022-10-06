@@ -11,7 +11,8 @@ class _company {
                 include: {
                     auth_user: {
                         select: {
-                            username: true
+                            username: true,
+                            level: true
                         }
                     }
                 }
