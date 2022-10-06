@@ -47,7 +47,7 @@ class _item {
                 data: list
             }
         } catch (error) {
-            console.error('listItem user module Error: ', error)
+            console.error('listItem module error: ', error)
 
             return {
                 status: false,
@@ -108,7 +108,7 @@ class _item {
                 data: checkItem
             }
         } catch (error) {
-            console.error('getItem user module Error: ', error)
+            console.error('getItem module error: ', error)
 
             return {
                 status: false,
@@ -202,7 +202,7 @@ class _item {
                 data: add
             }
         } catch (error) {
-            console.error('addItem user module Error: ', error)
+            console.error('addItem module error: ', error)
 
             return {
                 status: false,
@@ -282,7 +282,7 @@ class _item {
             }
 
         } catch (error) {
-            console.error('deleteItem user module Error: ', error)
+            console.error('deleteItem module error: ', error)
 
             return {
                 status: false,
@@ -379,7 +379,7 @@ class _item {
                 data: edit
             }
         } catch (error) {
-            console.error('editItem user module Error: ', error)
+            console.error('editItem module error: ', error)
 
             return {
                 status: false,

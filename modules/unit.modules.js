@@ -15,7 +15,7 @@ class _unit {
                 data: list
             }
         } catch (error) {
-            console.error('listUnit user module Error ', error)
+            console.error('listUnit module error ', error)
 
             return {
                 status: false,
@@ -53,7 +53,7 @@ class _unit {
                 data: add
             }
         } catch (error) {
-            console.error('addUnit user module Error: ', error)
+            console.error('addUnit module error: ', error)
 
             return {
                 status: false,
@@ -114,7 +114,7 @@ class _unit {
                 data: edit
             }
         } catch (error) {
-            console.error('editUnit user module Error: ', error)
+            console.error('editUnit module error: ', error)
 
             return {
                 status: false,

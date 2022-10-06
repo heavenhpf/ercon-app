@@ -15,7 +15,7 @@ class _category {
                 data: list
             }
         } catch (error) {
-            console.error('listCategory user module Error ', error)
+            console.error('listCategory module error ', error)
 
             return {
                 status: false,
@@ -53,7 +53,7 @@ class _category {
                 data: add
             }
         } catch (error) {
-            console.error('addCategory user module Error: ', error)
+            console.error('addCategory module error: ', error)
 
             return {
                 status: false,
@@ -169,7 +169,7 @@ class _category {
                 data: edit
             }
         } catch (error) {
-            console.error('editCompany user module Error: ', error)
+            console.error('editCompany module error: ', error)
 
             return {
                 status: false,

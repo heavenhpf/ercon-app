@@ -22,7 +22,7 @@ class _company {
                 data: list
             }
         } catch (error) {
-            console.error('listCompany user module Error ', error)
+            console.error('listCompany module error ', error)
 
             return {
                 status: false,
@@ -91,7 +91,7 @@ class _company {
                 data: edit
             }
         } catch (error) {
-            console.error('editCompany user module Error: ', error)
+            console.error('editCompany module error: ', error)
 
             return {
                 status: false,
@@ -146,7 +146,7 @@ class _company {
                 data: del
             }
         } catch (error) {
-            console.error('deleteUser module error: ', error)
+            console.error('deletemodule error: ', error)
 
             return {
                 status: false,

@@ -5,6 +5,7 @@ const ItemController = require('./controllers/ItemController')
 const CategoryController = require('./controllers/CategoryController')
 const UnitController = require('./controllers/UnitController')
 const OrderController = require('./controllers/OrderController')
+const PoController = require('./controllers/PoController')
 
 const _routes = [
     ['/login', AuthController],
@@ -14,6 +15,7 @@ const _routes = [
     ['/categories', CategoryController],
     ['/units', UnitController],
     ['/orders', OrderController],
+    ['/po', PoController],
 ]
 
 const routes = (app) => {

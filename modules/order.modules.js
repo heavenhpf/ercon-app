@@ -15,7 +15,7 @@ class _order {
                 data: list
             }
         } catch (error) {
-            console.error('listAllOrder user module Error ', error)
+            console.error('listAllOrder module error ', error)
 
             return {
                 status: false,
@@ -72,7 +72,7 @@ class _order {
                 data: list
             }
         } catch (error) {
-            console.error('listMyOrder user module Error ', error)
+            console.error('listMyOrder module error ', error)
 
             return {
                 status: false,
@@ -92,8 +92,8 @@ class _order {
             const schema = Joi.object({
                 id_user: Joi.number().required(),
                 id_item: Joi.number().required(),
-                quantity: Joi.number().required(),
-                note: Joi.string()
+                order_number: Joi.string().required(),
+                quantity: Joi.number().required()
             })
 
             const validation = schema.validate(body)
@@ -141,8 +141,8 @@ class _order {
                     order_from: checkCompany.id_company,
                     order_to: checkItem.id_company,
                     id_item: body.id_item,
+                    order_number: body.order_number,
                     quantity: body.quantity,
-                    note: body.note,
                     processed: false
                 }
             }).finally(prisma.$disconnect())
@@ -152,7 +152,7 @@ class _order {
                 data: add
             }
         } catch (error) {
-            console.error('addOrder user module Error ', error)
+            console.error('addOrder module error ', error)
 
             return {
                 status: false,
@@ -172,8 +172,7 @@ class _order {
             const schema = Joi.object({
                 id_user: Joi.number().required(),
                 id_order: Joi.number().required(),
-                quantity: Joi.number(),
-                note: Joi.string()
+                quantity: Joi.number()
             })
 
             const validation = schema.validate(body)
@@ -220,8 +219,7 @@ class _order {
                     id_order: body.id_order
                 },
                 data: {
-                    quantity: body.quantity,
-                    note: body.note
+                    quantity: body.quantity
                 }
             }).finally(prisma.$disconnect())
 
@@ -230,7 +228,7 @@ class _order {
                 data: edit
             }
         } catch (error) {
-            console.error('editOrder user module Error ', error)
+            console.error('editOrder module error ', error)
 
             return {
                 status: false,
@@ -304,7 +302,7 @@ class _order {
                 data: del
             }
         } catch (error) {
-            console.error('deleteOrder user module Error ', error)
+            console.error('deleteOrder module error ', error)
 
             return {
                 status: false,

@@ -16,7 +16,7 @@ class _user {
                 data: list
             }
         } catch (error) {
-            console.error('listUser user module Error ', error)
+            console.error('listUser module error ', error)
 
             return {
                 status: false,
@@ -92,7 +92,7 @@ class _user {
                 }
             }
         } catch (error) {
-            console.error('addUser user module Error: ', error)
+            console.error('addUser module error: ', error)
 
             return {
                 status: false,
@@ -156,7 +156,7 @@ class _user {
                 data: del
             }
         } catch (error) {
-            console.error('deleteUser module error: ', error)
+            console.error('deletemodule error: ', error)
 
             return {
                 status: false,
