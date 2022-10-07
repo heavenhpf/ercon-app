@@ -56,7 +56,7 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-          url="/billing"
+          url="dashboard/billing"
           :class="getRoute() === 'billing' ? 'active' : ''"
           navText="Billing"
         >

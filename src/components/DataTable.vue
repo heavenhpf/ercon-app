@@ -11,14 +11,14 @@
             <label class="m-0 text-sm">
               <select
                 v-model="itemsPerPage"
-                class="form-control form-control-md d-inline-block w-auto"
+                class="form-control form-control-sm d-inline-block w-auto mt-1"
               >
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
               </select>
-              <span class="d-none d-md-inline text-muted ms-2">Entries per page</span>
+              <span class="ms-2">Entries per page</span>
             </label>
           </div>
         </div>
@@ -28,7 +28,7 @@
               v-model="query"
               type="text"
               class="form-control form-control-md"
-              placeholder="Cari"
+              placeholder="Cari.."
               @keyup="search(query)"
             />
           </div>
@@ -55,7 +55,7 @@
           <thead :class="{ ['thead-dark']: $store.darkMode }">
             <tr>
               <!-- Display Checkboxes If Requested -->
-              <th v-if="selectable" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+              <th v-if="selectable" class="text-dark text-sm font-weight-bolder">
                 <div class="custom-control custom-checkbox">
                   <input
                     type="checkbox"
@@ -69,7 +69,7 @@
               <!-- Display Index If Requested -->
               <th 
                 v-if="index"
-                class="sortable text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                class="sortable text-dark text-sm font-weight-bolder"
                 :class="{
                   sort: sortColumn === '#',
                   asc: sortColumn === '#' && asc,
@@ -83,7 +83,7 @@
               <th
                 v-for="(th, i) in tableHeaders"
                 :key="i"
-                class="sortable text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                class="sortable text-dark text-sm font-weight-bolder"
                 :class="{
                   sort: sortColumn === th.name,
                   asc: sortColumn === th.name && asc,
@@ -94,7 +94,7 @@
                 {{ th.th }}
               </th>
               <!-- Display Actions If Provided -->
-              <th v-if="actions.length" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+              <th v-if="actions.length" class="text-dark text-sm font-weight-bolder">Actions</th>
             </tr>
           </thead>
           <tbody v-if="paginatedItems.length" :class="{ ['tbody-dark']: $store.darkMode }">
@@ -103,11 +103,12 @@
               v-for="(item, i) in paginatedItems"
               :key="i"
               :class="{ clickable: !!onClick }"
+              class="text-sm"
             >
               <!-- Display Checkboxes If Requested -->
               <td v-if="selectable">
                 <div
-                  class="custom-control custom-checkbox"
+                  class="custom-control custom-checkbox d-flex justify-content-end"
                   @click="select(item)"
                 >
                   <input
@@ -126,6 +127,7 @@
               <td
                 v-for="(td, j) in item.details.filter((d) => d.show)"
                 :key="j"
+                class="justify-content-center"
                 @click="
                   click(item.row, td.value, td.name, i),
                     columnClick(td.click, item.row, td.value, td.name, i)
@@ -143,7 +145,7 @@
                   v-for="(button, j) in item.buttons.filter((d) => d.show)"
                   :key="j"
                   type="button"
-                  class="btn"
+                  class="btn mt-3"
                   :class="`btn-${button.color} btn-${button.size || 'sm'}`"
                   :disabled="button.disabled"
                   @click="emit(button.event, item.row)"
@@ -161,8 +163,9 @@
                 :colspan="
                   headers.length + (actions.length ? 1 : 0) + (index ? 1 : 0)
                 "
+                class="text-dark text-sm"
               >
-                No results
+                Tidak Ada Hasil
               </td>
             </tr>
           </tbody>

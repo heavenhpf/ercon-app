@@ -43,9 +43,9 @@
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
-import POTable from "./components/POTable.vue";
+import POTable from "@/components/examples/POTable.vue";
 export default {
-    name: "po",
+    name: "tracking-detail",
     components: {
         ArgonButton,
         POTable,

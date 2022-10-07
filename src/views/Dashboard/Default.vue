@@ -22,55 +22,55 @@
           <div class="mb-5">
             <doughnut-tracking-chart />
           </div>
-          <div class="pb-0 row">
-            <div class="row mb-0">
-              <div class="col-10">
-                <div class="pb-0 text-start">
-                  <h5 class="text-black font-weight-bolder">Deadline PO Terdekat</h5>
+          <div class="mb-5">
+            <div class="pb-0 row">
+              <div class="row mb-0">
+                <div class="col-10">
+                  <div class="pb-0 text-start">
+                    <h5 class="text-black font-weight-bolder">Deadline PO Terdekat</h5>
+                  </div>
                 </div>
-              </div>
-              <div class="col-2 d-flex justify-content-end mt-1">
-                <div class="pb-0 text-start">
-                  <p class="text-primary font-weight-bolder">Lihat Semua</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <tracking-table />
-          </div>
-          <div class="pb-0 row">
-            <div class="row mb-0">
-              <div class="col-10">
-                <div class="pb-0 text-start">
-                  <h5 class="text-black font-weight-bolder">PO Selesai Terbaru</h5>
-                </div>
-              </div>
-              <div class="col-2 d-flex justify-content-end mt-1">
-                <div class="pb-0 text-start">
-                  <p class="text-primary font-weight-bolder">Lihat Semua</p>
+                <div class="col-2 d-flex justify-content-end mt-1">
+                  <div class="pb-0 text-start">
+                    <router-link to="/dashboard/tracking" tag="button">
+                      <span>
+                        <p class="text-primary font-weight-bolder">Lihat Semua</p>
+                      </span>
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
+            <div>
+              <tracking-table />
+            </div>
           </div>
-          <div>
-            <tracking-table />
+          <div class="mb-5">
+            <div class="pb-0 row">
+              <div class="row mb-0">
+                <div class="col-10">
+                  <div class="pb-0 text-start">
+                    <h5 class="text-black font-weight-bolder">PO Selesai Terbaru</h5>
+                  </div>
+                </div>
+                <div class="col-2 d-flex justify-content-end mt-1">
+                  <div class="pb-0 text-start">
+                    <router-link to="/dashboard/tracking" tag="button">
+                      <span>
+                        <p class="text-primary font-weight-bolder">Lihat Semua</p>
+                      </span>
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <tracking-table />
+            </div>
           </div>
           <div class="pb-0 row">
             <div class="pb-0 text-start mb-2">
               <h5 class="text-black font-weight-bolder">Item Monitoring</h5>
-            </div>
-            <div class="col-lg-4 col-md-3 mb-2">
-              <span>
-                <div class="input-group">
-                  <span class="input-group-text text-body">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                  </span>
-                  <input type="text" class="form-control" :placeholder="
-                  'Cari..'
-                  " />
-                </div>
-              </span>
             </div>
           </div>
           <div>

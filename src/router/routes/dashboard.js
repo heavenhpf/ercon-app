@@ -10,8 +10,14 @@ const dashboard = {
     },
     {
       path: 'tracking',
-      name: 'tracking',
+      name: 'Tracking',
       component: () => import('@/views/Dashboard/Tracking.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'tracking-detail',
+      name: 'TrackingDetail',
+      component: () => import('@/views/Dashboard/TrackingDetail.vue'),
       meta: { auth: true },
     },
     {

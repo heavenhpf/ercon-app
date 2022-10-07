@@ -46,7 +46,7 @@
                                 <span class="text-primary text-xs font-weight-bold">Belum Deadline</span>
                             </td>
                             <td class="align-middle">
-                                <router-link to="/tracking/po-detail" tag="button">
+                                <router-link to="/dashboard/tracking-detail" tag="button">
                                     <span>
                                         <argon-button size="md" color="warning">
                                             Detail
