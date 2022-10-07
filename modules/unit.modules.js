@@ -8,7 +8,7 @@ class _unit {
                 where: {
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -46,7 +46,7 @@ class _unit {
                 data: {
                     name: body.name,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -90,7 +90,7 @@ class _unit {
                     id_unit: body.id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -107,7 +107,7 @@ class _unit {
                 data: {
                     name: body.name,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -145,7 +145,7 @@ class _unit {
                     id_unit: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -162,7 +162,7 @@ class _unit {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

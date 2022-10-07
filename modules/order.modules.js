@@ -8,7 +8,7 @@ class _order {
                 where: {
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -50,7 +50,7 @@ class _order {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -65,7 +65,7 @@ class _order {
                     order_from: check.id_company,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -116,7 +116,7 @@ class _order {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkItem = await prisma.d_item.findFirst({
                 where: {
@@ -126,7 +126,7 @@ class _order {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkCompany && checkItem)) {
                 return {
@@ -145,7 +145,7 @@ class _order {
                     quantity: body.quantity,
                     processed: false
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -195,7 +195,7 @@ class _order {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkOrder = await prisma.d_order.findFirst({
                 where: {
@@ -204,7 +204,7 @@ class _order {
                     processed: false,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkCompany && checkOrder)) {
                 return {
@@ -221,7 +221,7 @@ class _order {
                 data: {
                     quantity: body.quantity
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -269,7 +269,7 @@ class _order {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkOrder = await prisma.d_order.findFirst({
                 where: {
@@ -278,7 +278,7 @@ class _order {
                     processed: false,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkCompany && checkOrder)) {
                 return {
@@ -295,7 +295,7 @@ class _order {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

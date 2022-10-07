@@ -8,7 +8,7 @@ class _category {
                 where: {
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -46,7 +46,7 @@ class _category {
                 data: {
                     name: body.name,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -84,7 +84,7 @@ class _category {
                     id_category: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -101,7 +101,7 @@ class _category {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -145,7 +145,7 @@ class _category {
                     id_category: body.id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -162,7 +162,7 @@ class _category {
                 data: {
                     name: body.name,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

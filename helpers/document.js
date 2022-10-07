@@ -11,7 +11,7 @@ class _document {
                 select: {
                     id_doc: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return add
         } catch (error) {

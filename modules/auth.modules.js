@@ -34,7 +34,7 @@ class _auth {
                     username: true,
                     password: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!checkUser) {
                 return {

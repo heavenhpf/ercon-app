@@ -40,14 +40,14 @@ class _po {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkCompanyTo = await prisma.s_company.findFirst({
                 where: {
                     id_company: body.order_to,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkCompanyFrom && checkCompanyTo)) {
                 return {
@@ -77,7 +77,7 @@ class _po {
                     note: body.note,
                     deadline: body.deadline
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

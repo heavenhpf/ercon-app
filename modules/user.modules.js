@@ -9,7 +9,7 @@ class _user {
                 where: {
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -17,6 +17,36 @@ class _user {
             }
         } catch (error) {
             console.error('listUser module error ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
+    getUsername = async (username) => {
+        try {
+            const schema = Joi.string().required()
+
+            const validation = schema.validate(username)
+
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            return {
+                status: true,
+                data: username
+            }
+        } catch (error) {
+            console.error('getUsername module error: ', error)
 
             return {
                 status: false,
@@ -55,7 +85,7 @@ class _user {
                 where: {
                     username: body.username
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (check) {
                 return {
@@ -73,7 +103,7 @@ class _user {
                     password: body.password,
                     level: body.level
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const addCompany = await prisma.s_company.create({
                 data: {
@@ -82,7 +112,7 @@ class _user {
                     address: body.address,
                     phone: body.phone,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -123,7 +153,7 @@ class _user {
                     id_user: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkCompany = await prisma.s_company.findFirst({
                 where: {
@@ -132,7 +162,7 @@ class _user {
                         not: null
                     }
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkUser && checkCompany)) {
                 return {
@@ -149,7 +179,7 @@ class _user {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

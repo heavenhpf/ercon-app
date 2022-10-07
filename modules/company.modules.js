@@ -16,7 +16,7 @@ class _company {
                         }
                     }
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -66,7 +66,7 @@ class _company {
                     id_company: body.id_company,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -85,7 +85,7 @@ class _company {
                     address: body.address,
                     phone: body.phone
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,
@@ -123,7 +123,7 @@ class _company {
                     id_company: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!check) {
                 return {
@@ -140,7 +140,7 @@ class _company {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

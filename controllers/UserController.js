@@ -9,7 +9,11 @@ app.get('/', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.listUser())
 })
 
-app.post('/', userSession, async (req, res, next) => {
+app.get('/username', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.getUsername(req.user.username))
+})
+
+app.post('/', async (req, res, next) => {
     response.sendResponse(res, await modules.addUser(req.body))
 })
 

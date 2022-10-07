@@ -25,7 +25,7 @@ class _item {
                     id_company: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
     
             if (!check) {
                 return {
@@ -40,7 +40,7 @@ class _item {
                     id_company: id,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
     
             return {
                 status: true,
@@ -85,7 +85,7 @@ class _item {
                     id_company: body.id_company,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkItem = await prisma.d_item.findFirst({
                 where: {
@@ -93,7 +93,7 @@ class _item {
                     id_item: body.id_item,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
     
             if (!(checkCompany && checkItem)) {
                 return {
@@ -154,21 +154,21 @@ class _item {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkUnit = await prisma.ref_unit.findFirst({
                 where: {
                     id_unit: body.id_unit,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkCategory = await prisma.ref_category.findFirst({
                 where: {
                     id_category: body.id_category,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             if (!(checkCompany && checkUnit && checkCategory)) {
                 return {
@@ -188,7 +188,7 @@ class _item {
                     serial_number: body.serial_number,
                     quantity: body.quantity,
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             await prisma.d_item_detail.create({
                 data: {
@@ -243,7 +243,7 @@ class _item {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkItem = await prisma.d_item.findFirst({
                 where: {
@@ -251,7 +251,7 @@ class _item {
                     id_item: body.id_item,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
             
             if (!(checkCompany && checkItem)) {
                 return {
@@ -268,13 +268,13 @@ class _item {
                 data: {
                     deleted_at: new Date(Date.now())
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             await prisma.d_item_detail.deleteMany({
                 where: {
                     id_item: body.id_item
                 }
-            }).finally(prisma.$disconnect())
+            })
             
             return {
                 status: true,
@@ -329,7 +329,7 @@ class _item {
                 select: {
                     id_company: true
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkItem = await prisma.d_item.findFirst({
                 where: {
@@ -337,21 +337,21 @@ class _item {
                     id_item: body.id_item,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkUnit = await prisma.ref_unit.findFirst({
                 where: {
                     id_unit: body.id_unit,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             const checkCategory = await prisma.ref_category.findFirst({
                 where: {
                     id_category: body.id_category,
                     deleted_at: null
                 }
-            }).finally(prisma.$disconnect())
+            })
             
             if (!(checkCompany && checkItem && checkUnit && checkCategory)) {
                 return {
@@ -372,7 +372,7 @@ class _item {
                     desc: body.desc,
                     serial_number: body.serial_number
                 }
-            }).finally(prisma.$disconnect())
+            })
 
             return {
                 status: true,

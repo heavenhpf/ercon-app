@@ -20,7 +20,7 @@ const userSession = async (req, res, next) => {
             id_user: true,
             username: true
           }
-        }).finally(prisma.$disconnect())
+        })
   
         if (user) {
           req.user = {
