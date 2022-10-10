@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const modules = require('../modules/company.modules')
 const response = require('../helpers/response')
-const userSession = require('../helpers/middleware')
+const { userSession } = require('../helpers/middleware')
 
 const app = Router()
 
