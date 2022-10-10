@@ -22,7 +22,7 @@ const dashboard = {
     },
     {
       path: 'company',
-      name: 'List Company',
+      name: 'Company List',
       component: () => import('@/views/Dashboard/Company.vue'),
       meta: { auth: true },
     },

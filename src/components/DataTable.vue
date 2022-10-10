@@ -127,7 +127,7 @@
               <td
                 v-for="(td, j) in item.details.filter((d) => d.show)"
                 :key="j"
-                class="justify-content-center"
+                class=""
                 @click="
                   click(item.row, td.value, td.name, i),
                     columnClick(td.click, item.row, td.value, td.name, i)
@@ -145,7 +145,7 @@
                   v-for="(button, j) in item.buttons.filter((d) => d.show)"
                   :key="j"
                   type="button"
-                  class="btn mt-3"
+                  class="btn mt-3 d-flex justify-content-center"
                   :class="`btn-${button.color} btn-${button.size || 'sm'}`"
                   :disabled="button.disabled"
                   @click="emit(button.event, item.row)"

@@ -11,7 +11,7 @@
           navText="Dashboard"
         >
           <template v-slot:icon>
-            <i class="fa fa-home text-primary text-sm opacity-10"></i>
+            <i class="fa fa-home mb-1 text-primary text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -23,7 +23,33 @@
         >
           <template v-slot:icon>
             <i
-              class="fa fa-location-arrow mb-1 text-success text-sm opacity-10"
+              class="fa fa-location-arrow mb-1 text-danger text-sm opacity-10"
+            ></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item
+          url="/dashboard/monitoring"
+          :class="getRoute() === 'monitoring' ? 'active' : ''"
+          navText="Monitoring"
+        >
+          <template v-slot:icon>
+            <i
+              class="ni ni-ui-04 text-info text-sm opacity-10"
+            ></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item
+          url="/dashboard/po"
+          :class="getRoute() === 'purchasingOrder' ? 'active' : ''"
+          navText="Purchasing Order"
+        >
+          <template v-slot:icon>
+            <i
+              class="ni ni-tag text-success text-sm opacity-10"
             ></i>
           </template>
         </sidenav-item>
@@ -32,36 +58,12 @@
         <sidenav-item
           url="/dashboard/company"
           :class="getRoute() === 'company' ? 'active' : ''"
-          navText="List Company"
+          navText="Company List"
         >
           <template v-slot:icon>
             <i
-              class="ni ni-circle-08 text-warning text-sm opacity-10"
+              class="fa fa-users mb-1 text-dark text-sm opacity-10"
             ></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/tables"
-          :class="getRoute() === 'tables' ? 'active' : ''"
-          navText="Tables"
-        >
-          <template v-slot:icon>
-            <i
-              class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"
-            ></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item
-          url="dashboard/billing"
-          :class="getRoute() === 'billing' ? 'active' : ''"
-          navText="Billing"
-        >
-          <template v-slot:icon>
-            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -74,7 +76,7 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-          url="/profile"
+          url="/dashboard/profile"
           :class="getRoute() === 'profile' ? 'active' : ''"
           navText="Profile"
         >
