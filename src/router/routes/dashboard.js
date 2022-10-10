@@ -27,6 +27,12 @@ const dashboard = {
       meta: { auth: true },
     },
     {
+      path: 'add-company',
+      name: 'Add Company',
+      component: () => import('@/views/Dashboard/AddCompany.vue'),
+      meta: { auth: true },
+    },
+    {
       path: 'tables',
       name: 'Tables',
       component: () => import('@/views/Dashboard/Tables.vue'),
