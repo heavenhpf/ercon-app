@@ -5,7 +5,7 @@
         <div class="row">
           <div class="pb-0 text-start mb-3">
             <h5 class="text-dark">Selamat Pagi,</h5>
-            <h4 class="font-weight-bolder text-dark">Admin PT TMMIN</h4>
+            <h4 class="font-weight-bolder text-dark">{{ g$username }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -151,16 +151,22 @@ import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
 import MonitoringTable from "@/components/examples/MonitoringTable.vue";
+import { baseApi } from '@/utils/axios';
+import d$user from '@/stores/dashboard/user';
+import { mapActions, mapState } from "pinia";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
+import { onMounted } from "vue";
 
 export default {
   name: "default",
   data() {
     return {
+      posts: '',
+      errors: [],
       stats: {
         po: {
           title: "Purchasing Order",
@@ -222,5 +228,38 @@ export default {
     Carousel,
     CategoriesCard,
   },
+
+  // created() {
+  //   baseApi.get(`/users/username`)
+  //     .then(response => {
+  //       // JSON responses are automatically parsed.
+  //       this.posts = response.data
+  //       console.log(this.posts)
+  //     })
+  //     .catch(e => {
+  //       this.errors.push(e)
+  //     })
+  // },
+  async created() {
+    try {
+      const { data } = await baseApi.get(`/users/username`);
+      this.posts = data;
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  computed: {
+    ...mapState(d$user, ['g$username'])
+  },
+  methods: {
+    ...mapActions(d$user, ['a$username'])
+  },
+  async mounted() {
+    try {
+      await this.a$username();
+    } catch (e) {
+    }
+  }
 };
 </script>

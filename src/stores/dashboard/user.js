@@ -5,6 +5,7 @@ const d$user = defineStore({
     id: 'user',
     state: () => ({
         user: [],
+        username: '',
         detail: {},
         status: null,
     }),
@@ -14,6 +15,17 @@ const d$user = defineStore({
                 this.status = null;
                 const { data, status } = await s$user.list();
                 this.user = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$username() {
+            try {
+                this.status = null;
+                const { data, status } = await s$user.username();
+                this.username = data ?? '';
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -56,6 +68,7 @@ const d$user = defineStore({
     getters: {
         g$status: ({ status }) => status,
         g$list: ({ user }) => user,
+        g$username: ({ username }) => username,
         g$detail: ({ detail }) => detail,
     },
 });

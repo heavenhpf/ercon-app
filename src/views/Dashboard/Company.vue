@@ -51,12 +51,6 @@
             <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
-                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
                         <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
                         </argon-input>
                     </div>
@@ -107,6 +101,11 @@ import { mapActions, mapState } from 'pinia';
 import d$company from '@/stores/dashboard/company';
 import auth from '@/router/routes/auth';
 
+// const statusColor = {
+//     0: "belim deadline",
+//     1: "diproses",
+// }
+
 export default {
     name: 'Company',
     data: () => ({
@@ -137,6 +136,15 @@ export default {
                     th: 'Username',
                     render: ({ auth_user }) => auth_user.username
                 },
+                // {
+                //     name: 'auth_user.username',
+                //     th: 'Username',
+                //     render: ({ auth_user }) => {
+                //         const auth = auth ? 1 : 0
+                //         return `<span[${statusColor}]`
+                //     },
+
+                // },
                 {
                     name: 'address',
                     th: 'address',
@@ -177,7 +185,7 @@ export default {
         await this.a$inquiryList();
     },
     methods: {
-        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -198,9 +206,9 @@ export default {
 
         async addInquiry() {
             try {
-                const { name } = this.input;
+                const { username, password, level, name, address, phone } = this.input;
                 const data = {
-                    name,
+                    username, password, level, name, address, phone
                 };
                 await this.a$inquiryAdd(data);
                 this.modal.add = false;
@@ -213,9 +221,10 @@ export default {
         },
         async editInquiry() {
             try {
-                const { id, name } = this.input;
+                const { id, name, address, phone } = this.input;
                 const data = {
                     name,
+                    address, phone
                 };
                 await this.a$inquiryEdit(id, data);
                 this.modal.detail = false;
@@ -228,8 +237,8 @@ export default {
         },
         async delInquiry() {
             try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
+                const { id_company } = this.input;
+                await this.a$inquiryDel(id_company);
                 this.modal.confirm = false;
                 console.log(`Delete ${this.pageTitle} Succeed!`);
             } catch (e) {
@@ -239,10 +248,10 @@ export default {
             }
         },
 
-        async triggerDetail({ auth_user, name, address, phone }) {
+        async triggerDetail({ id_company, name, address, phone }) {
             try {
                 this.input = {
-                    username: auth_user.username,
+                    id: id_company,
                     name,
                     address,
                     phone,
@@ -252,10 +261,11 @@ export default {
                 console.error(e);
             }
         },
-        async triggerDelete({ id }) {
+        async triggerDelete({ id_company }) {
             try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
+                this.input = {
+                    id_company
+                };
                 this.modal.confirm = true;
             } catch (e) {
                 console.error(e);
