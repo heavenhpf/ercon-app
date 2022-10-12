@@ -54,13 +54,13 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
-
-
-                            <argon-button @click="addInquiry()" size="md" color="primary">
-                                Tambah
-                            </argon-button>
-
-
+                            <router-link to="/dashboard/company" tag="button">
+                                <span>
+                                    <argon-button @click="addInquiry()" size="md" color="primary">
+                                        Tambah
+                                    </argon-button>
+                                </span>
+                            </router-link>
                         </div>
                         <!-- <modal-comp v-model:show="modal.confirm">
                             <template #header>

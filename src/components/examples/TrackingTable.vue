@@ -1,8 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table :index="false" :data="g$list" :columns="dt.column" :actions="dt.action" @detail="triggerDetail"
-                @delete="triggerDelete" />
+            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
+                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
@@ -34,7 +34,8 @@
             <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
-                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username" size="md">
+                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
+                            size="md">
                         </argon-input>
                     </div>
                 </div>
@@ -91,9 +92,9 @@ import d$company from '@/stores/dashboard/company';
 import auth from '../../router/routes/auth';
 
 export default {
-    name: 'Company',
+    name: 'Tracking',
     data: () => ({
-        pageTitle: 'Company',
+        pageTitle: 'Tracking',
         // Input
         input: {
             id: null,

@@ -1,29 +1,12 @@
 <template>
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="pb-0 text-start mb-3">
-                <h4 class="font-weight-bolder text-dark">Company List</h4>
-            </div>
-            <div class="pb-0 row mb-lg-3 mb-2">
-                <div class="col-lg-8 col-md-9">
-                    <router-link to="/dashboard/add-company" tag="button">
-                        <span>
-                            <argon-button size="md me-2" color="primary">
-                                <span class="fa fa-plus fa-sm me-2" />
-                                Tambah
-                            </argon-button>
-                        </span>
-                    </router-link>
-                </div>
-            </div>
-        </div>
+    <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align: center;" index="false" :data="g$list" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
-                <h3 class="modal-title">Add New {{ pageTitle }}</h3>
+                <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
             <template v-if="modal.add" #body>
                 <div class="row">
@@ -49,6 +32,13 @@
 
             <!-- buat ngerubah detail -->
             <template v-if="modal.detail" #body>
+                <div class="row">
+                    <div class="col-12">
+                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
+                            size="md">
+                        </argon-input>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
@@ -99,17 +89,12 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$company from '@/stores/dashboard/company';
-import auth from '@/router/routes/auth';
-
-// const statusColor = {
-//     0: "belim deadline",
-//     1: "diproses",
-// }
+import auth from '../../router/routes/auth';
 
 export default {
-    name: 'Company',
+    name: 'Monitoring',
     data: () => ({
-        pageTitle: 'Company',
+        pageTitle: 'Monitoring',
         // Input
         input: {
             id: null,
@@ -118,10 +103,10 @@ export default {
         // DataTable
         dt: {
             column: [
-                // {
-                //     name: 'id_company',
-                //     th: 'no',
-                // },
+                {
+                    name: 'id_company',
+                    th: 'No',
+                },
                 {
                     name: 'name',
                     th: 'Nama Perusahaan',
@@ -132,40 +117,23 @@ export default {
                     render: ({ auth_user }) => auth_user.level
                 },
                 {
-                    name: 'auth_user.username',
-                    th: 'Username',
-                    render: ({ auth_user }) => auth_user.username
-                },
-                // {
-                //     name: 'auth_user.username',
-                //     th: 'Username',
-                //     render: ({ auth_user }) => {
-                //         const auth = auth ? 1 : 0
-                //         return `<span[${statusColor}]`
-                //     },
-
-                // },
-                {
-                    name: 'address',
-                    th: 'alamat',
-                },
-
-                {
-                    name: 'phone',
-                    th: 'Nomor telepon',
+                    //quantity item
+                    name: 'd_item.quantity',
+                    th: 'Jumlah Barang  ',
+                    render: ({ d_item }) => d_item.quantity
                 },
             ],
             action: [
                 {
-                    text: 'Edit',
-                    color: 'primary',
+                    text: 'Detail',
+                    color: 'warning',
                     event: 'detail',
                 },
-                {
-                    text: 'Delete',
-                    color: 'danger',
-                    event: 'delete',
-                },
+                // {
+                //     text: 'Delete',
+                //     color: 'danger',
+                //     event: 'delete',
+                // },
             ],
         },
         // UI
@@ -185,7 +153,7 @@ export default {
         await this.a$inquiryList();
     },
     methods: {
-        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail']),
+        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -206,9 +174,9 @@ export default {
 
         async addInquiry() {
             try {
-                const { username, password, level, name, address, phone } = this.input;
+                const { name } = this.input;
                 const data = {
-                    username, password, level, name, address, phone
+                    name,
                 };
                 await this.a$inquiryAdd(data);
                 this.modal.add = false;
@@ -221,10 +189,9 @@ export default {
         },
         async editInquiry() {
             try {
-                const { id, name, address, phone } = this.input;
+                const { id, name } = this.input;
                 const data = {
                     name,
-                    address, phone
                 };
                 await this.a$inquiryEdit(id, data);
                 this.modal.detail = false;
@@ -237,8 +204,8 @@ export default {
         },
         async delInquiry() {
             try {
-                const { id_company } = this.input;
-                await this.a$inquiryDel(id_company);
+                const { id } = this.input;
+                await this.a$inquiryDel(id);
                 this.modal.confirm = false;
                 console.log(`Delete ${this.pageTitle} Succeed!`);
             } catch (e) {
@@ -248,10 +215,11 @@ export default {
             }
         },
 
-        async triggerDetail({ id_company, name, address, phone }) {
+        async triggerDetail({ auth_user, d_item, name, address, phone }) {
             try {
                 this.input = {
-                    id: id_company,
+                    username: auth_user.username,
+                    quantity: d_item.quantity,
                     name,
                     address,
                     phone,
@@ -261,11 +229,10 @@ export default {
                 console.error(e);
             }
         },
-        async triggerDelete({ id_company }) {
+        async triggerDelete({ id }) {
             try {
-                this.input = {
-                    id_company
-                };
+                await this.a$inquiryDetail(id);
+                this.input = this.g$detail;
                 this.modal.confirm = true;
             } catch (e) {
                 console.error(e);

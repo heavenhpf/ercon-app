@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
-import * as s$company from '@/services/dashboard/company';
+import * as s$item from '@/services/dashboard/item';
 
-const d$company = defineStore({
-    id: 'company',
+const d$item = defineStore({
+    id: 'item',
     state: () => ({
-        company: [],
-        name: '',
+        item: [],
         detail: {},
         status: null,
     }),
@@ -13,20 +12,8 @@ const d$company = defineStore({
         async a$inquiryList() {
             try {
                 this.status = null;
-                const { data, status } = await s$company.list();
-                this.company = data ?? [];
-                this.status = status;
-            } catch ({ error, message }) {
-                this.status = false;
-                throw error ?? message;
-            }
-        },
-
-        async a$name() {
-            try {
-                this.status = null;
-                const { data, status } = await s$company.name();
-                this.name = data ?? '';
+                const { data, status } = await s$item.list();
+                this.item = data ?? [];
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -37,7 +24,7 @@ const d$company = defineStore({
             try {
                 this.detail = {};
                 if (!id) return;
-                const { data } = await s$company.detail(id);
+                const { data } = await s$item.detail(id);
                 this.detail = data;
             } catch ({ error, message }) {
                 this.detail = {};
@@ -46,21 +33,21 @@ const d$company = defineStore({
         },
         async a$inquiryAdd(body) {
             try {
-                await s$company.add(body);
+                await s$item.add(body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
         },
         async a$inquiryEdit(id, body) {
             try {
-                await s$company.update(id, body);
+                await s$item.update(id, body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
         },
         async a$inquiryDel(id) {
             try {
-                await s$company.del(id);
+                await s$item.del(id);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -68,10 +55,9 @@ const d$company = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$list: ({ company }) => company,
-        g$name: ({ name }) => name,
+        g$list: ({ item }) => item,
         g$detail: ({ detail }) => detail,
     },
 });
 
-export default d$company;
+export default d$item;

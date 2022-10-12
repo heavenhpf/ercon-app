@@ -4,8 +4,8 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="pb-0 text-start mb-3">
-            <h5 class="text-dark">Selamat Pagi,</h5>
-            <h4 class="font-weight-bolder text-dark">{{ g$username }}</h4>
+            <h5 class="font-weight-bolder text-dark"><b>{{ status }}</b></h5>
+            <h4 class="text-dark">{{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div>
-            <monitoring-table />
+            <TableMonitoring />
           </div>
         </div>
         <div class="row">
@@ -150,9 +150,9 @@ import DoughnutTrackingChart from "@/examples/Charts/DoughnutTrackingChart.vue";
 import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
-import MonitoringTable from "@/components/examples/MonitoringTable.vue";
+import MonitoringTable from "@/components/examples/TableMonitoring.vue";
 import { baseApi } from '@/utils/axios';
-import d$user from '@/stores/dashboard/user';
+import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from "pinia";
 
 import US from "@/assets/img/icons/flags/US.png";
@@ -160,6 +160,20 @@ import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
 import { onMounted } from "vue";
+import TableMonitoring from "../../components/examples/TableMonitoring.vue";
+
+const date = new Date;
+let hours = date.getHours();
+let status = "";
+if (hours <= 12) {
+  status = "Selamat Pagi"
+} else if (hours == 12) {
+  status = "Selamat Siang"
+} else if (hours >= 14) {
+  status = "Selamat Sore"
+} else {
+  status = "Selamat Malam"
+}
 
 export default {
   name: "default",
@@ -167,6 +181,7 @@ export default {
     return {
       posts: '',
       errors: [],
+      status,
       stats: {
         po: {
           title: "Purchasing Order",
@@ -227,6 +242,7 @@ export default {
     MonitoringTable,
     Carousel,
     CategoriesCard,
+    TableMonitoring
   },
 
   // created() {
@@ -242,22 +258,22 @@ export default {
   // },
   async created() {
     try {
-      const { data } = await baseApi.get(`/users/username`);
-      this.posts = data;
+      const { data } = await baseApi.get(`/companies/name`);
+      this.posts = data.name;
     } catch (e) {
       console.error(e);
     }
   },
 
   computed: {
-    ...mapState(d$user, ['g$username'])
+    ...mapState(d$company, ['g$name'])
   },
   methods: {
-    ...mapActions(d$user, ['a$username'])
+    ...mapActions(d$company, ['a$name'])
   },
   async mounted() {
     try {
-      await this.a$username();
+      await this.a$name();
     } catch (e) {
     }
   }

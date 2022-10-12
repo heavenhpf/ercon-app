@@ -1,107 +1,64 @@
 <template>
-  <div
-    class="collapse navbar-collapse w-auto h-auto h-100"
-    id="sidenav-collapse-main"
-  >
+  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard"
-          :class="getRoute() === 'default' ? 'active' : ''"
-          navText="Dashboard"
-        >
+        <sidenav-item url="/" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
           <template v-slot:icon>
             <i class="fa fa-home mb-1 text-primary text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/tracking"
-          :class="getRoute() === 'tracking' ? 'active' : ''"
-          navText="Tracking"
-        >
+        <sidenav-item url="/dashboard/tracking" :class="getRoute() === 'tracking' ? 'active' : ''" navText="Tracking">
           <template v-slot:icon>
-            <i
-              class="fa fa-location-arrow mb-1 text-danger text-sm opacity-10"
-            ></i>
+            <i class="fa fa-location-arrow mb-1 text-danger text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/monitoring"
-          :class="getRoute() === 'monitoring' ? 'active' : ''"
-          navText="Monitoring"
-        >
+        <sidenav-item url="/dashboard/monitoring" :class="getRoute() === 'monitoring' ? 'active' : ''"
+          navText="Monitoring">
           <template v-slot:icon>
-            <i
-              class="ni ni-ui-04 text-info text-sm opacity-10"
-            ></i>
+            <i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/po"
-          :class="getRoute() === 'purchasingOrder' ? 'active' : ''"
-          navText="Purchasing Order"
-        >
+        <sidenav-item url="/dashboard/po" :class="getRoute() === 'purchasingOrder' ? 'active' : ''"
+          navText="Purchasing Order">
           <template v-slot:icon>
-            <i
-              class="ni ni-tag text-success text-sm opacity-10"
-            ></i>
+            <i class="ni ni-tag text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/company"
-          :class="getRoute() === 'company' ? 'active' : ''"
-          navText="Company List"
-        >
+        <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="Company List">
           <template v-slot:icon>
-            <i
-              class="fa fa-users mb-1 text-dark text-sm opacity-10"
-            ></i>
+            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="mt-3 nav-item">
-        <h6
-          class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2"
-        >
+        <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
           ACCOUNT PAGES
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/dashboard/profile"
-          :class="getRoute() === 'profile' ? 'active' : ''"
-          navText="Profile"
-        >
+        <sidenav-item url="/dashboard/profile" :class="getRoute() === 'profile' ? 'active' : ''" navText="Profile">
           <template v-slot:icon>
             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/auth/login"
-          :class="getRoute() === 'login' ? 'active' : ''"
-          navText="Sign In"
-        >
+        <sidenav-item url="/auth/login" :class="getRoute() === 'login' ? 'active' : ''" navText="Sign In">
           <template v-slot:icon>
             <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item
-          url="/auth/signup"
-          :class="getRoute() === 'signup' ? 'active' : ''"
-          navText="Sign Up"
-        >
+        <sidenav-item url="/auth/signup" :class="getRoute() === 'signup' ? 'active' : ''" navText="Sign Up">
           <template v-slot:icon>
             <i class="ni ni-collection text-info text-sm opacity-10"></i>
           </template>
@@ -110,11 +67,7 @@
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
-    <sidenav-card
-      :class="cardBg"
-      textPrimary="Need Help?"
-      textSecondary="Please check our docs"
-    />
+    <sidenav-card :class="cardBg" textPrimary="Need Help?" textSecondary="Please check our docs" />
   </div>
 </template>
 <script>
