@@ -150,6 +150,34 @@
 					"response": []
 				},
 				{
+					"name": "GET NAME",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/companies/name",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"companies",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "EDIT COMPANY",
 					"request": {
 						"auth": {
@@ -742,7 +770,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"quantity\": 500,\r\n    \"note\": \"ini note\"\r\n}",
+							"raw": "{\r\n    \"quantity\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

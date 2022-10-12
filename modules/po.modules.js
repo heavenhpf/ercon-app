@@ -400,7 +400,7 @@ class _po {
                 }
             }
 
-            const doc = await document.addDoc(doc_name, doc_data)
+            const doc = await document.addDoc(body.doc_name, body.doc_data)
 
             if (!doc) {
                 return {

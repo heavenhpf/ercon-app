@@ -247,13 +247,6 @@ class _item {
                 }
             })
 
-            await prisma.d_item_detail.create({
-                data: {
-                    id_item: add.id_item,
-                    quantity: add.quantity
-                }
-            })
-
             return {
                 status: true,
                 data: add

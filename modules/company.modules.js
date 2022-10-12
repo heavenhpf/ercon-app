@@ -32,6 +32,45 @@ class _company {
         }
     }
 
+    getCompany = async (id_user) => {
+        try {
+            const schema = Joi.number().required()
+
+            const validation = schema.validate(id_user)
+
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            const get = await prisma.s_company.findFirst({
+                where: {
+                    id_user
+                },
+                select: {
+                    name: true
+                }
+            })
+
+            return {
+                status: true,
+                data: get
+            }
+        } catch (error) {
+            console.error('getCompany module error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
     editCompany = async (id_user, id_company, body) => {
         try {
             body = {

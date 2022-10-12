@@ -48,6 +48,7 @@ class _order {
                 where: {
                     order_number: body.order_number,
                     order_from: check.id_company,
+                    processed: false,
                     deleted_at: null
                 }
             })

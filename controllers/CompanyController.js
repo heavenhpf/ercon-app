@@ -9,6 +9,10 @@ app.get('/', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.listCompany())
 })
 
+app.get('/name', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.getCompany(req.user.id))
+})
+
 app.put('/:id', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.editCompany(req.user.id, req.params.id, req.body))
 })
