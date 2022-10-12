@@ -17,8 +17,8 @@ app.get('/my/:status?', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.listMyPo(req.user.id, req.params.status))
 })
 
-app.get('/:id/:status?', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.listAllPo(req.params.id, req.params.status))
+app.get('/:tier/:status?', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listAllPo(req.params.tier, req.params.status))
 })
 
 app.post('/', userSession, async (req, res, next) => {
