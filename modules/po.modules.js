@@ -354,10 +354,9 @@ class _po {
             }
 
             const schema = Joi.object({
+                id_doc: Joi.number().required(),
                 id_user: Joi.number().required(),
                 order_to: Joi.number().required(),
-                doc_name: Joi.string().required(),
-                doc_data: Joi.any().required(),
                 po_number: Joi.string().required(),
                 deadline: Joi.date().required(),
                 order: Joi.array().required()
@@ -400,19 +399,9 @@ class _po {
                 }
             }
 
-            const doc = await document.addDoc(body.doc_name, body.doc_data)
-
-            if (!doc) {
-                return {
-                    status: false,
-                    code: 409,
-                    error: "File not uploaded"
-                }
-            }
-
             const add = await prisma.d_po.create({
                 data: {
-                    id_doc: doc.id_doc,
+                    id_doc: body.id_doc,
                     order_from: checkCompanyFrom.id_company,
                     order_to: body.order_to,
                     po_number: body.po_number,
