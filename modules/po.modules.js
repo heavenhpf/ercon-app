@@ -1,5 +1,4 @@
 const prisma = require('../helpers/database')
-const document = require('../helpers/document')
 const Joi = require('joi')
 
 class _po {
@@ -64,8 +63,6 @@ class _po {
                 })
             }
 
-            const progress = []
-
             list.forEach(function (item) {
                 let result = 0
 
@@ -74,15 +71,12 @@ class _po {
                 })
 
                 result = result / item.d_po_detail.length
-                progress.push(result)
+                item.progress = result
             })
 
             return {
                 status: true,
-                data: {
-                    progress,
-                    list
-                }
+                data: list
             }
         } catch (error) {
             console.error('listAllPo module error: ', error)
@@ -155,8 +149,6 @@ class _po {
                 })
             }
 
-            const progress = []
-
             list.forEach(function (item) {
                 let result = 0
 
@@ -165,15 +157,12 @@ class _po {
                 })
 
                 result = result / item.d_po_detail.length
-                progress.push(result)
+                item.progress = result
             })
 
             return {
                 status: true,
-                data: {
-                    progress,
-                    list
-                }
+                data: list
             }
         } catch (error) {
             console.error('listMyPo module error: ', error)
@@ -208,9 +197,7 @@ class _po {
                     id_po,
                     deleted_at: null
                 },
-                select: {
-                    po_number: true,
-                    deadline: true,
+                include: {
                     s_company_d_po_order_toTos_company: {
                         select: {
                             name: true
@@ -241,17 +228,14 @@ class _po {
                 }
             })
 
-            const progress = []
-
             list.forEach(function (item) {
-                progress.push(item.quantity / item.d_order.quantity)
+                item.progress = item.quantity / item.d_order.quantity
             })
 
             return {
                 status: true,
                 data: {
                     po: check,
-                    progress,
                     list
                 }
             }

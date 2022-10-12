@@ -955,7 +955,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"order_to\": 2,\r\n    \"doc_name\": \"Nama file\",\r\n    \"doc_data\": \"0xasd\",\r\n    \"po_number\": \"PO0001\",\r\n    \"deadline\": \"2022-10-11T10:19:16.812Z\",\r\n    \"order\": [\r\n        {\r\n            \"id_order\": 1\r\n        },\r\n        {\r\n            \"id_order\": 2\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"order_to\": 2,\r\n    \"id_doc\": 1,\r\n    \"po_number\": \"PO0001\",\r\n    \"deadline\": \"2022-10-11T10:19:16.812Z\",\r\n    \"order\": [\r\n        {\r\n            \"id_order\": 1\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
