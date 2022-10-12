@@ -2,35 +2,19 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _order {
-    listAllOrder = async () => {
+    getOrder = async (id_user, body) => {
         try {
-            const list = await prisma.d_order.findMany({
-                where: {
-                    deleted_at: null
-                }
+            body = {
+                id_user,
+                ...body
+            }
+
+            const schema = Joi.object({
+                id_user: Joi.number().required(),
+                order_number: Joi.string().required()
             })
 
-            return {
-                status: true,
-                data: list
-            }
-        } catch (error) {
-            console.error('listAllOrder module error ', error)
-
-            return {
-                status: false,
-                error
-            }
-        }
-    }
-
-    listMyOrder = async (id) => {
-        try {
-            id = parseInt(id)
-
-            const schema = Joi.number().required()
-
-            const validation = schema.validate(id)
+            const validation = schema.validate(body)
 
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -44,7 +28,7 @@ class _order {
 
             const check = await prisma.s_company.findFirst({
                 where: {
-                    id_user: id,
+                    id_user: body.id_user,
                     deleted_at: null
                 },
                 select: {
@@ -60,8 +44,9 @@ class _order {
                 }
             }
 
-            const list = await prisma.d_order.findMany({
+            const get = await prisma.d_order.findFirst({
                 where: {
+                    order_number: body.order_number,
                     order_from: check.id_company,
                     deleted_at: null
                 }
@@ -69,10 +54,10 @@ class _order {
 
             return {
                 status: true,
-                data: list
+                data: get
             }
         } catch (error) {
-            console.error('listMyOrder module error ', error)
+            console.error('getOrder module error ', error)
 
             return {
                 status: false,

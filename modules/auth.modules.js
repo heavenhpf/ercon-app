@@ -32,7 +32,8 @@ class _auth {
                 select: {
                     id_user: true,
                     username: true,
-                    password: true
+                    password: true,
+                    level: true
                 }
             })
 
@@ -56,7 +57,8 @@ class _auth {
 
             const payload = {
                 id: checkUser.id_user,
-                username: checkUser.username
+                username: checkUser.username,
+                level: checkUser.level
             }
 
             const { secret, expired } = config.jwt

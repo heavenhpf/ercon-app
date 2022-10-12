@@ -36,7 +36,7 @@
 					"response": []
 				},
 				{
-					"name": "ADD USER",
+					"name": "GET USERNAME",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -48,6 +48,24 @@
 								}
 							]
 						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/username",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD USER",
+					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -483,12 +501,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/1",
+							"raw": "{{url}}/items/1/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
+								"1",
 								"1"
 							]
 						}
@@ -511,14 +530,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/1/5",
+							"raw": "{{url}}/items/item/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
-								"1",
-								"5"
+								"item",
+								"1"
 							]
 						}
 					},
@@ -541,7 +560,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_unit\": 2,\r\n    \"id_category\": 2,\r\n    \"name\": \"Barang B\",\r\n    \"desc\": \"Desc B\",\r\n    \"serial_number\": \"0000\",\r\n    \"quantity\": 200\r\n}",
+							"raw": "{\r\n    \"id_unit\": 1,\r\n    \"id_category\": 1,\r\n    \"name\": \"Barang A\",\r\n    \"desc\": \"Desc A\",\r\n    \"serial_number\": \"0000\",\r\n    \"quantity\": 200\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -631,61 +650,6 @@
 			"name": "Orders",
 			"item": [
 				{
-					"name": "LIST ALL ORDER",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/orders/all",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"orders",
-								"all"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LIST MY ORDER",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/orders",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"orders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "ADD ORDER",
 					"request": {
 						"auth": {
@@ -702,7 +666,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"quantity\": 1000\r\n}",
+							"raw": "{\r\n    \"order_number\": \"ORDER000\",\r\n    \"quantity\": 1000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -710,13 +674,52 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/orders/9",
+							"raw": "{{url}}/orders/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"orders",
-								"9"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ORDER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_number\": \"ORDER000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
 							]
 						}
 					},
@@ -790,13 +793,180 @@
 			]
 		},
 		{
+			"name": "PO",
+			"item": [
+				{
+					"name": "LIST ALL PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/po/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST MY PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/po/my",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST PO DETAIL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/po/detail/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po",
+								"detail",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PO DETAIL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/po/detail/1/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po",
+								"detail",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_to\": 2,\r\n    \"doc_name\": \"Nama file\",\r\n    \"doc_data\": \"0xasd\",\r\n    \"po_number\": \"PO0001\",\r\n    \"deadline\": \"2022-10-11T10:19:16.812Z\",\r\n    \"order\": [\r\n        {\r\n            \"id_order\": 1\r\n        },\r\n        {\r\n            \"id_order\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/po",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"token\", pm.response.json().data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"toyota2\",\r\n    \"password\": \"toyota\"\r\n}",
+					"raw": "{\r\n    \"username\": \"toyota\",\r\n    \"password\": \"toyota\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

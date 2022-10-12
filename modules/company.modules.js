@@ -100,61 +100,6 @@ class _company {
             }
         }
     }
-
-    deleteCompany = async (id) => {
-        try {
-            id = parseInt(id)
-            const schema = Joi.number().required()
-
-            const validation = schema.validate(id)
-
-            if (validation.error) {
-                const errorDetails = validation.error.details.map(detail => detail.message)
-
-                return {
-                    status: false,
-                    code: 422,
-                    error: errorDetails.join(', ')
-                }
-            }
-
-            const check = await prisma.s_company.findFirst({
-                where: {
-                    id_company: id,
-                    deleted_at: null
-                }
-            })
-
-            if (!check) {
-                return {
-                    status: false,
-                    code: 404,
-                    error: "Data not found"
-                }
-            }
-
-            const del = await prisma.s_company.update({
-                where: {
-                    id_company: id
-                },
-                data: {
-                    deleted_at: new Date(Date.now())
-                }
-            })
-
-            return {
-                status: true,
-                data: del
-            }
-        } catch (error) {
-            console.error('deletemodule error: ', error)
-
-            return {
-                status: false,
-                error
-            }
-        }
-    }
 }
 
 module.exports = new _company()

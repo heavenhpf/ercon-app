@@ -5,12 +5,8 @@ const { userSession } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/all', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.listAllOrder())
-})
-
 app.get('/', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.listMyOrder(req.user.id))
+    response.sendResponse(res, await modules.getOrder(req.user.id, req.body))
 })
 
 app.post('/:id', userSession, async (req, res, next) => {

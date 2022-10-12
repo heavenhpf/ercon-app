@@ -74,15 +74,14 @@ model d_item {
 }
 
 model d_item_detail {
-  id_item_detail Int    @id @default(autoincrement())
+  id_item_detail Int         @id @default(autoincrement())
   id_item        Int
-  id_po          Int?
-  quantity       Float  @db.Float
-  d_item         d_item @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "d_item_detail_ibfk_1")
-  d_po           d_po?  @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_item_detail_ibfk_2")
+  id_po_detail   Int
+  d_item         d_item      @relation(fields: [id_item], references: [id_item], onDelete: Cascade, map: "d_item_detail_ibfk_1")
+  d_po_detail    d_po_detail @relation(fields: [id_po_detail], references: [id_po_detail], onDelete: Cascade, map: "d_item_detail_ibfk_2")
 
   @@index([id_item], map: "id_item")
-  @@index([id_po], map: "id_po")
+  @@index([id_po_detail], map: "id_po_detail")
 }
 
 model d_order {
@@ -107,22 +106,20 @@ model d_order {
 }
 
 model d_po {
-  id_po                                Int             @id @default(autoincrement())
+  id_po                                Int           @id @default(autoincrement())
   id_doc                               Int
   order_from                           Int
   order_to                             Int
-  po_number                            String          @db.VarChar(50)
-  status                               Int             @db.TinyInt
-  note                                 String?         @db.Text
-  deadline                             DateTime        @db.Date
-  finished_at                          DateTime?       @db.DateTime(0)
-  created_at                           DateTime        @default(now()) @db.DateTime(0)
-  deleted_at                           DateTime?       @db.DateTime(0)
-  d_doc                                d_doc           @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "d_po_ibfk_2")
-  s_company_d_po_order_fromTos_company s_company       @relation("d_po_order_fromTos_company", fields: [order_from], references: [id_company], onDelete: Cascade, map: "d_po_ibfk_3")
-  s_company_d_po_order_toTos_company   s_company       @relation("d_po_order_toTos_company", fields: [order_to], references: [id_company], onDelete: Cascade, map: "d_po_ibfk_4")
+  po_number                            String        @db.VarChar(50)
+  status                               Int           @db.TinyInt
+  deadline                             DateTime      @db.Date
+  finished_at                          DateTime?     @db.DateTime(0)
+  created_at                           DateTime      @default(now()) @db.DateTime(0)
+  deleted_at                           DateTime?     @db.DateTime(0)
+  d_doc                                d_doc         @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "d_po_ibfk_2")
+  s_company_d_po_order_fromTos_company s_company     @relation("d_po_order_fromTos_company", fields: [order_from], references: [id_company], onDelete: Cascade, map: "d_po_ibfk_3")
+  s_company_d_po_order_toTos_company   s_company     @relation("d_po_order_toTos_company", fields: [order_to], references: [id_company], onDelete: Cascade, map: "d_po_ibfk_4")
   d_dn                                 d_dn[]
-  d_item_detail                        d_item_detail[]
   d_po_detail                          d_po_detail[]
 
   @@index([id_doc], map: "id_doc")
@@ -131,15 +128,18 @@ model d_po {
 }
 
 model d_po_detail {
-  id_po_detail Int       @id @default(autoincrement())
-  id_po        Int
-  id_order     Int
-  quantity     Float     @db.Float
-  finished_at  DateTime? @db.DateTime(0)
-  created_at   DateTime  @default(now()) @db.DateTime(0)
-  deleted_at   DateTime? @db.DateTime(0)
-  d_po         d_po      @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_po_detail_ibfk_1")
-  d_order      d_order   @relation(fields: [id_order], references: [id_order], onDelete: Cascade, map: "d_po_detail_ibfk_3")
+  id_po_detail  Int             @id @default(autoincrement())
+  id_po         Int
+  id_order      Int
+  quantity      Float           @db.Float
+  note          String?         @db.Text
+  note_po       String?         @db.VarChar(50)
+  finished_at   DateTime?       @db.DateTime(0)
+  created_at    DateTime        @default(now()) @db.DateTime(0)
+  deleted_at    DateTime?       @db.DateTime(0)
+  d_po          d_po            @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_po_detail_ibfk_1")
+  d_order       d_order         @relation(fields: [id_order], references: [id_order], onDelete: Cascade, map: "d_po_detail_ibfk_3")
+  d_item_detail d_item_detail[]
 
   @@index([id_order], map: "id_order")
   @@index([id_po], map: "id_po")

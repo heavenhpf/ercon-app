@@ -2,13 +2,19 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _item {
-    listItem = async (id) => {
+    listItem = async (tier, id_category) => {
         try {
-            id = parseInt(id)
+            const body = {
+                tier: parseInt(tier),
+                id_category: (id_category) ? parseInt(id_category) : null
+            }
     
-            const schema = Joi.number().required()
+            const schema = Joi.object({
+                tier: Joi.number().required(),
+                id_category: Joi.any()
+            })
     
-            const validation = schema.validate(id)
+            const validation = schema.validate(body)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -19,28 +25,50 @@ class _item {
                     error: errorDetails.join(', ')
                 }
             }
-    
-            const check = await prisma.s_company.findFirst({
-                where: {
-                    id_company: id,
-                    deleted_at: null
-                }
-            })
-    
-            if (!check) {
-                return {
-                    status: false,
-                    code: 404,
-                    error: "Data not found"
-                }
-            }
 
-            const list = await prisma.d_item.findMany({
+            let list = await prisma.d_item.findMany({
                 where: {
-                    id_company: id,
+                    s_company: {
+                        auth_user: {
+                            level: body.tier
+                        }
+                    },
                     deleted_at: null
+                },
+                include: {
+                    s_company: {
+                        select: {
+                            name: true,
+                            auth_user: {
+                                select: {
+                                    level: true
+                                }
+                            }
+                        }
+                    }
                 }
             })
+
+            if (body.id_category !== null) {
+                const check = await prisma.ref_category.findFirst({
+                    where: {
+                        id_category: body.id_category,
+                        deleted_at: null
+                    }
+                })
+    
+                if (!check) {
+                    return {
+                        status: false,
+                        code: 404,
+                        error: "Data not found"
+                    }
+                }
+
+                list = list.filter(function (l) {
+                    return l.id_category === body.id_category
+                })
+            }
     
             return {
                 status: true,
@@ -56,19 +84,13 @@ class _item {
         }
     }
 
-    getItem = async (id_company, id_item) => {
+    getItem = async (id_item) => {
         try {
-            const body = {
-                id_company: parseInt(id_company),
-                id_item: parseInt(id_item)
-            }
+            id_item = parseInt(id_item)
 
-            const schema = Joi.object({
-                id_company: Joi.number().required(),
-                id_item: Joi.number().required()
-            })
+            const schema = Joi.number().required()
 
-            const validation = schema.validate(body)
+            const validation = schema.validate(id_item)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -80,22 +102,26 @@ class _item {
                 }
             }
 
-            const checkCompany = await prisma.s_company.findFirst({
+            const check = await prisma.d_item.findFirst({
                 where: {
-                    id_company: body.id_company,
+                    id_item,
                     deleted_at: null
+                },
+                include: {
+                    s_company: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    ref_category: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
 
-            const checkItem = await prisma.d_item.findFirst({
-                where: {
-                    id_company: body.id_company,
-                    id_item: body.id_item,
-                    deleted_at: null
-                }
-            })
-    
-            if (!(checkCompany && checkItem)) {
+            if (!check) {
                 return {
                     status: false,
                     code: 404,
@@ -103,9 +129,40 @@ class _item {
                 }
             }
 
+            const list = await prisma.d_item_detail.findMany({
+                where: {
+                    id_item
+                },
+                select: {
+                    d_po_detail: {
+                        select: {
+                            quantity: true,
+                            d_order: {
+                                select: {
+                                    quantity: true
+                                }
+                            },
+                            d_po: {
+                                select: {
+                                    po_number: true,
+                                    s_company_d_po_order_fromTos_company: {
+                                        select: {
+                                            name: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
             return {
                 status: true,
-                data: checkItem
+                data: {
+                    item: check,
+                    label: list
+                }
             }
         } catch (error) {
             console.error('getItem module error: ', error)

@@ -5,12 +5,12 @@ const { userSession } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/:id', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.listItem(req.params.id))
+app.get('/item/:id', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.getItem(req.params.id))
 })
 
-app.get('/:id_company/:id_item', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.getItem(req.params.id_company, req.params.id_item))
+app.get('/:tier/:category?', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listItem(req.params.tier, req.params.category))
 })
 
 app.post('/', userSession, async (req, res, next) => {

@@ -158,9 +158,10 @@ class _user {
             const checkCompany = await prisma.s_company.findFirst({
                 where: {
                     id_user: id,
-                    deleted_at: {
-                        not: null
-                    }
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
                 }
             })
 
@@ -172,7 +173,16 @@ class _user {
                 }
             }
 
-            const del = await prisma.auth_user.update({
+            const delCompany = await prisma.s_company.update({
+                where: {
+                    id_company: checkCompany.id_company
+                },
+                data: {
+                    deleted_at: new Date(Date.now())
+                }
+            })
+
+            const delUser = await prisma.auth_user.update({
                 where: {
                     id_user: id
                 },
@@ -183,7 +193,10 @@ class _user {
 
             return {
                 status: true,
-                data: del
+                data: {
+                    company: delCompany,
+                    user: delUser
+                }
             }
         } catch (error) {
             console.error('deletemodule error: ', error)

@@ -1,11 +1,23 @@
 const { Router } = require('express')
 const modules = require('../modules/po.modules')
 const response = require('../helpers/response')
-const { userSession, userSessionSU } = require('../helpers/middleware')
+const { userSession } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/:id/:status?', userSessionSU, async (req, res, next) => {
+app.get('/detail/:id', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listPoDetail(req.params.id))
+})
+
+app.get('/detail/:id_po/:id_po_detail', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.getPoDetail(req.params.id_po, req.params.id_po_detail))
+})
+
+app.get('/my/:status?', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listMyPo(req.user.id, req.params.status))
+})
+
+app.get('/:id/:status?', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.listAllPo(req.params.id, req.params.status))
 })
 
