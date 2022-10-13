@@ -181,7 +181,7 @@ export default {
 
         async init() {
             try {
-                await this.a$inquiryList(1, 1);
+                await this.a$inquiryList();
             } catch (e) {
                 console.error(e);
             }

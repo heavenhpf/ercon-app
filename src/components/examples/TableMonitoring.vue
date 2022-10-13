@@ -100,6 +100,10 @@ export default {
             id: null,
             name: '',
         },
+        filter: {
+            tier: 2,
+            category: 2,
+        },
         // DataTable
         dt: {
             column: [
@@ -149,7 +153,7 @@ export default {
         }
     },
     async mounted() {
-        await this.a$inquiryList();
+        await this.a$inquiryList(this.filter);
     },
     methods: {
         ...mapActions(d$item, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
@@ -161,23 +165,18 @@ export default {
                 username: '',
                 level: '',
                 quantity: '',
-                tier: 2,
-                category: 1
+                // tier: 2,
+                // category: 1
             };
         },
 
         async init() {
             try {
-                const { tier, category } = this.input;
-                const data = {
-                    tier, category
-                };
-                await this.a$inquiryList(data);
+                await this.a$inquiryList();
             } catch (e) {
                 console.error(e);
             }
         },
-
         async addInquiry() {
             try {
                 const { name } = this.input;

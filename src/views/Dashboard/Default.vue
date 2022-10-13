@@ -64,15 +64,19 @@
                 </div>
               </div>
             </div>
+
+            <!-- mengambil dari store po -->
             <div>
               <tracking-table />
             </div>
           </div>
           <div class="pb-0 row">
             <div class="pb-0 text-start mb-2">
-              <h5 class="text-black font-weight-bolder">Item Monitoring</h5>
+              <h5 class="text-black font-weight-bolder">History Monitoring</h5>
             </div>
           </div>
+
+          <!-- mengambil dari store item-->
           <div>
             <TableMonitoring />
           </div>

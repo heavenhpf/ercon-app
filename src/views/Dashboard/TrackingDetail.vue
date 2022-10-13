@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div>
-                    <p-o-table />
+                    <POTable />
                 </div>
             </div>
         </div>

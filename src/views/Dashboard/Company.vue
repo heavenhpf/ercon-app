@@ -263,7 +263,7 @@ export default {
         },
         
         // buat manggil page baru di page selanjutnya
-
+        
         // async triggerDetail({ id_company, name, address, phone }) {
         //     try {
         //         this.input = {

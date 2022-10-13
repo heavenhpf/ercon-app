@@ -27,6 +27,12 @@ const dashboard = {
       meta: { auth: true },
     },
     {
+      path: 'po',
+      name: 'PO',
+      component: () => import('@/views/Dashboard/PO.vue'),
+      meta: { auth: true },
+    },
+    {
       path: 'add-company',
       name: 'Add Company',
       component: () => import('@/views/Dashboard/AddCompany.vue'),
