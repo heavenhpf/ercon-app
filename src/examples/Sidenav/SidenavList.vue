@@ -4,75 +4,64 @@
       <li class="nav-item">
         <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
           <template v-slot:icon>
-            <i class="fa fa-home mb-2 text-dark text-sm opacity-10"></i>
+            <i class="fa fa-home mb-2 text-primary text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="mt-3 nav-item">
-        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-4">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
           Tracking
         </h6>
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''" navText="Tracking Saya">
           <template v-slot:icon>
-            <i class="fa fa-paper-plane-o mb-2 text-dark text-sm opacity-10"></i>
+            <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/tracking-item" :class="getRoute() === 'tracking-item' ? 'active' : ''" navText="Tracking Item">
           <template v-slot:icon>
-            <i class="fa fa-archive mb-2 text-dark text-sm opacity-10"></i>
+            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
+      </li>
+      <li class="mt-3 nav-item">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+          Monitoring
+        </h6>
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/monitoring" :class="getRoute() === 'monitoring' ? 'active' : ''"
           navText="Monitoring">
           <template v-slot:icon>
-            <i class="ni ni-ui-04 text-dark text-sm opacity-10"></i>
+            <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
           </template>
         </sidenav-item>
+      </li>
+      <li class="mt-3 nav-item">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+          Pemesanan
+        </h6>
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/po" :class="getRoute() === 'po' ? 'active' : ''"
           navText="Purchasing Order">
           <template v-slot:icon>
-            <i class="ni ni-tag text-dark text-sm opacity-10"></i>
+            <i class="ni ni-tag text-info text-sm opacity-10"></i>
           </template>
         </sidenav-item>
+      </li>
+      <li class="mt-3 nav-item">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+          Manajemen Akun
+        </h6>
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="Perusahaan">
           <template v-slot:icon>
             <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="mt-3 nav-item">
-        <h6 class="text-xs ps-4 font-weight-bolder ms-4">
-          ACCOUNT PAGES
-        </h6>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/dashboard/profile" :class="getRoute() === 'profile' ? 'active' : ''" navText="Profile">
-          <template v-slot:icon>
-            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/auth/login" :class="getRoute() === 'login' ? 'active' : ''" navText="Sign In">
-          <template v-slot:icon>
-            <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/auth/signup" :class="getRoute() === 'signup' ? 'active' : ''" navText="Sign Up">
-          <template v-slot:icon>
-            <i class="ni ni-collection text-info text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>

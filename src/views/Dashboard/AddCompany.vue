@@ -31,15 +31,13 @@
                                     Perusahaan </label>
                                 <div class="row p-2">
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier">
-                                        Tier 1
+                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier"> Tier 1
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier">Tier 2
-
+                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier"> Tier 2
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier">Tier 3
+                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
 
                                     </div>
                                 </div>
@@ -61,7 +59,7 @@
                                 </argon-button>
                                 </span>
                             </router-link>
-                            <argon-button @click="addInquiry()" size="md" color="primary">
+                            <argon-button @click="addInquiry()" size="md" color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Tambah
                             </argon-button>
                         </div>
@@ -94,6 +92,7 @@
 import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
+import ArgonAlert from "@/components/ArgonAlert.vue";
 
 import d$user from '@/stores/dashboard/user';
 import { mapActions, mapState } from 'pinia';
@@ -146,6 +145,7 @@ export default {
         ArgonInput,
         ArgonButton,
         ArgonRadio,
+        ArgonAlert,
     },
 
     computed: {

@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="card">
-            <data-table :index="false" :data="g$list" :columns="dt.column" :actions="dt.action" @detail="triggerDetail"
+            <data-table style="text-align: center" :index="false" :data="g$list" :columns="dt.column" :actions="dt.action" @detail="triggerDetail"
                 @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">

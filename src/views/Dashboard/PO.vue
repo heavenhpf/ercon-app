@@ -34,15 +34,15 @@
                                     </argon-button>
                                 </div>
                             </div>
-                            <div class="col-4 mb-2">
+                            <div class="col-5 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Deadline
                                     Pembuatan</label>
                                 <argon-input placeholder="Date" type="date" />
                             </div>
-                            <div class="mb-2">
+                            <div class="col-8 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Dokumen
                                     PO</label>
-                                <argon-input type="file" />
+                                <argon-input type="file" id="file" />
                             </div>
                             <!-- <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Username</label>
