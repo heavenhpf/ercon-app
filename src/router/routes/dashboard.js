@@ -9,9 +9,15 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking',
-      name: 'Tracking',
-      component: () => import('@/views/Dashboard/Tracking.vue'),
+      path: 'tracking-saya',
+      name: 'Tracking Saya',
+      component: () => import('@/views/Dashboard/TrackingSaya.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'tracking-item',
+      name: 'Tracking Item',
+      component: () => import('@/views/Dashboard/TrackingItem.vue'),
       meta: { auth: true },
     },
     {
@@ -22,14 +28,20 @@ const dashboard = {
     },
     {
       path: 'company',
-      name: 'Company List',
+      name: 'List Perusahaan',
       component: () => import('@/views/Dashboard/Company.vue'),
       meta: { auth: true },
     },
     {
       path: 'add-company',
-      name: 'Add Company',
+      name: 'Tambah Perusahaan',
       component: () => import('@/views/Dashboard/AddCompany.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'po',
+      name: 'PO',
+      component: () => import('@/views/Dashboard/PO.vue'),
       meta: { auth: true },
     },
     {

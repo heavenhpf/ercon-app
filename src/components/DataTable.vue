@@ -171,10 +171,10 @@
           </tbody>
         </table>
       </div>
-      <div v-if="footer" class="row mx-2 my-3 d-flex align-items-center">
+      <div v-if="footer" class="row mx-2 my-3 d-flex align-items-center text-sm">
         <div v-if="pageDetails" class="col-md-6">
           <div class="showing">
-            <!-- Current Page Starting Index -->
+            <!-- Current Page Starting Index --> Menampilkan
             {{
               paginatedItems.length ? itemsPerPage * (currentPage - 1) + 1 : 0
             }}
@@ -182,7 +182,7 @@
             <!-- Current Page End Index -->
             {{ itemsPerPage * (currentPage - 1) + paginatedItems.length }}
             <!-- All Items Provided -->
-            of {{ renderedItems.length }}
+            dari {{ renderedItems.length }} record
           </div>
         </div>
         <div v-if="paginate" class="col-md-6">

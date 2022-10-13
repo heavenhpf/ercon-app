@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="pb-0 text-start mb-3">
-                        <h4 class="font-weight-bolder text-dark">Tambah Perusahaan</h4>
+                        <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
                     </div>
                 </div>
                 <div class="card">
@@ -14,6 +14,37 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Nomor PO</label>
+                                <argon-input v-model="input.po" type="text" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Tujuan
+                                    Pemesanan</label>
+                                <argon-input v-model="input.po" type="text" />
+                            </div>
+                            <div class="row mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
+                                <div class="col-10">
+                                    <argon-input v-model="input.po" type="text" />
+                                </div>
+                                <div class="col-2">
+                                    <argon-button size="md" color="primary" class="ms-2">
+                                        <span class="fa fa-plus fa-sm me-2" />
+                                        Tambah
+                                    </argon-button>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Deadline
+                                    Pembuatan</label>
+                                <argon-input placeholder="Date" type="date" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Dokumen
+                                    PO</label>
+                                <argon-input type="file" />
+                            </div>
+                            <!-- <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Username</label>
                                 <argon-input v-model="input.username" type="text" />
                             </div>
@@ -51,18 +82,11 @@
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
                                 <argon-input v-model="input.phone" type="text" />
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-lg-8 col-md-9">
-                            <router-link to="/dashboard/company" tag="button">
-                                <span>
-                                <argon-button size="md" color="warning" class="me-2">
-                                    Kembali
-                                </argon-button>
-                                </span>
-                            </router-link>
-                            <argon-button @click="addInquiry()" size="md" color="primary">
-                                Tambah
+                            <argon-button size="md" color="primary">
+                                Buat PO
                             </argon-button>
                         </div>
                         <!-- <modal-comp v-model:show="modal.confirm">
@@ -106,9 +130,9 @@ const tier = {
 }
 
 export default {
-    name: 'add-company',
+    name: 'po',
     data: () => ({
-        pageTitle: 'add-company',
+        pageTitle: 'po',
         // Input
         input: {
             id: null,

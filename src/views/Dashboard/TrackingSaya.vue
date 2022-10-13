@@ -38,7 +38,7 @@ import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
 
 export default {
-    name: "tracking",
+    name: "tracking-saya",
     data() {
         return {
             stats: {

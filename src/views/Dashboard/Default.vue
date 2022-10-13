@@ -4,8 +4,8 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="pb-0 text-start mb-3">
-            <h5 class="text-dark">Selamat Pagi,</h5>
-            <h4 class="font-weight-bolder text-dark">Admin PT TMMIN</h4>
+            <h5 class="text-dark"><b>{{ status }}</b></h5>
+            <h4 class="font-weight-bolder text-dark">{{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -70,7 +70,7 @@
           </div>
           <div class="pb-0 row">
             <div class="pb-0 text-start mb-2">
-              <h5 class="text-black font-weight-bolder">Item Monitoring</h5>
+              <h5 class="text-black font-weight-bolder">History Monitoring</h5>
             </div>
           </div>
           <div>
@@ -151,11 +151,28 @@ import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
 import MonitoringTable from "@/components/examples/MonitoringTable.vue";
+import { baseApi } from '@/utils/axios';
+import d$company from '@/stores/dashboard/company';
+import { mapActions, mapState } from "pinia";
+import { onMounted } from "vue";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
+
+const date = new Date;
+let hours = date.getHours();
+let status = "";
+if (hours <= 12) {
+  status = "Selamat Pagi"
+} else if (hours == 12) {
+  status = "Selamat Siang"
+} else if (hours >= 14) {
+  status = "Selamat Sore"
+} else {
+  status = "Selamat Malam"
+}
 
 export default {
   name: "default",
@@ -221,6 +238,27 @@ export default {
     MonitoringTable,
     Carousel,
     CategoriesCard,
+  },
+
+  async created() {
+    try {
+      const { data } = await baseApi.get(`/companies/name`);
+      this.posts = data.name;
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  computed: {
+    ...mapState(d$company, ['g$name'])
+  },
+  methods: {
+    ...mapActions(d$company, ['a$name'])
+  },
+  async mounted() {
+    try {
+      await this.a$name();
+    } catch (e) {
+    }
   },
 };
 </script>

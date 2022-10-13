@@ -25,63 +25,6 @@
                 </argon-button>
             </template>
         </modal-comp>
-        <modal-comp v-model:show="modal.detail">
-            <template #header>
-                <h3 class="modal-title">{{ pageTitle }} Details</h3>
-            </template>
-
-            <!-- buat ngerubah detail -->
-            <template v-if="modal.detail" #body>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.address" type="text" placeholder="Address" name="address" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.phone" type="text" placeholder="Phone" name="phone" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
-                    Close
-                </argon-button>
-                <argon-button color="primary" @click="editInquiry()">
-                    Save Changes
-                </argon-button>
-            </template>
-        </modal-comp>
-        <modal-comp v-model:show="modal.confirm">
-            <template #header>
-                <h3 class="modal-title">Confirm</h3>
-            </template>
-            <template v-if="modal.confirm" #body>
-                <p>
-                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
-                </p>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.confirm = false">
-                    Close
-                </argon-button>
-                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
-            </template>
-        </modal-comp>
     </div>
 </template>
 
@@ -125,7 +68,7 @@ export default {
                 {
                     text: 'Detail',
                     color: 'warning',
-                    event: 'detail',
+                    event: '',
                 },
                 // {
                 //     text: 'Delete',
