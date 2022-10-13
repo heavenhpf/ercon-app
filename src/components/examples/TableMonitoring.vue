@@ -221,17 +221,18 @@ export default {
             }
         },
 
-        async triggerDetail({ auth_user, d_item, name, address, phone }) {
+        async triggerDetail({ d_po, d_item, name, address, phone }) {
             try {
                 this.input = {
-                    username: auth_user.username,
+                    id_po: d_po.id_po,
                     quantity: d_item.quantity,
-                    // quantity: d_item.quantity,
                     name,
                     address,
                     phone,
                 };
                 this.modal.detail = true;
+                this.$router.push({ name: 'TrackingDetail', params: { id: d_po.id_po } })
+                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }

@@ -10,10 +10,10 @@ const d$po = defineStore({
         status: null,
     }),
     actions: {
-        async a$inquiryList(tier, statusPo) {
+        async a$inquiryList(options) {
             try {
                 this.status = null;
-                const { data, status } = await s$po.listAllPo({ tier, status: statusPo });
+                const { data, status } = await s$po.listAllPo(options);
                 this.po = data ?? [];
                 this.status = status;
             } catch ({ error, message }) {

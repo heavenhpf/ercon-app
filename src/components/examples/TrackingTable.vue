@@ -106,6 +106,10 @@ export default {
             id: null,
             name: '',
         },
+        filter: {
+            tier: 1,
+            status: 1,
+        },
         // DataTable
         dt: {
             column: [
@@ -161,7 +165,7 @@ export default {
         }
     },
     async mounted() {
-        await this.a$inquiryList(1, 1);
+        await this.a$inquiryList(this.filter);
     },
     methods: {
         ...mapActions(d$po, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
