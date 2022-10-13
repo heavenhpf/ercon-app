@@ -88,7 +88,7 @@
 
 <script>
 import { mapActions, mapState } from 'pinia';
-import d$company from '@/stores/dashboard/company';
+import d$item from '@/stores/dashboard/item';
 import auth from '../../router/routes/auth';
 
 export default {
@@ -104,23 +104,22 @@ export default {
         dt: {
             column: [
                 {
-                    name: 'id_company',
+                    name: 'id_item',
                     th: 'No',
                 },
                 {
-                    name: 'name',
+                    name: 's_company.name',
                     th: 'Nama Perusahaan',
+                    render: ({ s_company }) => s_company.name
                 },
                 {
-                    name: 'auth_user.level',
+                    name: 's_company.auth_user.level',
                     th: 'Tier',
-                    render: ({ auth_user }) => auth_user.level
+                    render: ({ s_company }) => s_company.auth_user.level
                 },
                 {
-                    //quantity item
-                    name: 'd_item.quantity',
+                    name: 'quantity',
                     th: 'Jumlah Barang  ',
-                    render: ({ d_item }) => d_item.quantity
                 },
             ],
             action: [
@@ -144,7 +143,7 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$company, ['g$list', 'g$detail']),
+        ...mapState(d$item, ['g$list', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
@@ -153,7 +152,7 @@ export default {
         await this.a$inquiryList();
     },
     methods: {
-        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$item, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -161,12 +160,19 @@ export default {
                 name: '',
                 username: '',
                 level: '',
+                quantity: '',
+                tier: 2,
+                category: 1
             };
         },
 
         async init() {
             try {
-                await this.a$inquiryList();
+                const { tier, category } = this.input;
+                const data = {
+                    tier, category
+                };
+                await this.a$inquiryList(data);
             } catch (e) {
                 console.error(e);
             }
@@ -220,6 +226,7 @@ export default {
                 this.input = {
                     username: auth_user.username,
                     quantity: d_item.quantity,
+                    // quantity: d_item.quantity,
                     name,
                     address,
                     phone,

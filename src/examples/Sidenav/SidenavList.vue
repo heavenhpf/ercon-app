@@ -2,7 +2,7 @@
   <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <sidenav-item url="/" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
+        <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
           <template v-slot:icon>
             <i class="fa fa-home mb-1 text-primary text-sm opacity-10"></i>
           </template>

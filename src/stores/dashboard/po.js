@@ -1,19 +1,32 @@
 import { defineStore } from 'pinia';
-import * as s$item from '@/services/dashboard/item';
+import * as s$po from '@/services/dashboard/po';
 
-const d$item = defineStore({
-    id: 'item',
+const d$po = defineStore({
+    id: 'po',
     state: () => ({
-        item: [],
+        po: [],
+        name: '',
         detail: {},
         status: null,
     }),
     actions: {
-        async a$inquiryList(options) {
+        async a$inquiryList(tier, statusPo) {
             try {
                 this.status = null;
-                const { data, status } = await s$item.list(options);
-                this.item = data ?? [];
+                const { data, status } = await s$po.listAllPo({ tier, status: statusPo });
+                this.po = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+
+        async a$name() {
+            try {
+                this.status = null;
+                const { data, status } = await s$po.name();
+                this.name = data ?? '';
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -24,7 +37,7 @@ const d$item = defineStore({
             try {
                 this.detail = {};
                 if (!id) return;
-                const { data } = await s$item.detail(id);
+                const { data } = await s$po.detail(id);
                 this.detail = data;
             } catch ({ error, message }) {
                 this.detail = {};
@@ -33,21 +46,21 @@ const d$item = defineStore({
         },
         async a$inquiryAdd(body) {
             try {
-                await s$item.add(body);
+                await s$po.add(body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
         },
         async a$inquiryEdit(id, body) {
             try {
-                await s$item.update(id, body);
+                await s$po.update(id, body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
         },
         async a$inquiryDel(id) {
             try {
-                await s$item.del(id);
+                await s$po.del(id);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -55,9 +68,10 @@ const d$item = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$list: ({ item }) => item,
+        g$list: ({ po }) => po,
+        g$name: ({ name }) => name,
         g$detail: ({ detail }) => detail,
     },
 });
 
-export default d$item;
+export default d$po;

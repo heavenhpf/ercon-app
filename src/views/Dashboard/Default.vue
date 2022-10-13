@@ -5,7 +5,7 @@
         <div class="row">
           <div class="pb-0 text-start mb-3">
             <h5 class="font-weight-bolder text-dark"><b>{{ status }}</b></h5>
-            <h4 class="text-dark">{{ g$name.name }}</h4>
+            <h4 class="text-dark">Hallo {{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -165,9 +165,9 @@ import TableMonitoring from "../../components/examples/TableMonitoring.vue";
 const date = new Date;
 let hours = date.getHours();
 let status = "";
-if (hours <= 12) {
+if (hours < 12) {
   status = "Selamat Pagi"
-} else if (hours == 12) {
+} else if (hours >= 12) {
   status = "Selamat Siang"
 } else if (hours >= 14) {
   status = "Selamat Sore"

@@ -88,8 +88,14 @@
 
 <script>
 import { mapActions, mapState } from 'pinia';
-import d$company from '@/stores/dashboard/company';
+import d$po from '@/stores/dashboard/po';
 import auth from '../../router/routes/auth';
+
+const progress = {
+    0: "Belum Deadline",
+    1: "Melewati Deadline",
+    2: "Progress Selesai"
+}
 
 export default {
     name: 'Tracking',
@@ -104,22 +110,28 @@ export default {
         dt: {
             column: [
                 {
-                    name: 'id_company',
+                    name: 'po_number',
                     th: 'Nomor PO',
                 },
                 {
-                    name: 'name',
+                    name: 's_company_d_po_order_toTos_company.name',
                     th: 'Nama Perusahaan',
+                    render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {
-                    name: 'auth_user.level',
+                    name: 'progress',
                     th: 'Capaian',
-                    render: ({ auth_user }) => auth_user.level
                 },
                 {
-                    name: 'auth_user.username',
+                    name: 'status',
                     th: 'Status',
-                    render: ({ auth_user }) => auth_user.username
+                    render: ({ status }) => {
+                        if (status == 0) {
+                            return `<span>${progress[status]}</span>`
+                        } else {
+                            return `<span>${progress[status]}</span>`
+                        }
+                    }
                 },
             ],
             action: [
@@ -143,16 +155,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$company, ['g$list', 'g$detail']),
+        ...mapState(d$po, ['g$list', 'g$detail', 'g$progress']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$inquiryList();
+        await this.a$inquiryList(1, 1);
     },
     methods: {
-        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -165,7 +177,7 @@ export default {
 
         async init() {
             try {
-                await this.a$inquiryList();
+                await this.a$inquiryList(1, 1);
             } catch (e) {
                 console.error(e);
             }
