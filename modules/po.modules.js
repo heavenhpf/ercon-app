@@ -49,6 +49,7 @@ class _po {
                             quantity: true,
                             d_order: {
                                 select: {
+                                    id_order: true,
                                     quantity: true
                                 }
                             }
@@ -208,6 +209,7 @@ class _po {
                             id_user: body.id_user
                         }
                     },
+                    status: 0,
                     deleted_at: null
                 },
                 include: {
@@ -536,8 +538,8 @@ class _po {
             }
 
             const schema = Joi.object({
-                id_doc: Joi.number().required(),
                 id_user: Joi.number().required(),
+                id_doc: Joi.number().required(),
                 order_to: Joi.number().required(),
                 po_number: Joi.string().required(),
                 deadline: Joi.date().required(),
@@ -595,7 +597,8 @@ class _po {
             body.order.forEach(async function (o) {
                 const checkOrder = await prisma.d_order.findFirst({
                     where: {
-                        id_order: o.id_order
+                        id_order: o.id_order,
+                        processed: false
                     },
                     select: {
                         id_item: true

@@ -6,6 +6,7 @@ const CategoryController = require('./controllers/CategoryController')
 const UnitController = require('./controllers/UnitController')
 const OrderController = require('./controllers/OrderController')
 const PoController = require('./controllers/PoController')
+const DnController = require('./controllers/DnController')
 
 const _routes = [
     ['/login', AuthController],
@@ -16,13 +17,14 @@ const _routes = [
     ['/units', UnitController],
     ['/orders', OrderController],
     ['/po', PoController],
+    ['/dn', DnController],
 ]
 
 const routes = (app) => {
     _routes.forEach(route => {
         const [url, controller] = route
         app.use(`${url}`, controller)
-    });
+    })
 }
 
 module.exports = routes

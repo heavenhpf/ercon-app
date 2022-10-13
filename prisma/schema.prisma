@@ -127,7 +127,6 @@ model d_po_detail {
   quantity      Float           @db.Float
   note          String?         @db.Text
   note_po       String?         @db.VarChar(50)
-  finished_at   DateTime?       @db.DateTime(0)
   created_at    DateTime        @default(now()) @db.DateTime(0)
   deleted_at    DateTime?       @db.DateTime(0)
   d_po          d_po            @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_po_detail_ibfk_1")
