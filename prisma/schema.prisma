@@ -18,30 +18,23 @@ model auth_user {
 }
 
 model d_dn {
-  id_dn                                Int           @id @default(autoincrement())
-  id_po                                Int
-  id_doc                               Int
-  order_from                           Int
-  order_to                             Int
-  created_at                           DateTime      @default(now()) @db.DateTime(0)
-  deleted_at                           DateTime?     @db.DateTime(0)
-  d_doc                                d_doc         @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "d_dn_ibfk_1")
-  d_po                                 d_po          @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_dn_ibfk_2")
-  s_company_d_dn_order_fromTos_company s_company     @relation("d_dn_order_fromTos_company", fields: [order_from], references: [id_company], onDelete: Cascade, map: "d_dn_ibfk_3")
-  s_company_d_dn_order_toTos_company   s_company     @relation("d_dn_order_toTos_company", fields: [order_to], references: [id_company], onDelete: Cascade, map: "d_dn_ibfk_4")
-  d_dn_detail                          d_dn_detail[]
+  id_dn       Int           @id @default(autoincrement())
+  id_po       Int
+  id_doc      Int
+  created_at  DateTime      @default(now()) @db.DateTime(0)
+  deleted_at  DateTime?     @db.DateTime(0)
+  d_doc       d_doc         @relation(fields: [id_doc], references: [id_doc], onDelete: Cascade, map: "d_dn_ibfk_1")
+  d_po        d_po          @relation(fields: [id_po], references: [id_po], onDelete: Cascade, map: "d_dn_ibfk_2")
+  d_dn_detail d_dn_detail[]
 
   @@index([id_doc], map: "id_doc")
   @@index([id_po], map: "id_po")
-  @@index([order_from], map: "order_from")
-  @@index([order_to], map: "order_to")
 }
 
 model d_dn_detail {
   id_dn_detail Int       @id @default(autoincrement())
   id_dn        Int
   id_order     Int
-  note         String?   @db.Text
   created_at   DateTime  @default(now()) @db.DateTime(0)
   deleted_at   DateTime? @db.DateTime(0)
   d_dn         d_dn      @relation(fields: [id_dn], references: [id_dn], onDelete: Cascade, map: "d_dn_detail_ibfk_2")
@@ -154,8 +147,6 @@ model s_company {
   created_at                            DateTime  @default(now()) @db.DateTime(0)
   deleted_at                            DateTime? @db.DateTime(0)
   auth_user                             auth_user @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "s_company_ibfk_1")
-  d_dn_d_dn_order_fromTos_company       d_dn[]    @relation("d_dn_order_fromTos_company")
-  d_dn_d_dn_order_toTos_company         d_dn[]    @relation("d_dn_order_toTos_company")
   d_item                                d_item[]
   d_order_d_order_order_fromTos_company d_order[] @relation("d_order_order_fromTos_company")
   d_order_d_order_order_toTos_company   d_order[] @relation("d_order_order_toTos_company")

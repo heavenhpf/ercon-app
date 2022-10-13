@@ -13,12 +13,4 @@ app.get('/username', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.getUsername(req.user.username))
 })
 
-app.post('/', async (req, res, next) => {
-    response.sendResponse(res, await modules.addUser(req.body))
-})
-
-app.delete('/:id', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.deleteUser(req.params.id))
-})
-
 module.exports = app

@@ -194,7 +194,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Grassphic\",\r\n    \"address\": \"Gandrungmanis\",\r\n    \"phone\": \"0819\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Toyota\",\r\n    \"address\": \"Gandrungmanis\",\r\n    \"phone\": \"0819\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -880,6 +880,70 @@
 					"response": []
 				},
 				{
+					"name": "LIST INCOMING PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/po/incoming",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po",
+								"incoming"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_to\": 2,\r\n    \"id_doc\": 1,\r\n    \"po_number\": \"PO0001\",\r\n    \"deadline\": \"2022-10-11T10:19:16.812Z\",\r\n    \"order\": [\r\n        {\r\n            \"id_order\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/po",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"po"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "LIST PO DETAIL",
 					"request": {
 						"auth": {
@@ -939,7 +1003,7 @@
 					"response": []
 				},
 				{
-					"name": "ADD PO",
+					"name": "EDIT PO DETAIL",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -951,11 +1015,11 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"order_to\": 2,\r\n    \"id_doc\": 1,\r\n    \"po_number\": \"PO0001\",\r\n    \"deadline\": \"2022-10-11T10:19:16.812Z\",\r\n    \"order\": [\r\n        {\r\n            \"id_order\": 1\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"note_po\": \"PO0001\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -963,12 +1027,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/po",
+							"raw": "{{url}}/po/detail/1/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"po"
+								"po",
+								"detail",
+								"1",
+								"1"
 							]
 						}
 					},

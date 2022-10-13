@@ -174,6 +174,92 @@ class _po {
         }
     }
 
+    listIncomingPo = async (id_user, status) => {
+        try {
+            const body = {
+                id_user: parseInt(id_user),
+                status: (status) ? parseInt(status) : null
+            }
+
+            const schema = Joi.object({
+                id_user: Joi.number().required(),
+                status: Joi.any()
+            })
+
+            const validation = schema.validate(body)
+    
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+    
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            let list = await prisma.d_po.findMany({
+                orderBy: {
+                    id_po: 'desc'
+                },
+                where: {
+                    s_company_d_po_order_toTos_company: {
+                        auth_user: {
+                            id_user: body.id_user
+                        }
+                    },
+                    deleted_at: null
+                },
+                include: {
+                    s_company_d_po_order_fromTos_company: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    d_po_detail: {
+                        select: {
+                            quantity: true,
+                            d_order: {
+                                select: {
+                                    quantity: true
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
+            if (body.status !== null) {
+                list = list.filter(function (l) {
+                    return l.status === body.status
+                })
+            }
+
+            list.forEach(function (item) {
+                let result = 0
+
+                item.d_po_detail.forEach(function (item2) {
+                    result += item2.quantity / item2.d_order.quantity
+                })
+
+                result = result / item.d_po_detail.length
+                item.progress = result
+            })
+
+            return {
+                status: true,
+                data: list
+            }
+        } catch (error) {
+            console.error('listIncomingPo module error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
     listPoDetail = async (id_po) => {
         try {
             id_po = parseInt(id_po)
@@ -198,6 +284,11 @@ class _po {
                     deleted_at: null
                 },
                 include: {
+                    s_company_d_po_order_fromTos_company: {
+                        select: {
+                            name: true
+                        }
+                    },
                     s_company_d_po_order_toTos_company: {
                         select: {
                             name: true
@@ -219,18 +310,38 @@ class _po {
                     id_po,
                     deleted_at: null
                 },
-                include: {
+                select: {
+                    id_po_detail: true,
+                    id_po: true,
+                    id_order: true,
+                    quantity: true,
                     d_order: {
                         select: {
-                            quantity: true
+                            quantity: true,
+                            d_item: {
+                                select: {
+                                    name: true,
+                                    serial_number: true
+                                }
+                            }
                         }
                     }
                 }
             })
 
+            let progress = []
+            let result = 0
+
             list.forEach(function (item) {
                 item.progress = item.quantity / item.d_order.quantity
+                progress.push(item.progress)
             })
+
+            progress.forEach(function (i) {
+                result += i
+            })
+
+            check.progress = result / progress.length
 
             return {
                 status: true,
@@ -322,6 +433,93 @@ class _po {
             }
         } catch (error) {
             console.error('getPoDetail module error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
+    editPoDetail = async (id_user, id_po, id_po_detail, body) => {
+        try {
+            body = {
+                id_user: parseInt(id_user),
+                id_po: parseInt(id_po),
+                id_po_detail: parseInt(id_po_detail),
+                ...body
+            }
+
+            const schema = Joi.object({
+                id_user: Joi.number().required(),
+                id_po: Joi.number().required(),
+                id_po_detail: Joi.number().required(),
+                note: Joi.string(),
+                note_po: Joi.string()
+            })
+
+            const validation = schema.validate(body)
+    
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+    
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            const checkCompany = await prisma.s_company.findFirst({
+                where: {
+                    id_user: body.id_user,
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
+                }
+            })
+
+            const checkPo = await prisma.d_po.findFirst({
+                where: {
+                    id_po: body.id_po,
+                    order_to: checkCompany.id_company,
+                    deleted_at: null
+                }
+            })
+
+            const checkPoDetail = await prisma.d_po_detail.findFirst({
+                where: {
+                    id_po_detail: body.id_po_detail,
+                    id_po: body.id_po,
+                    deleted_at: null
+                }
+            })
+
+            if (!(checkCompany && checkPo && checkPoDetail)) {
+                return {
+                    status: false,
+                    code: 404,
+                    error: "Data not found"
+                }
+            }
+
+            const edit = await prisma.d_po_detail.update({
+                where: {
+                    id_po_detail: body.id_po_detail,
+                },
+                data: {
+                    note: body.note,
+                    note_po: body.note_po
+                }
+            })
+
+            return {
+                status: true,
+                data: edit
+            }
+        } catch (error) {
+            console.error('editPoDetail module error: ', error)
 
             return {
                 status: false,
