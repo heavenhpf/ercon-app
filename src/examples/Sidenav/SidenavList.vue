@@ -33,10 +33,18 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/monitoring" :class="getRoute() === 'monitoring' ? 'active' : ''"
-          navText="Monitoring">
+        <sidenav-item url="/dashboard/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
+          navText="Monitoring Item">
           <template v-slot:icon>
             <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/dashboard/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
+          navText="Gudang Saya">
+          <template v-slot:icon>
+            <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -60,6 +68,13 @@
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="Perusahaan">
+          <template v-slot:icon>
+            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/dashboard/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
           <template v-slot:icon>
             <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>

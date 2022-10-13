@@ -173,7 +173,7 @@
       </div>
       <div v-if="footer" class="row mx-2 my-3 d-flex align-items-center text-sm">
         <div v-if="pageDetails" class="col-md-6">
-          <div class="showing">
+          <div class="showing me-10">
             <!-- Current Page Starting Index --> Menampilkan
             {{
               paginatedItems.length ? itemsPerPage * (currentPage - 1) + 1 : 0

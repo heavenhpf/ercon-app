@@ -4,8 +4,8 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="pb-0 text-start mb-3">
-            <h5 class="text-dark"><b>{{ status }}</b></h5>
-            <h4 class="font-weight-bolder text-dark">{{ g$name.name }}</h4>
+            <h5 class="font-weight-bolder text-dark"><b>{{ status }}</b></h5>
+            <h4 class="text-dark">{{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking" tag="button">
+                    <router-link to="/dashboard/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking" tag="button">
+                    <router-link to="/dashboard/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>
@@ -77,7 +77,7 @@
             <monitoring-table />
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-10">
           <div class="col-lg-7 mb-lg">
             <!-- line chart -->
             <div class="card z-index-2">
@@ -154,19 +154,19 @@ import MonitoringTable from "@/components/examples/MonitoringTable.vue";
 import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from "pinia";
-import { onMounted } from "vue";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
+import { onMounted } from "vue";
 
 const date = new Date;
 let hours = date.getHours();
 let status = "";
-if (hours <= 12) {
+if (hours < 12) {
   status = "Selamat Pagi"
-} else if (hours == 12) {
+} else if (hours >= 12 && hours <= 14) {
   status = "Selamat Siang"
 } else if (hours >= 14) {
   status = "Selamat Sore"
@@ -178,6 +178,9 @@ export default {
   name: "default",
   data() {
     return {
+      posts: '',
+      errors: [],
+      status,
       stats: {
         po: {
           title: "Purchasing Order",
@@ -238,8 +241,20 @@ export default {
     MonitoringTable,
     Carousel,
     CategoriesCard,
+    MonitoringTable,
   },
 
+  // created() {
+  //   baseApi.get(`/users/username`)
+  //     .then(response => {
+  //       // JSON responses are automatically parsed.
+  //       this.posts = response.data
+  //       console.log(this.posts)
+  //     })
+  //     .catch(e => {
+  //       this.errors.push(e)
+  //     })
+  // },
   async created() {
     try {
       const { data } = await baseApi.get(`/companies/name`);
@@ -248,6 +263,7 @@ export default {
       console.error(e);
     }
   },
+
   computed: {
     ...mapState(d$company, ['g$name'])
   },
@@ -259,6 +275,6 @@ export default {
       await this.a$name();
     } catch (e) {
     }
-  },
+  }
 };
 </script>

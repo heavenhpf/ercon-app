@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div>
-                    <!-- table -->
+                    <p-o-table />
                 </div>
             </div>
         </div>

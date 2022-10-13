@@ -21,8 +21,8 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking-detail',
-      name: 'TrackingDetail',
+      path: 'tracking-detail/:id',
+      name: 'Tracking Detail',
       component: () => import('@/views/Dashboard/TrackingDetail.vue'),
       meta: { auth: true },
     },
