@@ -171,9 +171,9 @@ let hours = date.getHours();
 let status = "";
 if (hours < 12) {
   status = "Selamat Pagi"
-} else if (hours >= 12) {
+} else if (hours >= 12 && hours <= 15) {
   status = "Selamat Siang"
-} else if (hours >= 14) {
+} else if (hours >= 15) {
   status = "Selamat Sore"
 } else {
   status = "Selamat Malam"

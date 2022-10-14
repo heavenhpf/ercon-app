@@ -92,7 +92,7 @@ import d$item from '@/stores/dashboard/item';
 import auth from '../../router/routes/auth';
 
 export default {
-    name: 'Monitoring',
+    // name: 'Monitoring',
     data: () => ({
         pageTitle: 'Monitoring',
         // Input
@@ -153,10 +153,10 @@ export default {
         }
     },
     async mounted() {
-        await this.a$inquiryList(this.filter);
+        await this.a$listAllItem(this.filter);
     },
     methods: {
-        ...mapActions(d$item, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -172,7 +172,7 @@ export default {
 
         async init() {
             try {
-                await this.a$inquiryList();
+                await this.a$listAllItem();
             } catch (e) {
                 console.error(e);
             }

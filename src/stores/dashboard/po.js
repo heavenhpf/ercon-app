@@ -4,17 +4,30 @@ import * as s$po from '@/services/dashboard/po';
 const d$po = defineStore({
     id: 'po',
     state: () => ({
-        po: [],
-        name: '',
+        list_po: [],
+        list_po_detail: [],
+        po: {},
         detail: {},
         status: null,
     }),
     actions: {
-        async a$inquiryList(options) {
+        async a$listAllPo(options) {
             try {
                 this.status = null;
                 const { data, status } = await s$po.listAllPo(options);
-                this.po = data ?? [];
+                this.list_po = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$listPoDetail(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$po.listPoDetail(options);
+                this.po = data.po ?? {};
+                this.list_po_detail = data.list ?? [];
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -22,17 +35,6 @@ const d$po = defineStore({
             }
         },
 
-        async a$name() {
-            try {
-                this.status = null;
-                const { data, status } = await s$po.name();
-                this.name = data ?? '';
-                this.status = status;
-            } catch ({ error, message }) {
-                this.status = false;
-                throw error ?? message;
-            }
-        },
         async a$inquiryDetail(id) {
             try {
                 this.detail = {};
@@ -68,8 +70,9 @@ const d$po = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$list: ({ po }) => po,
-        g$name: ({ name }) => name,
+        g$po: ({ po }) => po,
+        g$list_po_detail: ({ list_po_detail }) => list_po_detail,
+        g$list_po: ({ list_po }) => list_po,
         g$detail: ({ detail }) => detail,
     },
 });

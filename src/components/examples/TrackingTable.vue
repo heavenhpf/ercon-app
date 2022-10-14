@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list_po" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
@@ -109,6 +109,10 @@ export default {
         filter: {
             tier: 1,
             status: 1,
+
+        },
+        filterDetail: {
+            id_po: 1,
         },
         // DataTable
         dt: {
@@ -159,16 +163,18 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$list', 'g$detail', 'g$progress']),
+        ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$detail', 'g$progress']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$inquiryList(this.filter);
+        await this.a$listAllPo(this.filter);
+        await this.a$listPoDetail(this.filterDetail);
+        // console.log(this.g$po)
     },
     methods: {
-        ...mapActions(d$po, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$listAllPo', 'a$listPoDetail', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -181,7 +187,9 @@ export default {
 
         async init() {
             try {
-                await this.a$inquiryList();
+                await this.a$listAllPo();
+                await this.a$listPoDetail();
+                // console.log(this.g$po)
             } catch (e) {
                 console.error(e);
             }
@@ -230,15 +238,14 @@ export default {
             }
         },
 
-        async triggerDetail({ auth_user, name, address, phone }) {
+        async triggerDetail({ id_po }) {
             try {
                 this.input = {
-                    username: auth_user.username,
-                    name,
-                    address,
-                    phone,
+                    id: id_po,
                 };
                 this.modal.detail = true;
+                this.$router.push({ name: 'TrackingDetail', params: { id: id_po } })
+                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }
