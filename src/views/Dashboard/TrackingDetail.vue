@@ -5,15 +5,15 @@
                 <div class="row">
                     <h5 class="text-dark">Nomor PO:</h5>
                     <div class="col-8 pb-0 text-start mb-3">
-                        <h4 class="font-weight-bolder text-dark">{{ g$list }}</h4>
+                        <h4 class="font-weight-bolder text-dark">1213</h4>
                     </div>
                     <div class="col-4">
-                        <h6 class="font-weight-bolder text-danger float-end">Deadline 30 September 2022</h6>
+                        <h5 class="font-weight-bolder text-danger float-end">Deadline 30 September 2022</h5>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8 pb-0 mb-3">
-                        <h5 class="font-weight-bolder text-dark">PT Toyota Manufacturing</h5>
+                        <h5 class="font-weight-bolder text-dark">{{ g$name.name }}</h5>
                         <h6 class="text-dark">Progress</h6>
                         <div class="row ps-2">
                             <div class="col progress" style="height: 20px;">
@@ -53,12 +53,55 @@
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
 import POTable from "@/components/examples/POTable.vue";
+import { baseApi } from '@/utils/axios';
+import d$po from '@/stores/dashboard/po';
+import { mapActions, mapState } from "pinia";
+import d$company from "../../stores/dashboard/company";
 
 export default {
     name: "tracking-detail",
+    data() {
+        return {
+            posts: '',
+            errors: [],
+        }
+    },
     components: {
         ArgonButton,
         POTable,
     },
+    filter: {
+        id_po: 1,
+    },
+
+
+    async created() {
+        try {
+            const { data } = await baseApi.get(`/companies/name`);
+            // const { data2 } = await baseApi.get(`/detail/:id`);
+            this.posts = data.name;
+            this.posts = data2.po.id_po;
+        } catch (e) {
+            console.error(e);
+        }
+    },
+
+    computed: {
+        // ...mapState(d$po, ['g$po', 'g$list_po_detail']),
+        ...mapState(d$company, ['g$name']),
+
+
+    },
+    methods: {
+        // ...mapActions(d$po, ['a$listPoDetail']),
+        ...mapActions(d$company, ['a$name'])
+    },
+    async mounted() {
+        try {
+            // await this.a$listPoDetail(this.filter);
+            await this.a$name();
+        } catch (e) {
+        }
+    }
 };
 </script>
