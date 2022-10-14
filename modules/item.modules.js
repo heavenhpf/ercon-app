@@ -84,6 +84,33 @@ class _item {
         }
     }
 
+    listMyItem = async (id_user) => {
+        try {
+            id_user = parseInt(id_user)
+
+            const schema = Joi.number().required()
+
+            const validation = schema.validate(id_user)
+    
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+    
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+        } catch (error) {
+            console.error('listMyItem module error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
     getItem = async (id_item) => {
         try {
             id_item = parseInt(id_item)
