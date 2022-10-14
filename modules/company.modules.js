@@ -1,4 +1,5 @@
 const prisma = require('../helpers/database')
+const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 class _company {
