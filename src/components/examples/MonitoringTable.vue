@@ -35,9 +35,9 @@ import d$item from '@/stores/dashboard/item';
 import auth from '../../router/routes/auth';
 
 export default {
-    // name: 'Monitoring',
+    name: 'monitoring-table',
     data: () => ({
-        pageTitle: 'Monitoring',
+        pageTitle: 'monitoring-table',
         // Input
         input: {
             id: null,

@@ -78,7 +78,7 @@
 
           <!-- mengambil dari store item-->
           <div>
-            <TableMonitoring />
+            <MonitoringTable />
           </div>
         </div>
         <div class="row">
@@ -154,7 +154,6 @@ import DoughnutTrackingChart from "@/examples/Charts/DoughnutTrackingChart.vue";
 import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
-import MonitoringTable from "@/components/examples/TableMonitoring.vue";
 import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from "pinia";
@@ -164,7 +163,7 @@ import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
 import { onMounted } from "vue";
-import TableMonitoring from "../../components/examples/TableMonitoring.vue";
+import MonitoringTable from "../../components/examples/MonitoringTable.vue";
 
 const date = new Date;
 let hours = date.getHours();
@@ -246,7 +245,6 @@ export default {
     MonitoringTable,
     Carousel,
     CategoriesCard,
-    TableMonitoring
   },
 
   // created() {
