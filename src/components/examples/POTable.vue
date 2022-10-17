@@ -134,6 +134,9 @@ export default {
                 {
                     name: 'progress',
                     th: 'progress',
+                    render: ({ progress }) => {
+                        return `<progress  value="${progress}" max="1">${progress}%</progress>`
+                    }
                 },
             ],
             action: [

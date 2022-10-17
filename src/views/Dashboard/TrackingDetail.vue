@@ -13,15 +13,11 @@
                 </div>
                 <div class="row">
                     <div class="col-8 pb-0 mb-3">
-                        <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_toTos_company }}</h5>
+                        <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_toTos_company?.name }}</h5>
                         <h6 class="text-dark">Progress</h6>
-                        <div class="row ps-2">
-                            <div class="col progress" style="height: 20px;">
-                                <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="60"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 60%; height: 20px;"></div>
+                            <div class="progress" style="height: 20px; width: 70%;">
+                                <div class="progress-bar bg-success" role="progressbar" :style="{width: g$po.progress * 100 + '%'}" aria-valuenow="{{g$po.progress * 100}}" aria-valuemin="0" aria-valuemax="100">{{ g$po.progress * 100 }}%</div>
                             </div>
-                            <span class="col text-xs">60%</span>
-                        </div>
                     </div>
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Purchasing Order:</h6>
