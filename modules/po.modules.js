@@ -209,7 +209,9 @@ class _po {
                             id_user: body.id_user
                         }
                     },
-                    status: 0,
+                    status: {
+                        not: 1
+                    },
                     deleted_at: null
                 },
                 include: {
