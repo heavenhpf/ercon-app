@@ -1,10 +1,10 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <modal-comp v-model:show="modal.add">
+        <!-- <modal-comp v-model:show="modal.add">
             <template #header>
                 <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
@@ -24,14 +24,14 @@
                     Save Changes
                 </argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
         <modal-comp v-model:show="modal.detail">
             <template #header>
                 <h3 class="modal-title">{{ pageTitle }} Details</h3>
             </template>
 
             <!-- buat ngerubah detail -->
-            <template v-if="modal.detail" #body>
+            <!-- <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
                         <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
@@ -57,7 +57,7 @@
                         </argon-input>
                     </div>
                 </div>
-            </template>
+            </template> -->
             <template #footer>
                 <argon-button color="secondary" @click="modal.detail = false">
                     Close
@@ -106,43 +106,31 @@ export default {
             id: null,
             name: '',
         },
-        filter: {
-            id_order: 1,
-            status: 1,
-        },
         // DataTable
         dt: {
             column: [
                 {
                     name: 'd_order.d_item.serial_number',
                     th: 'Serial Number',
+                    render: ({ d_order }) => d_order.d_item.serial_number
                 },
                 {
-                    name: 's_company_d_po_order_toTos_company.name',
+                    name: 'id_order',
                     th: 'ID Order',
-                    render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {
-                    name: 'progress',
+                    name: 'd_order.d_item.name',
                     th: 'nama item',
+                    render: ({ d_order }) => d_order.d_item.name
                 },
                 {
-                    name: 'status',
-                    th: 'Jumlah',
-                    render: ({ status }) => {
-                        if (status == 0) {
-                            return `<span>${progress[status]}</span>`
-                        } else {
-                            return `<span>${progress[status]}</span>`
-                        }
-                    }
+                    name: 'd_order.quantity',
+                    th: 'Jumlah Pesanan',
+                    render: ({ d_order }) => d_order.quantity
                 },
                 {
                     name: 'progress',
                     th: 'progress',
-                    render: ({ progress }) => {
-                        return `<progress  value="${progress}" max="1">${progress}%</progress>`
-                    }
                 },
             ],
             action: [
@@ -150,12 +138,7 @@ export default {
                     text: 'Detail',
                     color: 'warning',
                     event: 'detail',
-                },
-                // {
-                //     text: 'Delete',
-                //     color: 'danger',
-                //     event: 'delete',
-                // },
+                }
             ],
         },
         // UI
@@ -166,76 +149,25 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$list', 'g$detail', 'g$progress']),
+        ...mapState(d$po, ['g$list_po_detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listPoDetail(this.filter);
+        await this.a$listPoDetail({ id_po: this.$route.params.id });
     },
     methods: {
-        ...mapActions(d$po, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$listPoDetail']),
 
-        clear() {
-            this.input = {
-                id: null,
-                name: '',
-                username: '',
-                level: '',
-            };
-        },
 
-        async init() {
-            try {
-                await this.a$listPoDetail();
-            } catch (e) {
-                console.error(e);
-            }
-        },
-
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
+        // async init() {
+        //     try {
+        //         // await this.a$listPoDetail();
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
 
         async triggerDetail({ auth_user, name, address, phone }) {
             try {
@@ -250,20 +182,6 @@ export default {
                 console.error(e);
             }
         },
-        async triggerDelete({ id }) {
-            try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
-                this.modal.confirm = true;
-            } catch (e) {
-                console.error(e);
-            }
-        },
-    },
-    watch: {
-        modals(val) {
-            if (!val) this.clear();
-        }
-    },
+    }
 };
 </script>

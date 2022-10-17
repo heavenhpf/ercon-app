@@ -89,7 +89,7 @@ import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
 import auth from '../../router/routes/auth';
 
-const statusPO = {
+const progress = {
     0: "Belum Deadline",
     1: "Melewati Deadline",
     2: "Progress Selesai"
@@ -135,12 +135,12 @@ export default {
                     name: 'status',
                     th: 'Status',
                     render: ({ status }) => {
-                        if(status == 0){
-                            return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
-                        }else if(status == 1){
-                            return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
-                        }else{
-                            return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
+                        if (status == 0) {
+                            return `<span class="badge badge-pill badge-info">${progress[status]}</span>`
+                        } else if (status == 1) {
+                            return `<span class="badge badge-pill badge-danger">${progress[status]}</span>`
+                        } else {
+                            return `<span class="badge badge-pill badge-success">${progress[status]}</span>`
                         }
                     }
                 },

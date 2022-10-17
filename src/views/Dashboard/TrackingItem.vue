@@ -11,7 +11,7 @@
 import TrackingTable from "@/components/examples/TrackingTable.vue";
 
 export default {
-    name: "tracking-saya",
+    name: "tracking-item",
     components: {
         TrackingTable,
     },
