@@ -127,15 +127,20 @@ export default {
                 {
                     name: 'progress',
                     th: 'Capaian',
+                    render: ({ progress }) => {
+                        return `<progress  value="${progress}" max="1">${progress}%</progress>`
+                    }
                 },
                 {
                     name: 'status',
                     th: 'Status',
                     render: ({ status }) => {
                         if (status == 0) {
-                            return `<span>${progress[status]}</span>`
+                            return `<span class="badge badge-pill badge-info">${progress[status]}</span>`
+                        } else if (status == 1) {
+                            return `<span class="badge badge-pill badge-danger">${progress[status]}</span>`
                         } else {
-                            return `<span>${progress[status]}</span>`
+                            return `<span class="badge badge-pill badge-success">${progress[status]}</span>`
                         }
                     }
                 },

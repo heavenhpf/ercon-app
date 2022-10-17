@@ -1,6 +1,6 @@
 <template>
   <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ">
       <li class="nav-item">
         <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
           <template v-slot:icon>
@@ -14,6 +14,14 @@
         </h6>
       </li>
       <li class="nav-item">
+        <sidenav-item url="/dashboard/tracking-item" :class="getRoute() === 'tracking-item' ? 'active' : ''"
+          navText="Tracking Item">
+          <template v-slot:icon>
+            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
         <sidenav-item url="/dashboard/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''"
           navText="Tracking Saya">
           <template v-slot:icon>
@@ -22,10 +30,10 @@
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-item" :class="getRoute() === 'tracking-item' ? 'active' : ''"
-          navText="Tracking Item">
+        <sidenav-item url="/dashboard/tracking-po-pesanan" :class="getRoute() === 'tracking-po-pesanan' ? 'active' : ''"
+          navText="Tracking PO Pesanan">
           <template v-slot:icon>
-            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
+            <i class="fa fa-tasks mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -35,10 +43,18 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/monitoring" :class="getRoute() === 'monitoring' ? 'active' : ''"
-          navText="Monitoring">
+        <sidenav-item url="/dashboard/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
+          navText="Monitoring Item">
           <template v-slot:icon>
             <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/dashboard/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
+          navText="Gudang Saya">
+          <template v-slot:icon>
+            <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -61,6 +77,14 @@
       </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="Perusahaan">
+          <template v-slot:icon>
+            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/dashboard/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''"
+          navText="Perusahaan Saya">
           <template v-slot:icon>
             <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>

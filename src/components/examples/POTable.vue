@@ -106,9 +106,6 @@ export default {
             id: null,
             name: '',
         },
-        filter: {
-            id_po: 1,
-        },
         // DataTable
         dt: {
             column: [
@@ -158,7 +155,7 @@ export default {
         }
     },
     async mounted() {
-        await this.a$listPoDetail(this.filter);
+        await this.a$listPoDetail({ id_po: this.$route.params.id });
     },
     methods: {
         ...mapActions(d$po, ['a$listPoDetail']),
