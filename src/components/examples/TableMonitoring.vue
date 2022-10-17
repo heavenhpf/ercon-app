@@ -25,12 +25,12 @@
                 </argon-button>
             </template>
         </modal-comp>
-        <modal-comp v-model:show="modal.detail">
+        <!-- <modal-comp v-model:show="modal.detail">
             <template #header>
                 <h3 class="modal-title">{{ pageTitle }} Details</h3>
             </template>
 
-            <!-- buat ngerubah detail -->
+            
             <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
@@ -82,7 +82,7 @@
                 </argon-button>
                 <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
     </div>
 </template>
 
