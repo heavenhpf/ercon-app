@@ -515,6 +515,34 @@
 					"response": []
 				},
 				{
+					"name": "LIST MY ITEM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/my",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET ITEM",
 					"request": {
 						"auth": {
@@ -537,6 +565,36 @@
 							"path": [
 								"items",
 								"item",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ITEM DETAIL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/item/1/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"item",
+								"1",
 								"1"
 							]
 						}
@@ -639,6 +697,83 @@
 							"path": [
 								"items",
 								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT ITEM QUANTITY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_buffer\": true,\r\n    \"quantity\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/item/1/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"item",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT BUFFER QUANTITY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/item/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"item",
+								"1"
 							]
 						}
 					},

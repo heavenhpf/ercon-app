@@ -113,6 +113,21 @@ class _dn {
                         id_order: e.id_order
                     }
                 })
+
+                const checkItemDetail = await prisma.d_item_detail.findFirst({
+                    where: {
+                        id_po_detail: e.id_po_detail
+                    },
+                    select: {
+                        id_po_detail: true
+                    }
+                })
+
+                await prisma.d_item_detail.delete({
+                    where: {
+                        id_item_detail: checkItemDetail.id_po_detail
+                    }
+                })
             })
 
             await prisma.d_po.update({
