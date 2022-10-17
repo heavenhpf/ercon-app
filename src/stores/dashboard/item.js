@@ -9,7 +9,7 @@ const d$item = defineStore({
         status: null,
     }),
     actions: {
-        async a$inquiryList(options) {
+        async a$listAllItem(options) {
             try {
                 this.status = null;
                 const { data, status } = await s$item.listAllItem(options);

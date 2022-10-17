@@ -92,13 +92,17 @@ import d$item from '@/stores/dashboard/item';
 import auth from '../../router/routes/auth';
 
 export default {
-
+    // name: 'Monitoring',
     data: () => ({
         pageTitle: 'monitoring-table',
         // Input
         input: {
             id: null,
             name: '',
+        },
+        filter: {
+            tier: 2,
+            category: 2,
         },
         // DataTable
         dt: {
@@ -149,10 +153,10 @@ export default {
         }
     },
     async mounted() {
-        await this.a$inquiryList();
+        await this.a$listAllItem(this.filter);
     },
     methods: {
-        ...mapActions(d$item, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -161,23 +165,18 @@ export default {
                 username: '',
                 level: '',
                 quantity: '',
-                tier: 2,
-                category: 1
+                // tier: 2,
+                // category: 1
             };
         },
 
         async init() {
             try {
-                const { tier, category } = this.input;
-                const data = {
-                    tier, category
-                };
-                await this.a$inquiryList(data);
+                await this.a$listAllItem();
             } catch (e) {
                 console.error(e);
             }
         },
-
         async addInquiry() {
             try {
                 const { name } = this.input;

@@ -9,21 +9,27 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking-saya',
-      name: 'Tracking Saya',
-      component: () => import('@/views/Dashboard/TrackingSaya.vue'),
-      meta: { auth: true },
-    },
-    {
       path: 'tracking-item',
       name: 'Tracking Item',
       component: () => import('@/views/Dashboard/TrackingItem.vue'),
       meta: { auth: true },
     },
     {
+      path: 'tracking-saya',
+      name: 'Tracking Saya',
+      component: () => import('@/views/Dashboard/TrackingSaya.vue'),
+      meta: { auth: true },
+    },
+    {
       path: 'tracking-detail/:id',
       name: 'Tracking Detail',
       component: () => import('@/views/Dashboard/TrackingDetail.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'monitoring-item',
+      name: 'Monitoring item',
+      component: () => import('@/views/Dashboard/MonitoringItem.vue'),
       meta: { auth: true },
     },
     {

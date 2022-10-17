@@ -98,23 +98,23 @@ import auth from '../../router/routes/auth';
 // }
 
 export default {
-    name: 'po-table',
+    name: 'POTable',
     data: () => ({
-        pageTitle: 'po-table',
+        pageTitle: 'POTable',
         // Input
         input: {
             id: null,
             name: '',
         },
         filter: {
-            tier: 1,
+            id_order: 1,
             status: 1,
         },
         // DataTable
         dt: {
             column: [
                 {
-                    name: 'po_number',
+                    name: 'd_order.d_item.serial_number',
                     th: 'Serial Number',
                 },
                 {
@@ -140,6 +140,9 @@ export default {
                 {
                     name: 'progress',
                     th: 'progress',
+                    render: ({ progress }) => {
+                        return `<progress  value="${progress}" max="1">${progress}%</progress>`
+                    }
                 },
             ],
             action: [
@@ -169,7 +172,7 @@ export default {
         }
     },
     async mounted() {
-        await this.a$inquiryList(this.filter);
+        await this.a$listPoDetail(this.filter);
     },
     methods: {
         ...mapActions(d$po, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
@@ -185,7 +188,7 @@ export default {
 
         async init() {
             try {
-                await this.a$inquiryList(1, 1);
+                await this.a$listPoDetail();
             } catch (e) {
                 console.error(e);
             }
