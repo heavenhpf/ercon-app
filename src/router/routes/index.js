@@ -2,8 +2,8 @@ import auth from './auth';
 import dashboard from './dashboard';
 
 const routes = [
-  dashboard,
   auth,
+  dashboard,
 ];
 
 export default routes;

@@ -44,8 +44,7 @@ export default {
             name: '',
         },
         filter: {
-            tier: 2,
-            category: 2,
+            category: 1,
         },
         // DataTable
         dt: {
@@ -90,16 +89,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$list', 'g$detail']),
+        ...mapState(d$item, ['g$list', 'g$detail', 'g$listMyItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listAllItem(this.filter);
+        await this.a$listMyItem(this.filter);
     },
     methods: {
-        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$item, ['a$listMyItem', 'a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -115,7 +114,7 @@ export default {
 
         async init() {
             try {
-                await this.a$listAllItem();
+                await this.a$listMyItem();
             } catch (e) {
                 console.error(e);
             }
@@ -173,8 +172,8 @@ export default {
                     phone,
                 };
                 this.modal.detail = true;
-                this.$router.push({ name: 'TrackingDetail', params: { id: d_po.id_po } })
-                console.log(this.$route.params.id);
+                // this.$router.push({ name: 'Tracking Detail', params: { id: d_po.id_po } })
+                // console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }

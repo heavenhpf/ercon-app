@@ -78,7 +78,7 @@
 
           <!-- mengambil dari store item-->
           <div>
-            <MonitoringTable />
+            <!-- <MonitoringTable /> -->
           </div>
         </div>
         <div class="row">

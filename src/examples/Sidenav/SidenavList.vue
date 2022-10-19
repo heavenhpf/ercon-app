@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
+  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main" @click="showSidenav">
     <ul class="navbar-nav ">
       <li class="nav-item">
         <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
@@ -122,6 +122,14 @@ export default {
     getRoute() {
       const routeArr = this.$route.path.split("/");
       return routeArr[1];
+    },
+
+    hideSidenav() {
+      this.sidebarMenu = false;
+    },
+
+    showSidenav() {
+      this.sidebarMenu = true;
     }
   }
 };

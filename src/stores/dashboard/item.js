@@ -20,6 +20,17 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
+        async a$listMyItem(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$item.listMyItem(options);
+                this.item = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
         async a$inquiryDetail(id) {
             try {
                 this.detail = {};
@@ -56,6 +67,7 @@ const d$item = defineStore({
     getters: {
         g$status: ({ status }) => status,
         g$list: ({ item }) => item,
+        g$listMyItem: ({ item }) => item,
         g$detail: ({ detail }) => detail,
     },
 });

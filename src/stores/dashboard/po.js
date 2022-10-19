@@ -22,6 +22,17 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
+        async a$getPoDetail(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$po.getPoDetail(options);
+                this.list_po = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
         async a$listPoDetail(options) {
             try {
                 this.status = null;
