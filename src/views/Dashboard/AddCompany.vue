@@ -38,13 +38,12 @@
                                     </div>
                                     <div class="col-md-2">
                                         <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
-
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                                <argon-input v-model="input.address" type="text" />
+                                <argon-text-area v-model="input.address" type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
@@ -93,6 +92,7 @@ import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
 import ArgonAlert from "@/components/ArgonAlert.vue";
+import ArgonTextarea from "@/components/ArgonTextarea.vue";
 
 import d$user from '@/stores/dashboard/user';
 import { mapActions, mapState } from 'pinia';
@@ -146,6 +146,7 @@ export default {
         ArgonButton,
         ArgonRadio,
         ArgonAlert,
+        ArgonTextarea,
     },
 
     computed: {
