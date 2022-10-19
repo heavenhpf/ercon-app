@@ -48,7 +48,7 @@ const userSession = async (req, res, next) => {
 
 const verifyAdmin = async (req, res, next) => {
   try {
-    if (req.user.level === 1) {
+    if (req.user.level === 0) {
       next()
     } else {
       res.status(401).send({

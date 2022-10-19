@@ -33,7 +33,7 @@ class _company {
         }
     }
 
-    getCompany = async (id_user) => {
+    getName = async (id_user) => {
         try {
             const schema = Joi.number().required()
 
@@ -55,6 +55,42 @@ class _company {
                 },
                 select: {
                     name: true
+                }
+            })
+
+            return {
+                status: true,
+                data: get
+            }
+        } catch (error) {
+            console.error('getName module error: ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
+    getMyCompany = async (id_user) => {
+        try {
+            const schema = Joi.number().required()
+
+            const validation = schema.validate(id_user)
+
+            if (validation.error) {
+                const errorDetails = validation.error.details.map(detail => detail.message)
+
+                return {
+                    status: false,
+                    code: 422,
+                    error: errorDetails.join(', ')
+                }
+            }
+
+            const get = await prisma.s_company.findFirst({
+                where: {
+                    id_user
                 }
             })
 
@@ -148,17 +184,15 @@ class _company {
         }
     }
 
-    editCompany = async (id_user, id_company, body) => {
+    editMyCompany = async (id_user, body) => {
         try {
             body = {
                 id_user: parseInt(id_user),
-                id_company: parseInt(id_company),
                 ...body
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                id_company: Joi.number().required(),
                 name: Joi.string(),
                 address: Joi.string(),
                 phone: Joi.string()
@@ -179,8 +213,10 @@ class _company {
             const check = await prisma.s_company.findFirst({
                 where: {
                     id_user: body.id_user,
-                    id_company: body.id_company,
                     deleted_at: null
+                },
+                select: {
+                    id_company: true
                 }
             })
 
@@ -194,7 +230,7 @@ class _company {
 
             const edit = await prisma.s_company.update({
                 where: {
-                    id_company: body.id_company
+                    id_company: check.id_company
                 },
                 data: {
                     name: body.name,

@@ -2,14 +2,16 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _item {
-    listItem = async (tier, id_category) => {
+    listItem = async (level_user, tier, id_category) => {
         try {
             const body = {
+                level_user: parseInt(level_user),
                 tier: parseInt(tier),
                 id_category: (id_category) ? parseInt(id_category) : null
             }
     
             const schema = Joi.object({
+                level_user: Joi.number().required(),
                 tier: Joi.number().required(),
                 id_category: Joi.any()
             })
@@ -23,6 +25,14 @@ class _item {
                     status: false,
                     code: 422,
                     error: errorDetails.join(', ')
+                }
+            }
+
+            if (body.tier <= body.level_user) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "You're not permitted"
                 }
             }
 
@@ -168,13 +178,21 @@ class _item {
         }
     }
 
-    getItem = async (id_item) => {
+    getItem = async (id_user, level_user, id_item) => {
         try {
-            id_item = parseInt(id_item)
+            const body = {
+                id_user: parseInt(id_user),
+                level_user: parseInt(level_user),
+                id_item: parseInt(id_item)
+            }
 
-            const schema = Joi.number().required()
+            const schema = Joi.object({
+                id_user: Joi.number().required(),
+                level_user: Joi.number().required(),
+                id_item: Joi.number().required()
+            })
 
-            const validation = schema.validate(id_item)
+            const validation = schema.validate(body)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -186,15 +204,31 @@ class _item {
                 }
             }
 
-            const check = await prisma.d_item.findFirst({
+            const checkCompany = await prisma.s_company.findFirst({
                 where: {
-                    id_item,
+                    id_user: body.id_user,
+                    deleted_at: null
+                },
+                select: {
+                    id_company: true
+                }
+            })
+
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_item: body.id_item,
                     deleted_at: null
                 },
                 include: {
                     s_company: {
                         select: {
-                            name: true
+                            id_company: true,
+                            name: true,
+                            auth_user: {
+                                select: {
+                                    level: true
+                                }
+                            }
                         }
                     },
                     ref_category: {
@@ -205,7 +239,7 @@ class _item {
                 }
             })
 
-            if (!check) {
+            if (!(checkCompany && checkItem)) {
                 return {
                     status: false,
                     code: 404,
@@ -213,9 +247,17 @@ class _item {
                 }
             }
 
+            if (checkItem.s_company.id_company !== checkCompany.id_company && checkItem.s_company.auth_user.level <= body.level_user) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "You're not permitted"
+                }
+            }
+
             const list = await prisma.d_item_detail.findMany({
                 where: {
-                    id_item
+                    id_item: body.id_item
                 },
                 include: {
                     d_po_detail: {
@@ -244,7 +286,7 @@ class _item {
             return {
                 status: true,
                 data: {
-                    item: check,
+                    item: checkItem,
                     label: list
                 }
             }

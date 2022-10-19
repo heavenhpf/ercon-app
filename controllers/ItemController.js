@@ -6,7 +6,7 @@ const { userSession } = require('../helpers/middleware')
 const app = Router()
 
 app.get('/item/:id_item', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.getItem(req.params.id_item))
+    response.sendResponse(res, await modules.getItem(req.user.id, req.user.level, req.params.id_item))
 })
 
 app.put('/item/:id_item', userSession, async (req, res, next) => {
@@ -26,7 +26,7 @@ app.get('/my/:category?', userSession, async (req, res, next) => {
 })
 
 app.get('/:tier/:category?', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.listItem(req.params.tier, req.params.category))
+    response.sendResponse(res, await modules.listItem(req.user.level, req.params.tier, req.params.category))
 })
 
 app.post('/', userSession, async (req, res, next) => {

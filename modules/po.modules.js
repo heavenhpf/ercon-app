@@ -585,6 +585,27 @@ class _po {
                 }
             }
 
+            let checkOrder = []
+
+            body.order.forEach(async (o) => {
+                const check = await prisma.d_order.findFirst({
+                    where: {
+                        id_order: o.id_order,
+                        processed: true
+                    }
+                })
+
+                checkOrder.push(check)
+            })
+
+            if (checkOrder) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "Order have been processed"
+                }
+            }
+
             const add = await prisma.d_po.create({
                 data: {
                     id_doc: body.id_doc,
@@ -599,8 +620,7 @@ class _po {
             body.order.forEach(async function (o) {
                 const checkOrder = await prisma.d_order.findFirst({
                     where: {
-                        id_order: o.id_order,
-                        processed: false
+                        id_order: o.id_order
                     },
                     select: {
                         id_item: true

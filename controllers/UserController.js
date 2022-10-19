@@ -1,11 +1,11 @@
 const { Router } = require('express')
 const modules = require('../modules/user.modules')
 const response = require('../helpers/response')
-const { userSession } = require('../helpers/middleware')
+const { userSession, verifyAdmin } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/', userSession, async (req, res, next) => {
+app.get('/', userSession, verifyAdmin, async (req, res, next) => {
     response.sendResponse(res, await modules.listUser())
 })
 

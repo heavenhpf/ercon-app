@@ -122,6 +122,21 @@ class _order {
                 }
             }
 
+            const checkOrder = await prisma.d_order.findFirst({
+                where: {
+                    order_number: body.order_number,
+                    deleted_at: null
+                }
+            })
+
+            if (checkOrder) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "Data duplicate found"
+                }
+            }
+
             const add = await prisma.d_order.create({
                 data: {
                     order_from: checkCompany.id_company,
