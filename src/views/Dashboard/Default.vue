@@ -4,8 +4,8 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="pb-0 text-start mb-3">
-            <h5 class="font-weight-bolder text-dark"><b>{{ status }}</b></h5>
-            <h4 class="text-dark">{{ g$name.name }}</h4>
+            <h5 class="text-dark">{{ status }}</h5>
+            <h4 class="font-weight-bolder text-dark">{{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"

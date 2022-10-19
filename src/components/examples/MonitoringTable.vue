@@ -173,7 +173,7 @@ export default {
                     phone,
                 };
                 this.modal.detail = true;
-                this.$router.push({ name: 'TrackingDetail', params: { id: d_po.id_po } })
+                this.$router.push({ name: 'Tracking Detail', params: { id: d_po.id_po } })
                 console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);

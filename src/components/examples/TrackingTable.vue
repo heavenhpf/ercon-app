@@ -198,66 +198,14 @@ export default {
             }
         },
 
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-
         async triggerDetail({ id_po }) {
             try {
                 this.input = {
                     id: id_po,
                 };
                 this.modal.detail = true;
-                this.$router.push({ name: 'TrackingDetail', params: { id: id_po } })
+                this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
                 console.log(this.$route.params.id);
-            } catch (e) {
-                console.error(e);
-            }
-        },
-        async triggerDelete({ id }) {
-            try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
-                this.modal.confirm = true;
             } catch (e) {
                 console.error(e);
             }

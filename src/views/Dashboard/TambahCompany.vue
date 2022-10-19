@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="pb-0 text-start mb-3">
-                        <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
+                        <h4 class="font-weight-bolder text-dark">Tambah Perusahaan</h4>
                     </div>
                 </div>
                 <div class="card">
@@ -14,37 +14,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Nomor PO</label>
-                                <argon-input v-model="input.po" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Tujuan
-                                    Pemesanan</label>
-                                <argon-input v-model="input.po" type="text" />
-                            </div>
-                            <div class="row mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
-                                <div class="col-10">
-                                    <argon-input v-model="input.po" type="text" />
-                                </div>
-                                <div class="col-2">
-                                    <argon-button size="md" color="primary" class="ms-2">
-                                        <span class="fa fa-plus fa-sm me-2" />
-                                        Tambah
-                                    </argon-button>
-                                </div>
-                            </div>
-                            <div class="col-5 mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Deadline
-                                    Pembuatan</label>
-                                <argon-input placeholder="Date" type="date" />
-                            </div>
-                            <div class="col-8 mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Dokumen
-                                    PO</label>
-                                <argon-input type="file" id="file" />
-                            </div>
-                            <!-- <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Username</label>
                                 <argon-input v-model="input.username" type="text" />
                             </div>
@@ -62,31 +31,35 @@
                                     Perusahaan </label>
                                 <div class="row p-2">
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier">
-                                        Tier 1
+                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier"> Tier 1
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier">Tier 2
-
+                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier"> Tier 2
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier">Tier 3
-
+                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                                <argon-input v-model="input.address" type="text" />
+                                <argon-text-area v-model="input.address" type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
                                 <argon-input v-model="input.phone" type="text" />
-                            </div> -->
+                            </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
-                            <argon-button size="md" color="primary">
-                                Buat PO
+                            <router-link to="/dashboard/company" tag="button">
+                                <span>
+                                <argon-button size="md" color="warning" class="me-2">
+                                    Kembali
+                                </argon-button>
+                                </span>
+                            </router-link>
+                            <argon-button @click="addInquiry()" size="md" color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Tambah
                             </argon-button>
                         </div>
                         <!-- <modal-comp v-model:show="modal.confirm">
@@ -118,6 +91,8 @@
 import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
+import ArgonAlert from "@/components/ArgonAlert.vue";
+import ArgonTextarea from "@/components/ArgonTextarea.vue";
 
 import d$user from '@/stores/dashboard/user';
 import { mapActions, mapState } from 'pinia';
@@ -130,9 +105,9 @@ const tier = {
 }
 
 export default {
-    name: 'po',
+    name: 'tambah-company',
     data: () => ({
-        pageTitle: 'po',
+        pageTitle: 'add-company',
         // Input
         input: {
             id: null,
@@ -170,6 +145,8 @@ export default {
         ArgonInput,
         ArgonButton,
         ArgonRadio,
+        ArgonAlert,
+        ArgonTextarea,
     },
 
     computed: {

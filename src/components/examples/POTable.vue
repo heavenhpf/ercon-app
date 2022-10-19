@@ -11,7 +11,7 @@
             <template v-if="modal.add" #body>
                 <div class="row">
                     <div class="col-12">
-                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
+                        <argon-input  pe="text" placeholder="Name" name="name" size="md">
                         </argon-input>
                     </div>
                 </div>
@@ -25,41 +25,26 @@
                 </argon-button>
             </template>
         </modal-comp> -->
-        <modal-comp v-model:show="modal.detail">
+        <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <h3 class="modal-title">{{ pageTitle }} Details</h3>
+                <h5 class="modal-title">Serial Number</h5><br>
+                <h6 class="row">Deadline 30 September 2022</h6>
             </template>
 
             <!-- buat ngerubah detail -->
-            <!-- <template v-if="modal.detail" #body>
+            <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
-                            size="md">
-                        </argon-input>
-                    </div>
+                    <h3 class="col-12">Roda Eco Tire
+                    </h3>
+                    <p>Eco tire didesain untuk meningkatkan efisiensi penggunaan bahan bakar. Tipe ban yang satu ini
+                        dibuat dengan dilapisi silika agar cengkraman atau grip ke jalan jadi jauh lebih bagus. Rolling
+                        resistance bisa berkurang dengan adanya lapisan silika tersebut, sehingga Anda tidak memerlukan
+                        banyak bahan bakar.</p>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.address" type="text" placeholder="Address" name="address" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.phone" type="text" placeholder="Phone" name="phone" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-            </template> -->
+            </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
+                <h5 style="text-align: left;">Informasi Item</h5>
+                <argon-button style="text-align: left;" color="secondary" @click="modal.detail = false">
                     Close
                 </argon-button>
                 <argon-button color="primary" @click="editInquiry()">
@@ -169,14 +154,8 @@ export default {
         //     }
         // },
 
-        async triggerDetail({ auth_user, name, address, phone }) {
+        async triggerDetail({ }) {
             try {
-                this.input = {
-                    username: auth_user.username,
-                    name,
-                    address,
-                    phone,
-                };
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

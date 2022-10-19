@@ -14,7 +14,7 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-item" :class="getRoute() === 'tracking-item' ? 'active' : ''" navText="Tracking Item">
+        <sidenav-item url="/dashboard/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''" navText="Tracking Tier Bawah">
           <template v-slot:icon>
             <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
           </template>
@@ -28,7 +28,7 @@
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-po-pesanan" :class="getRoute() === 'tracking-po-pesanan' ? 'active' : ''" navText="Tracking PO Pesanan">
+        <sidenav-item url="/dashboard/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''" navText="Pesanan Masuk">
           <template v-slot:icon>
             <i class="fa fa-tasks mb-2 text-success text-sm opacity-10"></i>
           </template>
@@ -57,12 +57,12 @@
       </li>
       <li class="mt-3 nav-item">
         <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Pemesanan
+          Purchasing Order (PO)
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/po" :class="getRoute() === 'po' ? 'active' : ''"
-          navText="Purchasing Order">
+        <sidenav-item url="/dashboard/ajukan-po" :class="getRoute() === 'ajukan-po' ? 'active' : ''"
+          navText="Ajukan PO">
           <template v-slot:icon>
             <i class="ni ni-tag text-info text-sm opacity-10"></i>
           </template>
