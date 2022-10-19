@@ -14,7 +14,7 @@
     @mousedown.self="closeHandler(true)"
   >
     <div
-      class="modal-dialog modal-dialog-centered"
+      class="modal-dialog modal-dialog-centered p-0"
       :class="[
         { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
         modalClasses,
@@ -81,7 +81,7 @@ export default {
       type: String,
       description: 'Modal size',
       validator(value) {
-        const acceptedValues = ['', 'sm', 'lg'];
+        const acceptedValues = ['', 'sm', 'lg', 'xl'];
         return acceptedValues.indexOf(value) !== -1;
       },
       default: '',
@@ -166,9 +166,13 @@ export default {
     color: white!important;
   }
 
-  .close > span:not(.sr-only) {
-    color: white!important;
-  }
+  // .close {
+  //   color: red;
+  // }
+
+  // .close > span:not(.sr-only) {
+  //   color: white!important;
+  // }
 
   label {
     color: white!important;

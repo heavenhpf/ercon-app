@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking" tag="button">
+                    <router-link to="/dashboard/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking" tag="button">
+                    <router-link to="/dashboard/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>
@@ -81,7 +81,7 @@
             <TableMonitoring />
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-10">
           <div class="col-lg-7 mb-lg">
             <!-- line chart -->
             <div class="card z-index-2">
@@ -260,7 +260,6 @@ export default {
   //       this.errors.push(e)
   //     })
   // },
-
   async created() {
     try {
       const { data } = await baseApi.get(`/companies/name`);

@@ -34,7 +34,6 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
-
         async a$inquiryDetail(id) {
             try {
                 this.detail = {};

@@ -25,13 +25,15 @@
                 </argon-button>
             </template>
         </modal-comp> -->
+
+
         <modal-comp v-model:show="modal.detail">
             <template #header>
                 <h3 class="modal-title">{{ pageTitle }} Details</h3>
             </template>
 
             <!-- buat ngerubah detail -->
-            <!-- <template v-if="modal.detail" #body>
+            <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
                         <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
@@ -57,7 +59,7 @@
                         </argon-input>
                     </div>
                 </div>
-            </template> -->
+            </template>
             <template #footer>
                 <argon-button color="secondary" @click="modal.detail = false">
                     Close
@@ -67,7 +69,9 @@
                 </argon-button>
             </template>
         </modal-comp>
-        <modal-comp v-model:show="modal.confirm">
+
+
+        <!-- <modal-comp v-model:show="modal.confirm">
             <template #header>
                 <h3 class="modal-title">Confirm</h3>
             </template>
@@ -82,7 +86,7 @@
                 </argon-button>
                 <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
     </div>
 </template>
 

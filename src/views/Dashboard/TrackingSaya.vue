@@ -38,7 +38,7 @@ import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
 
 export default {
-    name: "tracking",
+    name: "tracking-saya",
     data() {
         return {
             stats: {
@@ -56,36 +56,6 @@ export default {
                     title: "Selesai",
                     value: "20",
                     cardBackground: "bg-success",
-                },
-            },
-            sales: {
-                us: {
-                    country: "United States",
-                    sales: 2500,
-                    value: "$230,900",
-                    bounce: "29.9%",
-                    flag: US,
-                },
-                germany: {
-                    country: "Germany",
-                    sales: "3.900",
-                    value: "$440,000",
-                    bounce: "40.22%",
-                    flag: DE,
-                },
-                britain: {
-                    country: "Great Britain",
-                    sales: "1.400",
-                    value: "$190,700",
-                    bounce: "23.44%",
-                    flag: GB,
-                },
-                brasil: {
-                    country: "Brasil",
-                    sales: "562",
-                    value: "$143,960",
-                    bounce: "32.14%",
-                    flag: BR,
                 },
             },
             data: [],

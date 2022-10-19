@@ -2,7 +2,7 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="pb-0 text-start mb-3">
-                <h4 class="font-weight-bolder text-dark">Company List</h4>
+                <h4 class="font-weight-bolder text-dark">List Perusahaan</h4>
             </div>
             <div class="pb-0 row mb-lg-3 mb-2">
                 <div class="col-lg-8 col-md-9">
@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="card">
-            <data-table style="text-align: center;" index="false" :data="g$list" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
+            <data-table style="text-align: center" :index="false" :data="g$list" :columns="dt.column" :actions="dt.action" @detail="triggerDetail"
+                @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
@@ -83,7 +83,7 @@
             </template>
             <template v-if="modal.confirm" #body>
                 <p>
-                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
+                    Apakah anda yakin untuk menghapus record {{ pageTitle }} ini?
                 </p>
             </template>
             <template #footer>
@@ -107,9 +107,9 @@ import auth from '@/router/routes/auth';
 // }
 
 export default {
-    name: 'Company',
+    name: 'company',
     data: () => ({
-        pageTitle: 'Company',
+        pageTitle: 'company',
         // Input
         input: {
             id: null,
@@ -261,25 +261,6 @@ export default {
                 console.error(e);
             }
         },
-        
-        // buat manggil page baru di page selanjutnya
-        
-        // async triggerDetail({ id_company, name, address, phone }) {
-        //     try {
-        //         this.input = {
-        //             id: id_company,
-        //             name,
-        //             address,
-        //             phone,
-        //         };
-        //         this.modal.detail = true;
-        //         this.$router.push({ name: 'TrackingDetail', params: { id: id_company, status: status }})
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-        
         async triggerDelete({ id_company }) {
             try {
                 this.input = {
@@ -296,5 +277,5 @@ export default {
             if (!val) this.clear();
         }
     },
-};
+}
 </script>
