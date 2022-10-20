@@ -6,7 +6,7 @@ class _po {
         try {
             const body = {
                 tier,
-                status: status? status : undefined
+                status: status ? status : undefined
             }
 
             const schema = Joi.object({
@@ -15,10 +15,10 @@ class _po {
             })
 
             const validation = schema.validate(body)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -93,7 +93,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status? status : undefined
+                status: status ? status : undefined
             }
 
             const schema = Joi.object({
@@ -102,10 +102,10 @@ class _po {
             })
 
             const validation = schema.validate(body)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -179,7 +179,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status? status : undefined
+                status: status ? status : undefined
             }
 
             const schema = Joi.object({
@@ -188,10 +188,10 @@ class _po {
             })
 
             const validation = schema.validate(body)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -269,10 +269,10 @@ class _po {
             const schema = Joi.number().required()
 
             const validation = schema.validate(id_po)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -375,10 +375,10 @@ class _po {
             })
 
             const validation = schema.validate(body)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -461,10 +461,10 @@ class _po {
             })
 
             const validation = schema.validate(body)
-    
+
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
-    
+
                 return {
                     status: false,
                     code: 422,
@@ -558,6 +558,24 @@ class _po {
                 }
             }
 
+            let checkOrder = new Set()
+
+            body.order.forEach(async (o) => {
+                const check = await prisma.d_order.findFirst({
+                    where: {
+                        id_order: o.id_order,
+                        processed: false
+                    },
+                    select: {
+                        id_order: true
+                    }
+                })
+
+                if (check) {
+                    checkOrder.add(check.id_order)
+                }
+            })
+
             const checkCompanyFrom = await prisma.s_company.findFirst({
                 where: {
                     id_user: body.id_user,
@@ -581,26 +599,11 @@ class _po {
                     code: 404,
                     error: "Data not found"
                 }
-            }
-
-            let checkOrder = []
-
-            body.order.forEach(async (o) => {
-                const check = await prisma.d_order.findFirst({
-                    where: {
-                        id_order: o.id_order,
-                        processed: true
-                    }
-                })
-
-                checkOrder.push(check)
-            })
-
-            if (checkOrder.length) {
+            } else if (checkOrder.size !== body.order.length) {
                 return {
                     status: false,
                     code: 403,
-                    error: "Order have been processed"
+                    error: "Something's wrong with order list"
                 }
             }
 
