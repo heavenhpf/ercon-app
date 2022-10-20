@@ -14,7 +14,7 @@
     @mousedown.self="closeHandler(true)"
   >
     <div
-      class="modal-dialog modal-dialog-centered p-0"
+      class="modal-dialog modal-dialog-centered"
       :class="[
         { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
         modalClasses,
@@ -33,12 +33,12 @@
             <button
               v-if="showClose"
               type="button"
-              class="close"
+              class="btn-close"
               data-dismiss="modal"
               aria-label="Close"
               @click="closeHandler()"
             >
-              <span :aria-hidden="!show">×</span>
+              <span :aria-hidden="!show"></span>
             </button>
           </slot>
         </div>
@@ -149,6 +149,7 @@ export default {
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(.25rem);
+  margin-left: 120px;
 }
 .modal-dark .modal-content {
   background-color: #1a1a1a!important;
@@ -170,9 +171,7 @@ export default {
   //   color: red;
   // }
 
-  // .close > span:not(.sr-only) {
-  //   color: white!important;
-  // }
+
 
   label {
     color: white!important;
