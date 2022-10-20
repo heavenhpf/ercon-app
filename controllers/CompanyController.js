@@ -26,7 +26,7 @@ app.put('/', userSession, async (req, res, next) => {
 })
 
 app.delete('/:id', userSession, verifyAdmin, async (req, res, next) => {
-    response.sendResponse(res, await modules.deleteCompany(req.params.id))
+    response.sendResponse(res, await modules.deleteCompany(Number(req.params.id)))
 })
 
 module.exports = app

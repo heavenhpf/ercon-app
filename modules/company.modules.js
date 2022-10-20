@@ -111,12 +111,9 @@ class _company {
     addCompany = async (body) => {
         try {
             const schema = Joi.object({
-                // table user
                 username: Joi.string().required(),
                 password: Joi.string().required(),
                 level: Joi.number().required(),
-
-                // table company
                 name: Joi.string().required(),
                 address: Joi.string().required(),
                 phone: Joi.string().required()
@@ -187,7 +184,7 @@ class _company {
     editMyCompany = async (id_user, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
+                id_user,
                 ...body
             }
 
@@ -255,7 +252,6 @@ class _company {
 
     deleteCompany = async (id) => {
         try {
-            id = parseInt(id)
             const schema = Joi.number().required()
 
             const validation = schema.validate(id)

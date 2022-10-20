@@ -96,6 +96,34 @@
 					"response": []
 				},
 				{
+					"name": "GET MY COMPANY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/companies/my",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"companies",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET NAME",
 					"request": {
 						"auth": {
@@ -126,6 +154,16 @@
 				{
 					"name": "ADD COMPANY",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -150,7 +188,7 @@
 					"response": []
 				},
 				{
-					"name": "EDIT COMPANY",
+					"name": "EDIT MY COMPANY",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -174,13 +212,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/companies/1",
+							"raw": "{{url}}/companies",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"companies",
-								"1"
+								"companies"
 							]
 						}
 					},
@@ -202,13 +239,19 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/companies/1",
+							"raw": "{{url}}/companies/:id_company",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"companies",
-								"1"
+								":id_company"
+							],
+							"variable": [
+								{
+									"key": "id_company",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -307,13 +350,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/units/1",
+							"raw": "{{url}}/units/:id_unit",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"units",
-								"1"
+								":id_unit"
+							],
+							"variable": [
+								{
+									"key": "id_unit",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -335,13 +384,19 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/units/1",
+							"raw": "{{url}}/units/:id_unit",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"units",
-								"1"
+								":id_unit"
+							],
+							"variable": [
+								{
+									"key": "id_unit",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -440,13 +495,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/categories/1",
+							"raw": "{{url}}/categories/:id_category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"categories",
-								"1"
+								":id_category"
+							],
+							"variable": [
+								{
+									"key": "id_category",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -468,13 +529,19 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/categories/1",
+							"raw": "{{url}}/categories/:id_category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"categories",
-								"1"
+								":id_category"
+							],
+							"variable": [
+								{
+									"key": "id_category",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -501,14 +568,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/1/1",
+							"raw": "{{url}}/items/:tier/:category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
-								"1",
-								"1"
+								":tier",
+								":category"
+							],
+							"variable": [
+								{
+									"key": "tier",
+									"value": "1"
+								},
+								{
+									"key": "category",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -530,13 +608,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/my",
+							"raw": "{{url}}/items/my/:category",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
-								"my"
+								"my",
+								":category"
+							],
+							"variable": [
+								{
+									"key": "category",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -558,14 +644,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/item/1",
+							"raw": "{{url}}/items/item/:id_item",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								"1"
+								":id_item"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -587,15 +679,26 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/item/1/1",
+							"raw": "{{url}}/items/item/:id_item/:id_item_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								"1",
-								"1"
+								":id_item",
+								":id_item_detail"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								},
+								{
+									"key": "id_item_detail",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -662,13 +765,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/items/7",
+							"raw": "{{url}}/items/:id_item",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
-								"7"
+								":id_item"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -690,13 +799,19 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/6",
+							"raw": "{{url}}/items/:id_item",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
-								"6"
+								":id_item"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -727,15 +842,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/items/item/1/1",
+							"raw": "{{url}}/items/item/:id_item/:id_item_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								"1",
-								"1"
+								":id_item",
+								":id_item_detail"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								},
+								{
+									"key": "id_item_detail",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -766,14 +891,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/items/item/1",
+							"raw": "{{url}}/items/item/:id_item",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								"1"
+								":id_item"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -809,13 +940,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/orders/1",
+							"raw": "{{url}}/orders/:id_item",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"orders",
-								"1"
+								":id_item"
+							],
+							"variable": [
+								{
+									"key": "id_item",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -885,13 +1022,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/orders/1",
+							"raw": "{{url}}/orders/:id_order",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"orders",
-								"1"
+								":id_order"
+							],
+							"variable": [
+								{
+									"key": "id_order",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -913,13 +1056,134 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/orders/1",
+							"raw": "{{url}}/orders/:id_order",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"orders",
-								"1"
+								":id_order"
+							],
+							"variable": [
+								{
+									"key": "id_order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DOC",
+			"item": [
+				{
+					"name": "ADD DOC PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ACER NITRO/Downloads/2002.07551.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/doc/po",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doc",
+								"po"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD DOC DN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ACER NITRO/Downloads/2002.07551.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/doc/dn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doc",
+								"dn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DOC",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/doc/:id_doc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doc",
+								":id_doc"
+							],
+							"variable": [
+								{
+									"key": "id_doc",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -946,13 +1210,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/po/1",
+							"raw": "{{url}}/po/:tier/:status",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
-								"1"
+								":tier",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "tier",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -974,13 +1250,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/po/my",
+							"raw": "{{url}}/po/my/:status",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
-								"my"
+								"my",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "status",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -1002,13 +1286,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/po/incoming",
+							"raw": "{{url}}/po/incoming/:status",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
-								"incoming"
+								"incoming",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "status",
+									"value": "1",
+									"description": "optional"
+								}
 							]
 						}
 					},
@@ -1066,14 +1358,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/po/detail/1",
+							"raw": "{{url}}/po/detail/:id_po",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
 								"detail",
-								"1"
+								":id_po"
+							],
+							"variable": [
+								{
+									"key": "id_po",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -1095,15 +1393,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/po/detail/1/1",
+							"raw": "{{url}}/po/detail/:id_po/:id_po_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
 								"detail",
-								"1",
-								"1"
+								":id_po",
+								":id_po_detail"
+							],
+							"variable": [
+								{
+									"key": "id_po",
+									"value": "1"
+								},
+								{
+									"key": "id_po_detail",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -1134,15 +1442,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/po/detail/1/1",
+							"raw": "{{url}}/po/detail/:id_po/:id_po_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"po",
 								"detail",
-								"1",
-								"1"
+								":id_po",
+								":id_po_detail"
+							],
+							"variable": [
+								{
+									"key": "id_po",
+									"value": "1"
+								},
+								{
+									"key": "id_po_detail",
+									"value": "1"
+								}
 							]
 						}
 					},

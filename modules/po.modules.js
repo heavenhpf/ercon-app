@@ -5,13 +5,13 @@ class _po {
     listAllPo = async (tier, status) => {
         try {
             const body = {
-                tier: parseInt(tier),
-                status: (status) ? parseInt(status) : null
+                tier,
+                status: status? status : undefined
             }
 
             const schema = Joi.object({
                 tier: Joi.number().required(),
-                status: Joi.any()
+                status: Joi.number()
             })
 
             const validation = schema.validate(body)
@@ -58,9 +58,9 @@ class _po {
                 }
             })
 
-            if (body.status != null) {
+            if (body.status) {
                 list = list.filter(function (l) {
-                    return l.status == body.status
+                    return l.status === body.status
                 })
             }
 
@@ -92,13 +92,13 @@ class _po {
     listMyPo = async (id_user, status) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                status: (status) ? parseInt(status) : null
+                id_user,
+                status: status? status : undefined
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                status: Joi.any()
+                status: Joi.number()
             })
 
             const validation = schema.validate(body)
@@ -144,7 +144,7 @@ class _po {
                 }
             })
 
-            if (body.status !== null) {
+            if (body.status) {
                 list = list.filter(function (l) {
                     return l.status === body.status
                 })
@@ -178,13 +178,13 @@ class _po {
     listIncomingPo = async (id_user, status) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                status: (status) ? parseInt(status) : null
+                id_user,
+                status: status? status : undefined
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                status: Joi.any()
+                status: Joi.number()
             })
 
             const validation = schema.validate(body)
@@ -233,7 +233,7 @@ class _po {
                 }
             })
 
-            if (body.status !== null) {
+            if (body.status) {
                 list = list.filter(function (l) {
                     return l.status === body.status
                 })
@@ -266,8 +266,6 @@ class _po {
 
     listPoDetail = async (id_po) => {
         try {
-            id_po = parseInt(id_po)
-
             const schema = Joi.number().required()
 
             const validation = schema.validate(id_po)
@@ -367,8 +365,8 @@ class _po {
     getPoDetail = async (id_po, id_po_detail) => {
         try {
             const body = {
-                id_po: parseInt(id_po),
-                id_po_detail: parseInt(id_po_detail)
+                id_po,
+                id_po_detail
             }
 
             const schema = Joi.object({
@@ -448,9 +446,9 @@ class _po {
     editPoDetail = async (id_user, id_po, id_po_detail, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_po: parseInt(id_po),
-                id_po_detail: parseInt(id_po_detail),
+                id_user,
+                id_po,
+                id_po_detail,
                 ...body
             }
 

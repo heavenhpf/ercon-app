@@ -5,15 +5,15 @@ class _item {
     listItem = async (level_user, tier, id_category) => {
         try {
             const body = {
-                level_user: parseInt(level_user),
-                tier: parseInt(tier),
-                id_category: (id_category) ? parseInt(id_category) : null
+                level_user,
+                tier,
+                id_category: id_category? id_category : undefined
             }
     
             const schema = Joi.object({
                 level_user: Joi.number().required(),
                 tier: Joi.number().required(),
-                id_category: Joi.any()
+                id_category: Joi.number()
             })
     
             const validation = schema.validate(body)
@@ -59,7 +59,7 @@ class _item {
                 }
             })
 
-            if (body.id_category !== null) {
+            if (body.id_category) {
                 const check = await prisma.ref_category.findFirst({
                     where: {
                         id_category: body.id_category,
@@ -97,13 +97,13 @@ class _item {
     listMyItem = async (id_user, id_category) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                id_category: (id_category) ? parseInt(id_category) : null
+                id_user,
+                id_category: id_category? id_category : undefined
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                id_category: Joi.any()
+                id_category: Joi.number()
             })
 
             const validation = schema.validate(body)
@@ -181,9 +181,9 @@ class _item {
     getItem = async (id_user, level_user, id_item) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                level_user: parseInt(level_user),
-                id_item: parseInt(id_item)
+                id_user,
+                level_user,
+                id_item
             }
 
             const schema = Joi.object({
@@ -303,8 +303,8 @@ class _item {
     getItemDetail = async (id_item, id_item_detail) => {
         try {
             const body = {
-                id_item: parseInt(id_item),
-                id_item_detail: parseInt(id_item_detail)
+                id_item,
+                id_item_detail
             }
 
             const schema = Joi.object({
@@ -380,15 +380,15 @@ class _item {
         }
     }
 
-    addItem = async (id, body) => {
+    addItem = async (id_user, body) => {
         try {
             body = {
-                id,
+                id_user,
                 ...body
             }
     
             const schema = Joi.object({
-                id: Joi.number().required(),
+                id_user: Joi.number().required(),
                 id_unit: Joi.number().required(),
                 id_category: Joi.number().required(),
                 name: Joi.string().required(),
@@ -411,7 +411,7 @@ class _item {
 
             const checkCompany = await prisma.s_company.findFirst({
                 where: {
-                    id_user: body.id,
+                    id_user: body.id_user,
                     deleted_at: null
                 },
                 select: {
@@ -470,8 +470,8 @@ class _item {
     deleteItem = async (id_user, id_item) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                id_item: parseInt(id_item)
+                id_user,
+                id_item
             }
 
             const schema = Joi.object({
@@ -550,8 +550,8 @@ class _item {
     editItem = async (id_user, id_item, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_item: parseInt(id_item),
+                id_user,
+                id_item,
                 ...body
             }
 
@@ -647,9 +647,9 @@ class _item {
     editItemQuantity = async (id_user, id_item, id_item_detail, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_item: parseInt(id_item),
-                id_item_detail: parseInt(id_item_detail),
+                id_user,
+                id_item,
+                id_item_detail,
                 ...body
             }
 
@@ -789,8 +789,8 @@ class _item {
     editBufferQuantity = async (id_user, id_item, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_item: parseInt(id_item),
+                id_user,
+                id_item,
                 ...body
             }
 

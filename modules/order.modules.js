@@ -70,8 +70,8 @@ class _order {
     addOrder = async (id_user, id_item, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_item: parseInt(id_item),
+                id_user,
+                id_item,
                 ...body
             }
 
@@ -165,8 +165,8 @@ class _order {
     editOrder = async (id_user, id_order, body) => {
         try {
             body = {
-                id_user: parseInt(id_user),
-                id_order: parseInt(id_order),
+                id_user,
+                id_order,
                 ...body
             }
 
@@ -241,8 +241,8 @@ class _order {
     deleteOrder = async (id_user, id_order) => {
         try {
             const body = {
-                id_user: parseInt(id_user),
-                id_order: parseInt(id_order)
+                id_user,
+                id_order
             }
 
             const schema = Joi.object({

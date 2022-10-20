@@ -14,11 +14,11 @@ app.post('/', userSession, async (req, res, next) => {
 })
 
 app.delete('/:id', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.deleteCategory(req.params.id))
+    response.sendResponse(res, await modules.deleteCategory(Number(req.params.id)))
 })
 
 app.put('/:id', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.editCategory(req.params.id, req.body))
+    response.sendResponse(res, await modules.editCategory(Number(req.params.id), req.body))
 })
 
 module.exports = app

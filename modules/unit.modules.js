@@ -65,7 +65,7 @@ class _unit {
     editUnit = async (id, body) => {
         try {
             body = {
-                id: parseInt(id),
+                id,
                 ...body
             }
             const schema = Joi.object({
@@ -125,7 +125,6 @@ class _unit {
 
     deleteUnit = async (id) => {
         try {
-            id = parseInt(id)
             const schema = Joi.number().required()
 
             const validation = schema.validate(id)

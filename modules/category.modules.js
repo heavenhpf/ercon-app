@@ -64,7 +64,6 @@ class _category {
 
     deleteCategory = async (id) => {
         try {
-            id = parseInt(id)
             const schema = Joi.number().required()
 
             const validation = schema.validate(id)
@@ -120,7 +119,7 @@ class _category {
     editCategory = async (id, body) => {
         try {
             body = {
-                id: parseInt(id),
+                id,
                 ...body
             }
             const schema = Joi.object({
