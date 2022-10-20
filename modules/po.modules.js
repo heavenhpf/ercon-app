@@ -6,7 +6,7 @@ class _po {
         try {
             const body = {
                 tier,
-                status: status ? status : undefined
+                status: status !== undefined ? status : undefined
             }
 
             const schema = Joi.object({
@@ -58,7 +58,7 @@ class _po {
                 }
             })
 
-            if (body.status) {
+            if (body.status !== undefined) {
                 list = list.filter(function (l) {
                     return l.status === body.status
                 })
@@ -93,7 +93,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status ? status : undefined
+                status: status !== undefined ? status : undefined
             }
 
             const schema = Joi.object({
@@ -144,7 +144,7 @@ class _po {
                 }
             })
 
-            if (body.status) {
+            if (body.status !== undefined) {
                 list = list.filter(function (l) {
                     return l.status === body.status
                 })
@@ -179,7 +179,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status ? status : undefined
+                status: status !== undefined ? status : undefined
             }
 
             const schema = Joi.object({
@@ -209,9 +209,6 @@ class _po {
                             id_user: body.id_user
                         }
                     },
-                    status: {
-                        not: 1
-                    },
                     deleted_at: null
                 },
                 include: {
@@ -233,7 +230,7 @@ class _po {
                 }
             })
 
-            if (body.status) {
+            if (body.status !== undefined) {
                 list = list.filter(function (l) {
                     return l.status === body.status
                 })
