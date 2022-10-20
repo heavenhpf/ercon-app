@@ -596,7 +596,7 @@ class _po {
                 checkOrder.push(check)
             })
 
-            if (checkOrder) {
+            if (checkOrder.length) {
                 return {
                     status: false,
                     code: 403,

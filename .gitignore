@@ -1,2 +1,4 @@
 node_modules
+public/PO/*
+public/DN/*
 .env
