@@ -2,25 +2,33 @@
     <div class="py-4 container-fluid">
         <div class="row">
             <div class="p-4 col-lg-12 mb-3">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.belum.title" :value="stats.belum.value"
-                            :cardBackground="stats.belum.cardBackground">
+                        <card2 :title="stats.po.title" :value="stats.po.value"
+                            :cardBackground="stats.po.cardBackground">
                         </card2>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.lewat.title" :value="stats.lewat.value"
-                            :cardBackground="stats.lewat.cardBackground">
-                        </card2>
+                    <div class="col-lg-1">
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.selesai.title" :value="stats.selesai.value"
-                            :cardBackground="stats.selesai.cardBackground"></card2>
+                        <card2 :title="stats.buffer.title" :value="stats.buffer.value"
+                            :cardBackground="stats.buffer.cardBackground">
+                        </card2>
                     </div>
                 </div>
             </div>
+            <div class="pb-0 row mb-lg-3 mb-2">
+                <router-link to="/dashboard/tambah-item" tag="button">
+                    <span>
+                        <argon-button size="md me-2" color="primary">
+                            <span class="fa fa-plus fa-sm me-2" />
+                            Tambah Item
+                        </argon-button>
+                    </span>
+                </router-link>
+            </div>
             <div>
-                <tracking-table />
+                <monitoring-table />
             </div>
         </div>
     </div>
@@ -34,24 +42,19 @@ import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
 
 export default {
-    name: "tracking-saya",
+    name: "gudang-saya",
     data() {
         return {
             stats: {
-                belum: {
-                    title: "Belum Deadline",
+                po: {
+                    title: "Barang Purchasing Order",
                     value: "60",
                     cardBackground: "bg-primary",
                 },
-                lewat: {
-                    title: "Lewat Deadline",
-                    value: "20",
-                    cardBackground: "bg-danger",
-                },
-                selesai: {
-                    title: "Selesai",
-                    value: "20",
-                    cardBackground: "bg-success",
+                buffer: {
+                    title: "Buffer",
+                    value: "120",
+                    cardBackground: "bg-warning",
                 },
             },
             data: [],

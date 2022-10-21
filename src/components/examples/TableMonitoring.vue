@@ -1,15 +1,39 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+            <div class=" col-12 row">
+                <div class="col-2 mt-4 ms-4">
+                    <label>Filter Tier</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" 
+                        type="button" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul id="category1" :data="g$listCategory" :columns="dt3.column"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">  
+                            <!-- <li><a class="dropdown-item" href="#">{{}}</a></li> -->
+                            <!-- <li class="dropdown-item" v-for="item in g$listCategory?.name" >
+                                <a>{{item}}</a>
+                            </li> -->
+                            <li class="dropdown-item" v-for='index in 10' :key='index'>
+                                <a>{{index}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-2 mt-4 ms-4">
+                    <label>Filter Category</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" 
+                        type="button" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
@@ -113,6 +137,21 @@
                 <argon-button color="primary" @click="addInquiry()">
                     Order
                 </argon-button>
+                <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                        Hello, world! This is a toast message.
+                        </div>
+                    </div>
+                    </div>
                 <argon-button color="secondary" @click="toogleOrderBack()">
                     Kembali
                 </argon-button>
@@ -121,11 +160,27 @@
     </div>
 </template>
 
+
 <script>
+const qty = 10;
+const room = document.querySelector("#category1");
+
+// for (let i = 1; i <= qty; i++) {
+//   room.insertAdjacentHTML("beforeend",number(i));
+// }
+
+// function number(a){
+//     const data = a;
+//     `<li><a class="dropdown-item">${data}</a></li>`
+// }
+
 import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
+import d$category from '@/stores/dashboard/category';
 import auth from '../../router/routes/auth';
+
+
 
 export default {
     // name: 'Monitoring',
@@ -133,8 +188,11 @@ export default {
         pageTitle: 'Monitoring',
         // Input
         input: {
-            id: null,
-            name: '',
+            text:``,
+            value: ``,
+        },
+        dropdown: {
+            category: '',
         },
         filter: {
             tier: 2,
@@ -219,6 +277,11 @@ export default {
                 render: ({ ref_category }) => ref_category.name
             }
         },
+        dt3: {
+            column: {
+                name: 'name',
+            }
+        },
         // UI
         modal: {
             detail: false,
@@ -227,17 +290,20 @@ export default {
     }),
     computed: {
         ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
+        ...mapState(d$category, ['g$listCategory']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listAllItem(this.filter);
-        console.log("ini g$label", this.g$label);
+        await this.a$categoryList();
+        // console.log("ini g$label", this.g$label);
     },
     methods: {
         ...mapActions(d$item, ['a$listAllItem', 'a$inquirygetItem']),
         ...mapActions(d$order, ['a$inquiryAddOrder']),
+        ...mapActions(d$category, ['a$categoryList']),
 
         clear() {
             this.input = {
@@ -268,7 +334,7 @@ export default {
                 // const id = this.g$item.id_item;
                 await this.a$inquiryAddOrder(id_item, data);
                 this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
+                // console.log(`Add ${this.pageTitle} Succeed!`);
             } catch (e) {
                 console.error(e);
             }

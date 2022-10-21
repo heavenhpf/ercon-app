@@ -1,8 +1,8 @@
 <template>
   <div class="form-group">
-    <label :for="exampleFormControlTextarea1">
+    <!-- <label :for="exampleFormControlTextarea1">
       <slot />
-    </label>
+    </label> -->
     <textarea
       class="form-control"
       rows="5"
