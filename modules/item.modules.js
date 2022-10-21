@@ -7,7 +7,7 @@ class _item {
             const body = {
                 level_user,
                 tier,
-                id_category: id_category? id_category : undefined
+                id_category: isFinite(id_category)? id_category : undefined
             }
     
             const schema = Joi.object({
@@ -59,7 +59,7 @@ class _item {
                 }
             })
 
-            if (body.id_category) {
+            if (body.id_category !== undefined) {
                 const check = await prisma.ref_category.findFirst({
                     where: {
                         id_category: body.id_category,
@@ -98,7 +98,7 @@ class _item {
         try {
             const body = {
                 id_user,
-                id_category: id_category? id_category : undefined
+                id_category: isFinite(id_category)? id_category : undefined
             }
 
             const schema = Joi.object({
@@ -143,7 +143,7 @@ class _item {
                 }
             })
 
-            if (body.id_category) {
+            if (body.id_category !== undefined) {
                 const checkCategory = await prisma.ref_category.findFirst({
                     where: {
                         id_category: body.id_category,

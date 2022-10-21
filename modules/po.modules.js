@@ -6,7 +6,7 @@ class _po {
         try {
             const body = {
                 tier,
-                status: status !== undefined ? status : undefined
+                status: isFinite(status)? status : undefined
             }
 
             const schema = Joi.object({
@@ -93,7 +93,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status !== undefined ? status : undefined
+                status: isFinite(status)? status : undefined
             }
 
             const schema = Joi.object({
@@ -179,7 +179,7 @@ class _po {
         try {
             const body = {
                 id_user,
-                status: status !== undefined ? status : undefined
+                status: isFinite(status)? status : undefined
             }
 
             const schema = Joi.object({
