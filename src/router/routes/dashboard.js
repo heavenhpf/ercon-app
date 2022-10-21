@@ -9,9 +9,9 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking-item',
-      name: 'Tracking Item',
-      component: () => import('@/views/Dashboard/TrackingItem.vue'),
+      path: 'tracking-tier-bawah',
+      name: 'Tracking Tier Bawah',
+      component: () => import('@/views/Dashboard/TrackingTierBawah.vue'),
       meta: { auth: true },
     },
     {
@@ -21,15 +21,27 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking-detail/:id',
-      name: 'Tracking Detail',
-      component: () => import('@/views/Dashboard/TrackingDetail.vue'),
+      path: 'monitoring-item',
+      name: 'Monitoring Item',
+      component: () => import('@/views/Dashboard/MonitoringItem.vue'),
       meta: { auth: true },
     },
     {
       path: 'monitoring-item',
-      name: 'Monitoring item',
+      name: 'Monitoring Item',
       component: () => import('@/views/Dashboard/MonitoringItem.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'gudang-saya',
+      name: 'Gudang Saya',
+      component: () => import('@/views/Dashboard/GudangSaya.vue'),
+      meta: { auth: true },
+    },
+    {
+      path: 'tambah-item',
+      name: 'Tambah Item',
+      component: () => import('@/views/Dashboard/TambahItem.vue'),
       meta: { auth: true },
     },
     {
@@ -39,15 +51,15 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'add-company',
+      path: 'tambah-company',
       name: 'Tambah Perusahaan',
-      component: () => import('@/views/Dashboard/AddCompany.vue'),
+      component: () => import('@/views/Dashboard/TambahCompany.vue'),
       meta: { auth: true },
     },
     {
-      path: 'po',
-      name: 'PO',
-      component: () => import('@/views/Dashboard/PO.vue'),
+      path: 'ajukan-po',
+      name: 'Ajukan PO',
+      component: () => import('@/views/Dashboard/AjukanPO.vue'),
       meta: { auth: true },
     },
     {

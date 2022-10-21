@@ -6,7 +6,7 @@
             </div>
             <div class="pb-0 row mb-lg-3 mb-2">
                 <div class="col-lg-8 col-md-9">
-                    <router-link to="/dashboard/add-company" tag="button">
+                    <router-link to="/dashboard/tambah-company" tag="button">
                         <span>
                             <argon-button size="md me-2" color="primary">
                                 <span class="fa fa-plus fa-sm me-2" />
@@ -261,24 +261,6 @@ export default {
                 console.error(e);
             }
         },
-
-        // buat manggil page baru di page selanjutnya
-
-        // async triggerDetail({ id_company, name, address, phone }) {
-        //     try {
-        //         this.input = {
-        //             id: id_company,
-        //             name,
-        //             address,
-        //             phone,
-        //         };
-        //         this.modal.detail = true;
-        //         this.$router.push({ name: 'TrackingDetail', params: { id: id_company, status: status }})
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
 
         async triggerDelete({ id_company }) {
             try {

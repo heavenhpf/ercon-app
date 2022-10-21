@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main" @click="showSidenav">
+  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav ">
       <li class="nav-item">
         <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
@@ -14,8 +14,8 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-item" :class="getRoute() === 'tracking-item' ? 'active' : ''"
-          navText="Tracking Item">
+        <sidenav-item url="/dashboard/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''"
+          navText="Tracking Tier Bawah">
           <template v-slot:icon>
             <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
           </template>
@@ -29,9 +29,14 @@
           </template>
         </sidenav-item>
       </li>
+      <li class="mt-3 nav-item">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+          Monitoring
+        </h6>
+      </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-po-pesanan" :class="getRoute() === 'tracking-po-pesanan' ? 'active' : ''"
-          navText="Tracking PO Pesanan">
+        <sidenav-item url="/dashboard/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''"
+          navText="Pesanan Masuk">
           <template v-slot:icon>
             <i class="fa fa-tasks mb-2 text-success text-sm opacity-10"></i>
           </template>
@@ -50,21 +55,14 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="nav-item">
-        <sidenav-item url="/dashboard/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
-          navText="Gudang Saya">
-          <template v-slot:icon>
-            <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
       <li class="mt-3 nav-item">
         <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Pemesanan
+          Purchasing Order (PO)
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/po" :class="getRoute() === 'po' ? 'active' : ''" navText="Purchasing Order">
+        <sidenav-item url="/dashboard/ajukan-po" :class="getRoute() === 'ajukan-po' ? 'active' : ''"
+          navText="Ajukan PO">
           <template v-slot:icon>
             <i class="ni ni-tag text-info text-sm opacity-10"></i>
           </template>
@@ -122,14 +120,6 @@ export default {
     getRoute() {
       const routeArr = this.$route.path.split("/");
       return routeArr[1];
-    },
-
-    hideSidenav() {
-      this.sidebarMenu = false;
-    },
-
-    showSidenav() {
-      this.sidebarMenu = true;
     }
   }
 };

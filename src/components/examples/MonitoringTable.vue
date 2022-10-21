@@ -1,48 +1,31 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <modal-comp size="lg" v-model:show="modal.detail">
+        <modal-comp v-model:show="modal.add">
             <template #header>
-                <h3 class="modal-title">{{ input.name }}</h3>
-
+                <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
-
-            <template v-if="modal.detail" #body>
+            <template v-if="modal.add" #body>
                 <div class="row">
                     <div class="col-12">
-                        <p>{{input.desc}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-9 float-lg-start">
-                        <data-table style="text-align:center ;" :index="false" :data="g$label" :columns="dt1.column"
-                            @detail="triggerDetail" @delete="triggerDelete" />
-                    </div>
-                    <div class="col-3 row align-items-center" style="padding: 5%;">
-                        <span class=" badge text-dark" style="background-color: yellow;">Buffer</span>
-
-                        <div class="mt-2 mb-2">
-                            <img src="../../assets/img/illustrations/box.png" alt="warning"
-                                style="width: 100px; height: 100px;">
-                        </div>
-                        <div class="mt-2 mb-2">
-                            <h4 class="row justify-content-center">{{input.quantity}}</h4>
-                        </div>
+                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
+                        </argon-input>
                     </div>
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
+                <argon-button color="secondary" @click="modal.add = false">
                     Close
                 </argon-button>
-                <argon-button color="primary" @click="editInquiry()">
-                    Order
+                <argon-button color="primary" @click="addInquiry()">
+                    Save Changes
                 </argon-button>
             </template>
         </modal-comp>
+
     </div>
 </template>
 
@@ -54,7 +37,7 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'Monitoring',
+        pageTitle: 'monitoring-table',
         // Input
         input: {
             id: null,
@@ -63,9 +46,6 @@ export default {
         filter: {
             tier: 2,
             category: 2,
-        },
-        filter_detail: {
-            id: 1,
         },
         // DataTable
         dt: {
@@ -85,12 +65,8 @@ export default {
                     render: ({ s_company }) => s_company.auth_user.level
                 },
                 {
-                    name: 'name',
-                    th: 'Nama Item',
-                },
-                {
                     name: 'quantity',
-                    th: 'Jumlah Item',
+                    th: 'Jumlah Barang  ',
                 },
             ],
             action: [
@@ -106,36 +82,6 @@ export default {
                 // },
             ],
         },
-        dt1: {
-            column: [
-                {
-                    name: 'd_po_detail.d_po.po_number',
-                    th: 'Nomor PO',
-                    render: ({ d_po_detail }) => d_po_detail.d_po.po_number
-                },
-                {
-                    name: 'd_po_detail.d_po.s_company_d_po_order_fromTos_company.name',
-                    th: 'Nama Perusahaan',
-                    render: ({ d_po_detail }) => d_po_detail.d_po.s_company_d_po_order_fromTos_company.name
-                },
-                {
-                    name: 'd_po_detail.quantity',
-                    th: 'Update Produksi',
-                    render: ({ d_po_detail }) => d_po_detail.quantity
-                },
-                {
-                    name: 'd_po_detail.d_order.quantity',
-                    th: 'Jumlah Pesanan',
-                    render: ({ d_po_detail }) => d_po_detail.d_order.quantity
-                },
-                {
-                    th: 'Label',
-                    render: ({ }) => {
-                        return `<span class="badge bg-primary">Purchasing Order</span>`
-                    }
-                },
-            ],
-        },
         // UI
         modal: {
             add: false,
@@ -144,18 +90,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
+        ...mapState(d$item, ['g$list', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listAllItem(this.filter);
-        await this.a$inquirygetItem(this.filter_detail);
-        console.log("ini g$label", this.g$label);
     },
     methods: {
-        ...mapActions(d$item, ['a$listAllItem', 'a$inquirygetItem']),
+        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -169,66 +113,68 @@ export default {
             };
         },
 
-        // async init() {
-        //     try {
-        //         await this.a$listAllItem();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-        // async addInquiry() {
-        //     try {
-        //         const { name } = this.input;
-        //         const data = {
-        //             name,
-        //         };
-        //         await this.a$inquiryAdd(data);
-        //         this.modal.add = false;
-        //         console.log(`Add ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
-        // async editInquiry() {
-        //     try {
-        //         const { id, name } = this.input;
-        //         const data = {
-        //             name,
-        //         };
-        //         await this.a$inquiryEdit(id, data);
-        //         this.modal.detail = false;
-        //         console.log(`Edit ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
-        // async delInquiry() {
-        //     try {
-        //         const { id } = this.input;
-        //         await this.a$inquiryDel(id);
-        //         this.modal.confirm = false;
-        //         console.log(`Delete ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
+        async init() {
+            try {
+                await this.a$listAllItem();
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async addInquiry() {
+            try {
+                const { name } = this.input;
+                const data = {
+                    name,
+                };
+                await this.a$inquiryAdd(data);
+                this.modal.add = false;
+                console.log(`Add ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+        async editInquiry() {
+            try {
+                const { id, name } = this.input;
+                const data = {
+                    name,
+                };
+                await this.a$inquiryEdit(id, data);
+                this.modal.detail = false;
+                console.log(`Edit ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+        async delInquiry() {
+            try {
+                const { id } = this.input;
+                await this.a$inquiryDel(id);
+                this.modal.confirm = false;
+                console.log(`Delete ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
 
-        async triggerDetail({ id_item, name, desc, quantity }) {
+        async triggerDetail({ d_po, d_item, name, address, phone }) {
             try {
                 this.input = {
-                    id_item,
+                    id_po: d_po.id_po,
+                    quantity: d_item.quantity,
                     name,
-                    desc,
-                    quantity
-                }
+                    address,
+                    phone,
+                };
                 this.modal.detail = true;
-                console.log(g$label)
+                this.$router.push({ name: 'Tracking Detail', params: { id: d_po.id_po } })
+                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }
