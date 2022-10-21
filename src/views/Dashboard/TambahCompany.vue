@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="pb-0 text-start mb-3">
-                        <h4 class="font-weight-bolder text-dark">Tambah Perusahaan</h4>
+                        <h4 class="font-weight-bolder text-dark">Tambah user</h4>
                     </div>
                 </div>
                 <div class="card">
@@ -31,19 +31,22 @@
                                     Perusahaan </label>
                                 <div class="row p-2">
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier"> Tier 1
+                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier">
+                                        Tier 1
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier"> Tier 2
+                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier">Tier 2
+
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
+                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier">Tier 3
+
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                                <argon-textarea v-model="input.address" type="text" />
+                                <argon-input v-model="input.address" type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
@@ -58,9 +61,13 @@
                                 </argon-button>
                                 </span>
                             </router-link>
-                            <argon-button @click="addInquiry()" size="md" color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Tambah
-                            </argon-button>
+                            <router-link to="/dashboard/company" tag="button">
+                                <span>
+                                    <argon-button @click="addInquiry()" size="md" color="primary">
+                                        Tambah
+                                    </argon-button>
+                                </span>
+                            </router-link>
                         </div>
                         <!-- <modal-comp v-model:show="modal.confirm">
                             <template #header>
@@ -91,10 +98,8 @@
 import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
-import ArgonAlert from "@/components/ArgonAlert.vue";
-import ArgonTextarea from "@/components/ArgonTextarea.vue";
 
-import d$user from '@/stores/dashboard/user';
+import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from 'pinia';
 
 const tier = {
@@ -105,9 +110,9 @@ const tier = {
 }
 
 export default {
-    name: 'tambah-company',
+    name: 'Add-user',
     data: () => ({
-        pageTitle: 'add-company',
+        pageTitle: 'Add-user',
         // Input
         input: {
             id: null,
@@ -118,20 +123,6 @@ export default {
             alamat: '',
             phone: '',
         },
-        // dt: {
-        //     action: [
-        //         {
-        //             text: 'Edit',
-        //             color: 'primary',
-        //             event: 'detail',
-        //         },
-        //         {
-        //             text: 'Delete',
-        //             color: 'danger',
-        //             event: 'delete',
-        //         },
-        //     ],
-        // },
 
         // UI
         modal: {
@@ -145,12 +136,10 @@ export default {
         ArgonInput,
         ArgonButton,
         ArgonRadio,
-        ArgonAlert,
-        ArgonTextarea,
     },
 
     computed: {
-        ...mapState(d$user, ['g$list', 'g$detail']),
+        ...mapState(d$company, ['g$list', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
@@ -159,7 +148,7 @@ export default {
         await this.a$inquiryList();
     },
     methods: {
-        ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
+        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
 
         clear() {
             this.input = {
@@ -211,8 +200,8 @@ export default {
         },
         async delInquiry() {
             try {
-                const { id_user } = this.input;
-                await this.a$inquiryDel(id_user);
+                const { id_company } = this.input;
+                await this.a$inquiryDel(id_company);
                 this.modal.confirm = false;
                 console.log(`Delete ${this.pageTitle} Succeed!`);
             } catch (e) {
@@ -235,10 +224,10 @@ export default {
                 console.error(e);
             }
         },
-        async triggerDelete({ id_user }) {
+        async triggerDelete({ id_company }) {
             try {
                 this.input = {
-                    id_user
+                    id_company
                 };
                 this.modal.confirm = true;
             } catch (e) {
