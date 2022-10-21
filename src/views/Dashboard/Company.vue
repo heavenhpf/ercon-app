@@ -261,9 +261,9 @@ export default {
                 console.error(e);
             }
         },
-        
+
         // buat manggil page baru di page selanjutnya
-        
+
         // async triggerDetail({ id_company, name, address, phone }) {
         //     try {
         //         this.input = {
@@ -279,7 +279,7 @@ export default {
         //         console.error(e);
         //     }
         // },
-        
+
         async triggerDelete({ id_company }) {
             try {
                 this.input = {

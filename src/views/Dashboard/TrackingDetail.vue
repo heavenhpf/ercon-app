@@ -8,10 +8,6 @@
                         <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
                     </div>
                     <div class="col-4">
-                        <!-- <h5 class="font-weight-bolder text-danger float-end">{{ new Intl.DateTimeFormat('id-ID', {
-                        dateStyle: 'full', timeStyle: 'long' }).format(g$po?.deadline
-                        ?? new Date())
-                        }}</h5> -->
                         <p class="font-weight-bolder text-danger float-end">Deadline {{new
                         Date(g$po.deadline).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month:
                         'long', day: 'numeric' })}}</p>

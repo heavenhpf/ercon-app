@@ -25,62 +25,6 @@
                 </argon-button>
             </template>
         </modal-comp>
-        <!-- <modal-comp v-model:show="modal.detail">
-            <template #header>
-                <h3 class="modal-title">{{ pageTitle }} Details</h3>
-            </template>
-            <template v-if="modal.detail" #body>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
-                            size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.address" type="text" placeholder="Address" name="address" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input v-model="input.phone" type="text" placeholder="Phone" name="phone" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
-                    Close
-                </argon-button>
-                <argon-button color="primary" @click="editInquiry()">
-                    Save Changes
-                </argon-button>
-            </template>
-        </modal-comp> -->
-        <!-- <modal-comp v-model:show="modal.confirm">
-            <template #header>
-                <h3 class="modal-title">Confirm</h3>
-            </template>
-            <template v-if="modal.confirm" #body>
-                <p>
-                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
-                </p>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.confirm = false">
-                    Close
-                </argon-button>
-                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
-            </template>
-        </modal-comp> -->
     </div>
 </template>
 
@@ -89,7 +33,7 @@ import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
 import auth from '../../router/routes/auth';
 
-const progress = {
+const statusPO = {
     0: "Belum Deadline",
     1: "Melewati Deadline",
     2: "Progress Selesai"
@@ -136,11 +80,11 @@ export default {
                     th: 'Status',
                     render: ({ status }) => {
                         if (status == 0) {
-                            return `<span class="badge badge-pill badge-info">${progress[status]}</span>`
+                            return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
                         } else if (status == 1) {
-                            return `<span class="badge badge-pill badge-danger">${progress[status]}</span>`
+                            return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
                         } else {
-                            return `<span class="badge badge-pill badge-success">${progress[status]}</span>`
+                            return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
                         }
                     }
                 },
@@ -198,14 +142,66 @@ export default {
             }
         },
 
+        async addInquiry() {
+            try {
+                const { name } = this.input;
+                const data = {
+                    name,
+                };
+                await this.a$inquiryAdd(data);
+                this.modal.add = false;
+                console.log(`Add ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+        async editInquiry() {
+            try {
+                const { id, name } = this.input;
+                const data = {
+                    name,
+                };
+                await this.a$inquiryEdit(id, data);
+                this.modal.detail = false;
+                console.log(`Edit ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+        async delInquiry() {
+            try {
+                const { id } = this.input;
+                await this.a$inquiryDel(id);
+                this.modal.confirm = false;
+                console.log(`Delete ${this.pageTitle} Succeed!`);
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+
         async triggerDetail({ id_po }) {
             try {
                 this.input = {
                     id: id_po,
                 };
-                this.modal.detail = true;
+                this.modal.detail = false;
                 this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
                 console.log(this.$route.params.id);
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async triggerDelete({ id }) {
+            try {
+                await this.a$inquiryDetail(id);
+                this.input = this.g$detail;
+                this.modal.confirm = true;
             } catch (e) {
                 console.error(e);
             }
@@ -217,4 +213,4 @@ export default {
         }
     },
 };
-</script>
+</script>  
