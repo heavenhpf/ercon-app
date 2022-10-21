@@ -43,7 +43,7 @@
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                                <argon-text-area v-model="input.address" type="text" />
+                                <argon-textarea v-model="input.address" type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>

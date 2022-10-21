@@ -1,23 +1,25 @@
 <template>
-    <div class="container-fluid py-4">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="pb-0 text-start mb-3">
-                <h4 class="font-weight-bolder text-dark">List Perusahaan</h4>
+                <h4 class="font-weight-bolder text-dark">Company List</h4>
             </div>
             <div class="pb-0 row mb-lg-3 mb-2">
-                <router-link to="/dashboard/tambah-company" tag="button">
-                    <span>
-                        <argon-button size="md me-2" color="primary">
-                            <span class="fa fa-plus fa-sm me-2" />
-                            Tambah
-                        </argon-button>
-                    </span>
-                </router-link>
+                <div class="col-lg-8 col-md-9">
+                    <router-link to="/dashboard/tambah-company" tag="button">
+                        <span>
+                            <argon-button size="md me-2" color="primary">
+                                <span class="fa fa-plus fa-sm me-2" />
+                                Tambah
+                            </argon-button>
+                        </span>
+                    </router-link>
+                </div>
             </div>
         </div>
         <div class="card">
-            <data-table style="text-align: center" :index="false" :data="g$list" :columns="dt.column" :actions="dt.action" @detail="triggerDetail"
-                @delete="triggerDelete" />
+            <data-table style="text-align: center;" index="false" :data="g$list" :columns="dt.column"
+                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
@@ -81,7 +83,7 @@
             </template>
             <template v-if="modal.confirm" #body>
                 <p>
-                    Apakah anda yakin untuk menghapus record {{ pageTitle }} ini?
+                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
                 </p>
             </template>
             <template #footer>
@@ -105,9 +107,9 @@ import auth from '@/router/routes/auth';
 // }
 
 export default {
-    name: 'company',
+    name: 'Company',
     data: () => ({
-        pageTitle: 'company',
+        pageTitle: 'Company',
         // Input
         input: {
             id: null,
@@ -116,13 +118,13 @@ export default {
         // DataTable
         dt: {
             column: [
-                {
-                    name: 'id_company',
-                    th: 'No',
-                },
+                // {
+                //     name: 'id_company',
+                //     th: 'no',
+                // },
                 {
                     name: 'name',
-                    th: 'Name',
+                    th: 'Nama Perusahaan',
                 },
                 {
                     name: 'auth_user.level',
@@ -145,12 +147,12 @@ export default {
                 // },
                 {
                     name: 'address',
-                    th: 'address',
+                    th: 'alamat',
                 },
 
                 {
                     name: 'phone',
-                    th: 'phone',
+                    th: 'Nomor telepon',
                 },
             ],
             action: [
@@ -254,11 +256,30 @@ export default {
                     address,
                     phone,
                 };
-                this.modal.detail = true;
+
             } catch (e) {
                 console.error(e);
             }
         },
+
+        // buat manggil page baru di page selanjutnya
+
+        // async triggerDetail({ id_company, name, address, phone }) {
+        //     try {
+        //         this.input = {
+        //             id: id_company,
+        //             name,
+        //             address,
+        //             phone,
+        //         };
+        //         this.modal.detail = true;
+        //         this.$router.push({ name: 'TrackingDetail', params: { id: id_company, status: status }})
+        //         console.log(this.$route.params.id);
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
+
         async triggerDelete({ id_company }) {
             try {
                 this.input = {
