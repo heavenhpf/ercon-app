@@ -5,6 +5,7 @@ const d$company = defineStore({
     id: 'company',
     state: () => ({
         company: [],
+        getmyCompany: {},
         name: '',
         detail: {},
         status: null,
@@ -15,6 +16,17 @@ const d$company = defineStore({
                 this.status = null;
                 const { data, status } = await s$company.list();
                 this.company = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$getMyCompany() {
+            try {
+                this.status = null;
+                const { data, status } = await s$company.getMyCompany();
+                this.getmyCompany = data ?? {};
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -71,6 +83,7 @@ const d$company = defineStore({
         g$list: ({ company }) => company,
         g$name: ({ name }) => name,
         g$detail: ({ detail }) => detail,
+        g$getMyCompany: ({ getmyCompany }) => getmyCompany,
     },
 });
 
