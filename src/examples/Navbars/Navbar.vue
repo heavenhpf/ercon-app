@@ -29,7 +29,11 @@
             <li class="nav-item dropdown d-flex align-items-center pe-2">
               <a href="#" class="p-0 nav-link text-dark" :class="[showMenu ? 'show' : '']" id="dropdownMenuButton"
                 data-bs-toggle="dropdown" aria-expanded="false" @click="showMenu = !showMenu">
-                <i class="cursor-pointer fa fa-bell"></i>
+                <i class="cursor-pointer fa fa-bell">
+                  <span class="position-absolute top-20 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+                </i>
               </a>
               <ul class="px-2 py-3 dropdown-menu dropdown-menu-end me-sm-n4" :class="showMenu ? 'show' : ''"
                 aria-labelledby="dropdownMenuButton">
@@ -52,7 +56,7 @@
                     </div>
                   </a>
                 </li>
-                <li class="mb-2">
+                <!-- <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="py-1 d-flex">
                       <div class="my-auto">
@@ -71,8 +75,8 @@
                       </div>
                     </div>
                   </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="py-1 d-flex">
                       <div class="my-auto avatar avatar-sm bg-gradient-secondary me-3">
@@ -105,7 +109,7 @@
                       </div>
                     </div>
                   </a>
-                </li>
+                </li> -->
               </ul>
             </li>
           </ul>

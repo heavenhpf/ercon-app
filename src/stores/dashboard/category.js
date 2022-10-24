@@ -12,7 +12,8 @@ const d$category = defineStore({
     async a$categoryList() {
       try {
         this.status = null;
-        const { data, status } = await s$category.list();
+        const { data, status } = await s$category.listAllCategories();
+        console.log("a$categoryList",data);
         this.category = data ?? [];
         this.status = status;
       } catch ({ error, message }) {
@@ -21,11 +22,10 @@ const d$category = defineStore({
       }
     },
   },
-//   getters: {
+  getters: {
     g$status: ({ status }) => status,
     g$listCategory: ({ category }) => category,
-//     g$detail: ({ detail }) => detail,
-//   },
+  },
 });
 
 export default d$category;

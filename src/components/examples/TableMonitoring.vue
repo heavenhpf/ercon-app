@@ -1,39 +1,25 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class=" col-12 row">
-                <div class="col-2 mt-4 ms-4">
+            <div class=" col-9 row">
+                <div class="col-4 mt-4 ms-4">
                     <label>Filter Tier</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" 
-                        type="button" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <ul id="category1" :data="g$listCategory" :columns="dt3.column"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">  
-                            <!-- <li><a class="dropdown-item" href="#">{{}}</a></li> -->
-                            <!-- <li class="dropdown-item" v-for="item in g$listCategory?.name" >
-                                <a>{{item}}</a>
-                            </li> -->
-                            <li class="dropdown-item" v-for='index in 10' :key='index'>
-                                <a>{{index}}</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <select v-model.number="filterTier.selectedTier" @change="triggerOptions()" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                        <option v-for='tier in 3'  v-bind:value="Number(tier)" selected>
+                            <option>{{tier}}</option>
+                        </option>
+
+                    </select>
                 </div>
-                <div class="col-2 mt-4 ms-4">
+                <div class="col-4 mt-4 ms-4">
                     <label>Filter Category</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" 
-                        type="button" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
+                    <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                        <option v-for='items in g$listCategory'  v-bind:value="{id_category:items.id_category, name: items.name}" selected>
+                            <option>{{items.name}}</option>
+                        </option>
+                    </select>
                 </div>
+                <h4>{{g$listCategory[selectedCategory]}}</h4>
             </div>
             <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
@@ -85,6 +71,14 @@
                         <argon-input v-model="input.no_order" type="text" placeholder="Nomor Order"></argon-input>
                     </div>
                 </div>
+                <div id="liveToast" class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{input.name}} Berhasil di Order
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
             </template>
 
             <template v-if="modal.order"  #body>
@@ -92,15 +86,15 @@
                     <div class="col-10">
                         <div class="row align-items-center mt-4 mb-4">
                             <div class="col-5">
-                                <h5>Nama Perusahaan :</h5>
+                                <h6>Nama Perusahaan :</h6>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" type="text" v-model="g$item.id_item" readonly>
+                                <input class="form-control" type="text" v-model="g$item.s_company.name" readonly>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
                             <div class="col-5">
-                                <h5>Nama Barang :</h5>
+                                <h6>Nama Barang :</h6>
                             </div>
                             <div class="col-6">
                                 <input class="form-control" type="text" v-model="input.name" readonly>
@@ -108,7 +102,7 @@
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
                             <div class="col-5">
-                                <h5>Jenis Barang :</h5>
+                                <h6>Jenis Barang :</h6>
                             </div>
                             <div class="col-6">
                                 <!-- <input class="form-control" type="text" v-model="g$item.ref_category.name" readonly> -->
@@ -117,7 +111,7 @@
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
                             <div class="col-5">
-                                <h5>Jumlah Barang :</h5>
+                                <h6>Jumlah Barang :</h6>
                             </div>
                             <div class="col-6">
                                 <argon-input v-model.number="input.jml_barang" type="number"  placeholder="Jumlah Barang" name="name" size="md">
@@ -134,46 +128,20 @@
 
             </template>
             <template #footer>
-                <argon-button color="primary" @click="addInquiry()">
+                <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
                     Order
                 </argon-button>
-                <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                        Hello, world! This is a toast message.
-                        </div>
-                    </div>
-                    </div>
                 <argon-button color="secondary" @click="toogleOrderBack()">
                     Kembali
                 </argon-button>
             </template>
         </modal-comp>
     </div>
+    <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
 </template>
 
 
 <script>
-const qty = 10;
-const room = document.querySelector("#category1");
-
-// for (let i = 1; i <= qty; i++) {
-//   room.insertAdjacentHTML("beforeend",number(i));
-// }
-
-// function number(a){
-//     const data = a;
-//     `<li><a class="dropdown-item">${data}</a></li>`
-// }
-
 import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
@@ -191,15 +159,18 @@ export default {
             text:``,
             value: ``,
         },
-        dropdown: {
-            category: '',
-        },
         filter: {
             tier: 2,
             category: 2,
         },
         filter_detail: {
             id: null,
+        },
+        filterCategory: {
+            value:``,
+        },
+        filterTier: {
+            value:``,
         },
         // DataTable
         dt: {
@@ -277,11 +248,6 @@ export default {
                 render: ({ ref_category }) => ref_category.name
             }
         },
-        dt3: {
-            column: {
-                name: 'name',
-            }
-        },
         // UI
         modal: {
             detail: false,
@@ -289,16 +255,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
         ...mapState(d$category, ['g$listCategory']),
+        ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listAllItem(this.filter);
         await this.a$categoryList();
-        // console.log("ini g$label", this.g$label);
+        await this.a$listAllItem(this.filter);
+
     },
     methods: {
         ...mapActions(d$item, ['a$listAllItem', 'a$inquirygetItem']),
@@ -332,10 +298,16 @@ export default {
                     quantity: jml_barang,
                 };
                 // const id = this.g$item.id_item;
-                await this.a$inquiryAddOrder(id_item, data);
+                // await this.a$inquiryAddOrder(id_item, data);
                 this.modal.add = false;
-                // console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Default' });
+                }, 1000);
+        }
+            catch (e) {
                 console.error(e);
             }
         },
@@ -402,6 +374,23 @@ export default {
                 console.error(e);
             }
         },
+
+        async triggerOptions(){
+            try {
+                const { selectedCategory } = this.filterCategory;
+                const {selectedTier } = this.filterTier;
+                const data = {
+                    tier: selectedTier,
+                    category: selectedCategory.id_category,
+                };
+                // console.log(data.id_category);
+                // console.log(data);
+                await this.a$listAllItem(data);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
     },
     watch: {
         modals(val) {
