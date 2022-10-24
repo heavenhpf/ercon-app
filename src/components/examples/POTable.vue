@@ -183,7 +183,7 @@ export default {
 
         async triggerDetail({ }) {
             try {
-                await this.a$getPoDetail({ id_po_detail: this.$route.params.id, id_po: this.$route.params.id });
+                await this.a$getPoDetail({ id_po_detail: 1, id_po: 1 });
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

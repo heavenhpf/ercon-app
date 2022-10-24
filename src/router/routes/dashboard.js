@@ -21,9 +21,9 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'monitoring-item',
-      name: 'Monitoring Item',
-      component: () => import('@/views/Dashboard/MonitoringItem.vue'),
+      path: 'tracking-detail/:id',
+      name: 'Tracking Detail',
+      component: () => import('@/views/Dashboard/TrackingDetail.vue'),
       meta: { auth: true },
     },
     {
@@ -45,6 +45,12 @@ const dashboard = {
       meta: { auth: true },
     },
     {
+      path: 'ajukan-po',
+      name: 'Ajukan PO',
+      component: () => import('@/views/Dashboard/AjukanPO.vue'),
+      meta: { auth: true },
+    },
+    {
       path: 'company',
       name: 'List Perusahaan',
       component: () => import('@/views/Dashboard/Company.vue'),
@@ -57,9 +63,9 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'ajukan-po',
-      name: 'Ajukan PO',
-      component: () => import('@/views/Dashboard/AjukanPO.vue'),
+      path: 'company-saya',
+      name: 'Perusahaan Saya',
+      component: () => import('@/views/Dashboard/CompanySaya.vue'),
       meta: { auth: true },
     },
     {

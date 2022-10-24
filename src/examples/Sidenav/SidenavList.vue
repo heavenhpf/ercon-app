@@ -42,11 +42,6 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="mt-3 nav-item">
-        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Monitoring
-        </h6>
-      </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
           navText="Monitoring Item">
