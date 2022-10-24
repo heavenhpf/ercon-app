@@ -149,7 +149,6 @@ import d$category from '@/stores/dashboard/category';
 import auth from '../../router/routes/auth';
 
 
-
 export default {
     // name: 'Monitoring',
     data: () => ({
