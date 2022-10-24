@@ -138,19 +138,20 @@ model d_po_detail {
 }
 
 model s_company {
-  id_company                            Int       @id @default(autoincrement())
+  id_company                            Int        @id @default(autoincrement())
   id_user                               Int
-  name                                  String    @db.VarChar(50)
-  address                               String    @db.VarChar(100)
-  phone                                 String    @db.VarChar(20)
-  created_at                            DateTime  @default(now()) @db.DateTime(0)
-  deleted_at                            DateTime? @db.DateTime(0)
-  auth_user                             auth_user @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "s_company_ibfk_1")
+  name                                  String     @db.VarChar(50)
+  address                               String     @db.VarChar(100)
+  phone                                 String     @db.VarChar(20)
+  created_at                            DateTime   @default(now()) @db.DateTime(0)
+  deleted_at                            DateTime?  @db.DateTime(0)
+  auth_user                             auth_user  @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "s_company_ibfk_1")
   d_item                                d_item[]
-  d_order_d_order_order_fromTos_company d_order[] @relation("d_order_order_fromTos_company")
-  d_order_d_order_order_toTos_company   d_order[] @relation("d_order_order_toTos_company")
-  d_po_d_po_order_fromTos_company       d_po[]    @relation("d_po_order_fromTos_company")
-  d_po_d_po_order_toTos_company         d_po[]    @relation("d_po_order_toTos_company")
+  d_order_d_order_order_fromTos_company d_order[]  @relation("d_order_order_fromTos_company")
+  d_order_d_order_order_toTos_company   d_order[]  @relation("d_order_order_toTos_company")
+  d_po_d_po_order_fromTos_company       d_po[]     @relation("d_po_order_fromTos_company")
+  d_po_d_po_order_toTos_company         d_po[]     @relation("d_po_order_toTos_company")
+  ref_unit                              ref_unit[]
 
   @@index([id_user], map: "id_user")
 }
@@ -177,8 +178,12 @@ model ref_category {
 
 model ref_unit {
   id_unit    Int       @id @default(autoincrement())
+  id_company Int
   name       String    @db.VarChar(20)
   created_at DateTime  @default(now()) @db.DateTime(0)
   deleted_at DateTime? @db.DateTime(0)
+  s_company  s_company @relation(fields: [id_company], references: [id_company], onDelete: Cascade, map: "ref_unit_ibfk_1")
   d_item     d_item[]
+
+  @@index([id_company], map: "id_company")
 }
