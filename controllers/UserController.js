@@ -13,4 +13,8 @@ app.get('/username', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.getUsername(req.user.username))
 })
 
+app.put('/password', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.editPassword(req.user.id, req.body))
+})
+
 module.exports = app

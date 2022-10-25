@@ -190,7 +190,6 @@ class _company {
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                name: Joi.string(),
                 address: Joi.string(),
                 phone: Joi.string()
             })
@@ -230,7 +229,6 @@ class _company {
                     id_company: check.id_company
                 },
                 data: {
-                    name: body.name,
                     address: body.address,
                     phone: body.phone
                 }
