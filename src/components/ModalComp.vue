@@ -129,7 +129,6 @@ export default {
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(.25rem);
-  margin-left: 120px;
 }
 
 .modal-dark .modal-content {

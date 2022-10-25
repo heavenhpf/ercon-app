@@ -15,10 +15,13 @@
                 <!-- <div class="mt-2" style="text-align:right; color:danger"><b>{{ g$get_po_detail.d_po?.deadline }}</b>
                 </div> -->
                 <div class="col-4">
-                    <p class="font-weight-bolder text-danger float-end">Deadline {{new
-                    Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", { weekday: 'long', year:
-                    'numeric', month:
-                    'long', day: 'numeric' })}}</p>
+                    <p class="font-weight-bolder text-danger float-end">Deadline {{ new
+                            Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
+                                weekday: 'long', year:
+                                    'numeric', month:
+                                    'long', day: 'numeric'
+                            })
+                    }}</p>
                 </div>
             </template>
 
@@ -95,6 +98,10 @@ export default {
             id_po: null,
             id_po_detail: null
         },
+        filter_po_detail: {
+            id_po: null,
+            id_po_detail: null
+        },
         // DataTable
         dt: {
             column: [
@@ -152,12 +159,13 @@ export default {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
 
-        async triggerDetail({ }) {
+        async triggerDetail({ id_po_detail, id_po }) {
             try {
-                // this.input={
-                //     serial_number: d_order.d_item.serial_number,
-                // }
-                await this.a$getPoDetail({ id_po_detail: 1, id_po: 1 });
+                this.filter_po_detail = {
+                    id_po: Number(id_po),
+                    id_po_detail: Number(id_po_detail)
+                }
+                await this.a$getPoDetail(this.filter_po_detail);
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);
