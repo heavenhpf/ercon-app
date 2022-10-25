@@ -8,8 +8,9 @@ const getMyCompany = () => baseApi.get(`${api}/my`);
 const detail = (id) => baseApi.get(`${api}/${id}`);
 const add = (body) => baseApi.post(`${api}`, body);
 const update = (id, body) => baseApi.put(`${api}/${id}`, body);
+const editMyCompany = (body) => baseApi.put(`${api}`, body);
 const del = (id) => baseApi.delete(`${api}/${id}`);
 
 export {
-    list, detail, add, update, del, name, getMyCompany
+    list, detail, add, update, del, name, getMyCompany, editMyCompany
 };

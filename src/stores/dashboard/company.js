@@ -63,9 +63,16 @@ const d$company = defineStore({
                 throw error ?? message;
             }
         },
-        async a$inquiryEdit(id, body) {
+        // async a$inquiryEdit(id, body) {
+        //     try {
+        //         await s$company.update(id, body);
+        //     } catch ({ error, message }) {
+        //         throw error ?? message;
+        //     }
+        // },
+        async a$editMyCompany(body) {
             try {
-                await s$company.update(id, body);
+                await s$company.editMyCompany(body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }

@@ -7,7 +7,7 @@
             <div class="card-body p-4">
                 <div class="row gx-4">
                     <div class="mb-0">
-                        <h5>{{g$getMyCompany.name}}</h5>
+                        <h5>{{ g$getMyCompany.name }}</h5>
                     </div>
                     <div class="mb-2">
                         <h6 class="font-weight-bold text-sm">{{ g$username }}</h6>
@@ -24,6 +24,32 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
+                            <h5 class="mb-0">Edit Password</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label for="example-text-input" class="form-control-label text-sm">Current
+                                    Password</label>
+                                <argon-input v-model='input.cur_password' type="text" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="example-text-input" class="form-control-label text-sm">New Password</label>
+                            <argon-input v-model='input.new_password' type="text" />
+                        </div>
+                        <argon-button @click="editPassword()" color="primary" size="md" class="ms-auto">Simpan Password
+                        </argon-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-4 container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="d-flex align-items-center">
                             <h5 class="mb-0">Edit Profil</h5>
                             <argon-button color="warning" size="sm" class="ms-auto">Settings</argon-button>
                         </div>
@@ -31,19 +57,16 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-6">
-                                <label for="example-text-input" class="form-control-label text-sm">Password</label>
-                                <argon-input type="text" />
-                            </div>
-                            <div class="col-6">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
-                                <argon-input type="text" />
+                                <argon-input v-model='input.phone' type="text" />
                             </div>
                         </div>
                         <div class="mb-5">
                             <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                            <argon-textarea type="text" />
+                            <argon-input v-model='input.address' type="text" />
                         </div>
-                        <argon-button color="primary" size="md" class="ms-auto">Simpan Perubahan</argon-button>
+                        <argon-button @click="editInquiry()" color="primary" size="md" class="ms-auto">Simpan Perubahan
+                        </argon-button>
                     </div>
                 </div>
             </div>
@@ -60,30 +83,71 @@ import d$user from '@/stores/dashboard/user';
 import { mapActions, mapState } from "pinia";
 
 export default {
+    pageTitle: "Profile",
     name: "profile",
     components: {
         ArgonInput,
         ArgonButton,
         ArgonTextarea
     },
+    data: () => ({
+        input: {
+            phone: '',
+            address: '',
+            cur_password: '',
+            new_password: '',
 
-    // async created() {
-    //     try {
-    //         const { data } = await baseApi.get(`/companies/my`);
-    //         this.posts = data.data;
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // },
 
+
+        }
+    }),
 
     computed: {
-        ...mapState(d$company, ['g$getMyCompany']),
+        ...mapState(d$company, ['g$getMyCompany', 'g$list']),
         ...mapState(d$user, ['g$username'])
     },
     methods: {
-        ...mapActions(d$company, ['a$getMyCompany']),
-        ...mapActions(d$user, ['a$username'])
+        ...mapActions(d$company, ['a$getMyCompany', 'a$editMyCompany']),
+        ...mapActions(d$user, ['a$username', 'a$editPassword']),
+
+        async init() {
+            try {
+                // await this.a$editMyCompany();
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
+        async editInquiry() {
+            try {
+                const { address, phone } = this.input;
+                const data = {
+                    address, phone
+                };
+                await this.a$editMyCompany(data);
+                console.log(`Edit ${this.pageTitle} Succeed!`);
+                // this.modal.detail = false;
+            } catch (e) {
+                console.error(e);
+            } finally {
+                await this.init();
+            }
+        },
+        async editPassword() {
+            try {
+                const { cur_password, new_password } = this.input;
+                const data = {
+                    cur_password, new_password
+                };
+                await this.a$editPassword(data);
+                console.log(`Edit Password Succeed!`);
+                // this.modal.detail = false;
+            } catch (e) {
+                console.error(e);
+            } finally {
+                // await this.init();
+            }
+        },
     },
     async mounted() {
         try {

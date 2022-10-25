@@ -105,7 +105,7 @@ if (hours >= 5 && hours < 12) {
   status = "Selamat Pagi"
 } else if (hours >= 12 && hours < 15) {
   status = "Selamat Siang"
-} else if (hours >= 15) {
+} else if (hours >= 15 && hours < 18) {
   status = "Selamat Sore"
 } else {
   status = "Selamat Malam"

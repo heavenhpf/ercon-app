@@ -156,11 +156,11 @@ export default {
                 },
             ],
             action: [
-                {
-                    text: 'Edit',
-                    color: 'primary',
-                    event: 'detail',
-                },
+                // {
+                //     text: 'Edit',
+                //     color: 'primary',
+                //     event: 'detail',
+                // },
                 {
                     text: 'Delete',
                     color: 'danger',
@@ -256,7 +256,7 @@ export default {
                     address,
                     phone,
                 };
-
+                this.modal.detail = true;
             } catch (e) {
                 console.error(e);
             }

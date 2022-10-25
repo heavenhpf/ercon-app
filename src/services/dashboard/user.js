@@ -7,8 +7,9 @@ const username = () => baseApi.get(`${api}/username`);
 const detail = (id) => baseApi.get(`${api}/${id}`);
 const add = (body) => baseApi.post(`${api}`, body);
 const update = (id, body) => baseApi.put(`${api}/${id}`, body);
+const editPassword = (body) => baseApi.put(`${api}/password`, body);
 const del = (id) => baseApi.delete(`${api}/${id}`);
 
 export {
-    list, detail, add, update, del, username
+    list, detail, add, update, del, username, editPassword
 };
