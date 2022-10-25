@@ -34,10 +34,10 @@
                                     Password</label>
                                 <argon-input v-model='input.cur_password' type="text" />
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <label for="example-text-input" class="form-control-label text-sm">New Password</label>
-                            <argon-input v-model='input.new_password' type="text" />
+                            <div class="col-6">
+                                <label for="example-text-input" class="form-control-label text-sm">New Password</label>
+                                <argon-input v-model='input.new_password' type="text" />
+                            </div>
                         </div>
                         <argon-button @click="editPassword()" color="primary" size="md" class="ms-auto">Simpan Password
                         </argon-button>
@@ -49,21 +49,20 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <div class="d-flex align-items-center">
-                            <h5 class="mb-0">Edit Profil</h5>
-                            <argon-button color="warning" size="sm" class="ms-auto">Settings</argon-button>
-                        </div>
+                        <h5 class="mb-0">Edit Profil</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-6">
+                        <div class="row">
+                            <div class="col-5">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
                                 <argon-input v-model='input.phone' type="text" />
                             </div>
                         </div>
-                        <div class="mb-5">
-                            <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                            <argon-input v-model='input.address' type="text" />
+                        <div class="row mb-2">
+                            <div class="col-12 mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
+                                <argon-input v-model='input.address' type="text" />
+                            </div>
                         </div>
                         <argon-button @click="editInquiry()" color="primary" size="md" class="ms-auto">Simpan Perubahan
                         </argon-button>
@@ -158,4 +157,3 @@ export default {
     }
 };
 </script>
-  
