@@ -11,7 +11,7 @@
       >
         <span class="mask bg-gradient-success opacity-6"></span>
       </div>
-      <div class="card shadow-lg mt-n6 p-1 w-60">
+      <div class="card shadow-lg mt-n6">
         <div class="card-body p-3">
           <div class="row gx-4">
             <div class="col-auto">

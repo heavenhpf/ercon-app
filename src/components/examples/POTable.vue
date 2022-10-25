@@ -4,27 +4,6 @@
             <data-table style="text-align:center ;" :index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <!-- <modal-comp v-model:show="modal.add">
-            <template #header>
-                <h2 class="modal-title">Add New {{ pageTitle }}</h2>
-            </template>
-            <template v-if="modal.add" #body>
-                <div class="row">
-                    <div class="col-12">
-                        <argon-input  pe="text" placeholder="Name" name="name" size="md">
-                        </argon-input>
-                    </div>
-                </div>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
-                <argon-button color="primary" @click="addInquiry()">
-                    Save Changes
-                </argon-button>
-            </template>
-        </modal-comp> -->
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <div class="modal-title">
@@ -173,16 +152,11 @@ export default {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
 
-        // async init() {
-        //     try {
-        //         // await this.a$listPoDetail();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
         async triggerDetail({ }) {
             try {
+                // this.input={
+                //     serial_number: d_order.d_item.serial_number,
+                // }
                 await this.a$getPoDetail({ id_po_detail: 1, id_po: 1 });
                 this.modal.detail = true;
             } catch (e) {

@@ -156,11 +156,11 @@ export default {
                 },
             ],
             action: [
-                {
-                    text: 'Edit',
-                    color: 'primary',
-                    event: 'detail',
-                },
+                // {
+                //     text: 'Edit',
+                //     color: 'primary',
+                //     event: 'detail',
+                // },
                 {
                     text: 'Delete',
                     color: 'danger',
@@ -256,29 +256,11 @@ export default {
                     address,
                     phone,
                 };
-
+                this.modal.detail = true;
             } catch (e) {
                 console.error(e);
             }
         },
-
-        // buat manggil page baru di page selanjutnya
-
-        // async triggerDetail({ id_company, name, address, phone }) {
-        //     try {
-        //         this.input = {
-        //             id: id_company,
-        //             name,
-        //             address,
-        //             phone,
-        //         };
-        //         this.modal.detail = true;
-        //         this.$router.push({ name: 'TrackingDetail', params: { id: id_company, status: status }})
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
 
         async triggerDelete({ id_company }) {
             try {

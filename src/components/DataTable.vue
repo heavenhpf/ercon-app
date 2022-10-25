@@ -9,10 +9,7 @@
         <div v-if="limitable" class="">
           <div :class="['form-group', 'my-3', { 'form-dark': $store.darkMode }]">
             <label class="m-0 text-sm">
-              <select
-                v-model="itemsPerPage"
-                class="form-control form-control-sm d-inline-block w-auto mt-1"
-              >
+              <select v-model="itemsPerPage" class="form-control form-control-sm d-inline-block w-auto mt-1">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -24,73 +21,45 @@
         </div>
         <div v-if="searchable" class="">
           <div :class="['form-group', 'my-3', { 'form-dark': $store.darkMode }]">
-            <input
-              v-model="query"
-              type="text"
-              class="form-control form-control-md"
-              placeholder="Cari.."
-              @keyup="search(query)"
-            />
+            <input v-model="query" type="text" class="form-control form-control-md" placeholder="Cari.."
+              @keyup="search(query)" />
           </div>
         </div>
         <div v-if="showFilters" class="col-auto ml-auto">
           Filters:
           <div class="table-filters d-inline-block">
-            <div
-              v-for="(option, i) in filters"
-              :key="i"
-              class="table-filter"
-              @click="filter(option)"
-            >
+            <div v-for="(option, i) in filters" :key="i" class="table-filter" @click="filter(option)">
               <span>{{ option.title }}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="table-responsive">
-        <table
-          class="table tablesorter"
-          :class="{ straight: !breakWords, 'table-hover': !!onClick }"
-        >
+        <table class="table tablesorter" :class="{ straight: !breakWords, 'table-hover': !!onClick }">
           <thead :class="{ ['thead-dark']: $store.darkMode }">
             <tr>
               <!-- Display Checkboxes If Requested -->
               <th v-if="selectable" class="text-dark text-sm font-weight-bolder">
                 <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    @change="selectAll"
-                  />
+                  <input type="checkbox" class="custom-control-input" @change="selectAll" />
                   <span class="custom-control-label"></span>
                 </div>
               </th>
 
               <!-- Display Index If Requested -->
-              <th 
-                v-if="index"
-                class="sortable text-dark text-sm font-weight-bolder"
-                :class="{
-                  sort: sortColumn === '#',
-                  asc: sortColumn === '#' && asc,
-                  desc: sortColumn === '#' && !asc,
-                }"
-                @click="sortIndex()"
-              >
+              <th v-if="index" class="sortable text-dark text-sm font-weight-bolder" :class="{
+                sort: sortColumn === '#',
+                asc: sortColumn === '#' && asc,
+                desc: sortColumn === '#' && !asc,
+              }" @click="sortIndex()">
                 #
               </th>
               <!-- Display All Parsed Headers -->
-              <th
-                v-for="(th, i) in tableHeaders"
-                :key="i"
-                class="sortable text-dark text-sm font-weight-bolder"
-                :class="{
-                  sort: sortColumn === th.name,
-                  asc: sortColumn === th.name && asc,
-                  desc: sortColumn === th.name && !asc,
-                }"
-                @click="sort(th.name)"
-              >
+              <th v-for="(th, i) in tableHeaders" :key="i" class="sortable text-dark text-sm font-weight-bolder" :class="{
+                sort: sortColumn === th.name,
+                asc: sortColumn === th.name && asc,
+                desc: sortColumn === th.name && !asc,
+              }" @click="sort(th.name)">
                 {{ th.th }}
               </th>
               <!-- Display Actions If Provided -->
@@ -99,23 +68,11 @@
           </thead>
           <tbody v-if="paginatedItems.length" :class="{ ['tbody-dark']: $store.darkMode }">
             <!-- Loop Through All Parsed and Paginated Items -->
-            <tr
-              v-for="(item, i) in paginatedItems"
-              :key="i"
-              :class="{ clickable: !!onClick }"
-              class="text-sm"
-            >
+            <tr v-for="(item, i) in paginatedItems" :key="i" :class="{ clickable: !!onClick }" class="text-sm">
               <!-- Display Checkboxes If Requested -->
               <td v-if="selectable">
-                <div
-                  class="custom-control custom-checkbox d-flex justify-content-end"
-                  @click="select(item)"
-                >
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    :checked="item.selected"
-                  />
+                <div class="custom-control custom-checkbox d-flex justify-content-end" @click="select(item)">
+                  <input type="checkbox" class="custom-control-input" :checked="item.selected" />
                   <span class="custom-control-label"></span>
                 </div>
               </td>
@@ -124,15 +81,10 @@
               <td v-if="index">{{ item.index + 1 }}</td>
 
               <!-- Display All Parsed Values -->
-              <td
-                v-for="(td, j) in item.details.filter((d) => d.show)"
-                :key="j"
-                class=""
-                @click="
-                  click(item.row, td.value, td.name, i),
-                    columnClick(td.click, item.row, td.value, td.name, i)
-                "
-              >
+              <td v-for="(td, j) in item.details.filter((d) => d.show)" :key="j" class="" @click="
+                click(item.row, td.value, td.name, i),
+                  columnClick(td.click, item.row, td.value, td.name, i)
+              ">
                 <!-- <component :is="i+'Component'" v-if="value.render"></component> -->
                 <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-html="td.rendered != null ? td.rendered : '----'"></span>
@@ -141,15 +93,9 @@
               <!-- Diplay Actions If Provided -->
               <td v-if="item.buttons.length">
                 <!-- Loop Through All Provided Actions -->
-                <button
-                  v-for="(button, j) in item.buttons.filter((d) => d.show)"
-                  :key="j"
-                  type="button"
-                  class="btn mt-1 m-1"
-                  :class="`btn-${button.color} btn-${button.size || 'sm'}`"
-                  :disabled="button.disabled"
-                  @click="emit(button.event, item.row)"
-                >
+                <button v-for="(button, j) in item.buttons.filter((d) => d.show)" :key="j" type="button"
+                  class="btn mt-1 m-1" :class="`btn-${button.color} btn-${button.size || 'sm'}`"
+                  :disabled="button.disabled" @click="emit(button.event, item.row)">
                   {{ button.text }}
                 </button>
               </td>
@@ -158,13 +104,9 @@
           <tbody v-else>
             <!-- Display Empty Message If No Items Are Rendered -->
             <tr>
-              <td
-                align="center"
-                :colspan="
-                  headers.length + (actions.length ? 1 : 0) + (index ? 1 : 0)
-                "
-                class="text-dark text-sm"
-              >
+              <td align="center" :colspan="
+                headers.length + (actions.length ? 1 : 0) + (index ? 1 : 0)
+              " class="text-dark text-sm">
                 Tidak Ada Hasil
               </td>
             </tr>
@@ -176,7 +118,7 @@
           <div class="showing me-10">
             <!-- Current Page Starting Index --> Menampilkan
             {{
-              paginatedItems.length ? itemsPerPage * (currentPage - 1) + 1 : 0
+            paginatedItems.length ? itemsPerPage * (currentPage - 1) + 1 : 0
             }}
             -
             <!-- Current Page End Index -->
@@ -186,29 +128,18 @@
           </div>
         </div>
         <div v-if="paginate" class="col-md-6">
-          <ul
-            v-if="paginateLinks.length"
-            class="pagination justify-content-end"
-          >
+          <ul v-if="paginateLinks.length" class="pagination justify-content-end">
             <li v-if="pages && currentPage !== 1" class="page-item">
-              <span class="page-link" @click="prev"
-                ><i aria-hidden="true" class="fa fa-angle-left"></i
-              ></span>
+              <span class="page-link" @click="prev"><i aria-hidden="true" class="fa fa-angle-left"></i></span>
             </li>
-            <li
-              v-for="item in paginateLinks"
-              :key="item.page"
-              class="page-item"
-              :class="{ active: currentPage === item.page }"
-            >
+            <li v-for="item in paginateLinks" :key="item.page" class="page-item"
+              :class="{ active: currentPage === item.page }">
               <span class="page-link" @click="paginate(item.page)">{{
-                item.page
+              item.page
               }}</span>
             </li>
             <li v-if="pages && currentPage < pages" class="page-item">
-              <span class="page-link" @click="next"
-                ><i aria-hidden="true" class="fa fa-angle-right"></i
-              ></span>
+              <span class="page-link" @click="next"><i aria-hidden="true" class="fa fa-angle-right"></i></span>
             </li>
           </ul>
         </div>
@@ -276,7 +207,7 @@ export default {
     // Click Events For Each Cell
     onClick: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     // Whether Or Not The Table Should Be Allowed To Break Elements
     breakWords: {

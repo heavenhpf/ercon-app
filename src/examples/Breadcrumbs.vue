@@ -4,27 +4,29 @@
       class="px-0 pt-1 pb-0 mb-0 bg-transparent breadcrumb"
       :class="`me-sm-6 ${this.$store.state.isNavFixed ? 'text-white' : 'text-dark' }`"
     >
-      <li class="text-md breadcrumb-item">
+      <li class="text-sm breadcrumb-item">
         <a
           v-if="this.$store.state.isRTL"
           class="opacity-5 ps-2"
           href="#"
-          :class="this.$store.state.isNavFixed ? 'text-white' : 'text-dark'"
-          ></a
+          :class="this.$store.state.isNavFixed ? 'ttext-white' : 'text-dark'"
+          >لوحات القيادة</a
         >
         <a v-else 
         :class="this.$store.state.isNavFixed ? 'text-white' : 'text-dark'"
-         class="opacity-9" href="#">Ercon</a>
+         class="opacity-8" href="#">Pages</a>
       </li>
       <li
-        class="text-md breadcrumb-item active"
+        class="text-sm breadcrumb-item active"
         :class="this.$store.state.isNavFixed ? 'text-white' : 'text-dark'"
         aria-current="page"
       >
         {{ currentPage }}
       </li>
     </ol>
-
+    <h6 class="mb-0 font-weight-bolder" :class="this.$store.state.isNavFixed ? 'text-white' : 'text-dark'">
+      {{ currentPage }}
+    </h6>
   </nav>
 </template>
 

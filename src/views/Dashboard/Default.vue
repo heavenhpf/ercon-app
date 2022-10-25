@@ -64,6 +64,8 @@
                 </div>
               </div>
             </div>
+
+            <!-- mengambil dari store po -->
             <div>
               <tracking-table />
             </div>
@@ -73,8 +75,10 @@
               <h5 class="text-black font-weight-bolder">History Monitoring</h5>
             </div>
           </div>
+
+          <!-- mengambil dari store item-->
           <div>
-            <monitoring-table />
+            <MonitoringTable />
           </div>
         </div>
       </div>
@@ -93,7 +97,6 @@ import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from "pinia";
 
-import { onMounted } from "vue";
 
 const date = new Date;
 let hours = date.getHours();
@@ -102,7 +105,7 @@ if (hours >= 5 && hours < 12) {
   status = "Selamat Pagi"
 } else if (hours >= 12 && hours < 15) {
   status = "Selamat Siang"
-} else if (hours >= 15) {
+} else if (hours >= 15 && hours < 18) {
   status = "Selamat Sore"
 } else {
   status = "Selamat Malam"
@@ -145,7 +148,6 @@ export default {
     MonitoringTable,
     Carousel,
     CategoriesCard,
-    MonitoringTable,
   },
 
   // created() {

@@ -19,37 +19,6 @@
                     </div>
                 </div>
             </div>
-            <div class="pb-0 row mb-lg-3 mb-2">
-                <div class="col-lg-4 col-md-4">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Sortir Berdasarkan Timeline</option>
-                        <option value="1">Belum Deadline</option>
-                        <option value="2">Melewati Deadline</option>
-                        <option value="3">Progress Selesai</option>
-                        <option value="3">Progress Selesai</option>
-                    </select>
-                </div>
-                <div class="col-lg-2 col-md-4 me-6">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Pilih Tier</option>
-                        <option value="1">Tier 1</option>
-                        <option value="2">Tier 2</option>
-                        <option value="3">Tier 3</option>
-                    </select>
-                </div>
-                <div class="col-lg-5 col-md-6 align-items-end">
-                    <span>
-                        <div class="input-group">
-                            <span class="input-group-text text-body">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </span>
-                            <input type="text" class="form-control" :placeholder="
-                            'Cari..'
-                            " />
-                        </div>
-                    </span>
-                </div>
-            </div>
             <div>
                 <tracking-table />
             </div>

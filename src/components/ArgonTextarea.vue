@@ -3,12 +3,7 @@
     <!-- <label :for="exampleFormControlTextarea1">
       <slot />
     </label> -->
-    <textarea
-      class="form-control"
-      rows="5"
-      :placeholder="placeholder"
-      :id="exampleFormControlTextarea1"
-    ></textarea>
+    <textarea class="form-control" rows="5" :placeholder="placeholder" :id="exampleFormControlTextarea1"></textarea>
   </div>
 </template>
 
