@@ -140,6 +140,18 @@ class _item {
                 where: {
                     id_company: checkCompany.id_company,
                     deleted_at: null
+                },
+                include: {
+                    ref_category: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    ref_unit: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
 
