@@ -8,6 +8,7 @@ const OrderController = require('./controllers/OrderController')
 const PoController = require('./controllers/PoController')
 const DnController = require('./controllers/DnController')
 const DocController = require('./controllers/DocController')
+const DashboardController = require('./controllers/DashboardController')
 
 const _routes = [
     ['/login', AuthController],
@@ -20,6 +21,7 @@ const _routes = [
     ['/po', PoController],
     ['/dn', DnController],
     ['/doc', DocController],
+    ['/dashboard', DashboardController],
 ]
 
 const routes = (app) => {

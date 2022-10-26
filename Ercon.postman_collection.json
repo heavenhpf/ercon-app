@@ -241,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Toyota\",\r\n    \"address\": \"Gandrungmanis\",\r\n    \"phone\": \"0819\"\r\n}",
+							"raw": "{\r\n    \"address\": \"Gandrungmanis\",\r\n    \"phone\": \"0819\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1539,6 +1539,163 @@
 							],
 							"path": [
 								"dn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "COUNT PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/po",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"po"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT PO STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/po/:status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"po",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "status",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT DN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/dn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"dn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT SUPPLIER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/supplier",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"supplier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT ITEM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"item"
 							]
 						}
 					},
