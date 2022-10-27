@@ -8,20 +8,20 @@
             <h4 class="font-weight-bolder text-dark">{{ g$name.name }}</h4>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card :title="stats.po.title" :value="stats.po.value" :iconClass="stats.po.iconClass"
+            <card :title="stats.po.title" :value="g$countPO" :iconClass="stats.po.iconClass"
               :iconBackground="stats.po.iconBackground" directionReverse></card>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card :title="stats.dn.title" :value="stats.dn.value" :iconClass="stats.dn.iconClass"
+            <card :title="stats.dn.title" :value="g$countDN" :iconClass="stats.dn.iconClass"
               :iconBackground="stats.dn.iconBackground" directionReverse></card>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <card :title="stats.supplier.title" :value="stats.supplier.value" :iconClass="stats.supplier.iconClass"
+            <card :title="stats.supplier.title" :value="g$count" :iconClass="stats.supplier.iconClass"
               :iconBackground="stats.supplier.iconBackground" directionReverse></card>
           </div>
-          <div class="mb-5">
+          <!-- <div class="mb-5">
             <doughnut-tracking-chart />
-          </div>
+          </div> -->
           <div class="mb-5">
             <div class="pb-0 row">
               <div class="row mb-0">
@@ -92,12 +92,10 @@ import DoughnutTrackingChart from "@/examples/Charts/DoughnutTrackingChart.vue";
 import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
-import MonitoringTable from "@/components/examples/TableMonitoring.vue";
 import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
+import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
-
-import { onMounted } from "vue";
 import TableMonitoring from "../../components/examples/TableMonitoring.vue";
 
 const date = new Date;
@@ -107,7 +105,7 @@ if (hours >= 5 && hours < 12) {
   status = "Selamat Pagi"
 } else if (hours >= 12 && hours < 15) {
   status = "Selamat Siang"
-} else if (hours >= 15) {
+} else if (hours >= 15 && hours < 18) {
   status = "Selamat Sore"
 } else {
   status = "Selamat Malam"
@@ -123,19 +121,16 @@ export default {
       stats: {
         po: {
           title: "Purchasing Order",
-          value: "100",
           iconClass: "ni ni-basket",
           iconBackground: "bg-info",
         },
         dn: {
           title: "Delivery Note",
-          value: "100",
           iconClass: "ni ni-delivery-fast",
           iconBackground: "bg-info",
         },
         supplier: {
-          title: "Tier-1 Supplier",
-          value: "5.373",
+          title: "Supplier",
           iconClass: "ni ni-single-02",
           iconBackground: "bg-info",
         },
@@ -147,10 +142,9 @@ export default {
     GradientLineChart,
     DoughnutTrackingChart,
     TrackingTable,
-    MonitoringTable,
+    TableMonitoring,
     Carousel,
     CategoriesCard,
-    TableMonitoring
   },
 
   // created() {
@@ -174,14 +168,19 @@ export default {
   },
 
   computed: {
-    ...mapState(d$company, ['g$name'])
+    ...mapState(d$company, ['g$name']),
+    ...mapState(d$dashboard, ['g$count', 'g$countDN', 'g$countPO']),
   },
   methods: {
-    ...mapActions(d$company, ['a$name'])
+    ...mapActions(d$company, ['a$name']),
+    ...mapActions(d$dashboard, ['a$countSupplier', 'a$countDN', 'a$countPO']),
   },
   async mounted() {
     try {
       await this.a$name();
+      await this.a$countSupplier();
+      await this.a$countDN();
+      await this.a$countPO();
     } catch (e) {
     }
   }

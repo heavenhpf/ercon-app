@@ -297,7 +297,7 @@ export default {
                     quantity: jml_barang,
                 };
                 // const id = this.g$item.id_item;
-                // await this.a$inquiryAddOrder(id_item, data);
+                await this.a$inquiryAddOrder(id_item, data);
                 this.modal.add = false;
                 const toastLiveExample = document.getElementById('liveToast')
                 const toast = new bootstrap.Toast(toastLiveExample)

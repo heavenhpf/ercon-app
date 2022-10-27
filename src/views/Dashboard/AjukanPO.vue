@@ -119,7 +119,7 @@ import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
 
-import d$user from '@/stores/dashboard/user';
+import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from 'pinia';
 
 const tier = {
@@ -143,20 +143,6 @@ export default {
             alamat: '',
             phone: '',
         },
-        // dt: {
-        //     action: [
-        //         {
-        //             text: 'Edit',
-        //             color: 'primary',
-        //             event: 'detail',
-        //         },
-        //         {
-        //             text: 'Delete',
-        //             color: 'danger',
-        //             event: 'delete',
-        //         },
-        //     ],
-        // },
 
         // UI
         modal: {
@@ -173,7 +159,7 @@ export default {
     },
 
     computed: {
-        ...mapState(d$user, ['g$list', 'g$detail']),
+        ...mapState(d$company, ['g$list', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
@@ -182,7 +168,7 @@ export default {
         await this.a$inquiryList();
     },
     methods: {
-        ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
+        ...mapActions(d$company, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
 
         clear() {
             this.input = {
@@ -234,8 +220,8 @@ export default {
         },
         async delInquiry() {
             try {
-                const { id_user } = this.input;
-                await this.a$inquiryDel(id_user);
+                const { id_company } = this.input;
+                await this.a$inquiryDel(id_company);
                 this.modal.confirm = false;
                 console.log(`Delete ${this.pageTitle} Succeed!`);
             } catch (e) {
@@ -258,10 +244,10 @@ export default {
                 console.error(e);
             }
         },
-        async triggerDelete({ id_user }) {
+        async triggerDelete({ id_company }) {
             try {
                 this.input = {
-                    id_user
+                    id_company
                 };
                 this.modal.confirm = true;
             } catch (e) {

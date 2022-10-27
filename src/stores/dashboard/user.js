@@ -57,6 +57,13 @@ const d$user = defineStore({
                 throw error ?? message;
             }
         },
+        async a$editPassword(body) {
+            try {
+                await s$user.editPassword(body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         async a$inquiryDel(id) {
             try {
                 await s$user.del(id);

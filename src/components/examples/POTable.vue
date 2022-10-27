@@ -4,7 +4,7 @@
             <data-table style="text-align:center ;" :index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <!-- <modal-comp v-model:show="modal.add">
+        <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
@@ -178,17 +178,13 @@ export default {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
 
-        // async init() {
-        //     try {
-        //         // await this.a$listPoDetail();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
-        async triggerDetail({ }) {
+        async triggerDetail({ id_po_detail, id_po }) {
             try {
-                await this.a$getPoDetail({ id_po_detail: this.$route.params.id, id_po: this.$route.params.id });
+                this.filter_po_detail = {
+                    id_po: Number(id_po),
+                    id_po_detail: Number(id_po_detail)
+                }
+                await this.a$getPoDetail(this.filter_po_detail);
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

@@ -5,6 +5,7 @@ const d$company = defineStore({
     id: 'company',
     state: () => ({
         company: [],
+        getmyCompany: {},
         name: '',
         detail: {},
         status: null,
@@ -15,6 +16,17 @@ const d$company = defineStore({
                 this.status = null;
                 const { data, status } = await s$company.list();
                 this.company = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$getMyCompany() {
+            try {
+                this.status = null;
+                const { data, status } = await s$company.getMyCompany();
+                this.getmyCompany = data ?? {};
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -51,9 +63,16 @@ const d$company = defineStore({
                 throw error ?? message;
             }
         },
-        async a$inquiryEdit(id, body) {
+        // async a$inquiryEdit(id, body) {
+        //     try {
+        //         await s$company.update(id, body);
+        //     } catch ({ error, message }) {
+        //         throw error ?? message;
+        //     }
+        // },
+        async a$editMyCompany(body) {
             try {
-                await s$company.update(id, body);
+                await s$company.editMyCompany(body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -71,6 +90,7 @@ const d$company = defineStore({
         g$list: ({ company }) => company,
         g$name: ({ name }) => name,
         g$detail: ({ detail }) => detail,
+        g$getMyCompany: ({ getmyCompany }) => getmyCompany,
     },
 });
 
