@@ -31,11 +31,17 @@ import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
+import d$dashboard from '@/stores/dashboard/dashboard';
+import { mapActions, mapState } from "pinia";
 
 import US from "@/assets/img/icons/flags/US.png";
 import DE from "@/assets/img/icons/flags/DE.png";
 import GB from "@/assets/img/icons/flags/GB.png";
 import BR from "@/assets/img/icons/flags/BR.png";
+
+// -1 : Lewat Deadline
+// 0: Ongoing (Belum deadline)
+// 1: selesai
 
 export default {
     name: "tracking-saya",

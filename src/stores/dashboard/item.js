@@ -5,6 +5,7 @@ const d$item = defineStore({
     id: 'item',
     state: () => ({
         listItem: [],
+        myItem: [],
         item: {},
         label: [],
         status: null,
@@ -16,6 +17,18 @@ const d$item = defineStore({
                 const { data, status } = await s$item.listAllItem(options);
                 this.listItem = data ?? [];
                 this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$listMyItem(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$item.listMyItem(options);
+                this.myItem = data ?? {};
+                this.status = status;
+                console.log(this.myItem);
             } catch ({ error, message }) {
                 this.status = false;
                 throw error ?? message;
@@ -34,13 +47,6 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
-        // async a$inquiryAdd(body) {
-        //     try {
-        //         await s$item.add(body);
-        //     } catch ({ error, message }) {
-        //         throw error ?? message;
-        //     }
-        // },
         async a$inquiryEdit(id, body) {
             try {
                 await s$item.update(id, body);
@@ -48,20 +54,13 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
-        // async a$inquiryDel(id) {
-        //     try {
-        //         await s$item.del(id);
-        //     } catch ({ error, message }) {
-        //         throw error ?? message;
-        //     }
-        // },
     },
     getters: {
         g$status: ({ status }) => status,
         g$listItem: ({ listItem }) => listItem,
         g$label: ({ label }) => label,
         g$item: ({ item }) => item,
-        // g$detail: ({ detail }) => detail,
+        g$myItem: ({ myItem }) => myItem,
     },
 });
 
