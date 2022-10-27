@@ -29,11 +29,6 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="mt-3 nav-item">
-        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Monitoring
-        </h6>
-      </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''"
           navText="Pesanan Masuk">
@@ -42,7 +37,20 @@
           </template>
         </sidenav-item>
       </li>
+      <li class="mt-3 nav-item">
+        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+          Monitoring
+        </h6>
+      </li>
       <li class="nav-item">
+        <sidenav-item url="/dashboard/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
+          navText="Gudang Saya">
+          <template v-slot:icon>
+            <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li>
         <sidenav-item url="/dashboard/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
           navText="Monitoring Item">
           <template v-slot:icon>
@@ -50,6 +58,7 @@
           </template>
         </sidenav-item>
       </li>
+
       <li class="mt-3 nav-item">
         <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
           Purchasing Order (PO)

@@ -14,7 +14,7 @@
                 </div>
                 <!-- <div class="mt-2" style="text-align:right; color:danger"><b>{{ g$get_po_detail.d_po?.deadline }}</b>
                 </div> -->
-                <div class="col-4">
+                <div class="col-5">
                     <p class="font-weight-bolder text-danger float-end">Deadline {{ new
                             Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
                                 weekday: 'long', year:
