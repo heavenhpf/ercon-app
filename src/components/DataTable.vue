@@ -94,7 +94,7 @@
               <td v-if="item.buttons.length">
                 <!-- Loop Through All Provided Actions -->
                 <button v-for="(button, j) in item.buttons.filter((d) => d.show)" :key="j" type="button"
-                  class="btn mt-3 d-flex justify-content-center"
+                  class="btn mt-1 m-1"
                   :class="`btn-${button.color} btn-${button.size || 'sm'}`" :disabled="button.disabled"
                   @click="emit(button.event, item.row)">
                   {{ button.text }}

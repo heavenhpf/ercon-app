@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
+  <div class="collapse zindex-0 navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav ">
       <li class="nav-item">
         <sidenav-item url="/dashboard" :class="getRoute() === 'default' ? 'active' : ''" navText="Dashboard">
@@ -27,11 +27,6 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="mt-3 nav-item">
-        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Monitoring
-        </h6>
-      </li>
       <li class="nav-item">
         <sidenav-item url="/dashboard/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''" navText="Pesanan Masuk">
           <template v-slot:icon>
@@ -49,6 +44,14 @@
           navText="Monitoring Item">
           <template v-slot:icon>
             <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/dashboard/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
+          navText="Gudang Saya">
+          <template v-slot:icon>
+            <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -71,7 +74,7 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="Perusahaan">
+        <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
           <template v-slot:icon>
             <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>
@@ -80,7 +83,7 @@
       <li class="nav-item">
         <sidenav-item url="/dashboard/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
           <template v-slot:icon>
-            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
+            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>

@@ -29,11 +29,11 @@
                                 <label for="example-text-input" class="form-control-label text-sm">Deskripsi Item</label>
                                 <argon-textarea type="text" />
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2 col-6">
                                 <label for="example-text-input" class="form-control-label text-sm">Jumlah Item</label>
                                 <argon-input type="number" />
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2 col-6">
                                 <label for="example-text-input" class="form-control-label text-sm">Satuan</label>
                                 <argon-input type="text" />
                             </div>

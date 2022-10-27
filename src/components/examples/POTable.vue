@@ -27,29 +27,50 @@
         </modal-comp> -->
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <h5 class="modal-title">Serial Number</h5><br>
-                <h6 class="row">Deadline 30 September 2022</h6>
+                <div class="modal-title">
+                    <h5>Serial Number</h5>
+                    <div>
+                        <h6 class="mt-2">{{ g$get_po_detail.d_order?.d_item.serial_number }}</h6>
+                    </div>
+                </div>
+                <!-- <div class="mt-2" style="text-align:right; color:danger"><b>{{ g$get_po_detail.d_po?.deadline }}</b>
+                </div> -->
+                <div class="col-4">
+                    <p class="font-weight-bolder text-danger float-end">Deadline {{new
+                    Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", { weekday: 'long', year:
+                    'numeric', month:
+                    'long', day: 'numeric' })}}</p>
+                </div>
             </template>
 
             <!-- buat ngerubah detail -->
             <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
-                    <h3 class="col-12">Roda Eco Tire
+                    <h3 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
                     </h3>
-                    <p>Eco tire didesain untuk meningkatkan efisiensi penggunaan bahan bakar. Tipe ban yang satu ini
-                        dibuat dengan dilapisi silika agar cengkraman atau grip ke jalan jadi jauh lebih bagus. Rolling
-                        resistance bisa berkurang dengan adanya lapisan silika tersebut, sehingga Anda tidak memerlukan
-                        banyak bahan bakar.</p>
+                    <p>{{ g$get_po_detail.d_order.d_item.desc }}</p>
+                </div>
+                <div>
+                    <h5>Informasi Item</h5>
+                </div>
+                <div>
+                    <p>{{ g$get_po_detail.note }} </p>
+                </div>
+                <div class="mt-2">
+                    <h5>Nomor PO</h5>
                 </div>
             </template>
             <template #footer>
-                <h5 style="text-align: left;">Informasi Item</h5>
-                <argon-button style="text-align: left;" color="secondary" @click="modal.detail = false">
-                    Close
-                </argon-button>
-                <argon-button color="primary" @click="editInquiry()">
-                    Save Changes
-                </argon-button>
+                <div class="d-flex justify-content-start">
+                    <div style="margin-left: 10px;">
+                        <argon-button color="primary" @click="modal.detail = false">
+                            Cari PO
+                        </argon-button>
+                    </div>
+                    <argon-button color="danger" @click="editInquiry()">
+                        Kembali
+                    </argon-button>
+                </div>
             </template>
         </modal-comp>
 
@@ -93,6 +114,10 @@ export default {
             id: null,
             name: '',
         },
+        filter: {
+            id_po: null,
+            id_po_detail: null
+        },
         // DataTable
         dt: {
             column: [
@@ -131,6 +156,7 @@ export default {
                 }
             ],
         },
+
         // UI
         modal: {
             add: false,
@@ -139,16 +165,17 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$list_po_detail']),
+        ...mapState(d$po, ['g$list_po_detail', 'g$get_po_detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listPoDetail({ id_po: this.$route.params.id });
+
     },
     methods: {
-        ...mapActions(d$po, ['a$listPoDetail']),
+        ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
 
         // async init() {
@@ -161,6 +188,7 @@ export default {
 
         async triggerDetail({ }) {
             try {
+                await this.a$getPoDetail({ id_po_detail: this.$route.params.id, id_po: this.$route.params.id });
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

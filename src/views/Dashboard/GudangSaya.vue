@@ -17,18 +17,28 @@
                     </div>
                 </div>
             </div>
-            <div class="pb-0 row mb-lg-3 mb-2">
-                <router-link to="/dashboard/tambah-item" tag="button">
-                    <span>
-                        <argon-button size="md me-2" color="primary">
-                            <span class="fa fa-plus fa-sm me-2" />
-                            Tambah Item
-                        </argon-button>
-                    </span>
-                </router-link>
+            <div class="row">
+                <div class="pb-0 d-flex col-6 ">
+                        <router-link to="/dashboard/tambah-item" tag="button">
+                            <span>
+                                <argon-button size="md me-2" color="primary">
+                                    <span class="fa fa-plus fa-sm me-2" />
+                                    Tambah Item
+                                </argon-button>
+                            </span>
+                        </router-link>
+                </div>
+                <!-- <div class="d-flex flex-row-reverse bd-highlight col-6">
+                        <span>
+                            <argon-button size="md me-2" color="secondary">
+                                <span class="fa fa-info-circle fa-md me-2"/>
+                                Tentang Unit
+                            </argon-button>
+                        </span>
+                </div> -->
             </div>
-            <div>
-                <monitoring-table />
+            <div class="mt-3">
+                <GudangSaya />
             </div>
         </div>
     </div>
@@ -39,7 +49,7 @@ import Card2 from "@/examples/Cards/Card2.vue";
 import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
-import TrackingTable from "@/components/examples/TrackingTable.vue";
+import GudangSaya from "@/components/examples/GudangSaya.vue"
 
 export default {
     name: "gudang-saya",
@@ -65,7 +75,7 @@ export default {
         GradientLineChart,
         Carousel,
         CategoriesCard,
-        TrackingTable,
+        GudangSaya,
     },
 };
 </script>

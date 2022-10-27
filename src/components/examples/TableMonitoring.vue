@@ -24,7 +24,7 @@
             <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <modal-comp size="lg" v-model:show="modal.detail" >
+        <modal-comp size="xl" v-model:show="modal.detail" >
             <template #header>
                 <h3 class="modal-title">{{ input.name }}</h3>
 
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-3 row align-items-center" style="padding: 5%;">
                         <span class=" badge text-dark" style="background-color: yellow;">Buffer</span>
-                        <div class="mt-2 mb-2">
+                        <div class="mt-3 mb-2 ms-4">
                             <img src="../../assets/img/illustrations/box.png" alt="warning" style="width: 100px; height: 100px;">
                         </div>
                         <div class="mt-2 mb-2">

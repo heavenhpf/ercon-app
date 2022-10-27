@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$myItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
@@ -47,26 +47,33 @@ export default {
             tier: 2,
             category: 2,
         },
+        filterMyItem: {
+            category: 3,
+        },
         // DataTable
         dt: {
             column: [
                 {
-                    name: 'id_item',
-                    th: 'No',
+                    name: 'serial_number',
+                    th: 'Nomor Barang',
                 },
                 {
-                    name: 's_company.name',
-                    th: 'Nama Perusahaan',
-                    render: ({ s_company }) => s_company.name
+                    name: 'name',
+                    th: 'Nama Barang',
                 },
                 {
-                    name: 's_company.auth_user.level',
-                    th: 'Tier',
-                    render: ({ s_company }) => s_company.auth_user.level
+                    name: 'ref_category.name',
+                    th: 'Kategori',
+                    render: ({ ref_category }) => ref_category.name,
                 },
                 {
                     name: 'quantity',
                     th: 'Jumlah Barang  ',
+                },
+                {
+                    name: 'ref_unit.name',
+                    th: 'Satuan',
+                    render: ({ ref_unit }) => ref_unit.name,
                 },
             ],
             action: [
@@ -75,11 +82,16 @@ export default {
                     color: 'warning',
                     event: 'detail',
                 },
-                // {
-                //     text: 'Delete',
-                //     color: 'danger',
-                //     event: 'delete',
-                // },
+                {
+                    text: 'Edit',
+                    color: 'primary',
+                    event: 'edit',
+                },
+                {
+                    text: 'Delete',
+                    color: 'danger',
+                    event: 'delete',
+                },
             ],
         },
         // UI
@@ -90,16 +102,18 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$list', 'g$detail']),
+        ...mapState(d$item, ['g$list', 'g$detail', 'g$myItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listAllItem(this.filter);
+        await this.a$listMyItem(this.filterMyItem);
+        console.log(this.g$myItem);
     },
     methods: {
-        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail', 'a$listMyItem']),
 
         clear() {
             this.input = {
