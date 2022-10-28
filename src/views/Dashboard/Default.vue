@@ -19,9 +19,9 @@
             <card :title="stats.supplier.title" :value="g$count" :iconClass="stats.supplier.iconClass"
               :iconBackground="stats.supplier.iconBackground" directionReverse></card>
           </div>
-          <!-- <div class="mb-5">
+          <div class="mb-5">
             <doughnut-tracking-chart />
-          </div> -->
+          </div>
           <div class="mb-5">
             <div class="pb-0 row">
               <div class="row mb-0">
