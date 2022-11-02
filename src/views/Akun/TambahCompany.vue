@@ -35,11 +35,11 @@
                                         Tier 1
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier">Tier 2
+                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier"> Tier 2
 
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier">Tier 3
+                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
 
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
-                            <router-link to="/dashboard/company" tag="button">
+                            <router-link to="/akun/company" tag="button">
                                 <span>
                                     <argon-button @click="addInquiry()" size="md" color="primary">
                                         Tambah

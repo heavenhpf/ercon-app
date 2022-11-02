@@ -6,7 +6,7 @@
             </div>
             <div class="pb-0 row mb-lg-3 mb-2">
                 <div class="col-lg-8 col-md-9">
-                    <router-link to="/dashboard/tambah-company" tag="button">
+                    <router-link to="/akun/tambah-company" tag="button">
                         <span>
                             <argon-button size="md me-2" color="primary">
                                 <span class="fa fa-plus fa-sm me-2" />

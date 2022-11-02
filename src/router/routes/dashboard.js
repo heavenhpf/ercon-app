@@ -9,24 +9,6 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'company',
-      name: 'List Perusahaan',
-      component: () => import('@/views/Dashboard/Company.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'tambah-company',
-      name: 'Tambah Perusahaan',
-      component: () => import('@/views/Dashboard/TambahCompany.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'company-saya',
-      name: 'Perusahaan Saya',
-      component: () => import('@/views/Dashboard/CompanySaya.vue'),
-      meta: { auth: true },
-    },
-    {
       path: 'tables',
       name: 'Tables',
       component: () => import('@/views/Dashboard/Tables.vue'),

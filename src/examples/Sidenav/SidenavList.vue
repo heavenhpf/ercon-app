@@ -74,14 +74,14 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
+        <sidenav-item url="/akun/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
           <template v-slot:icon>
             <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
+        <sidenav-item url="/akun/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
           <template v-slot:icon>
             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
           </template>
