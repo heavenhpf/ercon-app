@@ -14,16 +14,16 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''" navText="Tracking Tier Bawah">
+        <sidenav-item url="/tracking/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''" navText="Tracking Saya">
           <template v-slot:icon>
-            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
+            <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/tracking/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''" navText="Tracking Saya">
+        <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''" navText="Tracking Tier Bawah">
           <template v-slot:icon>
-            <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
+            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -40,18 +40,18 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/monitoring/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
-          navText="Monitoring Item">
-          <template v-slot:icon>
-            <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
         <sidenav-item url="/monitoring/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
           navText="Gudang Saya">
           <template v-slot:icon>
             <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item url="/monitoring/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
+          navText="Monitoring Item">
+          <template v-slot:icon>
+            <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -74,16 +74,16 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/akun/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
+        <sidenav-item url="/akun/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
           <template v-slot:icon>
-            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
+            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/akun/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''" navText="Perusahaan Saya">
+        <sidenav-item url="/akun/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
           <template v-slot:icon>
-            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>

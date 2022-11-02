@@ -3,6 +3,12 @@ const akun = {
     name: 'Manajemen Akun',
     children: [
       {
+        path: 'company-saya',
+        name: 'Perusahaan Saya',
+        component: () => import('@/views/Akun/CompanySaya.vue'),
+        meta: { auth: true },
+      },
+      {
         path: 'company',
         name: 'List Perusahaan',
         component: () => import('@/views/Akun/Company.vue'),
@@ -12,12 +18,6 @@ const akun = {
         path: 'tambah-company',
         name: 'Tambah Perusahaan',
         component: () => import('@/views/Akun/TambahCompany.vue'),
-        meta: { auth: true },
-      },
-      {
-        path: 'company-saya',
-        name: 'Perusahaan Saya',
-        component: () => import('@/views/Akun/CompanySaya.vue'),
         meta: { auth: true },
       },
     ],
