@@ -6,37 +6,163 @@
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "Authentications",
 			"item": [
 				{
-					"name": "LIST USER",
+					"name": "LOGIN VALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should be 201', () => {\r",
+									"   pm.response.to.have.status(201);\r",
+									"}); \r",
+									" \r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									" \r",
+									"pm.test('response body should have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									" \r",
+									"    pm.expect(responseJson).to.ownProperty('status');\r",
+									"    pm.expect(responseJson).to.ownProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('object');\r",
+									"});\r",
+									" \r",
+									"pm.test('response body data should have property with correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    const { data } = responseJson;\r",
+									" \r",
+									"    pm.expect(data).to.have.ownProperty('token');\r",
+									"    pm.expect(data.accessToken).to.not.equals('');\r",
+									"    pm.expect(data.accessToken).to.not.equals(null);\r",
+									"    pm.expect(data).to.have.ownProperty('expiresAt');\r",
+									"    pm.expect(data.refreshToken).to.not.equals('');\r",
+									"    pm.expect(data.refreshToken).to.not.equals(null);\r",
+									"\r",
+									"    pm.environment.set('token', data.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{toyotaUsername}}\",\r\n    \"password\": \"{{toyotaPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/users",
+							"raw": "{{url}}/login",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"users"
+								"login"
 							]
 						}
 					},
 					"response": []
 				},
 				{
+					"name": "LOGIN INVALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should be 401', () => {\r",
+									"   pm.response.to.have.status(401);\r",
+									"}); \r",
+									" \r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"}); \r",
+									" \r",
+									"pm.test('response body should have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									" \r",
+									"    pm.expect(responseJson).to.ownProperty('status');\r",
+									"    pm.expect(responseJson).to.ownProperty('error');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(false);\r",
+									"    pm.expect(responseJson.error).to.be.a('string');\r",
+									"    pm.expect(responseJson.error).to.not.equals('');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{toyotaUsername}}\",\r\n    \"password\": \"xxxx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
 					"name": "GET USERNAME",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -64,7 +190,35 @@
 					"response": []
 				},
 				{
-					"name": "EDIT PASSWORD",
+					"name": "EDIT PASSWORD VALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status should be 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.a('string');\r",
+									"    pm.expect(responseJson.data).to.not.equals('');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -80,7 +234,72 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cur_password\": \"toyota\",\r\n    \"new_password\": \"toyota\"\r\n}",
+							"raw": "{\r\n    \"cur_password\": \"{{toyotaPassword}}\",\r\n    \"new_password\": \"{{toyotaUsername}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT PASSWORD INVALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status should be 200', () => {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('error');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(false);\r",
+									"    pm.expect(responseJson.error).to.be.a('string');\r",
+									"    pm.expect(responseJson.error).to.not.equals('');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cur_password\": \"xxx\",\r\n    \"new_password\": \"{{toyotaUsername}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,6 +326,40 @@
 			"item": [
 				{
 					"name": "LIST COMPANY",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body data should contains array companies and have only 1 item', () => {\r",
+									"    const { data } = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data).to.be.an('array');\r",
+									"    pm.expect(data).lengthOf.at.least(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -134,6 +387,33 @@
 				},
 				{
 					"name": "GET MY COMPANY",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('object');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -162,6 +442,33 @@
 				},
 				{
 					"name": "GET NAME",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body shoud contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('object');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -189,7 +496,56 @@
 					"response": []
 				},
 				{
-					"name": "ADD COMPANY",
+					"name": "ADD COMPANY VALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status response should be 201', () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body should contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('data');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(true);\r",
+									"    pm.expect(responseJson.data).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body data should contains id_user and id_company', () => {\r",
+									"    const { data } = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data).to.haveOwnProperty('user');\r",
+									"    pm.expect(data.user).to.be.a('object');\r",
+									"\r",
+									"    pm.expect(data).to.haveOwnProperty('company');\r",
+									"    pm.expect(data.company).to.be.a('object');\r",
+									"\r",
+									"    pm.expect(data.user).to.haveOwnProperty('id_user');\r",
+									"    pm.expect(data.user.id_user).to.be.a('number');\r",
+									"    pm.expect(data.user.id_user).to.not.equals('');\r",
+									"\r",
+									"    pm.expect(data.company).to.haveOwnProperty('id_company');\r",
+									"    pm.expect(data.company.id_company).to.be.a('number');\r",
+									"    pm.expect(data.company.id_company).to.not.equals('');\r",
+									"\r",
+									"    pm.environment.set('newIdUser', data.user.id_user);\r",
+									"    pm.environment.set('newIdCompany', data.company.id_company);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -205,7 +561,138 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"sugiti\",\r\n    \"password\": \"sugiti\",\r\n    \"level\": 1,\r\n    \"name\": \"Sugiti\",\r\n    \"address\": \"Indo\",\r\n    \"phone\": \"+1234\"\r\n}",
+							"raw": "{\r\n    \"username\": \"{{dummy}}\",\r\n    \"password\": \"{{dummy}}\",\r\n    \"level\": 1,\r\n    \"name\": \"{{dummy}}\",\r\n    \"address\": \"{{dummy}}\",\r\n    \"phone\": \"{{dummy}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/companies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD COMPANY DUPLICATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status response should be 201', () => {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test('response Content-Type should application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test('response body should contains correct value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('error');\r",
+									"\r",
+									"    pm.expect(responseJson.status).to.equals(false);\r",
+									"    pm.expect(responseJson.error).to.be.an('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{dummy}}\",\r\n    \"password\": \"{{dummy}}\",\r\n    \"level\": 1,\r\n    \"name\": \"{{dummy}}\",\r\n    \"address\": \"{{dummy}}\",\r\n    \"phone\": \"{{dummy}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/companies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD COMPANY INVALID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('response status code should have 400 value', () => {\r",
+									"   pm.response.to.have.status(422);\r",
+									"}); \r",
+									" \r",
+									"pm.test('response Content-Type header should have application/json value', () => {\r",
+									"  pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json; charset=utf-8');\r",
+									"}); \r",
+									" \r",
+									"pm.test('response body should an object', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"});\r",
+									" \r",
+									"pm.test('response body should have correct property and value', () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('status');\r",
+									"    pm.expect(responseJson.status).to.equals(false);\r",
+									"\r",
+									"    pm.expect(responseJson).to.haveOwnProperty('error');\r",
+									"    pm.expect(responseJson.error).to.not.equals('');\r",
+									"    pm.expect(responseJson.error).to.not.equals(null);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"{{dummy}}\": \"{{dummy}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -287,151 +774,6 @@
 							"variable": [
 								{
 									"key": "id_company",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Units",
-			"item": [
-				{
-					"name": "LIST UNIT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/units",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"units"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ADD UNIT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Kaca\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/units",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"units"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "EDIT UNIT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"spion\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/units/:id_unit",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"units",
-								":id_unit"
-							],
-							"variable": [
-								{
-									"key": "id_unit",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE UNIT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/units/:id_unit",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"units",
-								":id_unit"
-							],
-							"variable": [
-								{
-									"key": "id_unit",
 									"value": "1"
 								}
 							]
@@ -758,7 +1100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_unit\": 1,\r\n    \"id_category\": 1,\r\n    \"name\": \"Barang A\",\r\n    \"desc\": \"Desc A\",\r\n    \"serial_number\": \"0000\",\r\n    \"quantity\": 200\r\n}",
+							"raw": "{\r\n    \"id_category\": 1,\r\n    \"name\": \"Barang A\",\r\n    \"desc\": \"Desc A\",\r\n    \"serial_number\": \"0000\",\r\n    \"quantity\": 200,\r\n    \"unit\": \"Kg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1702,43 +2044,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "LOGIN",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.environment.set(\"token\", pm.response.json().data.token);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"toyota\",\r\n    \"password\": \"toyota\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}/login",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

@@ -68,6 +68,7 @@ class _auth {
 
             return {
                 status: true,
+                code: 201,
                 data: {
                     token,
                     expiresAt

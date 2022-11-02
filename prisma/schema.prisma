@@ -47,22 +47,20 @@ model d_dn_detail {
 model d_item {
   id_item       Int             @id @default(autoincrement())
   id_company    Int
-  id_unit       Int
   id_category   Int
   serial_number String          @db.VarChar(50)
   name          String          @db.VarChar(50)
   desc          String          @db.Text
   quantity      Float           @db.Float
+  unit          String          @db.VarChar(50)
   created_at    DateTime        @default(now()) @db.DateTime(0)
   deleted_at    DateTime?       @db.DateTime(0)
   s_company     s_company       @relation(fields: [id_company], references: [id_company], onDelete: Cascade, map: "d_item_ibfk_1")
-  ref_unit      ref_unit        @relation(fields: [id_unit], references: [id_unit], onDelete: Cascade, map: "d_item_ibfk_2")
   ref_category  ref_category    @relation(fields: [id_category], references: [id_category], onDelete: Cascade, map: "d_item_ibfk_3")
   d_item_detail d_item_detail[]
   d_order       d_order[]
 
   @@index([id_category], map: "id_category")
-  @@index([id_unit], map: "id_unit")
   @@index([id_company], map: "id_user")
 }
 
@@ -151,7 +149,6 @@ model s_company {
   d_order_d_order_order_toTos_company   d_order[]  @relation("d_order_order_toTos_company")
   d_po_d_po_order_fromTos_company       d_po[]     @relation("d_po_order_fromTos_company")
   d_po_d_po_order_toTos_company         d_po[]     @relation("d_po_order_toTos_company")
-  ref_unit                              ref_unit[]
 
   @@index([id_user], map: "id_user")
 }
@@ -174,16 +171,4 @@ model ref_category {
   created_at  DateTime  @default(now()) @db.DateTime(0)
   deleted_at  DateTime? @db.DateTime(0)
   d_item      d_item[]
-}
-
-model ref_unit {
-  id_unit    Int       @id @default(autoincrement())
-  id_company Int
-  name       String    @db.VarChar(20)
-  created_at DateTime  @default(now()) @db.DateTime(0)
-  deleted_at DateTime? @db.DateTime(0)
-  s_company  s_company @relation(fields: [id_company], references: [id_company], onDelete: Cascade, map: "ref_unit_ibfk_1")
-  d_item     d_item[]
-
-  @@index([id_company], map: "id_company")
 }

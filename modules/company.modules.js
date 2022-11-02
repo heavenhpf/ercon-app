@@ -152,6 +152,9 @@ class _company {
                     username: body.username,
                     password: body.password,
                     level: body.level
+                },
+                select: {
+                    id_user: true
                 }
             })
 
@@ -161,11 +164,15 @@ class _company {
                     name: body.name,
                     address: body.address,
                     phone: body.phone,
+                },
+                select: {
+                    id_company: true
                 }
             })
 
             return {
                 status: true,
+                code: 201,
                 data: {
                     user: addUser,
                     company: addCompany

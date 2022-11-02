@@ -146,11 +146,6 @@ class _item {
                         select: {
                             name: true
                         }
-                    },
-                    ref_unit: {
-                        select: {
-                            name: true
-                        }
                     }
                 }
             })
@@ -401,12 +396,12 @@ class _item {
     
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                id_unit: Joi.number().required(),
                 id_category: Joi.number().required(),
                 name: Joi.string().required(),
                 desc: Joi.string().required(),
                 serial_number: Joi.string().required(),
-                quantity: Joi.number().required()
+                quantity: Joi.number().required(),
+                unit: Joi.string().required()
             })
     
             const validation = schema.validate(body)
@@ -431,13 +426,6 @@ class _item {
                 }
             })
 
-            const checkUnit = await prisma.ref_unit.findFirst({
-                where: {
-                    id_unit: body.id_unit,
-                    deleted_at: null
-                }
-            })
-
             const checkCategory = await prisma.ref_category.findFirst({
                 where: {
                     id_category: body.id_category,
@@ -445,7 +433,7 @@ class _item {
                 }
             })
 
-            if (!(checkCompany && checkUnit && checkCategory)) {
+            if (!(checkCompany && checkCategory)) {
                 return {
                     status: false,
                     code: 404,
@@ -456,12 +444,12 @@ class _item {
             const add = await prisma.d_item.create({
                 data: {
                     id_company: checkCompany.id_company,
-                    id_unit: body.id_unit,
                     id_category: body.id_category,
                     name: body.name,
                     desc: body.desc,
                     serial_number: body.serial_number,
                     quantity: body.quantity,
+                    unit: body.unit
                 }
             })
 
@@ -570,10 +558,10 @@ class _item {
             const schema = Joi.object({
                 id_user: Joi.number().required(),
                 id_item: Joi.number().required(),
-                id_unit: Joi.number().required(),
                 id_category: Joi.number().required(),
                 name: Joi.string(),
                 desc: Joi.string(),
+                unit: Joi.string(),
                 serial_number: Joi.string()
             })
 
@@ -607,13 +595,6 @@ class _item {
                 }
             })
 
-            const checkUnit = await prisma.ref_unit.findFirst({
-                where: {
-                    id_unit: body.id_unit,
-                    deleted_at: null
-                }
-            })
-
             const checkCategory = await prisma.ref_category.findFirst({
                 where: {
                     id_category: body.id_category,
@@ -621,7 +602,7 @@ class _item {
                 }
             })
             
-            if (!(checkCompany && checkItem && checkUnit && checkCategory)) {
+            if (!(checkCompany && checkItem && checkCategory)) {
                 return {
                     status: false,
                     code: 404,
@@ -634,10 +615,10 @@ class _item {
                     id_item: body.id_item
                 },
                 data: {
-                    id_unit: body.id_unit,
                     id_category: body.id_category,
                     name: body.name,
                     desc: body.desc,
+                    unit: body.unit,
                     serial_number: body.serial_number
                 }
             })

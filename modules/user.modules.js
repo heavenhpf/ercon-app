@@ -3,28 +3,6 @@ const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 class _user {
-    listUser = async () => {
-        try {
-            const list = await prisma.auth_user.findMany({
-                where: {
-                    deleted_at: null
-                }
-            })
-
-            return {
-                status: true,
-                data: list
-            }
-        } catch (error) {
-            console.error('listUser module error ', error)
-
-            return {
-                status: false,
-                error
-            }
-        }
-    }
-
     getUsername = async (username) => {
         try {
             const schema = Joi.string().required()
@@ -118,7 +96,6 @@ class _user {
 
             return {
                 status: true,
-                code: 201,
                 data: 'Password updated'
             }
         } catch (error) {

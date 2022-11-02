@@ -5,10 +5,6 @@ const { userSession, verifyAdmin } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/', userSession, verifyAdmin, async (req, res, next) => {
-    response.sendResponse(res, await modules.listUser())
-})
-
 app.get('/username', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.getUsername(req.user.username))
 })
