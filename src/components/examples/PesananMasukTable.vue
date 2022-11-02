@@ -34,7 +34,7 @@ import d$po from '@/stores/dashboard/po';
 import auth from '../../router/routes/auth';
 
 const statusPO = {
-    '0': "Sedang Diproses",
+    '0': "Belum Deadline",
     '-1': "Melewati Deadline",
     '1': "Progress Selesai"
 }
@@ -64,7 +64,7 @@ export default {
                 },
                 {
                     name: 's_company_d_po_order_toTos_company.name',
-                    th: 'Perusahaan Penjual',
+                    th: 'Pemesan',
                     render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {

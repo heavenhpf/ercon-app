@@ -39,14 +39,14 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
-                            <router-link to="/dashboard/gudang-saya" tag="button">
+                            <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
                                 <argon-button size="md" color="warning" class="me-2">
                                     Kembali
                                 </argon-button>
                                 </span>
                             </router-link>
-                            <argon-button size="md" color="primary" data-bs-toggle="modal">
+                            <argon-button size="md" color="primary">
                                 Tambah
                             </argon-button>
                         </div>

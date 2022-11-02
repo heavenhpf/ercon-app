@@ -34,7 +34,7 @@
                     <div class="px-2 py-1 d-flex">
                       <span class="badge bg-info me-3">&nbsp;</span>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Belum Deadline</h6>
+                        <h6 class="mb-0 text-sm">Sedang Diproses</h6>
                       </div>
                     </div>
                   </td>
