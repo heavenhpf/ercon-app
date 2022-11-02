@@ -4,15 +4,17 @@
             <div class=" col-9 row">
                 <div class="col-4 mt-4 ms-4">
                     <label>Filter Tier</label>
-                    <select v-model.number="filterTier.selectedTier" @change="triggerOptions()" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                        <option v-for='tier in 3'  v-bind:value="Number(tier)" selected>
+                    <select v-model.number="filterTier.selectedTier" @change="triggerOptions()" class="form-select form-select-md mb-3" aria-label=".form-select-lg example" placeholder="-- Tier --">
+                        <option selected>
+                            <option>-- Pilih Tier --</option>
+                        </option>
+                        <option v-for='tier in 3'  v-bind:value="Number(tier)">
                             <option>{{tier}}</option>
                         </option>
-
                     </select>
                 </div>
                 <div class="col-4 mt-4 ms-4">
-                    <label>Filter Category</label>
+                    <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                         <option v-for='items in g$listCategory'  v-bind:value="{id_category:items.id_category, name: items.name}" selected>
                             <option>{{items.name}}</option>
