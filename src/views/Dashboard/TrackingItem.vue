@@ -2,7 +2,7 @@
     <div class="py-4 container-fluid">
         <div class="row">
             <div>
-                <tracking-table />
+                <TrackingTable />
             </div>
         </div>
     </div>

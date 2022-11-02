@@ -46,6 +46,7 @@ Coded by www.creative-tim.com
   </main>
 </template>
 <script>
+import '@/dist/bootstrap.min.js';
 import d$auth from '@/stores/auth.d';
 import Sidenav from '@/examples/Sidenav/index.vue';
 import Configurator from '@/examples/Configurator.vue';

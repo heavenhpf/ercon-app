@@ -94,8 +94,9 @@
               <td v-if="item.buttons.length">
                 <!-- Loop Through All Provided Actions -->
                 <button v-for="(button, j) in item.buttons.filter((d) => d.show)" :key="j" type="button"
-                  class="btn mt-1 m-1" :class="`btn-${button.color} btn-${button.size || 'sm'}`"
-                  :disabled="button.disabled" @click="emit(button.event, item.row)">
+                  class="btn mt-1 m-1"
+                  :class="`btn-${button.color} btn-${button.size || 'sm'}`" :disabled="button.disabled"
+                  @click="emit(button.event, item.row)">
                   {{ button.text }}
                 </button>
               </td>
@@ -113,10 +114,10 @@
           </tbody>
         </table>
       </div>
-      <div v-if="footer" class="row mx-2 my-3 d-flex align-items-center text-sm">
-        <div v-if="pageDetails" class="col-md-6">
-          <div class="showing me-10">
-            <!-- Current Page Starting Index --> Menampilkan
+      <div v-if="footer" class="row mx-2 my-3  d-flex align-items-center text-sm">
+        <div v-if="pageDetails" class="col-md-12">
+          <div class="showing me-5">Menampilkan
+            <!-- Current Page Starting Index -->
             {{
             paginatedItems.length ? itemsPerPage * (currentPage - 1) + 1 : 0
             }}

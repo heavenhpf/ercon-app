@@ -6,19 +6,41 @@
         </div>
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <div class="modal-title">
+                <h2 class="modal-title">Add New {{ pageTitle }}</h2>
+            </template>
+            <template v-if="modal.add" #body>
+                <div class="row">
+                    <div class="col-12">
+                        <argon-input pe="text" placeholder="Name" name="name" size="md">
+                        </argon-input>
+                    </div>
+                </div>
+            </template>
+            <template #footer>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
+                </argon-button>
+                <argon-button color="primary" @click="addInquiry()">
+                    Save Changes
+                </argon-button>
+            </template>
+        </modal-comp>
+        <modal-comp size="lg" v-model:show="modal.detail">
+            <template #header>
+                <div class="col-6 modal-title">
                     <h5>Serial Number</h5>
                     <div>
                         <h6 class="mt-2">{{ g$get_po_detail.d_order?.d_item.serial_number }}</h6>
                     </div>
                 </div>
-                <!-- <div class="mt-2" style="text-align:right; color:danger"><b>{{ g$get_po_detail.d_po?.deadline }}</b>
-                </div> -->
-                <div class="col-4">
-                    <p class="font-weight-bolder text-danger float-end">Deadline {{new
-                    Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", { weekday: 'long', year:
-                    'numeric', month:
-                    'long', day: 'numeric' })}}</p>
+                <div class="mt-3">
+                    <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
+                        Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
+                        weekday: 'long', year:
+                        'numeric', month:
+                        'long', day: 'numeric'
+                        })
+                        }}</p>
                 </div>
             </template>
 
@@ -40,19 +62,21 @@
                 </div>
             </template>
             <template #footer>
-                <div class="d-flex justify-content-start">
-                    <div style="margin-left: 10px;">
-                        <argon-button color="primary" @click="modal.detail = false">
-                            Cari PO
-                        </argon-button>
-                    </div>
-                    <argon-button color="danger" @click="editInquiry()">
-                        Kembali
+                <!-- <argon-button color="danger" @click="editInquiry()">
+                    Kembali
+                </argon-button> -->
+                <argon-button color="danger" @click="modal.detail = false">
+                    Kembali
+                </argon-button>
+                <div style="margin-left: 10px;">
+                    <argon-button color="primary" @click="modal.detail = false">
+                        Cari PO
                     </argon-button>
                 </div>
             </template>
         </modal-comp>
-        <modal-comp v-model:show="modal.confirm">
+
+        <!-- <modal-comp v-model:show="modal.confirm">
             <template #header>
                 <h3 class="modal-title">Confirm</h3>
             </template>
@@ -67,7 +91,7 @@
                 </argon-button>
                 <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
     </div>
 </template>
 
@@ -120,6 +144,9 @@ export default {
                 {
                     name: 'progress',
                     th: 'progress',
+                    render: ({ progress }) => {
+                        return `<progress  value="${progress}" max="1">${progress}%</progress>`
+                    }
                 },
             ],
             action: [
@@ -152,12 +179,13 @@ export default {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
 
-        async triggerDetail({ }) {
+        async triggerDetail({ id_po_detail, id_po }) {
             try {
-                // this.input={
-                //     serial_number: d_order.d_item.serial_number,
-                // }
-                await this.a$getPoDetail({ id_po_detail: 1, id_po: 1 });
+                this.filter_po_detail = {
+                    id_po: Number(id_po),
+                    id_po_detail: Number(id_po_detail)
+                }
+                await this.a$getPoDetail(this.filter_po_detail);
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

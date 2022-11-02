@@ -30,7 +30,8 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-6">
-                                <label for="example-text-input" class="form-control-label text-sm">Current Password</label>
+                                <label for="example-text-input" class="form-control-label text-sm">Current
+                                    Password</label>
                                 <argon-input v-model='input.cur_password' type="text" />
                             </div>
                             <div class="col-6">
@@ -156,4 +157,3 @@ export default {
     }
 };
 </script>
-  

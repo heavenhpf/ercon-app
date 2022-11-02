@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <h5 class="text-dark">Nomor PO:</h5>
-                    <div class="col-8 pb-0 text-start mb-3">
+                    <div class="col-8 pb-0 mb-3">
                         <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
                     </div>
                     <div class="col-4">
@@ -13,7 +13,7 @@
                         'long', day: 'numeric' })}}</p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-5">
                     <div class="col-8 pb-0 mb-3">
                         <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_toTos_company?.name }}
                         </h5>

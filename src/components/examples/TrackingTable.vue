@@ -34,9 +34,9 @@ import d$po from '@/stores/dashboard/po';
 import auth from '../../router/routes/auth';
 
 const statusPO = {
-    0: "Belum Deadline",
-    1: "Melewati Deadline",
-    2: "Progress Selesai"
+    '0': "Belum Deadline",
+    '-1': "Melewati Deadline",
+    '1': "Progress Selesai"
 }
 
 export default {
@@ -49,12 +49,11 @@ export default {
             name: '',
         },
         filter: {
-            tier: 1,
-            status: 1,
+            tier: 0,
 
         },
         filterDetail: {
-            id_po: 1,
+            id_po: 0,
         },
         // DataTable
         dt: {
@@ -79,12 +78,12 @@ export default {
                     name: 'status',
                     th: 'Status',
                     render: ({ status }) => {
-                        if (status == 0) {
+                        if(status == 0){
                             return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
-                        } else if (status == 1) {
-                            return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
-                        } else {
+                        }else if(status == 1){
                             return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
+                        }else{
+                            return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
                         }
                     }
                 },
@@ -191,7 +190,7 @@ export default {
                     id: id_po,
                 };
                 this.modal.detail = false;
-                this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
+                this.$router.push({ name: 'TrackingDetail', params: { id: id_po } })
                 console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);

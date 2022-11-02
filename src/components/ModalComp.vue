@@ -1,23 +1,43 @@
 <template>
-  <div v-show="show" class="modal fade" :class="[
-    { 'show d-block': show },
-    { 'd-none': !show },
-    { 'modal-mini': type === 'mini' },
-    { 'modal-dark': $store.darkMode },
-  ]" tabindex="-1" role="dialog" :aria-hidden="!show" @mousedown.self="closeHandler(true)">
-    <div class="modal-dialog modal-dialog-centered p-0" :class="[
-      { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
-      modalClasses,
-    ]">
-      <div class="modal-content" :class="[
-        gradient ? `bg-gradient-${gradient}` : '',
-        modalContentClasses,
-      ]">
+  <div
+    v-show="show"
+    class="modal fade"
+    :class="[
+      { 'show d-block': show },
+      { 'd-none': !show },
+      { 'modal-mini': type === 'mini' },
+      { 'modal-dark': $store.darkMode },
+    ]"
+    tabindex="-1"
+    role="dialog"
+    :aria-hidden="!show"
+    @mousedown.self="closeHandler(true)"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered"
+      :class="[
+        { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
+        modalClasses,
+      ]"
+    >
+      <div
+        class="modal-content"
+        :class="[
+          gradient ? `bg-gradient-${gradient}` : '',
+          modalContentClasses,
+        ]"
+      >
         <div v-if="$slots.header" class="modal-header align-items-center" :class="[headerClasses]">
           <slot name="header"></slot>
           <slot name="close-button">
-            <button v-if="showClose" type="button" class="close" data-dismiss="modal" aria-label="Close"
-              @click="closeHandler()">
+            <button
+              v-if="showClose"
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              @click="closeHandler()"
+            >
               <span :aria-hidden="!show">×</span>
             </button>
           </slot>
@@ -61,7 +81,7 @@ export default {
       type: String,
       description: 'Modal size',
       validator(value) {
-        const acceptedValues = ['', 'sm', 'lg', 'xl'];
+        const acceptedValues = ['', 'sm', 'lg'];
         return acceptedValues.indexOf(value) !== -1;
       },
       default: '',
@@ -129,37 +149,29 @@ export default {
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(.25rem);
-  margin-left: 120px;
 }
-
 .modal-dark .modal-content {
-  background-color: #1a1a1a !important;
+  background-color: #1a1a1a!important;
 
-  .modal-body,
-  .modal-footer {
-    border-top: 1px solid #3a3a3a !important;
+  .modal-body, .modal-footer {
+    border-top: 1px solid #3a3a3a!important;
 
   }
 
-  h3,
-  strong {
-    color: white !important;
+  h3, strong {
+    color: white!important;
   }
 
   p {
-    color: white !important;
+    color: white!important;
   }
 
-  // .close {
-  //   color: red;
-  // }
-
-  // .close > span:not(.sr-only) {
-  //   color: white!important;
-  // }
+  .close > span:not(.sr-only) {
+    color: white!important;
+  }
 
   label {
-    color: white !important;
+    color: white!important;
   }
 }
 </style>

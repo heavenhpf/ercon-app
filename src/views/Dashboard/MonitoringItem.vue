@@ -1,20 +1,45 @@
 <template>
-    <div class="py-4 container-fluid">
-        <div class="row">
-            <div>
-                <monitoring-table />
-            </div>
-        </div>
+    <div class="div">
+        <TableMonitoring />
     </div>
 </template>
-
 <script>
-import MonitoringTable from "@/components/examples/MonitoringTable.vue";
+import Card2 from "@/examples/Cards/Card2.vue";
+import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
+import Carousel from "@/components/examples//Carousel.vue";
+import CategoriesCard from "@/components/examples/CategoriesCard.vue";
+import TableMonitoring from "@/components/examples/TableMonitoring.vue";
+
+import US from "@/assets/img/icons/flags/US.png";
+import DE from "@/assets/img/icons/flags/DE.png";
+import GB from "@/assets/img/icons/flags/GB.png";
+import BR from "@/assets/img/icons/flags/BR.png";
 
 export default {
-    name: "monitoring-item",
+    name: "tracking-saya",
+    data() {
+        return {
+            stats: {
+                belum: {
+                    title: "Belum Deadline",
+                    value: "60",
+                    cardBackground: "bg-primary",
+                },
+                lewat: {
+                    title: "Lewat Deadline",
+                    value: "20",
+                    cardBackground: "bg-warning",
+                },
+            },
+            data: [],
+        };
+    },
     components: {
-        MonitoringTable,
+        Card2,
+        GradientLineChart,
+        Carousel,
+        CategoriesCard,
+        TableMonitoring,
     },
 };
 </script>
