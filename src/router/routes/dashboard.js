@@ -9,24 +9,6 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'tracking-tier-bawah',
-      name: 'Tracking Tier Bawah',
-      component: () => import('@/views/Dashboard/TrackingTierBawah.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'tracking-saya',
-      name: 'Tracking Saya',
-      component: () => import('@/views/Dashboard/TrackingSaya.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'tracking-detail/:id',
-      name: 'TrackingDetail',
-      component: () => import('@/views/Dashboard/TrackingDetail.vue'),
-      meta: { auth: true },
-    },
-    {
       path: 'monitoring-item',
       name: 'Monitoring Item',
       component: () => import('@/views/Dashboard/MonitoringItem.vue'),

@@ -14,21 +14,21 @@
         </h6>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''" navText="Tracking Tier Bawah">
+        <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''" navText="Tracking Tier Bawah">
           <template v-slot:icon>
             <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''" navText="Tracking Saya">
+        <sidenav-item url="/tracking/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''" navText="Tracking Saya">
           <template v-slot:icon>
             <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/dashboard/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''" navText="Pesanan Masuk">
+        <sidenav-item url="/tracking/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''" navText="Pesanan Masuk">
           <template v-slot:icon>
             <i class="fa fa-tasks mb-2 text-success text-sm opacity-10"></i>
           </template>

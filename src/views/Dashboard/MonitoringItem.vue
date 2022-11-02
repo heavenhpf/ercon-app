@@ -10,11 +10,6 @@ import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TableMonitoring from "@/components/examples/TableMonitoring.vue";
 
-import US from "@/assets/img/icons/flags/US.png";
-import DE from "@/assets/img/icons/flags/DE.png";
-import GB from "@/assets/img/icons/flags/GB.png";
-import BR from "@/assets/img/icons/flags/BR.png";
-
 export default {
     name: "tracking-saya",
     data() {
