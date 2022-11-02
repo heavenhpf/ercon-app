@@ -130,7 +130,7 @@ const tier = {
 }
 
 export default {
-    name: 'po',
+    name: 'ajukan-po',
     data: () => ({
         pageTitle: 'po',
         // Input

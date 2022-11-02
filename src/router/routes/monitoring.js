@@ -1,4 +1,4 @@
-const dashboard = {
+const monitoring = {
     path: '/monitoring',
     name: 'Monitoring',
     children: [
@@ -23,4 +23,4 @@ const dashboard = {
     ],
 };
 
-export default dashboard;
+export default monitoring;

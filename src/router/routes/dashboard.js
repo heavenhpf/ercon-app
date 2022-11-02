@@ -9,12 +9,6 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'ajukan-po',
-      name: 'Ajukan PO',
-      component: () => import('@/views/Dashboard/AjukanPO.vue'),
-      meta: { auth: true },
-    },
-    {
       path: 'company',
       name: 'List Perusahaan',
       component: () => import('@/views/Dashboard/Company.vue'),

@@ -1,4 +1,4 @@
-const dashboard = {
+const tracking = {
     path: '/tracking',
     name: 'Tracking',
     children: [
@@ -16,11 +16,11 @@ const dashboard = {
         },
         {
             path: 'tracking-detail/:id',
-            name: 'TrackingDetail',
+            name: 'Tracking Detail',
             component: () => import('@/views/Tracking/TrackingDetail.vue'),
             meta: { auth: true },
         },
     ],
 };
 
-export default dashboard;
+export default tracking;
