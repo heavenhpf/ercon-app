@@ -15,6 +15,16 @@
                     </div>
                 </div>
             </div>
+            <div class="pb-0 row mb-lg-3 mb-2">
+                <router-link to="/monitoring/tambah-item" tag="button">
+                    <span>
+                        <argon-button size="md me-2" color="primary">
+                            <span class="fa fa-plus fa-sm me-2" />
+                            Tambah Item
+                        </argon-button>
+                    </span>
+                </router-link>
+            </div>
             <div>
                 <TableMonitoring />
             </div>

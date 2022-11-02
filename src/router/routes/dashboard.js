@@ -9,24 +9,6 @@ const dashboard = {
       meta: { auth: true },
     },
     {
-      path: 'monitoring-item',
-      name: 'Monitoring Item',
-      component: () => import('@/views/Dashboard/MonitoringItem.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'gudang-saya',
-      name: 'Gudang Saya',
-      component: () => import('@/views/Dashboard/GudangSaya.vue'),
-      meta: { auth: true },
-    },
-    {
-      path: 'tambah-item',
-      name: 'Tambah Item',
-      component: () => import('@/views/Dashboard/TambahItem.vue'),
-      meta: { auth: true },
-    },
-    {
       path: 'ajukan-po',
       name: 'Ajukan PO',
       component: () => import('@/views/Dashboard/AjukanPO.vue'),
