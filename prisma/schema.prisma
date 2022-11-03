@@ -145,6 +145,8 @@ model s_company {
   deleted_at                            DateTime?  @db.DateTime(0)
   auth_user                             auth_user  @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "s_company_ibfk_1")
   d_item                                d_item[]
+  d_notification_change                 d_notification_change[]
+  d_notification                        d_notification[]
   d_order_d_order_order_fromTos_company d_order[]  @relation("d_order_order_fromTos_company")
   d_order_d_order_order_toTos_company   d_order[]  @relation("d_order_order_toTos_company")
   d_po_d_po_order_fromTos_company       d_po[]     @relation("d_po_order_fromTos_company")
@@ -171,4 +173,38 @@ model ref_category {
   created_at  DateTime  @default(now()) @db.DateTime(0)
   deleted_at  DateTime? @db.DateTime(0)
   d_item      d_item[]
+}
+
+model d_notification_object {
+  id_notification_object  Int       @id @default(autoincrement())
+  entity_type             Int
+  entity_id               Int
+  status                  Int       @db.TinyInt
+  created_at              DateTime  @default(now()) @db.DateTime(0)
+  d_notification_change   d_notification_change[]
+  d_notification          d_notification[]
+}
+
+model d_notification_change {
+  id_notification_change  Int                     @id @default(autoincrement())
+  id_notification_object  Int
+  id_company              Int
+  status                  Int                     @db.TinyInt
+  d_notification_object   d_notification_object   @relation(fields: [id_notification_object], references: [id_notification_object], onDelete: Cascade, map: "d_notification_change_ibfk_1")
+  s_company               s_company               @relation(fields: [id_company], references: [id_company], onDelete: Cascade, map: "d_notification_change_ibfk_2")
+
+  @@index([id_notification_object], map: "id_notification_object")
+  @@index([id_company], map: "id_company")
+}
+
+model d_notification {
+  id_notification         Int                     @id @default(autoincrement())
+  id_notification_object  Int
+  id_company              Int
+  status                  Int                     @db.TinyInt
+  d_notification_object   d_notification_object   @relation(fields: [id_notification_object], references: [id_notification_object], onDelete: Cascade, map: "d_notification_ibfk_1")
+  s_company               s_company               @relation(fields: [id_company], references: [id_company], onDelete: Cascade, map: "d_notification_ibfk_2")
+
+  @@index([id_notification_object], map: "id_notification_object")
+  @@index([id_company], map: "id_company")
 }

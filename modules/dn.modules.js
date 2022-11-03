@@ -1,5 +1,6 @@
 const prisma = require('../helpers/database')
 const Joi = require('joi')
+const { notify } = require('../helpers/notification')
 
 class _dn {
     addDn = async (id_user, body) => {
@@ -143,6 +144,8 @@ class _dn {
                     finished_at: new Date(Date.now())
                 }
             })
+
+            await notify(2, add.id_dn, checkCompany.id_company, checkPo.order_from)
 
             return {
                 status: true,

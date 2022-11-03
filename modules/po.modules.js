@@ -1,5 +1,6 @@
 const prisma = require('../helpers/database')
 const Joi = require('joi')
+const { notify } = require('../helpers/notification')
 
 class _po {
     listAllPo = async (level, tier, status) => {
@@ -661,6 +662,8 @@ class _po {
                     }
                 })
             })
+
+            await notify(1, add.id_po, add.order_from, add.order_to)
 
             return {
                 status: true,
