@@ -57,19 +57,11 @@ class _dashboard {
         }
     }
 
-    countPoStatus = async (id_user, status) => {
+    countPoStatus = async (id_user) => {
         try {
-            const body = {
-                id_user,
-                status
-            }
+            const schema = Joi.number().required()
 
-            const schema = Joi.object({
-                id_user: Joi.number().required(),
-                status: Joi.number().required()
-            })
-
-            const validation = schema.validate(body)
+            const validation = schema.validate(id_user)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -99,17 +91,37 @@ class _dashboard {
                 }
             }
 
-            const count = await prisma.d_po.count({
+            const countDeadline = await prisma.d_po.count({
                 where: {
                     order_from: checkCompany.id_company,
-                    status: body.status,
+                    status: -1,
+                    deleted_at: null
+                }
+            })
+
+            const countProgress = await prisma.d_po.count({
+                where: {
+                    order_from: checkCompany.id_company,
+                    status: 0,
+                    deleted_at: null
+                }
+            })
+
+            const countDone = await prisma.d_po.count({
+                where: {
+                    order_from: checkCompany.id_company,
+                    status: 1,
                     deleted_at: null
                 }
             })
 
             return {
                 status: true,
-                data: count
+                data: {
+                    deadline: countDeadline,
+                    progress: countProgress,
+                    done: countDone
+                }
             }
         } catch (error) {
             console.error('countPoStatus module error: ', error)
@@ -176,19 +188,11 @@ class _dashboard {
         }
     }
 
-    countIncomingPoStatus = async (id_user, status) => {
+    countIncomingPoStatus = async (id_user) => {
         try {
-            const body = {
-                id_user,
-                status
-            }
+            const schema = Joi.number().required()
 
-            const schema = Joi.object({
-                id_user: Joi.number().required(),
-                status: Joi.number().required()
-            })
-
-            const validation = schema.validate(body)
+            const validation = schema.validate(id_user)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -218,17 +222,37 @@ class _dashboard {
                 }
             }
 
-            const count = await prisma.d_po.count({
+            const countDeadline = await prisma.d_po.count({
                 where: {
                     order_to: checkCompany.id_company,
-                    status: body.status,
+                    status: -1,
+                    deleted_at: null
+                }
+            })
+
+            const countProgress = await prisma.d_po.count({
+                where: {
+                    order_to: checkCompany.id_company,
+                    status: 0,
+                    deleted_at: null
+                }
+            })
+
+            const countDone = await prisma.d_po.count({
+                where: {
+                    order_to: checkCompany.id_company,
+                    status: 1,
                     deleted_at: null
                 }
             })
 
             return {
                 status: true,
-                data: count
+                data: {
+                    deadline: countDeadline,
+                    progress: countProgress,
+                    done: countDone
+                }
             }
         } catch (error) {
             console.error('countIncomingPoStatus module error: ', error)

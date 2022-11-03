@@ -1927,21 +1927,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/dashboard/count/incoming_po/:status",
+							"raw": "{{url}}/dashboard/count/po/status",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"dashboard",
 								"count",
-								"incoming_po",
-								":status"
-							],
-							"variable": [
-								{
-									"key": "status",
-									"value": "1"
-								}
+								"po",
+								"status"
 							]
 						}
 					},
@@ -1992,21 +1986,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/dashboard/count/po/:status",
+							"raw": "{{url}}/dashboard/count/incoming_po/status",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"dashboard",
 								"count",
-								"po",
-								":status"
-							],
-							"variable": [
-								{
-									"key": "status",
-									"value": "1"
-								}
+								"incoming_po",
+								"status"
 							]
 						}
 					},

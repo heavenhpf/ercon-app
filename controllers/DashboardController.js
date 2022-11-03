@@ -9,16 +9,16 @@ app.get('/count/po', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.countPo(req.user.id))
 })
 
-app.get('/count/po/:status', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.countPoStatus(req.user.id, Number(req.params.status)))
+app.get('/count/po/status', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.countPoStatus(req.user.id))
 })
 
 app.get('/count/incoming_po', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.countIncomingPo(req.user.id))
 })
 
-app.get('/count/incoming_po/:status', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.countIncomingPoStatus(req.user.id, Number(req.params.status)))
+app.get('/count/incoming_po/status', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.countIncomingPoStatus(req.user.id))
 })
 
 app.get('/count/dn', userSession, async (req, res, next) => {
