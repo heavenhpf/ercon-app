@@ -1,7 +1,10 @@
 <template>
     <div class="py-4 container-fluid">
         <div class="row">
-            <div class="p-4 col-lg-12 mb-3">
+            <div class="pb-0 text-start">
+                <h4 class="font-weight-bolder text-dark">Pesanan Masuk</h4>
+            </div>
+            <div class="p-4 col-lg-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
                         <card2 :title="stats.belum.title" :value="stats.belum.value"
@@ -22,9 +25,6 @@
                         </card2>
                     </div>
                 </div>
-            </div>
-            <div class="pb-0 text-start mb-3">
-                <h4 class="font-weight-bolder text-dark">Pesanan Masuk</h4>
             </div>
             <div>
                 <PesananMasukTable />

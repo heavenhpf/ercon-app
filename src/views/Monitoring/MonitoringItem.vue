@@ -1,6 +1,13 @@
 <template>
-    <div class="div">
-        <TableMonitoring />
+    <div class="py-4 container-fluid">
+        <div class="row">
+            <div class="pb-0 text-start mb-3">
+                <h4 class="font-weight-bolder text-dark">Monitoring Item</h4>
+            </div>
+            <div class="div">
+                <TableMonitoring />
+            </div>
+        </div>
     </div>
 </template>
 <script>

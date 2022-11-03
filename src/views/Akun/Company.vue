@@ -2,7 +2,7 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="pb-0 text-start mb-3">
-                <h4 class="font-weight-bolder text-dark">Company List</h4>
+                <h4 class="font-weight-bolder text-dark">List Perusahaan</h4>
             </div>
             <div class="pb-0 row mb-lg-3 mb-2">
                 <div class="col-lg-8 col-md-9">
