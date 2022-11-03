@@ -5,6 +5,7 @@ const d$po = defineStore({
     id: 'po',
     state: () => ({
         list_po: [],
+        list_my_po: [],
         list_po_detail: [],
         get_po_detail: {},
         po: {},
@@ -17,6 +18,17 @@ const d$po = defineStore({
                 this.status = null;
                 const { data, status } = await s$po.listAllPo(options);
                 this.list_po = data ?? [];
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$listMyPo(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$po.listMyPo(options);
+                this.list_my_po = data ?? [];
                 this.status = status;
             } catch ({ error, message }) {
                 this.status = false;
@@ -85,6 +97,7 @@ const d$po = defineStore({
         g$po: ({ po }) => po,
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
         g$list_po: ({ list_po }) => list_po,
+        g$list_my_po: ({ list_my_po }) => list_my_po,
         g$get_po_detail: ({ get_po_detail }) => get_po_detail,
         g$detail: ({ detail }) => detail,
     },
