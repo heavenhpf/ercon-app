@@ -75,7 +75,7 @@ class _po {
                 })
             }
 
-            list.forEach(function (item) {
+            list.forEach((item) => {
                 let result = 0
 
                 item.d_po_detail.forEach(function (item2) {
@@ -84,6 +84,9 @@ class _po {
 
                 result = result / item.d_po_detail.length
                 item.progress = result
+
+                const diff = new Date() - item.deadline
+                item.day_count = Math.ceil(diff / (1000 * 60 * 60 * 24))
             })
 
             return {
@@ -161,7 +164,7 @@ class _po {
                 })
             }
 
-            list.forEach(function (item) {
+            list.forEach((item) => {
                 let result = 0
 
                 item.d_po_detail.forEach(function (item2) {
@@ -170,6 +173,9 @@ class _po {
 
                 result = result / item.d_po_detail.length
                 item.progress = result
+
+                const diff = new Date() - item.deadline
+                item.day_count = Math.ceil(diff / (1000 * 60 * 60 * 24))
             })
 
             return {
@@ -247,7 +253,7 @@ class _po {
                 })
             }
 
-            list.forEach(function (item) {
+            list.forEach((item) => {
                 let result = 0
 
                 item.d_po_detail.forEach(function (item2) {
@@ -256,6 +262,9 @@ class _po {
 
                 result = result / item.d_po_detail.length
                 item.progress = result
+
+                const diff = new Date() - item.deadline
+                item.day_count = Math.ceil(diff / (1000 * 60 * 60 * 24))
             })
 
             return {
