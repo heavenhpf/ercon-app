@@ -15,38 +15,39 @@
                         <div class="row">
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Item</label>
-                                <argon-input type="text" />
+                                <argon-input v-model='input.serial_number' type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nama Item</label>
-                                <argon-input type="text" />
+                                <argon-input v-model='input.name' type="text" />
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Kategori Item</label>
-                                <argon-input type="text" />
+                                <argon-input v-model.number='input.id_category' type="number" />
                             </div>
                             <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Deskripsi Item</label>
-                                <argon-textarea type="text" />
+                                <label for="example-text-input" class="form-control-label text-sm">Deskripsi
+                                    Item</label>
+                                <argon-input v-model='input.desc' type="text" />
                             </div>
                             <div class="mb-2 col-6">
                                 <label for="example-text-input" class="form-control-label text-sm">Jumlah Item</label>
-                                <argon-input type="number" />
+                                <argon-input v-model.number='input.quantity' type="number" />
                             </div>
                             <div class="mb-2 col-6">
                                 <label for="example-text-input" class="form-control-label text-sm">Satuan</label>
-                                <argon-input type="text" />
+                                <argon-input v-model='input.unit' type="text" />
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
-                                <argon-button size="md" color="warning" class="me-2">
-                                    Kembali
-                                </argon-button>
+                                    <argon-button size="md" color="warning" class="me-2">
+                                        Kembali
+                                    </argon-button>
                                 </span>
                             </router-link>
-                            <argon-button size="md" color="primary">
+                            <argon-button @click="addInquiry()" size="md" color="primary" data-bs-toggle="modal">
                                 Tambah
                             </argon-button>
                         </div>
@@ -82,29 +83,22 @@ import ArgonRadio from "@/components/ArgonRadio.vue";
 import ArgonAlert from "@/components/ArgonAlert.vue";
 import ArgonTextarea from "@/components/ArgonTextarea.vue";
 
-import d$user from '@/stores/dashboard/user';
+import d$item from '@/stores/dashboard/item';
 import { mapActions, mapState } from 'pinia';
 
-const tier = {
-    0: "admin",
-    1: "Tier 1",
-    2: "Tier 2",
-    3: "Tier 3",
-}
 
 export default {
     name: 'tambah-item',
     data: () => ({
-        pageTitle: 'add-company',
+        pageTitle: 'tambah-item',
         // Input
         input: {
-            id: null,
-            username: '',
-            password: '',
+            id_category: null,
             name: '',
-            level: '',
-            alamat: '',
-            phone: '',
+            desc: '',
+            serial_number: '',
+            quantity: null,
+            unit: '',
         },
         // dt: {
         //     action: [
@@ -138,101 +132,108 @@ export default {
     },
 
     computed: {
-        ...mapState(d$user, ['g$list', 'g$detail']),
+        ...mapState(d$item, ['g$list', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
-    async mounted() {
-        await this.a$inquiryList();
-    },
+    // async mounted() {
+    //     await this.a$inquiryAdd();
+    // },
     methods: {
-        ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
+        ...mapActions(d$item, ['a$inquiryAdd']),
 
         clear() {
             this.input = {
-                id: null,
+                id_category: null,
                 name: '',
-                username: '',
-                level: '',
+                desc: '',
+                serial_number: null,
+                quantity: null,
             };
         },
 
-        async init() {
-            try {
-                await this.a$inquiryList();
-            } catch (e) {
-                console.error(e);
-            }
-        },
+        // async init() {
+        //     try {
+        //         await this.a$inquiryAdd();
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
 
         async addInquiry() {
             try {
-                const { username, password, name, level, address, phone } = this.input;
+                const { id_category, name, desc, serial_number, quantity, unit } = this.input;
                 const data = {
-                    username, password, level: parseInt(level), name, address, phone
+                    id_category, name, desc, serial_number, quantity, unit
                 };
+                console.log(data)
                 await this.a$inquiryAdd(data);
+
                 this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
+
+                // console.log(`Add ${this.pageTitle} Succeed!`);
             } catch (e) {
                 console.error(e);
             } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name, address, phone } = this.input;
-                const data = {
-                    name,
-                    address, phone
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id_user } = this.input;
-                await this.a$inquiryDel(id_user);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
+                // await this.init();
             }
         },
 
-        async triggerDetail({ id_user, name, address, phone }) {
-            try {
-                this.input = {
-                    id: id_user,
-                    name,
-                    address,
-                    phone,
-                };
-                this.modal.detail = true;
-            } catch (e) {
-                console.error(e);
-            }
-        },
-        async triggerDelete({ id_user }) {
-            try {
-                this.input = {
-                    id_user
-                };
-                this.modal.confirm = true;
-            } catch (e) {
-                console.error(e);
-            }
-        },
+        // async editInquiry() {
+        //     try {
+        //         const { id, name, address, phone } = this.input;
+        //         const data = {
+        //             name,
+        //             address, phone
+        //         };
+        //         await this.a$inquiryEdit(id, data);
+        //         this.modal.detail = false;
+        //         console.log(`Edit ${this.pageTitle} Succeed!`);
+        //     } catch (e) {
+        //         console.error(e);
+        //     } finally {
+        //         await this.init();
+        //     }
+        // },
+
+        // async delInquiry() {
+        //     try {
+        //         const { id_user } = this.input;
+        //         await this.a$inquiryDel(id_user);
+        //         this.modal.confirm = false;
+        //         console.log(`Delete ${this.pageTitle} Succeed!`);
+        //     } catch (e) {
+        //         console.error(e);
+        //     } finally {
+        //         await this.init();
+        //     }
+        // },
+
+        // async triggerDetail({ id_user, name, address, phone }) {
+        //     try {
+        //         this.input = {
+        //             id: id_user,
+        //             name,
+        //             address,
+        //             phone,
+        //         };
+        //         this.modal.detail = true;
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
+
+        // async triggerDelete({ id_user }) {
+        //     try {
+        //         this.input = {
+        //             id_user
+        //         };
+        //         this.modal.confirm = true;
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
     },
     watch: {
         modals(val) {

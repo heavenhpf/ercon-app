@@ -1,13 +1,18 @@
 <template>
-  <div class="mb-4 card" :class="cardBackground">
-    <div class="p-4 card-body">
-      <div class="d-flex">
-        <div class="row" :class="contentClass">
+  <div class="card" :class="cardBackground">
+    <div class="card-body p-2">
+      <div class="row" :class="contentClass">
+        <div class="p-4 col-9">
           <p class="mb-0 text-md text-white font-weight-bold" :class="titleColor">{{ title }}</p>
-          <h2 class="mb-0 text-white font-weight-bolder" :class="valueColor">{{ value }}</h2>
-          <!-- <span class="text-sm"  :class="percentageColor">{{ percentage }}</span> 
-                {{detail}} -->
+          <h2 class="mb-0 text-xxl text-white font-weight-bolder" :class="valueColor">{{ value }}</h2>
         </div>
+        <div class="p-1 col-3 mt-2">
+          <div class="text-center icon icon-shape">
+            <i class="fa-6x opacity-9" :class="iconClass" aria-hidden="true"></i>
+          </div>
+        </div>
+        <!-- <span class="text-sm"  :class="percentageColor">{{ percentage }}</span> 
+                {{detail}} -->
       </div>
     </div>
   </div>
@@ -15,7 +20,7 @@
   
 <script>
 export default {
-  name: "card2",
+  name: "card3",
   data() {
     return {
       reverseDirection: "flex-row-reverse justify-content-between",
@@ -59,6 +64,10 @@ export default {
     },
     contentClass: {
       type: String,
+    },
+    iconClass: {
+      type: String,
+      required: true,
     },
   },
 };

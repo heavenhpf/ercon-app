@@ -190,7 +190,7 @@ export default {
                     id: id_po,
                 };
                 this.modal.detail = false;
-                this.$router.push({ name: 'TrackingDetail', params: { id: id_po } })
+                this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
                 console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);

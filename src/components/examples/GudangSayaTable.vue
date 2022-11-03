@@ -37,7 +37,7 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'monitoring-table',
+        pageTitle: 'gudang-saya-table',
         // Input
         input: {
             id: null,

@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class=" col-9 row">
+            <div class="col-9 row">
                 <div class="col-4 mt-4 ms-4">
                     <label>Filter Tier</label>
                     <select v-model.number="filterTier.selectedTier" @change="triggerOptions()" class="form-select form-select-md mb-3" aria-label=".form-select-lg example" placeholder="-- Tier --">

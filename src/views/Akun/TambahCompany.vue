@@ -56,6 +56,13 @@
                         <div class="col-lg-8 col-md-9">
                             <router-link to="/akun/company" tag="button">
                                 <span>
+                                    <argon-button size="md" color="warning" class="me-2">
+                                        Kembali
+                                    </argon-button>
+                                </span>
+                            </router-link>
+                            <router-link to="/akun/company" tag="button">
+                                <span>
                                     <argon-button @click="addInquiry()" size="md" color="primary">
                                         Tambah
                                     </argon-button>
@@ -173,58 +180,6 @@ export default {
                 console.error(e);
             } finally {
                 await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name, address, phone } = this.input;
-                const data = {
-                    name,
-                    address, phone
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id_company } = this.input;
-                await this.a$inquiryDel(id_company);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-
-        async triggerDetail({ id_user, name, address, phone }) {
-            try {
-                this.input = {
-                    id: id_user,
-                    name,
-                    address,
-                    phone,
-                };
-                this.modal.detail = true;
-            } catch (e) {
-                console.error(e);
-            }
-        },
-        async triggerDelete({ id_company }) {
-            try {
-                this.input = {
-                    id_company
-                };
-                this.modal.confirm = true;
-            } catch (e) {
-                console.error(e);
             }
         },
     },

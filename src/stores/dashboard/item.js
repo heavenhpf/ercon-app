@@ -26,7 +26,7 @@ const d$item = defineStore({
             try {
                 this.status = null;
                 const { data, status } = await s$item.listMyItem(options);
-                this.myItem= data ?? {};
+                this.myItem = data ?? {};
                 this.status = status;
                 console.log(this.myItem);
             } catch ({ error, message }) {
@@ -47,13 +47,13 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
-        // async a$inquiryAdd(body) {
-        //     try {
-        //         await s$item.add(body);
-        //     } catch ({ error, message }) {
-        //         throw error ?? message;
-        //     }
-        // },
+        async a$inquiryAdd(body) {
+            try {
+                await s$item.addItem(body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         async a$inquiryEdit(id, body) {
             try {
                 await s$item.update(id, body);
@@ -73,8 +73,8 @@ const d$item = defineStore({
         g$status: ({ status }) => status,
         g$listItem: ({ listItem }) => listItem,
         g$label: ({ label }) => label,
-        g$item : ({ item }) => item,
-        g$myItem : ({ myItem }) => myItem,
+        g$item: ({ item }) => item,
+        g$myItem: ({ myItem }) => myItem,
         // g$detail: ({ detail }) => detail,
     },
 });

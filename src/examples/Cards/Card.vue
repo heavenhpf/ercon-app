@@ -55,7 +55,6 @@ export default {
     valueColor: {
       type: String,
     },
-    percentage: String,
     iconClass: {
       type: String,
       required: true,
