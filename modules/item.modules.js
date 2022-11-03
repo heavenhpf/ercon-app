@@ -307,19 +307,11 @@ class _item {
         }
     }
 
-    getItemDetail = async (id_item, id_item_detail) => {
+    getItemDetail = async (id_item_detail) => {
         try {
-            const body = {
-                id_item,
-                id_item_detail
-            }
+            const schema = Joi.number().required()
 
-            const schema = Joi.object({
-                id_item: Joi.number().required(),
-                id_item_detail: Joi.number().required()
-            })
-
-            const validation = schema.validate(body)
+            const validation = schema.validate(id_item_detail)
     
             if (validation.error) {
                 const errorDetails = validation.error.details.map(detail => detail.message)
@@ -331,14 +323,23 @@ class _item {
                 }
             }
 
-            const check = await prisma.d_item.findFirst({
+            const checkItemDetail = await prisma.d_item_detail.findUnique({
                 where: {
-                    id_item: body.id_item,
+                    id_item_detail
+                },
+                select: {
+                    id_item: true
+                }
+            })
+
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_item: checkItemDetail.id_item,
                     deleted_at: null
                 }
             })
 
-            if (!check) {
+            if (!(checkItemDetail && checkItem)) {
                 return {
                     status: false,
                     code: 404,
@@ -346,10 +347,9 @@ class _item {
                 }
             }
 
-            const get = await prisma.d_item_detail.findFirst({
+            const get = await prisma.d_item_detail.findUnique({
                 where: {
-                    id_item_detail: body.id_item_detail,
-                    id_item: body.id_item
+                    id_item_detail,
                 },
                 include: {
                     d_po_detail: {
@@ -373,7 +373,7 @@ class _item {
             return {
                 status: true,
                 data: {
-                    item: check,
+                    item: checkItem,
                     label: get
                 }
             }
@@ -637,18 +637,16 @@ class _item {
         }
     }
 
-    editItemQuantity = async (id_user, id_item, id_item_detail, body) => {
+    editItemQuantity = async (id_user, id_item_detail, body) => {
         try {
             body = {
                 id_user,
-                id_item,
                 id_item_detail,
                 ...body
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                id_item: Joi.number().required(),
                 id_item_detail: Joi.number().required(),
                 is_buffer: Joi.bool().required(),
                 quantity: Joi.number().required()
@@ -676,22 +674,23 @@ class _item {
                 }
             })
 
-            const checkItem = await prisma.d_item.findFirst({
-                where: {
-                    id_item: body.id_item,
-                    deleted_at: null
-                },
-                select: {
-                    quantity: true
-                }
-            })
-
-            const checkItemDetail = await prisma.d_item_detail.findFirst({
+            const checkItemDetail = await prisma.d_item_detail.findUnique({
                 where: {
                     id_item_detail: body.id_item_detail
                 },
                 select: {
+                    id_item: true,
                     id_po_detail: true
+                }
+            })
+
+            const checkItem = await prisma.d_item.findFirst({
+                where: {
+                    id_item: checkItemDetail.id_item,
+                    deleted_at: null
+                },
+                select: {
+                    quantity: true
                 }
             })
 
@@ -732,7 +731,7 @@ class _item {
                     return {
                         status: false,
                         code: 403,
-                        error: "Buffer not enough"
+                        error: "Buffer is not enough"
                     }
                 }
             }
@@ -757,7 +756,7 @@ class _item {
             if (body.is_buffer) {
                 await prisma.d_item.update({
                     where: {
-                        id_item: body.id_item
+                        id_item: checkItemDetail.id_item
                     },
                     data: {
                         quantity: (checkItem.quantity - body.quantity)

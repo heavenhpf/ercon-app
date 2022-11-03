@@ -13,12 +13,12 @@ app.put('/item/:id_item', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.editBufferQuantity(req.user.id, Number(req.params.id_item), req.body))
 })
 
-app.get('/item/:id_item/:id_item_detail', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.getItemDetail(Number(req.params.id_item), Number(req.params.id_item_detail)))
+app.get('/item/detail/:id_item_detail', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.getItemDetail(Number(req.params.id_item_detail)))
 })
 
-app.put('/item/:id_item/:id_item_detail', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.editItemQuantity(req.user.id, Number(req.params.id_item), Number(req.params.id_item_detail), req.body))
+app.put('/item/detail/:id_item_detail', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.editItemQuantity(req.user.id, Number(req.params.id_item_detail), req.body))
 })
 
 app.get('/my/:category?', userSession, async (req, res, next) => {

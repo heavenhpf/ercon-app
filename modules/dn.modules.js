@@ -41,6 +41,10 @@ class _dn {
                 where: {
                     id_po: body.id_po,
                     order_to: checkCompany.id_company,
+                    status: {
+                        not: 1
+                    },
+                    finished_at: null,
                     deleted_at: null
                 }
             })

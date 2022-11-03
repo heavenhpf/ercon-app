@@ -1058,25 +1058,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/item/:id_item/:id_item_detail",
+							"raw": "{{url}}/items/item/detail/:id_item_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								":id_item",
+								"detail",
 								":id_item_detail"
 							],
 							"variable": [
 								{
-									"key": "id_item",
-									"value": "1"
-								},
-								{
 									"key": "id_item_detail",
-									"value": "1",
-									"description": "optional"
+									"value": "1"
 								}
 							]
 						}
@@ -1221,21 +1216,17 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/items/item/:id_item/:id_item_detail",
+							"raw": "{{url}}/items/item/detail/:id_item_detail",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"items",
 								"item",
-								":id_item",
+								"detail",
 								":id_item_detail"
 							],
 							"variable": [
-								{
-									"key": "id_item",
-									"value": "1"
-								},
 								{
 									"key": "id_item_detail",
 									"value": "1"
@@ -1922,6 +1913,71 @@
 				},
 				{
 					"name": "COUNT PO STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/incoming_po/:status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"incoming_po",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "status",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT INCOMING PO",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/dashboard/count/incoming_po",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"dashboard",
+								"count",
+								"incoming_po"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COUNT INCOMING PO STATUS",
 					"request": {
 						"auth": {
 							"type": "bearer",

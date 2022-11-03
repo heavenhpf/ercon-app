@@ -2,14 +2,16 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _po {
-    listAllPo = async (tier, status) => {
+    listAllPo = async (level, tier, status) => {
         try {
             const body = {
+                level,
                 tier,
                 status: isFinite(status)? status : undefined
             }
 
             const schema = Joi.object({
+                level: Joi.number().required(),
                 tier: Joi.number().required(),
                 status: Joi.number()
             })
@@ -23,6 +25,14 @@ class _po {
                     status: false,
                     code: 422,
                     error: errorDetails.join(', ')
+                }
+            }
+
+            if (body.tier <= body.level) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "Forbidden"
                 }
             }
 
@@ -561,7 +571,9 @@ class _po {
                 const check = await prisma.d_order.findFirst({
                     where: {
                         id_order: o.id_order,
-                        processed: false
+                        order_to: body.order_to,
+                        processed: false,
+                        deleted_at: null
                     },
                     select: {
                         id_order: true

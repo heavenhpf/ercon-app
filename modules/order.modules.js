@@ -67,16 +67,18 @@ class _order {
         }
     }
 
-    addOrder = async (id_user, id_item, body) => {
+    addOrder = async (id_user, level, id_item, body) => {
         try {
             body = {
                 id_user,
+                level,
                 id_item,
                 ...body
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
+                level: Joi.number().required(),
                 id_item: Joi.number().required(),
                 order_number: Joi.string().required(),
                 quantity: Joi.number().required()
@@ -110,7 +112,16 @@ class _order {
                     deleted_at: null
                 },
                 select: {
-                    id_company: true
+                    id_company: true,
+                    s_company: {
+                        select: {
+                            auth_user: {
+                                select: {
+                                    level: true
+                                }
+                            }
+                        }
+                    }
                 }
             })
 
@@ -119,6 +130,12 @@ class _order {
                     status: false,
                     code: 404,
                     error: "Data not found"
+                }
+            } else if (checkItem.s_company.auth_user.level - body.level !== 1) {
+                return {
+                    status: false,
+                    code: 403,
+                    error: "Forbidden"
                 }
             }
 
