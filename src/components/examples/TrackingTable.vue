@@ -31,10 +31,10 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
-// import auth from '../../router/routes/auth';
+import auth from '../../router/routes/auth';
 
 const statusPO = {
-    '0': "Sedang Diproses",
+    '0': "Belum Deadline",
     '-1': "Melewati Deadline",
     '1': "Progress Selesai"
 }
@@ -53,7 +53,7 @@ export default {
 
         },
         filterDetail: {
-            id_po: 0,
+            id_po: 1,
         },
         // DataTable
         dt: {
@@ -64,7 +64,7 @@ export default {
                 },
                 {
                     name: 's_company_d_po_order_toTos_company.name',
-                    th: 'Perusahaan Penjual',
+                    th: 'Nama Perusahaan',
                     render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {
@@ -78,11 +78,11 @@ export default {
                     name: 'status',
                     th: 'Status',
                     render: ({ status }) => {
-                        if(status == 0){
+                        if (status == 0) {
                             return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
-                        }else if(status == 1){
+                        } else if (status == 1) {
                             return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
-                        }else{
+                        } else {
                             return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
                         }
                     }

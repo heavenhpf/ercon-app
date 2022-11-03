@@ -27,7 +27,7 @@
               <div class="row mb-0">
                 <div class="col-10">
                   <div class="pb-0 text-start">
-                    <h5 class="text-black font-weight-bolder">Deadline PO Terdekat</h5>
+                    <h5 class="text-black font-weight-bolder">PO Terdekat Saya</h5>
                   </div>
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">

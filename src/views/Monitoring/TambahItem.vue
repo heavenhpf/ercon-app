@@ -23,7 +23,14 @@
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Kategori Item</label>
-                                <argon-input v-model.number='input.id_category' type="number" />
+                                <!-- <argon-input v-model.number='input.id_category' type="number" /> -->
+                                <select @change="triggerOptions()" v-model.number="input.id_category"
+                                    class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    <option v-for='items in g$listCategory' v-bind:value="items.id_category" selected>
+                                    <option>{{ items.name }}</option>
+                                    </option>
+                                </select>
+                                <h4>{{ g$listCategory[selectedCategory] }}</h4>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Deskripsi
@@ -40,6 +47,15 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
+                            <div id="showToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body" style="text-align:center">
+                                        Item Berhasil Ditambahkan
+                                    </div>
+                                </div>
+                            </div>
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
                                     <argon-button size="md" color="warning" class="me-2">
@@ -47,27 +63,11 @@
                                     </argon-button>
                                 </span>
                             </router-link>
-                            <argon-button @click="addInquiry()" size="md" color="primary" data-bs-toggle="modal">
-                                Tambah
-                            </argon-button>
-                        </div>
-                        <!-- <modal-comp v-model:show="modal.confirm">
-                            <template #header>
-                                <h3 class="modal-title">Confirm</h3>
-                            </template>
-                            <template v-if="modal.confirm" #body>
-                                <p>
-                                    Are you sure you want to create new user <strong>{{ pageTitle }}: {{ input.name
-                                    }}</strong>?
-                                </p>
-                            </template>
-                            <template #footer>
-                                <argon-button color="secondary" @click="modal.confirm = false">
-                                    Close
+                                <argon-button id="showToast" @click="addInquiry()" size="md" color="primary"
+                                    data-bs-toggle="modal">
+                                    Tambah
                                 </argon-button>
-                                <argon-button color="danger" @click="addInquiry()">Save </argon-button>
-                            </template>
-                        </modal-comp> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,6 +84,7 @@ import ArgonAlert from "@/components/ArgonAlert.vue";
 import ArgonTextarea from "@/components/ArgonTextarea.vue";
 
 import d$item from '@/stores/dashboard/item';
+import d$category from '@/stores/dashboard/category';
 import { mapActions, mapState } from 'pinia';
 
 
@@ -100,20 +101,10 @@ export default {
             quantity: null,
             unit: '',
         },
-        // dt: {
-        //     action: [
-        //         {
-        //             text: 'Edit',
-        //             color: 'primary',
-        //             event: 'detail',
-        //         },
-        //         {
-        //             text: 'Delete',
-        //             color: 'danger',
-        //             event: 'delete',
-        //         },
-        //     ],
-        // },
+        filterCategory: {
+            value: ``,
+        },
+
 
         // UI
         modal: {
@@ -133,15 +124,17 @@ export default {
 
     computed: {
         ...mapState(d$item, ['g$list', 'g$detail']),
+        ...mapState(d$category, ['g$listCategory']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
-    // async mounted() {
-    //     await this.a$inquiryAdd();
-    // },
+    async mounted() {
+        await this.a$categoryList();
+    },
     methods: {
         ...mapActions(d$item, ['a$inquiryAdd']),
+        ...mapActions(d$category, ['a$categoryList']),
 
         clear() {
             this.input = {
@@ -153,13 +146,13 @@ export default {
             };
         },
 
-        // async init() {
-        //     try {
-        //         await this.a$inquiryAdd();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
+        async init() {
+            try {
+                await this.a$inquiryAdd();
+            } catch (e) {
+                console.error(e);
+            }
+        },
 
         async addInquiry() {
             try {
@@ -167,12 +160,15 @@ export default {
                 const data = {
                     id_category, name, desc, serial_number, quantity, unit
                 };
-                console.log(data)
                 await this.a$inquiryAdd(data);
-
                 this.modal.add = false;
+                const toastLiveExample = document.getElementById('showToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                // // setTimeout(() => {
+                // //     this.$router.push({ name: 'Default' });
+                // // }, 1000);
 
-                // console.log(`Add ${this.pageTitle} Succeed!`);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -180,60 +176,21 @@ export default {
             }
         },
 
-        // async editInquiry() {
-        //     try {
-        //         const { id, name, address, phone } = this.input;
-        //         const data = {
-        //             name,
-        //             address, phone
-        //         };
-        //         await this.a$inquiryEdit(id, data);
-        //         this.modal.detail = false;
-        //         console.log(`Edit ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
+        async triggerOptions() {
+            try {
+                const { selectedCategory } = this.filterCategory;
+                const data = {
+                    category: selectedCategory.id_category,
+                };
+                // console.log(data.id_category);
+                // console.log(data);
+                // await this.a$listAllItem(data);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
 
-        // async delInquiry() {
-        //     try {
-        //         const { id_user } = this.input;
-        //         await this.a$inquiryDel(id_user);
-        //         this.modal.confirm = false;
-        //         console.log(`Delete ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
-
-        // async triggerDetail({ id_user, name, address, phone }) {
-        //     try {
-        //         this.input = {
-        //             id: id_user,
-        //             name,
-        //             address,
-        //             phone,
-        //         };
-        //         this.modal.detail = true;
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
-        // async triggerDelete({ id_user }) {
-        //     try {
-        //         this.input = {
-        //             id_user
-        //         };
-        //         this.modal.confirm = true;
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
     },
     watch: {
         modals(val) {

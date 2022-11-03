@@ -43,7 +43,7 @@ export default {
                     cardBackground: "bg-primary",
                 },
                 lewat: {
-                    title: "Lewat Deadline",
+                    title: "Melewati Deadline",
                     value: "20",
                     cardBackground: "bg-danger",
                 },
