@@ -1,12 +1,15 @@
 <template>
-  <div class="mb-4 card" :class="cardBackground">
-    <div class="p-4 card-body">
-      <div class="d-flex">
-        <div class="row" :class="contentClass">
+  <div class="card" :class="cardBackground">
+    <div class="card-body p-2">
+      <div class="row" :class="contentClass">
+        <div :class="textPosition">
           <p class="mb-0 text-md text-white font-weight-bold" :class="titleColor">{{ title }}</p>
-          <h2 class="mb-0 text-white font-weight-bolder" :class="valueColor">{{ value }}</h2>
-          <!-- <span class="text-sm"  :class="percentageColor">{{ percentage }}</span> 
-                {{detail}} -->
+          <h2 class="mb-0 text-xxl text-white font-weight-bolder" :class="valueColor">{{ value }}</h2>
+        </div>
+        <div :class="iconPosition">
+          <div class="text-center icon icon-shape">
+            <i :class="iconClass" aria-hidden="true"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -40,7 +43,6 @@ export default {
     valueColor: {
       type: String,
     },
-    percentage: String,
     iconClass: {
       type: String,
       required: true,
@@ -59,6 +61,16 @@ export default {
     },
     contentClass: {
       type: String,
+    },
+    textPosition: {
+      type: String,
+    },
+    iconPosition: {
+      type: String,
+    },
+    iconClass: {
+      type: String,
+      required: true,
     },
   },
 };

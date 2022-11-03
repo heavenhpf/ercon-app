@@ -64,7 +64,6 @@
                 </div>
               </div>
             </div>
-
             <!-- mengambil dari store po -->
             <div>
               <TrackingTable />
@@ -122,17 +121,17 @@ export default {
         po: {
           title: "Purchasing Order",
           iconClass: "ni ni-basket",
-          iconBackground: "bg-info",
+          iconBackground: "bg-primary",
         },
         dn: {
           title: "Delivery Note",
           iconClass: "ni ni-delivery-fast",
-          iconBackground: "bg-info",
+          iconBackground: "bg-primary",
         },
         supplier: {
           title: "Supplier",
           iconClass: "ni ni-single-02",
-          iconBackground: "bg-info",
+          iconBackground: "bg-primary",
         },
       },
     };

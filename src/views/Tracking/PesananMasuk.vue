@@ -5,17 +5,21 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
                         <card2 :title="stats.belum.title" :value="stats.belum.value"
-                            :cardBackground="stats.belum.cardBackground">
+                            :cardBackground="stats.belum.cardBackground"
+                            :textPosition="stats.belum.textPosition" :iconPosition="stats.belum.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <card2 :title="stats.lewat.title" :value="stats.lewat.value"
-                            :cardBackground="stats.lewat.cardBackground">
+                            :cardBackground="stats.lewat.cardBackground"
+                            :textPosition="stats.lewat.textPosition" :iconPosition="stats.lewat.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <card2 :title="stats.selesai.title" :value="stats.selesai.value"
-                            :cardBackground="stats.selesai.cardBackground"></card2>
+                            :cardBackground="stats.selesai.cardBackground"
+                            :textPosition="stats.selesai.textPosition" :iconPosition="stats.selesai.iconPosition">
+                        </card2>
                     </div>
                 </div>
             </div>
@@ -41,23 +45,29 @@ export default {
                     title: "Belum Deadline",
                     value: "60",
                     cardBackground: "bg-primary",
+                    textPosition: "p-3 ms-2 col-8",
+                    iconPosition: "p-1 col-3 mt-2",
                 },
                 lewat: {
                     title: "Melewati Deadline",
                     value: "20",
                     cardBackground: "bg-danger",
+                    textPosition: "p-3 ms-2 col-8",
+                    iconPosition: "p-1 col-3 mt-2",
                 },
                 selesai: {
                     title: "Selesai",
                     value: "20",
                     cardBackground: "bg-success",
+                    textPosition: "p-3 ms-2 col-8",
+                    iconPosition: "p-1 col-3 mt-2",
                 },
             },
             data: [],
         };
     },
     components: {
-        Card,
+        Card2,
         PesananMasukTable,
     },
 };
