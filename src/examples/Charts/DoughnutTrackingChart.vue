@@ -20,12 +20,12 @@
             <canvas id="chart-consumption" class="chart-canvas" height="197"></canvas>
           </div>
           <h4 class="font-weight-bold mt-n8">
-            <span>100</span>
-            <span class="text-sm d-block text-body">Purchasing Order</span>
+            <span>{{ g$countPO }}</span>
+            <span class="text-sm d-block text-body">Total Purchasing Order</span>
           </h4>
         </div>
         <div class="col-7">
-          <h5 class="mb-0">Rekap Tracking</h5>
+          <h5 class="mb-0">Rekap PO Saya</h5>
           <div class="table-responsive">
             <table class="table mt-3 mb-0 align-items-center">
               <tbody>
@@ -39,7 +39,7 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-xs font-weight-bold">60%</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.progress / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
                   </td>
                 </tr>
                 <tr>
@@ -52,7 +52,7 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-xs font-weight-bold">20%</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.deadline / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
                   </td>
                 </tr>
                 <tr>
@@ -65,7 +65,7 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-xs font-weight-bold">20%</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.done / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
                   </td>
                 </tr>
               </tbody>
@@ -79,6 +79,8 @@
 
 <script>
 import Chart from "chart.js/auto";
+import d$dashboard from '@/stores/dashboard/dashboard';
+import { mapActions, mapState } from "pinia";
 
 export default {
   name: "doughnut-tracking-chart",
@@ -148,5 +150,18 @@ export default {
       },
     });
   },
+    computed: {
+        ...mapState(d$dashboard, ['g$countPO', 'g$countStatus']),
+    },
+    methods: {
+        ...mapActions(d$dashboard, ['a$countPO', 'a$countStatus']),
+    },
+    async mounted() {
+        try {
+            await this.a$countPO();
+            await this.a$countStatus();
+        } catch (e) {
+        }
+    },
 };
 </script>

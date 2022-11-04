@@ -42,7 +42,7 @@ export default {
         return {
             stats: {
                 belum: {
-                    title: "Belum Deadline",
+                    title: "Sedang Diproses",
                     value: "60",
                     cardBackground: "bg-primary",
                     textPosition: "p-3 ms-2 col-8",
