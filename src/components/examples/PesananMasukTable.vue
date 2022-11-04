@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list_po" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list_inbox" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
@@ -63,9 +63,16 @@ export default {
                     th: 'Nomor PO',
                 },
                 {
-                    name: 's_company_d_po_order_toTos_company.name',
+                    name: 's_company_d_po_order_fromTos_company.name',
                     th: 'Pemesan',
-                    render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
+                    render: ({ s_company_d_po_order_fromTos_company }) => s_company_d_po_order_fromTos_company.name
+                },
+                {
+                    name: 'deadline',
+                    th: 'Deadline',
+                    render: ({ deadline }) => {
+                        return new Date(deadline).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })
+                    }
                 },
                 {
                     name: 'progress',
@@ -78,11 +85,11 @@ export default {
                     name: 'status',
                     th: 'Status',
                     render: ({ status }) => {
-                        if(status == 0){
+                        if (status == 0) {
                             return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
-                        }else if(status == 1){
+                        } else if (status == 1) {
                             return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
-                        }else{
+                        } else {
                             return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
                         }
                     }
@@ -109,18 +116,17 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$detail', 'g$progress']),
+        ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$list_inbox', 'g$detail', 'g$progress']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listAllPo(this.filter);
-        await this.a$listPoDetail(this.filterDetail);
+        await this.a$listInbox();
         // console.log(this.g$po)
     },
     methods: {
-        ...mapActions(d$po, ['a$listAllPo', 'a$listPoDetail', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$listAllPo', 'a$listInbox', 'a$listPoDetail', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
 
         clear() {
             this.input = {
@@ -133,8 +139,7 @@ export default {
 
         async init() {
             try {
-                await this.a$listAllPo();
-                await this.a$listPoDetail();
+                await this.a$listInbox();
                 // console.log(this.g$po)
             } catch (e) {
                 console.error(e);

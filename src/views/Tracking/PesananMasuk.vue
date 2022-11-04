@@ -7,21 +7,21 @@
             <div class="p-4 col-lg-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.belum.title" :value="stats.belum.value"
-                            :cardBackground="stats.belum.cardBackground"
-                            :textPosition="stats.belum.textPosition" :iconPosition="stats.belum.iconPosition">
+                        <card2 :title="stats.belum.title" :value="g$countInbox.progress"
+                            :cardBackground="stats.belum.cardBackground" :textPosition="stats.belum.textPosition"
+                            :iconPosition="stats.belum.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.lewat.title" :value="stats.lewat.value"
-                            :cardBackground="stats.lewat.cardBackground"
-                            :textPosition="stats.lewat.textPosition" :iconPosition="stats.lewat.iconPosition">
+                        <card2 :title="stats.lewat.title" :value="g$countInbox.deadline"
+                            :cardBackground="stats.lewat.cardBackground" :textPosition="stats.lewat.textPosition"
+                            :iconPosition="stats.lewat.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.selesai.title" :value="stats.selesai.value"
-                            :cardBackground="stats.selesai.cardBackground"
-                            :textPosition="stats.selesai.textPosition" :iconPosition="stats.selesai.iconPosition">
+                        <card2 :title="stats.selesai.title" :value="g$countInbox.done"
+                            :cardBackground="stats.selesai.cardBackground" :textPosition="stats.selesai.textPosition"
+                            :iconPosition="stats.selesai.iconPosition">
                         </card2>
                     </div>
                 </div>
@@ -35,6 +35,8 @@
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
 import PesananMasukTable from "@/components/examples/PesananMasukTable.vue";
+import d$dashboard from '@/stores/dashboard/dashboard';
+import { mapActions, mapState } from "pinia";
 
 export default {
     name: "pesanan-masuk",
@@ -42,7 +44,7 @@ export default {
         return {
             stats: {
                 belum: {
-                    title: "Sedang Diproses",
+                    title: "Belum Deadline",
                     value: "60",
                     cardBackground: "bg-primary",
                     textPosition: "p-3 ms-2 col-8",
@@ -70,5 +72,18 @@ export default {
         Card2,
         PesananMasukTable,
     },
+
+    computed: {
+        ...mapState(d$dashboard, ['g$countInbox']),
+    },
+    methods: {
+        ...mapActions(d$dashboard, ['a$countInbox']),
+    },
+    async mounted() {
+        try {
+            await this.a$countInbox();
+        } catch (e) {
+        }
+    }
 };
 </script>

@@ -7,7 +7,8 @@ const countDN = () => baseApi.get(`${api}/count/dn`);
 const countPO = () => baseApi.get(`${api}/count/po`);
 const countItem = () => baseApi.get(`${api}/count/item`);
 const countStatus = () => baseApi.get(`${api}/count/po/status`);
+const countInbox = () => baseApi.get(`${api}/count/incoming_po/status`);
 
 export {
-    countSupplier, countDN, countPO, countStatus, countItem
+    countSupplier, countDN, countPO, countStatus, countItem, countInbox
 };
