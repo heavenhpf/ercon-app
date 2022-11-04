@@ -91,7 +91,7 @@ export default {
     new Chart(ctx1, {
       type: "doughnut",
       data: {
-        labels: ["Belum Deadline", "Melewati Deadline", "Progress Selesai"],
+        labels: ["Sedang Diproses", "Melewati Deadline", "Progress Selesai"],
         datasets: [
           {
             label: "Consumption",
@@ -106,7 +106,7 @@ export default {
               "#2dce89",
             ],
 
-            data: [60, 20, 20],
+            data: [g$countStatus.progress, g$countStatus.deadline, g$countStatus.done],
             fill: false,
           },
         ],
