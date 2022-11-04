@@ -7,20 +7,20 @@
             <div class="p-4 col-lg-12 mb-3">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.belum.title" :value="stats.belum.value"
+                        <card2 :title="stats.belum.title" :value="g$countStatus.progress"
                             :cardBackground="stats.belum.cardBackground"
                             :textPosition="stats.belum.textPosition" :iconPosition="stats.belum.iconPosition"
                             :iconClass="stats.belum.iconClass">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.lewat.title" :value="stats.lewat.value"
+                        <card2 :title="stats.lewat.title" :value="g$countStatus.deadline"
                             :cardBackground="stats.lewat.cardBackground"
                             :textPosition="stats.lewat.textPosition" :iconPosition="stats.lewat.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
-                        <card2 :title="stats.selesai.title" :value="stats.selesai.value"
+                        <card2 :title="stats.selesai.title" :value="g$countStatus.done"
                             :cardBackground="stats.selesai.cardBackground"
                             :textPosition="stats.selesai.textPosition" :iconPosition="stats.selesai.iconPosition">
                         </card2>
@@ -39,6 +39,8 @@ import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingTable from "@/components/examples/TrackingTable.vue";
+import d$dashboard from '@/stores/dashboard/dashboard';
+import { mapActions, mapState } from "pinia";
 
 export default {
     name: "tracking-saya",
@@ -47,21 +49,18 @@ export default {
             stats: {
                 belum: {
                     title: "Belum Deadline",
-                    value: "60",
                     cardBackground: "bg-primary",
                     textPosition: "p-3 ms-2 col-8",
                     iconPosition: "p-1 col-3 mt-2",
                 },
                 lewat: {
                     title: "Melewati Deadline",
-                    value: "20",
                     cardBackground: "bg-danger",
                     textPosition: "p-3 ms-2 col-8",
                     iconPosition: "p-1 col-3 mt-2",
                 },
                 selesai: {
                     title: "Selesai",
-                    value: "20",
                     cardBackground: "bg-success",
                     textPosition: "p-3 ms-2 col-8",
                     iconPosition: "p-1 col-3 mt-2",
@@ -77,5 +76,17 @@ export default {
         CategoriesCard,
         TrackingTable,
     },
+    computed: {
+        ...mapState(d$dashboard, ['g$countStatus']),
+    },
+    methods: {
+        ...mapActions(d$dashboard, ['a$countStatus']),
+    },
+    async mounted() {
+        try {
+            await this.a$countStatus();
+        } catch (e) {
+        }
+    }
 };
 </script>

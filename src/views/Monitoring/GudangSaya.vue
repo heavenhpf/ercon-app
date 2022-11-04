@@ -4,7 +4,7 @@
             <div class="p-4 col-lg-12 mb-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 col-md-8 col-12">
-                        <card2 :title="stats.jenisItem.title" :value="stats.jenisItem.value"
+                        <card2 :title="stats.jenisItem.title" :value="g$countItem.item"
                             :cardBackground="stats.jenisItem.cardBackground" :iconClass="stats.jenisItem.iconClass"
                             :textPosition="stats.jenisItem.textPosition" :iconPosition="stats.jenisItem.iconPosition">
                         </card2>
@@ -36,6 +36,8 @@ import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TableMonitoring from "@/components/examples/TableMonitoring.vue";
+import d$dashboard from '@/stores/dashboard/dashboard';
+import { mapActions, mapState } from "pinia";
 
 export default {
     name: "gudang-saya",
@@ -44,7 +46,6 @@ export default {
             stats: {
                 jenisItem: {
                     title: "Total Jenis Item",
-                    value: "= 60 jenis",
                     cardBackground: "bg-primary",
                     iconClass: "fa-6x opacity-9 fa fa-archive",
                     textPosition: "p-4 ps-5 col-9",
@@ -61,5 +62,17 @@ export default {
         CategoriesCard,
         TableMonitoring,
     },
+    computed: {
+        ...mapState(d$dashboard, ['g$countItem']),
+    },
+    methods: {
+        ...mapActions(d$dashboard, ['a$countItem']),
+    },
+    async mounted() {
+        try {
+            await this.a$countItem();
+        } catch (e) {
+        }
+    }
 };
 </script>
