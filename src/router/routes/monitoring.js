@@ -8,6 +8,24 @@ const monitoring = {
             component: () => import('@/views/Monitoring/GudangSaya.vue'),
             meta: { auth: true },
         },
+        // {
+        //     path: 'detail-item/:id',
+        //     name: 'Detail Item',
+        //     component: () => import('@/views/Monitoring/DetailItem.vue'),
+        //     meta: { auth: true },
+        // },
+        {
+            path: 'detail-item',
+            name: 'Detail Item',
+            component: () => import('@/views/Monitoring/DetailItem.vue'),
+            meta: { auth: true },
+        },
+        {
+            path: 'edit-jumlah-buffer',
+            name: 'Edit Jumlah Buffer',
+            component: () => import('@/views/Monitoring/EditJumlahBuffer.vue'),
+            meta: { auth: true },
+        },
         {
             path: 'monitoring-item',
             name: 'Monitoring Item',

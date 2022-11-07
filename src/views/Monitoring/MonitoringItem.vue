@@ -10,6 +10,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
 import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";

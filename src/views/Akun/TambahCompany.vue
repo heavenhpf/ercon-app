@@ -98,7 +98,6 @@
 import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
-
 import d$company from '@/stores/dashboard/company';
 import { mapActions, mapState } from 'pinia';
 

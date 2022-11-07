@@ -75,9 +75,9 @@ export default {
             ],
             action: [
                 {
-                    text: 'Update',
+                    text: 'Edit',
                     color: 'primary',
-                    event: 'detail',
+                    event: 'edit',
                 },
                 {
                     text: 'Delete',
@@ -171,24 +171,14 @@ export default {
             }
         },
 
-        // async triggerDetail({ id_item }) {
-        //     try {
-        //         this.input = {
-        //             id: id_item,
-        //         };
-        //         this.modal.detail = false;
-        //         this.$router.push({ name: 'Detail Item', params: { id: id_item } })
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
         async triggerDetail({ id_item }) {
             try {
+                this.input = {
+                    id: id_item,
+                };
                 this.modal.detail = false;
-                this.$router.push({ name: 'Detail Item'})
-                // console.log(this.$route.params.id);
+                this.$router.push({ name: 'Detail Item', params: { id: id_item } })
+                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }

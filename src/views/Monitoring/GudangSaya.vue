@@ -1,6 +1,9 @@
 <template>
     <div class="py-4 container-fluid">
         <div class="row">
+            <div class="pb-0 text-start">
+                <h4 class="font-weight-bolder text-dark">Gudang Saya</h4>
+            </div>
             <div class="p-4 col-lg-12 mb-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 col-md-8 col-12">
@@ -12,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <div class="pb-0 row mb-lg-3 mb-2 col-3">
+                <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
                     <router-link to="/monitoring/tambah-item" tag="button">
                         <span>
                             <argon-button size="md me-2" color="primary">
@@ -32,9 +35,6 @@
 
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
-import Carousel from "@/components/examples//Carousel.vue";
-import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
 import GudangSayaTable from "@/components/examples/GudangSayaTable.vue";
@@ -57,10 +57,7 @@ export default {
     },
     components: {
         Card2,
-        GradientLineChart,
-        Carousel,
-        CategoriesCard,
-        GudangSayaTable
+        GudangSayaTable,
     },
     computed: {
         ...mapState(d$dashboard, ['g$countItem']),

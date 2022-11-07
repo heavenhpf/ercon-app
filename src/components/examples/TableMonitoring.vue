@@ -49,9 +49,9 @@
                     </div>
                     <div class="col-3 row align-items-center" style="padding: 5%;">
                         <span class=" badge text-dark" style="background-color: yellow;">Buffer</span>
-                        <div class="mt-3 mb-2 ms-4">
-                            <img src="../../assets/img/illustrations/box.png" alt="warning"
-                                style="width: 100px; height: 100px;">
+                        <div class="d-flex justify-content-center mt-2">
+                            <img src="@/assets/img/illustrations/box.png" alt="warning"
+                                style="width: 80%; height: 80%;">
                         </div>
                         <div class="mt-2 mb-2">
                             <h4 class="row justify-content-center">{{ input.quantity }}</h4>
