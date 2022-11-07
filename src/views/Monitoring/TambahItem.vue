@@ -47,15 +47,19 @@
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
-                            <div id="showToast"
+                            <!-- <router-link to="/monitoring/gudang-saya"> -->
+                            <div id="liveToast"
                                 class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
-                                    <div class="toast-body" style="text-align:center">
-                                        Item Berhasil Ditambahkan
+                                    <div class="toast-body">
+                                        Item Berhasil ditambahkan
                                     </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                        data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>
+                            <!-- </router-link> -->
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
                                     <argon-button size="md" color="warning" class="me-2">
@@ -63,10 +67,12 @@
                                     </argon-button>
                                 </span>
                             </router-link>
-                                <argon-button id="showToast" @click="addInquiry()" size="md" color="primary"
-                                    data-bs-toggle="modal">
-                                    Tambah
-                                </argon-button>
+                            <!-- <router-link to="/monitoring/gudang-saya"> -->
+                            <argon-button id="showToastb" href="/monitoring/gudang-saya" @click="addInquiry()" size="md"
+                                color="primary" data-bs-toggle="modal">
+                                Tambah
+                            </argon-button>
+                            <!-- </router-link> -->
                         </div>
                     </div>
                 </div>
@@ -162,12 +168,12 @@ export default {
                 };
                 await this.a$inquiryAdd(data);
                 this.modal.add = false;
-                const toastLiveExample = document.getElementById('showToast')
+                const toastLiveExample = document.getElementById('liveToast')
                 const toast = new bootstrap.Toast(toastLiveExample)
                 toast.show()
-                // // setTimeout(() => {
-                // //     this.$router.push({ name: 'Default' });
-                // // }, 1000);
+                setTimeout(() => {
+                    this.$router.push({ name: 'Gudang Saya' });
+                }, 2000);
 
             } catch (e) {
                 console.error(e);

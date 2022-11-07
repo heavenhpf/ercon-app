@@ -83,7 +83,7 @@
             </template>
             <template v-if="modal.confirm" #body>
                 <p>
-                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
+                    Apakah Anda yakin ingin menghapus <b>perusahaan</b> ini?
                 </p>
             </template>
             <template #footer>
