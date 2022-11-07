@@ -29,15 +29,11 @@
                             <span class="badge text-dark text-lg" style="background-color: yellow;">Buffer</span>
                         </div>
                         <div class="card-body">
-                            <div class="align-items-center">
-                                <div class="d-flex justify-content-center">
-                                    <img src="@/assets/img/illustrations/box.png" alt="warning"
-                                        style="width: 80%; height: 80%;">
-                                </div>
-                                <div class="mt-2 mb-2">
-                                    <h4 class="row justify-content-center">10000 Kg</h4>
-                                </div>
+                            <div class="d-flex justify-content-center">
+                                <img src="@/assets/img/illustrations/box.png" alt="warning"
+                                    style="width: 80%; height: 80%;">
                             </div>
+                            <h4 class="row justify-content-center">10000 Kg</h4>
                         </div>
                     </div>
                 </div>
