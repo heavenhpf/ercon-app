@@ -332,6 +332,14 @@ class _item {
                 }
             })
 
+            if (!checkItemDetail) {
+                return {
+                    status: false,
+                    code: 404,
+                    error: "Data not found"
+                }
+            }
+
             const checkItem = await prisma.d_item.findFirst({
                 where: {
                     id_item: checkItemDetail.id_item,
@@ -339,7 +347,7 @@ class _item {
                 }
             })
 
-            if (!(checkItemDetail && checkItem)) {
+            if (!checkItem) {
                 return {
                     status: false,
                     code: 404,
