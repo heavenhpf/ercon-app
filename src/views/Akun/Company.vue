@@ -136,15 +136,7 @@ export default {
                     th: 'Username',
                     render: ({ auth_user }) => auth_user.username
                 },
-                // {
-                //     name: 'auth_user.username',
-                //     th: 'Username',
-                //     render: ({ auth_user }) => {
-                //         const auth = auth ? 1 : 0
-                //         return `<span[${statusColor}]`
-                //     },
 
-                // },
                 {
                     name: 'address',
                     th: 'alamat',
@@ -156,11 +148,6 @@ export default {
                 },
             ],
             action: [
-                // {
-                //     text: 'Edit',
-                //     color: 'primary',
-                //     event: 'detail',
-                // },
                 {
                     text: 'Delete',
                     color: 'danger',

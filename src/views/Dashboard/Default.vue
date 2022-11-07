@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking-saya" tag="button">
+                    <router-link to="/tracking/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-2 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
-                    <router-link to="/dashboard/tracking-saya" tag="button">
+                    <router-link to="/tracking/tracking-saya" tag="button">
                       <span>
                         <p class="text-primary font-weight-bolder">Lihat Semua</p>
                       </span>

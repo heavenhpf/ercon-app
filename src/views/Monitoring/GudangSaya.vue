@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div>
-                <TableMonitoring />
+                <GudangSayaTable />
             </div>
         </div>
     </div>
@@ -35,9 +35,9 @@ import Card2 from "@/examples/Cards/Card2.vue";
 import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "@/components/examples//Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
-import TableMonitoring from "@/components/examples/TableMonitoring.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
+import GudangSayaTable from "@/components/examples/GudangSayaTable.vue";
 
 export default {
     name: "gudang-saya",
@@ -60,7 +60,7 @@ export default {
         GradientLineChart,
         Carousel,
         CategoriesCard,
-        TableMonitoring,
+        GudangSayaTable
     },
     computed: {
         ...mapState(d$dashboard, ['g$countItem']),

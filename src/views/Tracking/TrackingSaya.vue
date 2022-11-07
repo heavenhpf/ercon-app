@@ -48,7 +48,7 @@ export default {
         return {
             stats: {
                 belum: {
-                    title: "Sedang Diproses",
+                    title: "Belum Deadline",
                     cardBackground: "bg-primary",
                     textPosition: "p-3 ms-2 col-8",
                     iconPosition: "p-1 col-3 mt-2",
@@ -87,6 +87,6 @@ export default {
             await this.a$countStatus();
         } catch (e) {
         }
-    },
+    }
 };
 </script>

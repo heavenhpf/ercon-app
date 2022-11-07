@@ -59,6 +59,27 @@
                 </div>
                 <div class="mt-2">
                     <h5>Nomor PO</h5>
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{ g$po.po_number }}</h6>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div id="showToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body" style="text-align:center">
+                                        Nomor PO disimpan pada clipboard
+                                    </div>
+                                </div>
+                            </div>
+                            <argon-button id="showToast" data-bs-toggle="modal" style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
+                                <span class="fa fa-files-o fa-lg text-dark"/>
+                            </argon-button>
+                        </div>
+                    </div>
                 </div>
             </template>
             <template #footer>
@@ -68,36 +89,20 @@
                 <argon-button color="danger" @click="modal.detail = false">
                     Kembali
                 </argon-button>
-                <div style="margin-left: 10px;">
+                <router-link class="nav-link" to="/tracking/tracking-tier-bawah">
                     <argon-button color="primary" @click="modal.detail = false">
                         Cari PO
                     </argon-button>
-                </div>
+                </router-link>
             </template>
         </modal-comp>
-
-        <!-- <modal-comp v-model:show="modal.confirm">
-            <template #header>
-                <h3 class="modal-title">Confirm</h3>
-            </template>
-            <template v-if="modal.confirm" #body>
-                <p>
-                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
-                </p>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.confirm = false">
-                    Close
-                </argon-button>
-                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
-            </template>
-        </modal-comp> -->
     </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
+import ArgonButton from '@/components/ArgonButton.vue';
+import { mapActions, mapState } from "pinia";
 import auth from '../../router/routes/auth';
 
 // const progress = {
@@ -166,18 +171,42 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$list_po_detail', 'g$get_po_detail']),
+        ...mapState(d$po, ['g$list_po_detail', 'g$get_po_detail', 'g$po']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listPoDetail({ id_po: this.$route.params.id });
-
     },
+    // async addInquiry() {
+    //     // Get the text field
+    //     var copyText = document.getElementById("myInput");
+
+    //     // Select the text field
+    //     copyText.select();
+    //     copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    //     // Copy the text inside the text field
+    //     navigator.clipboard.writeText(copyText.value);
+
+    //     // Alert the copied text
+    //     alert("Copied the text: " + copyText.value);
+    // },
+
+    // async copy() {
+    //     try {
+    //         const toastLiveExample = document.getElementById('showToast').value
+    //         const toast = new bootstrap.Toast(toastLiveExample)
+    //         toast.show()
+    //     } catch (e) {
+    //         console.error(e);
+    //     } finally {
+    //         // await this.init();
+    //     }
+    // },
     methods: {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
-
 
         async triggerDetail({ id_po_detail, id_po }) {
             try {
@@ -191,6 +220,6 @@ export default {
                 console.error(e);
             }
         },
-    }
+    },
 };
 </script>

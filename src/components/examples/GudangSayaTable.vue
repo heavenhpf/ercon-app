@@ -4,25 +4,53 @@
             <data-table style="text-align:center ;" :index="false" :data="g$myItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
-        <modal-comp v-model:show="modal.add">
+        <modal-comp v-model:show="modal.detail">
             <template #header>
                 <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
-            <template v-if="modal.add" #body>
+            <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
-                        <argon-input v-model="input.name" type="text" placeholder="Name" name="name" size="md">
+                        <argon-input type="text" placeholder="Name" name="name" size="md">
+                        </argon-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <argon-input type="text" placeholder="Address" name="address" size="md">
+                        </argon-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <argon-input type="text" placeholder="Phone" name="phone" size="md">
                         </argon-input>
                     </div>
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
+                <argon-button color="secondary" @click="modal.detail = false">
                     Close
                 </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
                 </argon-button>
+            </template>
+        </modal-comp>
+        <modal-comp v-model:show="modal.confirm">
+            <template #header>
+                <h3 class="modal-title">Confirm</h3>
+            </template>
+            <template v-if="modal.confirm" #body>
+                <p>
+                    Are you sure you want to delete <strong>{{ pageTitle }}: {{ input.name }}</strong>?
+                </p>
+            </template>
+            <template #footer>
+                <argon-button color="secondary" @click="modal.confirm = false">
+                    Close
+                </argon-button>
+                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
             </template>
         </modal-comp>
 
@@ -37,19 +65,13 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'gudang-saya-table',
+        pageTitle: 'item',
         // Input
         input: {
             id: null,
             name: '',
         },
-        filter: {
-            tier: 2,
-            category: 2,
-        },
-        filterMyItem: {
-            category: 3,
-        },
+
         // DataTable
         dt: {
             column: [
@@ -71,9 +93,8 @@ export default {
                     th: 'Jumlah Barang  ',
                 },
                 {
-                    name: 'ref_unit.name',
+                    name: 'unit',
                     th: 'Satuan',
-                    render: ({ ref_unit }) => ref_unit.name,
                 },
             ],
             action: [
@@ -108,12 +129,10 @@ export default {
         }
     },
     async mounted() {
-        await this.a$listAllItem(this.filter);
-        await this.a$listMyItem(this.filterMyItem);
-        console.log(this.g$myItem);
+        await this.a$listMyItem();
     },
     methods: {
-        ...mapActions(d$item, ['a$listAllItem', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail', 'a$listMyItem']),
+        ...mapActions(d$item, ['a$inquiryEdit', 'a$deleteItem', 'a$inquiryDetail', 'a$listMyItem']),
 
         clear() {
             this.input = {
@@ -129,7 +148,7 @@ export default {
 
         async init() {
             try {
-                await this.a$listAllItem();
+
             } catch (e) {
                 console.error(e);
             }
@@ -166,8 +185,8 @@ export default {
         },
         async delInquiry() {
             try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
+                const { id_item } = this.input;
+                await this.a$deleteItem(id_item);
                 this.modal.confirm = false;
                 console.log(`Delete ${this.pageTitle} Succeed!`);
             } catch (e) {
@@ -177,26 +196,23 @@ export default {
             }
         },
 
-        async triggerDetail({ d_po, d_item, name, address, phone }) {
+        async triggerDetail({ name, address, phone }) {
             try {
                 this.input = {
-                    id_po: d_po.id_po,
-                    quantity: d_item.quantity,
                     name,
                     address,
                     phone,
                 };
                 this.modal.detail = true;
-                this.$router.push({ name: 'Tracking Detail', params: { id: d_po.id_po } })
-                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }
         },
-        async triggerDelete({ id }) {
+        async triggerDelete({ id_item }) {
             try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
+                this.input = {
+                    id_item
+                };
                 this.modal.confirm = true;
             } catch (e) {
                 console.error(e);

@@ -19,9 +19,6 @@
                     <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                        <option selected>
-                        <option>-- Pilih Tier --</option>
-                        </option>
                         <option v-for='items in g$listCategory'
                             v-bind:value="{ id_category: items.id_category, name: items.name }" selected>
                         <option>{{ items.name }}</option>

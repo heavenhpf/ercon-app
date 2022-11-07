@@ -2,13 +2,9 @@
   <div class="card pb-4">
     <div class="p-3 pb-0 card-header">
       <div class="d-flex align-items-center">
-        <button
-          type="button"
+        <button type="button"
           class="mb-0 btn btn-icon-only btn-rounded btn-outline-secondary ms-2 btn-sm d-flex align-items-center justify-content-center ms-auto"
-          data-bs-toggle="tooltip"
-          data-bs-placement="bottom"
-          title="Rekaplitulasi Total Purchasing Order (PO)"
-        >
+          data-bs-toggle="tooltip" data-bs-placement="bottom" title="Rekaplitulasi Total Purchasing Order (PO)">
           <i class="fas fa-info"></i>
         </button>
       </div>
@@ -39,7 +35,9 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-sm font-weight-bold">{{ (g$countStatus.progress / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.progress / (g$countStatus.progress +
+                        g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1)
+                    }} %</span>
                   </td>
                 </tr>
                 <tr>
@@ -52,7 +50,9 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-sm font-weight-bold">{{ (g$countStatus.deadline / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.deadline / (g$countStatus.progress +
+                        g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1)
+                    }} %</span>
                   </td>
                 </tr>
                 <tr>
@@ -65,7 +65,9 @@
                     </div>
                   </td>
                   <td class="text-sm text-center align-middle">
-                    <span class="text-sm font-weight-bold">{{ (g$countStatus.done / (g$countStatus.progress + g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1) }} %</span>
+                    <span class="text-sm font-weight-bold">{{ (g$countStatus.done / (g$countStatus.progress +
+                        g$countStatus.deadline + g$countStatus.done) * 100).toFixed(1)
+                    }} %</span>
                   </td>
                 </tr>
               </tbody>
@@ -87,11 +89,11 @@ export default {
   mounted() {
     // Chart Doughnut Consumption by room
     var ctx1 = document.getElementById("chart-consumption").getContext("2d");
-    
+
     new Chart(ctx1, {
       type: "doughnut",
       data: {
-        labels: ["Sedang Diproses", "Melewati Deadline", "Progress Selesai"],
+        labels: ["Belum Deadline", "Melewati Deadline", "Progress Selesai"],
         datasets: [
           {
             label: "Consumption",
@@ -106,7 +108,7 @@ export default {
               "#2dce89",
             ],
 
-            data: [g$countStatus.progress, g$countStatus.deadline, g$countStatus.done],
+            data: [60, 20, 20],
             fill: false,
           },
         ],
@@ -150,18 +152,18 @@ export default {
       },
     });
   },
-    computed: {
-        ...mapState(d$dashboard, ['g$countPO', 'g$countStatus']),
-    },
-    methods: {
-        ...mapActions(d$dashboard, ['a$countPO', 'a$countStatus']),
-    },
-    async mounted() {
-        try {
-            await this.a$countPO();
-            await this.a$countStatus();
-        } catch (e) {
-        }
-    },
+  computed: {
+    ...mapState(d$dashboard, ['g$countPO', 'g$countStatus']),
+  },
+  methods: {
+    ...mapActions(d$dashboard, ['a$countPO', 'a$countStatus']),
+  },
+  async mounted() {
+    try {
+      await this.a$countPO();
+      await this.a$countStatus();
+    } catch (e) {
+    }
+  },
 };
 </script>

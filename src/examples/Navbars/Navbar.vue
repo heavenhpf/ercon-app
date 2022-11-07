@@ -12,7 +12,7 @@
                 <span class="d-sm-inline d-none">Log Out</span>
               </router-link>
             </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <!-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="#" @click="toggleSidebar" class="p-0 nav-link text-dark" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line bg-white"></i>
@@ -20,7 +20,7 @@
                   <i class="sidenav-toggler-line bg-white"></i>
                 </div>
               </a>
-            </li>
+            </li> -->
             <li class="px-3 nav-item d-flex align-items-center">
               <a class="p-0 nav-link text-dark" @click="toggleConfigurator">
                 <i class="cursor-pointer fa fa-cog fixed-plugin-button-nav"></i>
@@ -56,7 +56,7 @@
                     </div>
                   </a>
                 </li>
-                <!-- <li class="mb-2">
+                <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="py-1 d-flex">
                       <div class="my-auto">
@@ -75,8 +75,8 @@
                       </div>
                     </div>
                   </a>
-                </li> -->
-                <!-- <li>
+                </li>
+                <li>
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="py-1 d-flex">
                       <div class="my-auto avatar avatar-sm bg-gradient-secondary me-3">
@@ -109,12 +109,11 @@
                       </div>
                     </div>
                   </a>
-                </li> -->
+                </li>
               </ul>
             </li>
           </ul>
         </div>
-
       </div>
     </div>
   </nav>

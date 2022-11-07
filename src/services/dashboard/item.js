@@ -7,8 +7,8 @@ const getItem = (options) => baseApi.get(`${api}/item/${options.id}`);
 const listMyItem = (options) => baseApi.get(`${api}/my/${options?.category ?? ''}`);
 const addItem = (body) => baseApi.post(`${api}`, body);
 const update = (id, body) => baseApi.put(`${api}/${id}`, body);
-const del = (id) => baseApi.delete(`${api}/${id}`);
+const delItem = (id) => baseApi.delete(`${api}/${id}`);
 
 export {
-    listAllItem, getItem, addItem, update, del, listMyItem
+    listAllItem, getItem, addItem, update, delItem, listMyItem
 };
