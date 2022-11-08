@@ -27,6 +27,12 @@ const monitoring = {
             meta: { auth: true },
         },
         {
+            path: 'update-produksi',
+            name: 'Update Produksi',
+            component: () => import('@/views/Monitoring/UpdateProduksi.vue'),
+            meta: { auth: true },
+        },
+        {
             path: 'monitoring-item',
             name: 'Monitoring Item',
             component: () => import('@/views/Monitoring/MonitoringItem.vue'),

@@ -2,25 +2,8 @@
     <div class="table-responsive p-0">
         <div class="card">
             <data-table style="text-align:center ;" :index="false" :data="g$myItem" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
+                :actions="dt.action" @detail="triggerDetail" />
         </div>
-        <modal-comp v-model:show="modal.confirm">
-            <template #header>
-                <h3 class="modal-title">Confirm</h3>
-            </template>
-            <template v-if="modal.confirm" #body>
-                <p>
-                    Apakah Anda yakin ingin menghapus <b>item</b> ini?
-                </p>
-            </template>
-            <template #footer>
-                <argon-button color="secondary" @click="modal.confirm = false">
-                    Close
-                </argon-button>
-                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
-            </template>
-        </modal-comp>
-
     </div>
 </template>
 
@@ -79,11 +62,6 @@ export default {
                     color: 'primary',
                     event: 'edit',
                 },
-                {
-                    text: 'Delete',
-                    color: 'danger',
-                    event: 'delete',
-                },
             ],
         },
         // UI
@@ -106,7 +84,7 @@ export default {
         await this.a$categoryList();
     },
     methods: {
-        ...mapActions(d$item, ['a$editItem', 'a$deleteItem', 'a$inquiryDetail', 'a$listMyItem', 'a$inquiryAdd']),
+        ...mapActions(d$item, ['a$editItem', 'a$inquiryDetail', 'a$listMyItem', 'a$inquiryAdd']),
         ...mapActions(d$category, ['a$categoryList']),
 
         clear() {
@@ -158,27 +136,28 @@ export default {
                 await this.init();
             }
         },
-        async delInquiry() {
-            try {
-                const { id_item } = this.input;
-                await this.a$deleteItem(id_item);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
 
-        async triggerDetail({ id_item }) {
+        // async triggerDetail({ id_item }) {
+        //     try {
+        //         this.input = {
+        //             id: id_item,
+        //         };
+        //         this.modal.detail = false;
+        //         this.$router.push({ name: 'Update Produksi', params: { id: id_item } })
+        //         console.log(this.$route.params.id);
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
+
+        async triggerDetail() {
             try {
-                this.input = {
-                    id: id_item,
-                };
-                this.modal.detail = false;
-                this.$router.push({ name: 'Detail Item', params: { id: id_item } })
-                console.log(this.$route.params.id);
+                // this.input = {
+                //     id: id_item,
+                // };
+                // this.modal.detail = false;
+                this.$router.push({ name: 'Update Produksi' })
+                // console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }

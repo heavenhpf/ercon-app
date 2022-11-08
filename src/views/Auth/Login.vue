@@ -17,11 +17,11 @@
                   <form role="form" @submit.prevent="submit">
                     <div class="mb-3">
                       <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
-                        size="lg" />
+                        size="lg" isRequired="true" />
                     </div>
                     <div class="mb-3">
                       <argon-input v-model="input.password" type="password" placeholder="Password" name="password"
-                        size="lg" />
+                        size="lg" isRequired="true" />
                     </div>
                     <div class="row">
                       <div class="col-6">

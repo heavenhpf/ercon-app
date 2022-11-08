@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Username</label>
-                                <argon-input v-model="input.username" type="text" />
+                                <argon-input v-model="input.username" type="text"/>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Password</label>
@@ -40,7 +40,6 @@
                                     </div>
                                     <div class="col-md-2">
                                         <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3
-
                                     </div>
                                 </div>
                             </div>
