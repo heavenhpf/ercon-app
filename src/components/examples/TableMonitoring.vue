@@ -33,9 +33,7 @@
         <modal-comp size="xl" v-model:show="modal.detail">
             <template #header>
                 <h3 class="modal-title">{{ input.name }}</h3>
-
             </template>
-
             <template v-if="modal.detail" #body>
                 <div class="row">
                     <div class="col-12">
@@ -68,7 +66,6 @@
                 </argon-button>
             </template>
         </modal-comp>
-
         <modal-comp size="lg" v-model:show="modal.order">
             <template #header>
                 <div class="mt-1">
@@ -90,7 +87,6 @@
                     </div>
                 </div>
             </template>
-
             <template v-if="modal.order" #body>
                 <div class="row">
                     <div class="col-10">
@@ -139,7 +135,6 @@
                         </div>
                     </div>
                 </div>
-
             </template>
             <template #footer>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
@@ -161,7 +156,6 @@ import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
 import d$category from '@/stores/dashboard/category';
 import auth from '../../router/routes/auth';
-
 
 export default {
     // name: 'Monitoring',

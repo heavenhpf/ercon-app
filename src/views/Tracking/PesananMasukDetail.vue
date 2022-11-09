@@ -5,16 +5,14 @@
                 <div class="row">
                     <h5 class="text-dark">Nomor PO:</h5>
                     <div class="col-8 pb-0 mb-3">
-                        <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
+                        <h4 class="font-weight-bolder text-dark">PO123</h4>
                     </div>
                     <div class="col-4">
-                        <p class="font-weight-bolder text-danger float-end">Deadline: {{new
-                        Date(g$po.deadline).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month:
-                        'long', day: 'numeric' })}}</p>
+                        <p class="font-weight-bolder text-danger float-end">Deadline: 20 September 2022</p>
                     </div>
                 </div>
                 <div class="row mb-5">
-                    <div class="col-8 pb-0 mb-3">
+                    <div class="col-10 pb-0 mb-3">
                         <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_toTos_company?.name }}
                         </h5>
                         <h6 class="text-dark">Progress</h6>
@@ -34,18 +32,28 @@
                             </argon-button>
                         </span>
                     </div>
-                    <div class="col-2 pb-0 mb-3">
-                        <h6 class="text-dark text-sm">Delivery Note:</h6>
+                </div>
+                <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
+                    <router-link to="/tracking/buat-delivery-note" tag="button">
                         <span>
-                            <argon-button size="md me-2" color="success">
-                                <span class="ni ni-single-copy-04 fa-lg me-2" />
-                                Lihat PDF
+                            <argon-button size="md me-2" color="primary">
+                                <span class="fa fa-pencil-square-o fa-md me-2" />
+                                Buat Delivery Note
                             </argon-button>
                         </span>
-                    </div>
+                    </router-link>
                 </div>
-                <div>
-                    <POTable />
+                <div class="mb-3">
+                    <PesananMasukDetailTable />
+                </div>
+                <div class="col-lg-8 col-md-9">
+                    <router-link to="/akun/company" tag="button">
+                        <span>
+                            <argon-button size="md" color="warning" class="me-2">
+                                Kembali
+                            </argon-button>
+                        </span>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -57,9 +65,10 @@ import ArgonButton from "@/components/ArgonButton.vue";
 import POTable from "@/components/examples/POTable.vue";
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from "pinia";
+import PesananMasukDetailTable from "../../components/examples/PesananMasukDetailTable.vue";
 
 export default {
-    name: "tracking-detail",
+    name: "pesanan-masuk-detail",
     data() {
         return {
             post: {},
@@ -68,9 +77,10 @@ export default {
         }
     },
     components: {
-        ArgonButton,
-        POTable,
-    },
+    ArgonButton,
+    POTable,
+    PesananMasukDetailTable
+},
 
 
     async created() {

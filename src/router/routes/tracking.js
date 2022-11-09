@@ -26,6 +26,12 @@ const tracking = {
             component: () => import('@/views/Tracking/PesananMasuk.vue'),
             meta: { auth: true },
         },
+        {
+            path: 'pesanan-masuk-detail',
+            name: 'Pesanan Masuk Detail',
+            component: () => import('@/views/Tracking/PesananMasukDetail.vue'),
+            meta: { auth: true },
+        },
     ],
 };
 

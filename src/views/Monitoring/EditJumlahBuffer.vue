@@ -54,7 +54,7 @@ import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 
 export default {
-    name: "detail-item",
+    name: "edit-jumlah-buffer",
     components: {
         ArgonInput,
         ArgonButton,
