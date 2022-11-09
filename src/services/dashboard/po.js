@@ -2,7 +2,7 @@ import { baseApi } from '@/utils/axios';
 
 const api = `/po`;
 
-const listAllPo = (options) => baseApi.get(`${api}/${options.tier}/${options?.status ?? ''}`); //nullish coalescing
+const listAllPo = (options) => baseApi.get(`${api}/${options.tier}/${options?.status ?? '0'}`); //nullish coalescing
 const listMyPo = (options) => baseApi.get(`${api}/my/${options?.status ?? ''}`); //nullish coalescing
 const listInbox = (options) => baseApi.get(`${api}/incoming/${options?.status ?? ''}`); //nullish coalescing
 const listPoDetail = (options) => baseApi.get(`${api}/detail/${options.id_po}`); //nullish coalescing

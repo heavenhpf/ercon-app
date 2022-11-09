@@ -35,12 +35,12 @@
                 </div>
                 <div class="mt-3">
                     <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                        Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
-                        weekday: 'long', year:
-                        'numeric', month:
-                        'long', day: 'numeric'
-                        })
-                        }}</p>
+                            Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
+                                weekday: 'long', year:
+                                    'numeric', month:
+                                    'long', day: 'numeric'
+                            })
+                    }}</p>
                 </div>
             </template>
 
@@ -62,7 +62,9 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
-                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{ g$po.po_number }}</h6>
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
+                                        g$po.po_number
+                                }}</h6>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -75,8 +77,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <argon-button id="showToast" data-bs-toggle="modal" style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
-                                <span class="fa fa-files-o fa-lg text-dark"/>
+                            <argon-button id="showToast" data-bs-toggle="modal"
+                                style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
+                                <span class="fa fa-files-o fa-lg text-dark" />
                             </argon-button>
                         </div>
                     </div>

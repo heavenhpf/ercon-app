@@ -37,6 +37,7 @@ import Card2 from "@/examples/Cards/Card2.vue";
 import PesananMasukTable from "@/components/examples/PesananMasukTable.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
+import POTable from "../../components/examples/POTable.vue";
 
 export default {
     name: "pesanan-masuk",
@@ -71,6 +72,7 @@ export default {
     components: {
         Card2,
         PesananMasukTable,
+        POTable
     },
 
     computed: {

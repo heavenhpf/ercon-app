@@ -20,5 +20,15 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+// router.beforeEach((to, from, next) => {
+//   const { id, role } = certCookies();
+//   if (to.matched.some(({ meta }) => meta.auth && meta.role.find((r) => r === role)) && !id) {
+//     next({ name: 'LogIn' });
+//   } else if (to.matched.some(({ path }) => path.includes('auth')) && id) {
+//     next({ name: 'Default' });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
