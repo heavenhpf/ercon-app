@@ -79,24 +79,23 @@
           Manajemen Akun
         </h6>
       </li>
+      <li class="nav-item">
+        <sidenav-item url="/akun/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''"
+          navText="Perusahaan Saya">
+          <template v-slot:icon>
+            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
       <template v-if="this.g$user.role === 0">
         <li class="nav-item">
-          <sidenav-item url="/akun/company-saya" :class="getRoute() === 'company-saya' ? 'active' : ''"
-            navText="Perusahaan Saya">
+          <sidenav-item url="/akun/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
             <template v-slot:icon>
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+              <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
             </template>
           </sidenav-item>
         </li>
       </template>
-      <li class="nav-item">
-        <sidenav-item url="/akun/company" :class="getRoute() === 'company' ? 'active' : ''" navText="List Perusahaan">
-          <template v-slot:icon>
-            <i class="fa fa-users mb-1 text-dark text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <!-- </template> -->
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
