@@ -19,7 +19,7 @@ import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TableMonitoring from "@/components/examples/TableMonitoring.vue";
 
 export default {
-    name: "tracking-saya",
+    name: "monitoring-item",
     data() {
         return {
             stats: {
