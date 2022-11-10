@@ -25,14 +25,36 @@
                             <div class="row mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
                                 <div class="col-10">
-                                    <argon-input v-model="input.po" type="text" />
+                                    <argon-input v-model="filterOrder.selectedOrder" type="text" />
                                 </div>
                                 <div class="col-2">
-                                    <argon-button size="md" color="primary" class="ms-2">
-                                        <span class="fa fa-plus fa-sm me-2" />
-                                        Tambah
-                                    </argon-button>
+                                    <argon-button @click="searchOrder()" class="btn btn-primary" type="button">Cari</argon-button>
                                 </div>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nomor Order</th>
+                                        <th scope="col">Tanggal Order</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(item, index) in filterOrder.order" :key="index">
+                                        <th scope="row">{{ index + 1 }}</th>
+                                        <td>{{ item.order_number }}</td>
+                                        <td>{{ item.created_at }}</td>
+                                        <td>{{ item.quantity}}</td>
+                                        <td>
+                                            <argon-button size="md" color="danger" class="ms-2">
+                                                <span class="fa fa-trash fa-sm me-2" />
+                                                Hapus
+                                            </argon-button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="col-5 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Deadline
@@ -120,7 +142,9 @@ import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
 
 import d$user from '@/stores/dashboard/user';
+import d$order from '@/stores/dashboard/order';
 import { mapActions, mapState } from 'pinia';
+
 
 const tier = {
     0: "admin",
@@ -142,6 +166,10 @@ export default {
             level: '',
             alamat: '',
             phone: '',
+        },
+        filterOrder: {
+            selectedOrder: '',
+            order: [],
         },
         // dt: {
         //     action: [
@@ -174,15 +202,18 @@ export default {
 
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
+        ...mapState(d$order, ['g$getOrder']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$inquiryList();
+        // await this.a$inquiryList();
+        // console.log(this.g$getOrder);
     },
     methods: {
-        ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
+        // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
+        ...mapActions(d$order, ['a$getOrder']),
 
         clear() {
             this.input = {
@@ -193,28 +224,42 @@ export default {
             };
         },
 
-        async init() {
-            try {
-                await this.a$inquiryList();
-            } catch (e) {
-                console.error(e);
-            }
-        },
+        // async init() {
+        //     try {
+        //         await this.a$inquiryList();
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
 
-        async addInquiry() {
+        // async addInquiry() {
+        //     try {
+        //         const { username, password, name, level, address, phone } = this.input;
+        //         const data = {
+        //             username, password, level: parseInt(level), name, address, phone
+        //         };
+        //         await this.a$inquiryAdd(data);
+        //         this.modal.add = false;
+        //         console.log(`Add ${this.pageTitle} Succeed!`);
+        //     } catch (e) {
+        //         console.error(e);
+        //     } finally {
+        //         await this.init();
+        //     }
+        // },
+        async searchOrder(){
             try {
-                const { username, password, name, level, address, phone } = this.input;
+                const { selectedOrder} = this.filterOrder;
                 const data = {
-                    username, password, level: parseInt(level), name, address, phone
+                    order_number: selectedOrder
                 };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
+                console.log(data);
+                await this.a$getOrder(data);
+                this.filterOrder.order.push(g$getOrder);
+                
             } catch (e) {
                 console.error(e);
-            } finally {
-                await this.init();
-            }
+            } 
         },
         async editInquiry() {
             try {

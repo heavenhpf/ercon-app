@@ -6,6 +6,7 @@ const d$order = defineStore({
     state: () => ({
         list_po: [],
         list_po_detail: [],
+        getOrder: {},
         po: {},
         detail: {},
         status: null,
@@ -16,6 +17,19 @@ const d$order = defineStore({
             try {
                 await s$order.add(id,body);
             } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$getOrder(body) {
+            try {
+                this.status = null;
+                const { data, status } = await s$order.getOrder(body);
+                console.log("data",data);
+
+                this.getOrder = data ?? {};
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
                 throw error ?? message;
             }
         },
@@ -40,6 +54,7 @@ const d$order = defineStore({
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
         g$list_po: ({ list_po }) => list_po,
         g$detail: ({ detail }) => detail,
+        g$getOrder: ({ getOrder }) => getOrder,
     },
 });
 
