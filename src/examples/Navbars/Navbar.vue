@@ -7,10 +7,7 @@
         <div class="pe-md-3 d-flex align-items-center ms-md-auto">
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <router-link :to="{ name: 'LogIn' }" class="px-0 nav-link font-weight-bold text-dark">
-                <i class="fa fa-user me-sm-2"></i>
-                <span class="d-sm-inline d-none">Log Out</span>
-              </router-link>
+              <Profile />
             </li>
             <!-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="#" @click="toggleSidebar" class="p-0 nav-link text-dark" id="iconNavbarSidenav">
@@ -118,9 +115,12 @@
     </div>
   </nav>
 </template>
+
 <script>
 import Breadcrumbs from "../Breadcrumbs.vue";
 import { mapMutations, mapActions } from "vuex";
+import d$auth from '@/stores/auth.d';
+import Profile from '@/examples/Navbars/Profile.vue';
 
 export default {
   name: "navbar",
@@ -140,10 +140,11 @@ export default {
     toggleSidebar() {
       this.toggleSidebarColor("bg-white");
       this.navbarMinimize();
-    }
+    },
   },
   components: {
-    Breadcrumbs
+    Breadcrumbs,
+    Profile,
   },
   computed: {
     currentRouteName() {
