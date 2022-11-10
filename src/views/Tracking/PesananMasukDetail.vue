@@ -86,15 +86,12 @@ export default {
         POTable,
         PesananMasukDetailTable
     },
-
-
     async created() {
         try {
         } catch (e) {
 
         }
     },
-
     computed: {
         ...mapState(d$po, ['g$po']),
     },

@@ -59,7 +59,7 @@
                     Order
                 </argon-button>
                 <argon-button color="secondary" @click="modal.detail = false">
-                    Close
+                    Tutup
                 </argon-button>
             </template>
         </modal-comp>
@@ -134,11 +134,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
-                    Order
-                </argon-button>
                 <argon-button color="secondary" @click="toogleOrderBack()">
                     Kembali
+                </argon-button>
+                <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
+                    Order
                 </argon-button>
             </template>
         </modal-comp>
