@@ -77,7 +77,7 @@
 
           <!-- mengambil dari store item-->
           <div>
-            <TableMonitoring />
+            <TableMonitoringAdmin />
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
-import TableMonitoring from "../../components/examples/TableMonitoring.vue";
+import TableMonitoringAdmin from "../../components/examples/TableMonitoringAdmin.vue";
 
 const date = new Date;
 let hours = date.getHours();
@@ -141,7 +141,7 @@ export default {
     GradientLineChart,
     DoughnutTrackingChart,
     TrackingTable,
-    TableMonitoring,
+    TableMonitoringAdmin,
     Carousel,
     CategoriesCard,
   },
