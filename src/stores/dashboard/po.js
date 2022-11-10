@@ -107,8 +107,8 @@ const d$po = defineStore({
         g$list_inbox: ({ list_inbox }) => list_inbox,
         g$list_my_po: ({ list_my_po }) => list_my_po,
         g$get_po_detail: ({ get_po_detail }) => get_po_detail,
-        g$list_po_terdekat: ({ list_my_po }) => list_my_po.filter((item) => item.day_count > -7),
-        g$list_po_selesai_terbaru: ({ list_my_po }) => list_my_po.filter((item) => item.day_count > -7 && item.status == 1),
+        g$list_po_terdekat: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7 ),
+        g$list_po_selesai_terbaru: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7 && item.status == 1),
         g$detail: ({ detail }) => detail,
     },
 });

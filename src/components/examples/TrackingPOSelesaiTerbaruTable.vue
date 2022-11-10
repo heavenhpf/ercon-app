@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table  v-if="g$list_po_selesai_terbaru.length > 0" style="text-align:center ;" :index="false" :data="g$list_po_selesai_terbaru" :columns="dt.column"
+            <data-table style="text-align:center ;" :index="false" :data="g$list_po_selesai_terbaru" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
