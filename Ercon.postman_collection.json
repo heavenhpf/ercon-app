@@ -1131,7 +1131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_unit\": 2,\r\n    \"id_category\": 2,\r\n    \"name\": \"Barang Edit\",\r\n    \"desc\": \"desc edit\",\r\n    \"serial_number\": \"3340\"\r\n}",
+							"raw": "{\r\n    \"id_category\": 2,\r\n    \"name\": \"Barang Edit\",\r\n    \"desc\": \"desc edit\",\r\n    \"serial_number\": \"3340\",\r\n    \"unit\": \"new unit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1348,7 +1348,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"order_number\": \"ORDER000\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1356,12 +1356,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/orders",
+							"raw": "{{url}}/orders/:order_number",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"orders"
+								"orders",
+								":order_number"
+							],
+							"variable": [
+								{
+									"key": "order_number",
+									"value": ""
+								}
 							]
 						}
 					},

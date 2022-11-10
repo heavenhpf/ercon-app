@@ -2,11 +2,11 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _order {
-    getOrder = async (id_user, body) => {
+    getOrder = async (id_user, order_number) => {
         try {
-            body = {
+            const body = {
                 id_user,
-                ...body
+                order_number
             }
 
             const schema = Joi.object({
