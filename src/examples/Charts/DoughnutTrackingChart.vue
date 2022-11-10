@@ -86,77 +86,79 @@ import { mapActions, mapState } from "pinia";
 
 export default {
   name: "doughnut-tracking-chart",
-  mounted() {
-    // Chart Doughnut Consumption by room
-    var ctx1 = document.getElementById("chart-consumption").getContext("2d");
-
-    new Chart(ctx1, {
-      type: "doughnut",
-      data: {
-        labels: ["Belum Deadline", "Melewati Deadline", "Progress Selesai"],
-        datasets: [
-          {
-            label: "Consumption",
-            weight: 9,
-            cutout: 90,
-            tension: 0.9,
-            pointRadius: 2,
-            borderWidth: 0,
-            backgroundColor: [
-              "#11cdef",
-              "#f5365c",
-              "#2dce89",
-            ],
-
-            data: [60, 20, 20],
-            fill: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        interaction: {
-          intersect: false,
-          mode: "index",
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              display: false,
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              display: false,
-            },
-          },
-        },
-      },
-    });
-  },
   computed: {
     ...mapState(d$dashboard, ['g$countPO', 'g$countStatus']),
   },
   methods: {
     ...mapActions(d$dashboard, ['a$countPO', 'a$countStatus']),
+    renderChart() {
+      const ctx1 = document.getElementById("chart-consumption").getContext("2d");
+
+      const label = Object.keys(this.g$countStatus);
+      const data = Object.values(this.g$countStatus);
+
+      new Chart(ctx1, {
+        type: "doughnut",
+        data: {
+          labels: label,
+          datasets: [
+            {
+              label: "Consumption",
+              weight: 9,
+              cutout: 90,
+              tension: 0.9,
+              pointRadius: 2,
+              borderWidth: 0,
+              backgroundColor: [
+                "#11cdef",
+                "#f5365c",
+                "#2dce89",
+              ],
+
+              data: data,
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+          interaction: {
+            intersect: false,
+            mode: "index",
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+              },
+              ticks: {
+                display: false,
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+              },
+              ticks: {
+                display: false,
+              },
+            },
+          },
+        },
+      });
+    },
   },
   async mounted() {
     try {
@@ -165,5 +167,10 @@ export default {
     } catch (e) {
     }
   },
+  watch: {
+    g$countStatus(val) {
+      this.renderChart();
+    }
+  }
 };
 </script>
