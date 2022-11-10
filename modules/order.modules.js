@@ -50,6 +50,13 @@ class _order {
                     order_from: check.id_company,
                     processed: false,
                     deleted_at: null
+                },
+                include: {
+                    d_item: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
 
