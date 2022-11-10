@@ -20,10 +20,10 @@ const d$order = defineStore({
                 throw error ?? message;
             }
         },
-        async a$getOrder(body) {
+        async a$getOrder(options) {
             try {
                 this.status = null;
-                const { data, status } = await s$order.getOrder(body);
+                const { data, status } = await s$order.getOrder(options);
                 console.log("data",data);
 
                 this.getOrder = data ?? {};

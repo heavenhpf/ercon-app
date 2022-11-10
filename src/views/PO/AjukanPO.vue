@@ -30,31 +30,33 @@
                                 <div class="col-2">
                                     <argon-button @click="searchOrder()" class="btn btn-primary" type="button">Cari</argon-button>
                                 </div>
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nomor Order</th>
-                                        <th scope="col">Tanggal Order</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="(item, index) in filterOrder.order" :key="index">
-                                        <th scope="row">{{ index + 1 }}</th>
-                                        <td>{{ item.order_number }}</td>
-                                        <td>{{ item.created_at }}</td>
-                                        <td>{{ item.quantity}}</td>
-                                        <td>
-                                            <argon-button size="md" color="danger" class="ms-2">
-                                                <span class="fa fa-trash fa-sm me-2" />
-                                                Hapus
-                                            </argon-button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="col-11">
+                                    <table class="table table-hover text-center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nomor Order</th>
+                                            <th scope="col">Tanggal Order</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(item, index) in filterOrder.order" :key="index">
+                                            <th scope="row">{{ index + 1 }}</th>
+                                            <td>{{ item.order_number }}</td>
+                                            <td>{{ item.created_at }}</td>
+                                            <td>{{ item.quantity}}</td>
+                                            <td>
+                                                <argon-button size="md" color="danger" class="ms-2">
+                                                    <span class="fa fa-trash fa-sm me-2" />
+                                                    Hapus
+                                                </argon-button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="col-5 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Deadline
@@ -255,7 +257,8 @@ export default {
                 };
                 console.log(data);
                 await this.a$getOrder(data);
-                this.filterOrder.order.push(g$getOrder);
+                this.filterOrder.order.push(this.g$getOrder);
+                console.log(this.filterOrder.order);
                 
             } catch (e) {
                 console.error(e);
