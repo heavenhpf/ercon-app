@@ -42,7 +42,7 @@
               </div>
             </div>
             <div>
-              <TrackingTable />
+              <TrackingPOTerdekatTable />
             </div>
           </div>
           <div class="mb-5">
@@ -66,7 +66,7 @@
             </div>
             <!-- mengambil dari store po -->
             <div>
-              <TrackingTable />
+              <TrackingPOSelesaiTerbaruTable />
             </div>
           </div>
           <div class="pb-0 row">
@@ -90,12 +90,13 @@ import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import DoughnutTrackingChart from "@/examples/Charts/DoughnutTrackingChart.vue";
 import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
-import TrackingTable from "@/components/examples/TrackingTable.vue";
 import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
-import TableMonitoringAdmin from "../../components/examples/TableMonitoringAdmin.vue";
+import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
+import TrackingPOTerdekatTable from "@/components/examples/TrackingPOTerdekatTable.vue";
+import TrackingPOSelesaiTerbaruTable from "@/components/examples/TrackingPOSelesaiTerbaruTable.vue";
 
 const date = new Date;
 let hours = date.getHours();
@@ -140,10 +141,11 @@ export default {
     Card,
     GradientLineChart,
     DoughnutTrackingChart,
-    TrackingTable,
-    TableMonitoringAdmin,
     Carousel,
+    TableMonitoringAdmin,
     CategoriesCard,
+    TrackingPOTerdekatTable,
+    TrackingPOSelesaiTerbaruTable,
   },
 
   // created() {
