@@ -31,7 +31,7 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
-import auth from '../../router/routes/auth';
+import d$auth from '@/stores/auth.d';
 
 const statusPO = {
     '0': "Belum Deadline",
@@ -47,10 +47,6 @@ export default {
         input: {
             id: null,
             name: '',
-        },
-        filter: {
-            tier: 1,
-
         },
         filterDetail: {
             id_po: 1,
@@ -117,8 +113,14 @@ export default {
     }),
     computed: {
         ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$detail', 'g$progress', 'g$list_my_po']),
+        ...mapState(d$auth, ['g$user']),
         modals() {
             return Object.values(this.modal).includes(true);
+        },
+        filter() {
+            return {
+                tier: this.g$user.role + 1,
+            }
         }
     },
     async mounted() {

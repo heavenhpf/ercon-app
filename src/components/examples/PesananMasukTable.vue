@@ -2,7 +2,7 @@
     <div class="table-responsive p-0">
         <div class="card">
             <data-table style="text-align:center ;" :index="false" :data="g$list_inbox" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
+                :actions="dt.action" @detail="triggerDetail" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
@@ -49,11 +49,8 @@ export default {
             name: '',
         },
         filter: {
-            tier: 0,
-
-        },
-        filterDetail: {
-            id_po: 0,
+            id_po: null,
+            id_po_detail: null
         },
         // DataTable
         dt: {
@@ -123,10 +120,11 @@ export default {
     },
     async mounted() {
         await this.a$listInbox();
+        await this.a$listPoDetail({ id_po: this.$route.params.id });
         // console.log(this.g$po)
     },
     methods: {
-        ...mapActions(d$po, ['a$listAllPo', 'a$listInbox', 'a$listPoDetail', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$listAllPo', 'a$listInbox', 'a$listPoDetail', 'a$getPoDetail',]),
 
         clear() {
             this.input = {
@@ -146,49 +144,6 @@ export default {
             }
         },
 
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-
         async triggerDetail({ id_po }) {
             try {
                 this.input = {
@@ -197,15 +152,6 @@ export default {
                 this.modal.detail = false;
                 this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: id_po } })
                 console.log(this.$route.params.id);
-            } catch (e) {
-                console.error(e);
-            }
-        },
-        async triggerDelete({ id }) {
-            try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
-                this.modal.confirm = true;
             } catch (e) {
                 console.error(e);
             }

@@ -20,6 +20,12 @@ const tracking = {
             component: () => import('@/views/Tracking/TrackingDetail.vue'),
             meta: { auth: true },
         },
+        // {
+        //     path: 'tracking-detail/:id',
+        //     name: 'Tracking Detail',
+        //     component: () => import('@/views/Tracking/TrackingDetail.vue'),
+        //     meta: { auth: true, role: [0, 1, 2] },
+        // },
         {
             path: 'pesanan-masuk',
             name: 'Pesanan Masuk',
@@ -27,7 +33,7 @@ const tracking = {
             meta: { auth: true },
         },
         {
-            path: 'pesanan-masuk-detail',
+            path: 'pesanan-masuk-detail/:id',
             name: 'Pesanan Masuk Detail',
             component: () => import('@/views/Tracking/PesananMasukDetail.vue'),
             meta: { auth: true },
