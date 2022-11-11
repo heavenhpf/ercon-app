@@ -38,6 +38,12 @@ const tracking = {
             component: () => import('@/views/Tracking/PesananMasukDetail.vue'),
             meta: { auth: true },
         },
+        {
+            path: 'edit-order',
+            name: 'Edit Order',
+            component: () => import('@/views/Tracking/EditOrder.vue'),
+            meta: { auth: true },
+        },
     ],
 };
 
