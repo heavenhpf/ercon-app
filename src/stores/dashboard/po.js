@@ -91,9 +91,9 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
-        async a$editPoDetail(id, body) {
+        async a$editPoDetail(options, body) {
             try {
-                await s$po.editPoDetail(id, body);
+                await s$po.editPoDetail(options, body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }

@@ -1,6 +1,18 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
+            <div class=" col-9 row">
+                <div class="col-4 mt-4 ms-4">
+                    <label>Filter Status</label>
+                    <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
+                        aria-label=".form-select-lg example">
+                        <option>-- Semua --</option>
+                        <option value="-1">Melewati Deadline</option>
+                        <option value="0">Belum Deadline</option>
+                        <option value="1">Progress Selesai</option>
+                    </select>
+                </div>
+            </div>
             <data-table style="text-align:center ;" :index="false" :data="g$list_my_po" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" />
         </div>
@@ -136,6 +148,14 @@ export default {
                 await this.a$listPoDetail();
                 await this.a$listMyPo();
                 // console.log(this.g$po)
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
+        async triggerOptions() {
+            try {
+                await this.a$listMyPo({status: Number(this.input.status)});
             } catch (e) {
                 console.error(e);
             }

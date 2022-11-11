@@ -16,12 +16,11 @@
                     <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                        <option>-- Semua --</option>
+                        <option>-- Semua Kategori --</option>
                         <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}
                         </option>
                     </select>
                 </div>
-                <h4>{{ g$listCategory[selectedCategory] }}</h4>
             </div>
             <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
@@ -48,7 +47,7 @@
                                 style="width: 80%; height: 80%;">
                         </div>
                         <div class="mt-2 mb-2">
-                            <h4 class="row justify-content-center">{{ input.quantity }}</h4>
+                            <h5 class="row justify-content-center">{{ input.quantity }} {{ g$item.unit }}</h5>
                         </div>
                     </div>
                 </div>
@@ -193,6 +192,10 @@ export default {
                 {
                     name: 'quantity',
                     th: 'Jumlah Item',
+                },
+                {
+                    name: 'unit',
+                    th: 'Satuan',
                 },
             ],
             action: [

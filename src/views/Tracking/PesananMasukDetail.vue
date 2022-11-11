@@ -39,15 +39,46 @@
                     </div>
                 </div>
                 <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
-                    <router-link to="/tracking/buat-delivery-note" tag="button">
+                    <argon-button size="md me-2" color="primary" @click="addDN()">
+                        <span class="fa fa-pencil-square-o fa-md me-2" />
+                        Buat Delivery Note
+                    </argon-button>
+                </div>
+
+                <modal-comp size="lg" v-model:show="modal.addDN">
+                    <template #header>
+                        <div class="row">
+                            <h4 class="modal-title font-weight-bolder">Buat Delivery Note</h4>
+                        </div>
+                    </template>
+                    <template v-if="modal.addDN" #body>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <label class="form-control-label text-sm">Nomor PO</label>
+                                    <input class="form-control" type="text" v-model="g$po.po_number" readonly>
+                                </div>
+                                <div>
+                                    <label class="form-control-label text-sm">Dokumen Delivery Note</label>
+                                    <argon-input type="file" id="file" />
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template #footer>
                         <span>
-                            <argon-button size="md me-2" color="primary">
-                                <span class="fa fa-pencil-square-o fa-md me-2" />
-                                Buat Delivery Note
+                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                                Kembali
                             </argon-button>
                         </span>
-                    </router-link>
-                </div>
+                        <span>
+                            <argon-button @click="addInquiry()" size="md" color="primary" class="me-2">
+                                Simpan Perubahan
+                            </argon-button>
+                        </span>
+                    </template>
+                </modal-comp>
+
                 <div class="mb-3">
                     <PesananMasukDetailTable />
                 </div>
@@ -73,13 +104,13 @@ import PesananMasukDetailTable from "@/components/examples/PesananMasukDetailTab
 
 export default {
     name: "pesanan-masuk-detail",
-    data() {
-        return {
-            post: {},
-            po_detail: [],
-            errors: [],
-        }
-    },
+    data: () => ({
+        input: {
+        },
+        modal: {
+            addDN: false,
+        },
+    }),
     components: {
         ArgonButton,
         PesananMasukDetailTable,
@@ -94,11 +125,27 @@ export default {
         ...mapState(d$po, ['g$po']),
     },
     methods: {
+        async addDN() {
+            try {
+                this.modal.addDN = true;
+            } catch (error) {
+                throw error
+            }
+        },
+        async addInquiry() {
+            try {
+                this.modal.addDN = false;
+            } catch (error) {
+                throw error
+            }
+        },
+        async toggleBack() {
+            try {
+                this.modal.addDN = false;
+            } catch (error) {
+                throw error;
+            }
+        },
     },
-    async mounted() {
-        try {
-        } catch (e) {
-        }
-    }
 };
 </script>

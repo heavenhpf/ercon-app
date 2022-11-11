@@ -1,6 +1,26 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
+            <div class=" col-9 row">
+                <div class="col-4 mt-4 ms-4">
+                    <label>Filter Tier</label>
+                    <select @change="triggerOptions()" v-model="input.tier" class="form-select form-select-md mb-3"
+                        aria-label=".form-select-lg example">
+                        <option v-for="n in 3" v-bind:value="n - 1">Tier {{n}}</option>
+                        <!-- tier 1 harusnya diiliangin karena masuk tracking saya, table untuk tier 1 2 3 dibedain karena gaada tier -->
+                    </select>
+                </div>
+                <div class="col-4 mt-4 ms-4">
+                    <label>Filter Status</label>
+                    <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
+                        aria-label=".form-select-lg example">
+                        <option>-- Semua --</option>
+                        <option value="-1">Melewati Deadline</option>
+                        <option value="0">Belum Deadline</option>
+                        <option value="1">Progress Selesai</option>
+                    </select>
+                </div>
+            </div>
             <data-table style="text-align:center ;" :index="false" :data="g$list_po" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
@@ -49,8 +69,7 @@ export default {
             id: null,
             name: '',
         },
-        filterDetail: {
-            id_po: 1,
+        filter: {
         },
         // DataTable
         dt: {
@@ -117,14 +136,10 @@ export default {
         ...mapState(d$auth, ['g$user']),
         modals() {
             return Object.values(this.modal).includes(true);
-        },
-        filter() {
-            return {
-                tier: this.g$user.role + 1,
-            }
         }
     },
     async mounted() {
+        this.filter.tier = this.g$user.role + 1
         await this.a$listAllPo(this.filter);
         // console.log(this.g$po)
     },
@@ -143,7 +158,6 @@ export default {
         async init() {
             try {
                 await this.a$listAllPo();
-                // console.log(this.g$po)
             } catch (e) {
                 console.error(e);
             }
@@ -209,6 +223,17 @@ export default {
                 await this.a$inquiryDetail(id);
                 this.input = this.g$detail;
                 this.modal.confirm = true;
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async triggerOptions() {
+            try {
+                this.filter = {
+                    tier: Number(this.input.tier),
+                    status: Number(this.input.status)
+                }
+                await this.a$listAllPo(this.filter);
             } catch (e) {
                 console.error(e);
             }

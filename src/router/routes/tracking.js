@@ -39,9 +39,9 @@ const tracking = {
             meta: { auth: true },
         },
         {
-            path: 'edit-order',
-            name: 'Edit Order',
-            component: () => import('@/views/Tracking/EditOrder.vue'),
+            path: 'edit-info-po/:id_po/:id_po_detail',
+            name: 'Edit Informasi PO',
+            component: () => import('@/views/Tracking/EditInformasiPO.vue'),
             meta: { auth: true },
         },
     ],

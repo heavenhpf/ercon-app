@@ -27,7 +27,7 @@
         </modal-comp>
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <div class="col-6 modal-title">
+                <div class="col-6 modal-title mt-3">
                     <h5>Serial Number</h5>
                     <div>
                         <h6 class="mt-2">{{ g$get_po_detail.d_order?.d_item.serial_number }}</h6>
@@ -47,23 +47,24 @@
             <!-- buat ngerubah detail -->
             <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
-                    <h3 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
-                    </h3>
+                    <h4 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
+                    </h4>
+                    <h6>Deskripsi Item</h6>
                     <p>{{ g$get_po_detail.d_order.d_item.desc }}</p>
                 </div>
                 <div>
-                    <h5>Informasi Item</h5>
+                    <h6>Informasi Item</h6>
                 </div>
                 <div>
                     <p>{{ g$get_po_detail.note }} </p>
                 </div>
                 <div class="mt-2">
-                    <h5>Nomor PO</h5>
+                    <h6>Nomor PO Terkait</h6>
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
                                 <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
-                                        g$po.po_number
+                                        g$get_po_detail.note_po?? ""
                                 }}</h6>
                             </div>
                         </div>
@@ -144,6 +145,11 @@ export default {
                     name: 'd_order.quantity',
                     th: 'Jumlah Pesanan',
                     render: ({ d_order }) => d_order.quantity
+                },
+                {
+                    name: 'd_order.unit',
+                    th: 'Satuan',
+                    render: ({ d_order }) => d_order.unit
                 },
                 {
                     name: 'progress',

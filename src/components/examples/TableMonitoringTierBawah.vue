@@ -200,6 +200,10 @@ export default {
                     name: 'quantity',
                     th: 'Jumlah Item',
                 },
+                {
+                    name: 'unit',
+                    th: 'Satuan',
+                },
             ],
             action: [
                 {

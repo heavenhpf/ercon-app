@@ -90,8 +90,7 @@
                                         <p class="font-weight-bolder text-dark">Masukkan jumlah buffer terkini:</p>
                                     </div>
                                     <div class="mb-3 col-9">
-                                        <!-- <argon-input v-model="input.username" type="text" required/> -->
-                                        <argon-input v-model.number="input.quantity" type="number" isRequired="true" />
+                                        <argon-input v-model.number="input.quantity" type="number" isRequired="true" placeholder="Contoh: 1,5" />
                                     </div>
                                 </div>
                                 <div class="col-3">
