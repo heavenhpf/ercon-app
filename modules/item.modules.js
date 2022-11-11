@@ -827,9 +827,6 @@ class _item {
                     id_item: body.id_item,
                     id_company: checkCompany.id_company,
                     deleted_at: null
-                },
-                select: {
-                    quantity: true
                 }
             })
 
@@ -846,7 +843,7 @@ class _item {
                     id_item: body.id_item
                 },
                 data: {
-                    quantity: (body.quantity + checkItem.quantity)
+                    quantity: body.quantity
                 }
             })
 
