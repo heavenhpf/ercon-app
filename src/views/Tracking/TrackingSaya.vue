@@ -41,6 +41,7 @@ import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingSayaTable from "@/components/examples/TrackingSayaTable.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
+
 export default {
     name: "tracking-saya",
     data() {

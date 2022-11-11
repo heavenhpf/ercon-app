@@ -134,7 +134,7 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="toogleOrderBack()">
+                <argon-button color="secondary" @click="toggleOrderBack()">
                     Kembali
                 </argon-button>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
@@ -309,7 +309,7 @@ export default {
                 console.error(e);
             }
         },
-        async toogleOrderBack() {
+        async toggleOrderBack() {
             try {
                 this.modal.order = false;
                 this.modal.detail = true;

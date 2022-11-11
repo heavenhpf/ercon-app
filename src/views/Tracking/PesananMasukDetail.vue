@@ -5,21 +5,26 @@
                 <div class="row">
                     <h5 class="text-dark">Nomor PO:</h5>
                     <div class="col-8 pb-0 mb-3">
-                        <h4 class="font-weight-bolder text-dark">PO123</h4>
+                        <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
                     </div>
                     <div class="col-4">
-                        <p class="font-weight-bolder text-danger float-end">Deadline: 20 September 2022</p>
+                        <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
+                                Date(g$po.deadline).toLocaleDateString("id-ID", {
+                                    weekday: 'long', year: 'numeric', month:
+                                        'long', day: 'numeric'
+                                })
+                        }}</p>
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-10 pb-0 mb-3">
-                        <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_toTos_company?.name }}
+                        <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_fromTos_company?.name }}
                         </h5>
                         <h6 class="text-dark">Progress</h6>
                         <div class="progress" style="height: 20px; width: 70%;">
                             <div class="progress-bar bg-success" role="progressbar"
-                                :style="{width: g$po.progress * 100 + '%'}" aria-valuenow="{{g$po.progress * 100}}"
-                                aria-valuemin="0" aria-valuemax="100">{{ g$po.progress * 100 }}%
+                                :style="{ width: g$po.progress * 100 + '%' }" aria-valuenow="{{g$po.progress * 100}}"
+                                aria-valuemin="0" aria-valuemax="100">{{ (g$po.progress * 100).toFixed(1) }}%
                             </div>
                         </div>
                     </div>
@@ -62,10 +67,9 @@
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
-import POTable from "@/components/examples/POTable.vue";
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from "pinia";
-import PesananMasukDetailTable from "../../components/examples/PesananMasukDetailTable.vue";
+import PesananMasukDetailTable from "@/components/examples/PesananMasukDetailTable.vue";
 
 export default {
     name: "pesanan-masuk-detail",
@@ -77,19 +81,15 @@ export default {
         }
     },
     components: {
-    ArgonButton,
-    POTable,
-    PesananMasukDetailTable
-},
-
-
+        ArgonButton,
+        PesananMasukDetailTable,
+    },
     async created() {
         try {
         } catch (e) {
 
         }
     },
-
     computed: {
         ...mapState(d$po, ['g$po']),
     },

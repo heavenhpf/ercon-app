@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import * as s$auth from '@/services/auth';
-import { setCookies, certCookies, delCookies } from '@/utils/cookies';
+import { delCookies, setCookies, certCookies } from '@/utils/cookies';
+
 import { parseISO } from 'date-fns';
 
 const d$auth = defineStore({

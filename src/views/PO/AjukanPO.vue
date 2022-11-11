@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor PO</label>
-                                <argon-input v-model="input.po" type="text" />
+                                <argon-input v-model="input.po" type="text" size="lg"/>
                             </div>
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Tujuan

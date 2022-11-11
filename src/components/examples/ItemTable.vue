@@ -1,8 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$myItem" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" />
+            <data-table style="text-align:center ;" :index="false" :data="g$label" :columns="dt.column"
+                :actions="dt.action" @edit="triggerEdit" />
         </div>
     </div>
 </template>
@@ -10,8 +10,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
-import d$category from '@/stores/dashboard/category';
-import auth from '../../router/routes/auth';
 
 export default {
     // name: 'Monitoring',
@@ -19,41 +17,36 @@ export default {
         pageTitle: 'Item',
         // Input
         input: {
-            id_item: null,
-            id_category: null,
-            name: '',
-            desc: '',
-            serial_number: '',
-            unit: '',
-        },
-
-        filterCategory: {
-            value: ``,
         },
 
         // DataTable
         dt: {
             column: [
                 {
-                    name: 'serial_number',
+                    name: 'd_po_detail.d_po.po_number',
                     th: 'Nomor Barang',
+                    render: ({ d_po_detail }) => d_po_detail.d_po.po_number,
                 },
                 {
-                    name: 'name',
-                    th: 'Nama Item',
+                    name: 'd_po_detail..d_po.s_company_d_po_order_fromTos_company.name',
+                    th: 'Perusahaan PO',
+                    render: ({ d_po_detail }) => d_po_detail.d_po.s_company_d_po_order_fromTos_company.name,
                 },
                 {
-                    name: 'ref_category.name',
-                    th: 'Kategori',
-                    render: ({ ref_category }) => ref_category.name,
+                    name: 'd_po_detail.quantity',
+                    th: 'Update Produksi',
+                    render: ({ d_po_detail }) => d_po_detail.quantity,
                 },
                 {
-                    name: 'quantity',
-                    th: 'Jumlah Barang  ',
+                    name: 'd_po_detail.d_order.quantity',
+                    th: 'Jumlah Pesanan',
+                    render: ({ d_po_detail }) => d_po_detail.d_order.quantity,
                 },
                 {
-                    name: 'unit',
-                    th: 'Satuan',
+                    th: 'Label',
+                    render: ({ }) => {
+                        return `<span class="badge bg-primary">Purchasing Order</span>`
+                    }
                 },
             ],
             action: [
@@ -73,126 +66,22 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$list', 'g$detail', 'g$myItem']),
-        ...mapState(d$category, ['g$listCategory']),
+        ...mapState(d$item, ['g$label']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listMyItem();
-        await this.a$categoryList();
     },
     methods: {
-        ...mapActions(d$item, ['a$editItem', 'a$inquiryDetail', 'a$listMyItem', 'a$inquiryAdd']),
-        ...mapActions(d$category, ['a$categoryList']),
-
-        clear() {
-            this.input = {
-                id_item: null,
-                id_category: null,
-                name: '',
-                desc: '',
-                serial_number: '',
-                unit: '',
-            };
-        },
-
-        async init() {
+        async triggerEdit({ id_item, id_item_detail }) {
             try {
-                await this.a$listMyItem();
-                await this.a$inquiryAdd();
+                this.modal.detail = false;
+                this.$router.push({ name: 'Update Produksi', params: { id_item, id_item_detail } })
             } catch (e) {
                 console.error(e);
             }
         },
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id_item, id_category, name, desc, serial_number, unit } = this.input;
-                const data = {
-                    id_category, name, desc, serial_number, unit
-                };
-                await this.a$editItem(Number(id_item), data);
-                this.modal.edit = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-
-        // async triggerDetail({ id_item }) {
-        //     try {
-        //         this.input = {
-        //             id: id_item,
-        //         };
-        //         this.modal.detail = false;
-        //         this.$router.push({ name: 'Update Produksi', params: { id: id_item } })
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
-        async triggerDetail() {
-            try {
-                // this.input = {
-                //     id: id_item,
-                // };
-                // this.modal.detail = false;
-                this.$router.push({ name: 'Update Produksi' })
-                // console.log(this.$route.params.id);
-            } catch (e) {
-                console.error(e);
-            }
-        },
-
-        async triggerDelete({ id_item }) {
-            try {
-                this.input = {
-                    id_item
-                };
-                this.modal.confirm = true;
-            } catch (e) {
-                console.error(e);
-            }
-        },
-
-        async triggerOptions() {
-            try {
-                const { selectedCategory } = this.filterCategory;
-                const data = {
-                    category: selectedCategory.id_category,
-                };
-                // console.log(data.id_category);
-                // console.log(data);
-                // await this.a$listAllItem(data);
-            }
-            catch (e) {
-                console.log(e);
-            }
-        }
-    },
-    watch: {
-        modals(val) {
-            if (!val) this.clear();
-        }
     },
 };
 </script>

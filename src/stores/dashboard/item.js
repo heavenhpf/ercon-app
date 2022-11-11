@@ -55,11 +55,12 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
-        async a$detailItem(options) {
+        async a$itemDetail(options) {
             try {
                 this.status = null;
-                const { data, status } = await s$item.detailItem(options);
-                this.item = data ?? {};
+                const { data, status } = await s$item.itemDetail(options);
+                this.item = data.item ?? [];
+                this.label = data.label ?? {};
                 this.status = status;
                 console.log(this.myItem);
             } catch ({ error, message }) {
@@ -109,6 +110,7 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
+
 
     },
     getters: {

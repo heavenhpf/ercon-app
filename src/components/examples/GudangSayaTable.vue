@@ -27,7 +27,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
-import d$category from '@/stores/dashboard/category';
 import auth from '../../router/routes/auth';
 
 export default {
@@ -43,9 +42,8 @@ export default {
             serial_number: '',
             unit: '',
         },
-
-        filterCategory: {
-            value: ``,
+        filter: {
+            id_item: null,
         },
 
         // DataTable
@@ -95,19 +93,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$item, ['g$list', 'g$detail', 'g$myItem']),
-        ...mapState(d$category, ['g$listCategory']),
+        ...mapState(d$item, ['g$list', 'g$detail', 'g$myItem', 'g$item']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listMyItem();
-        await this.a$categoryList();
     },
     methods: {
-        ...mapActions(d$item, ['a$editItem', 'a$deleteItem', 'a$inquiryDetail', 'a$listMyItem', 'a$inquiryAdd']),
-        ...mapActions(d$category, ['a$categoryList']),
+        ...mapActions(d$item, ['a$deleteItem', 'a$inquiryDetail', 'a$listMyItem', 'a$inquirygetItem']),
 
         clear() {
             this.input = {
@@ -128,36 +123,6 @@ export default {
                 console.error(e);
             }
         },
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id_item, id_category, name, desc, serial_number, unit } = this.input;
-                const data = {
-                    id_category, name, desc, serial_number, unit
-                };
-                await this.a$editItem(Number(id_item), data);
-                this.modal.edit = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
         async delInquiry() {
             try {
                 const { id_item } = this.input;
@@ -171,28 +136,27 @@ export default {
             }
         },
 
-        // async triggerDetail({ id_item }) {
-        //     try {
-        //         this.input = {
-        //             id: id_item,
-        //         };
-        //         this.modal.detail = false;
-        //         this.$router.push({ name: 'Detail Item', params: { id: id_item } })
-        //         console.log(this.$route.params.id);
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
         async triggerDetail({ id_item }) {
             try {
-                this.modal.detail = false;
-                this.$router.push({ name: 'Detail Item'})
-                // console.log(this.$route.params.id);
+                this.input = {
+                    id_item: Number(id_item),
+                };
+                this.$router.push({ name: 'Detail Item', params: { id: id_item } })
+                console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);
             }
         },
+
+        // async triggerDetail({ id_item }) {
+        //     try {
+        //         this.modal.detail = false;
+        //         this.$router.push({ name: 'Detail Item', params: { id: id_item } })
+        //         // console.log(this.$route.params.id);
+        //     } catch (e) {
+        //         console.error(e);
+        //     }
+        // },
 
         async triggerDelete({ id_item }) {
             try {

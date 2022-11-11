@@ -30,7 +30,7 @@ export default {
         filter: {
             id_po: null,
             id_po_detail: null
-        },
+       },
         // DataTable
         dt: {
             column: [
@@ -38,10 +38,6 @@ export default {
                     name: 'd_order.d_item.serial_number',
                     th: 'Serial Number',
                     render: ({ d_order }) => d_order.d_item.serial_number
-                },
-                {
-                    name: 'id_order',
-                    th: 'ID Order',
                 },
                 {
                     name: 'd_order.d_item.name',

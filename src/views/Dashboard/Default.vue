@@ -92,7 +92,7 @@ import Carousel from "@/components/examples/Carousel.vue";
 import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import { baseApi } from '@/utils/axios';
 import d$company from '@/stores/dashboard/company';
-import d$dashboard from '@/stores/dashboard/dashboard';
+import d$dashboard from "@/stores/dashboard/dashboard";
 import { mapActions, mapState } from "pinia";
 import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
 import TrackingPOTerdekatTable from "@/components/examples/TrackingPOTerdekatTable.vue";
@@ -184,6 +184,7 @@ export default {
       await this.a$countPO();
     } catch (e) {
     }
-  }
+  },
+
 };
 </script>

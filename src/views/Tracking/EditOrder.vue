@@ -3,12 +3,17 @@
         <div class="card">
             <div class="card-body p-4">
                 <div class="row p-1">
-                <h6 class="text-dark">Nomor Item</h6>
+                <h6 class="text-dark">Serial Number</h6>
                 <div class="col-8 pb-0">
-                    <h4 class="font-weight-bolder text-dark">R-23123</h4>
+                    <h4 class="font-weight-bolder text-dark">.</h4>
                 </div>
                 <div class="col-4">
-                    <p class="font-weight-bolder text-danger float-end">Deadline: 20 September 2022</p>
+                    <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
+                                Date(g$po.deadline).toLocaleDateString("id-ID", {
+                                    weekday: 'long', year: 'numeric', month:
+                                        'long', day: 'numeric'
+                                })
+                        }}</p>
                 </div>
             </div>
             <hr>
@@ -57,15 +62,43 @@
     </div>
 </template>
 
+
 <script>
+import ArgonButton from "@/components/ArgonButton.vue";
+import d$po from '@/stores/dashboard/po';
+import { mapActions, mapState } from "pinia";
+import PesananMasukDetailTable from "@/components/examples/PesananMasukDetailTable.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 
 export default {
-    name: "edit-order",
+    name: "pesanan-masuk-detail",
+    data() {
+        return {
+            post: {},
+            po_detail: [],
+            errors: [],
+        }
+    },
     components: {
         ArgonButton,
-        ArgonInput,
+        PesananMasukDetailTable,
     },
+    async created() {
+        try {
+        } catch (e) {
+
+        }
+    },
+    computed: {
+        ...mapState(d$po, ['g$po']),
+    },
+    methods: {
+    },
+    async mounted() {
+        try {
+        } catch (e) {
+        }
+    }
 };
 </script>

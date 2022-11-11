@@ -16,9 +16,8 @@
                     <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                        <option v-for='items in g$listCategory'
-                            v-bind:value="{ id_category: items.id_category, name: items.name }" selected>
-                        <option>{{ items.name }}</option>
+                        <option>-- Semua --</option>
+                        <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}
                         </option>
                     </select>
                 </div>
@@ -134,7 +133,7 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="toogleOrderBack()">
+                <argon-button color="secondary" @click="toggleOrderBack()">
                     Kembali
                 </argon-button>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
@@ -151,6 +150,7 @@ import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
 import d$category from '@/stores/dashboard/category';
+import d$auth from '@/stores/auth.d';
 import auth from '../../router/routes/auth';
 
 export default {
@@ -162,18 +162,12 @@ export default {
             text: ``,
             value: ``,
         },
-        filter: {
-            tier: 2,
-            category: 2,
-        },
         filter_detail: {
             id: null,
         },
         filterCategory: {
-            value: ``,
         },
         filterTier: {
-            value: ``,
         },
         // DataTable
         dt: {
@@ -255,9 +249,17 @@ export default {
     computed: {
         ...mapState(d$category, ['g$listCategory']),
         ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
+        ...mapState(d$auth, ['g$user']),
         modals() {
             return Object.values(this.modal).includes(true);
-        }
+        },
+
+        filter() {
+            return {
+                tier: this.g$user.role + 1,
+                category: null,
+            }
+        },
     },
     async mounted() {
         await this.a$categoryList();
@@ -309,7 +311,7 @@ export default {
                 console.error(e);
             }
         },
-        async toogleOrderBack() {
+        async toggleOrderBack() {
             try {
                 this.modal.order = false;
                 this.modal.detail = true;
@@ -366,8 +368,8 @@ export default {
                 const { selectedCategory } = this.filterCategory;
                 const { selectedTier } = this.filterTier;
                 const data = {
-                    tier: selectedTier,
-                    category: selectedCategory.id_category,
+                    tier: this.g$user.role + 1,
+                    category: selectedCategory,
                 };
                 // console.log(data.id_category);
                 // console.log(data);

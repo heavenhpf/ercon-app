@@ -95,9 +95,6 @@ export default {
             address: '',
             cur_password: '',
             new_password: '',
-
-
-
         }
     }),
 
@@ -111,7 +108,8 @@ export default {
 
         async init() {
             try {
-                // await this.a$editMyCompany();
+                await this.a$getMyCompany();
+                await this.a$username();
             } catch (e) {
                 console.error(e);
             }
@@ -124,7 +122,7 @@ export default {
                     address, phone
                 };
                 await this.a$editMyCompany(data);
-                console.log(`Edit ${this.pageTitle} Succeed!`);
+                console.log(`Edit Company Succeed!`);
                 // this.modal.detail = false;
             } catch (e) {
                 console.error(e);
