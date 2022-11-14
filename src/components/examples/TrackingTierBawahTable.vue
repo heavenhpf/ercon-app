@@ -2,11 +2,13 @@
     <div class="table-responsive p-0">
         <div class="card">
             <div class=" col-9 row">
-                <div class="col-4 mt-4 ms-4">
+                <div class="col-4 mt-4 ms-4" v-if="this.g$user.role === 0">
                     <label>Filter Tier</label>
                     <select @change="triggerOptions()" v-model="input.tier" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
-                        <option v-for="n in 3" v-bind:value="n - 1">Tier {{n}}</option>
+                        <option v-bind:value="1" >Tier 2</option>
+                        <option v-bind:value="2">Tier 3</option>
+                        <!-- <option v-for="n in 3" v-bind:value="n">Tier {{n}}</option> -->
                         <!-- tier 1 harusnya diiliangin karena masuk tracking saya, table untuk tier 1 2 3 dibedain karena gaada tier -->
                     </select>
                 </div>
@@ -14,7 +16,7 @@
                     <label>Filter Status</label>
                     <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
-                        <option>-- Semua --</option>
+                        <option>-- Semua Status --</option>
                         <option value="-1">Melewati Deadline</option>
                         <option value="0">Belum Deadline</option>
                         <option value="1">Progress Selesai</option>
@@ -80,7 +82,7 @@ export default {
                 },
                 {
                     name: 's_company_d_po_order_toTos_company.name',
-                    th: 'Nama Perusahaan',
+                    th: 'Perusahaan Supplier',
                     render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {

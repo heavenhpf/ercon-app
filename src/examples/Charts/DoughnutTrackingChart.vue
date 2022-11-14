@@ -110,8 +110,8 @@ export default {
               pointRadius: 2,
               borderWidth: 0,
               backgroundColor: [
-                "#11cdef",
                 "#f5365c",
+                "#11cdef",
                 "#2dce89",
               ],
 

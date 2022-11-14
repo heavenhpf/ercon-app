@@ -68,7 +68,7 @@
                 <div class="mt-1">
                     <h3 class="modal-title">Order {{ g$item.name }}</h3>
                     <div class="mt-2">
-                        <label for="exampleFormControlInput1" class="form-label">Nomor Order</label>
+                         for="exampleFormControlInput1" class="form-label">Nomor Order</label><label
                         <argon-input v-model="input.no_order" type="text" placeholder="Nomor Order"></argon-input>
                     </div>
                 </div>

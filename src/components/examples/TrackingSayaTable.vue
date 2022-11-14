@@ -6,7 +6,7 @@
                     <label>Filter Status</label>
                     <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
-                        <option>-- Semua --</option>
+                        <option>-- Pilih Semua --</option>
                         <option value="-1">Melewati Deadline</option>
                         <option value="0">Belum Deadline</option>
                         <option value="1">Progress Selesai</option>
@@ -69,7 +69,7 @@ export default {
                 },
                 {
                     name: 's_company_d_po_order_toTos_company.name',
-                    th: 'Nama Perusahaan',
+                    th: 'Perusahaan Supplier',
                     render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {
@@ -148,14 +148,6 @@ export default {
                 await this.a$listPoDetail();
                 await this.a$listMyPo();
                 // console.log(this.g$po)
-            } catch (e) {
-                console.error(e);
-            }
-        },
-
-        async triggerOptions() {
-            try {
-                await this.a$listMyPo({status: Number(this.input.status)});
             } catch (e) {
                 console.error(e);
             }

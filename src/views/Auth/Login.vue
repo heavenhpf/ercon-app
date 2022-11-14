@@ -58,7 +58,7 @@
         role="alert" style="text-align: center; z-index: 1;" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
           <div class="toast-body">
-            User Tidak Ditemukan!
+            <span class="text-center">User Tidak Ditemukan!</span>
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
             aria-label="Close"></button>

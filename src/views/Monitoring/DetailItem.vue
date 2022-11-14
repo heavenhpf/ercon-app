@@ -137,6 +137,7 @@
                             <div class="row mb-3">
                                 <div class="">
                                     <div class="mb-3">
+                                        <label for="example-text-input" class="form-control-label text-sm">Kategori</label>
                                         <select v-model.number="input.id_category"
                                             class="form-select form-select-md mb-3"
                                             aria-label=".form-select-lg example">
@@ -144,15 +145,19 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-text-input" class="form-control-label text-sm">Nama Item</label>
                                         <argon-input v-model="input.name" isRequired="true" />
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-text-input" class="form-control-label text-sm">Deskripsi Item</label>
                                         <argon-input v-model="input.desc" isRequired="true" />
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-text-input" class="form-control-label text-sm">Serial Number</label>
                                         <argon-input v-model="input.serial_number" isRequired="true" />
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-text-input" class="form-control-label text-sm">Satuan Item</label>
                                         <argon-input v-model="input.unit" isRequired="true" />
                                     </div>
                                 </div>

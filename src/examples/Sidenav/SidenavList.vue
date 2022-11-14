@@ -111,12 +111,13 @@
     <sidenav-card :class="cardBg" textPrimary="Need Help?" textSecondary="Please check our docs" />
   </div>
 </template>
+
 <script>
+import { mapActions, mapState } from 'pinia';
 import SidenavItem from "./SidenavItem.vue";
 import SidenavCard from "./SidenavCard.vue";
 import ArgonRadio from "@/components/ArgonRadio.vue";
 import d$auth from '@/stores/auth.d';
-import { mapActions, mapState } from 'pinia';
 
 export default {
   name: "SidenavList",
