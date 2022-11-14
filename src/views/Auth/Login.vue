@@ -16,8 +16,8 @@
                 <div class="card-body">
                   <form role="form" @submit.prevent="submit">
                     <div class="mb-3">
-                      <argon-input v-model="input.username" type="text" placeholder="Username" name="username"
-                        size="lg" isRequired="true" />
+                      <argon-input v-model="input.username" type="text" placeholder="Username" name="username" size="lg"
+                        isRequired="true" />
                     </div>
                     <div class="mb-3">
                       <argon-input v-model="input.password" type="password" placeholder="Password" name="password"
@@ -51,6 +51,17 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div id="error"
+        class="toast position-fixed top-0 start-50 translate-middle-x mt-4 align-items-center text-white bg-danger"
+        role="alert" style="text-align: center; z-index: 1;" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            User Tidak Ditemukan!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
         </div>
       </div>
     </section>
@@ -88,7 +99,12 @@ export default {
         await this.a$login(this.input);
         this.$router.push({ name: 'Default' });
       } catch (e) {
-        console.error(e);
+        // console.error(e);
+        const toastError = document.getElementById('error')
+        const toast = new bootstrap.Toast(toastError)
+        toast.show()
+        setTimeout(() => {
+        }, 2000);
       }
     },
   },

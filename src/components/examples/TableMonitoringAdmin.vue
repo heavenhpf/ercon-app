@@ -90,7 +90,7 @@
                                 <h6>Nama Perusahaan :</h6>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" type="text" v-model="g$item.s_company.name" readonly>
+                                <argon-input type="text" v-model="g$item.s_company.name" readonly></argon-input>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
