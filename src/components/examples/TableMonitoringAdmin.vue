@@ -229,6 +229,11 @@ export default {
                     render: ({ d_po_detail }) => d_po_detail.d_order.quantity
                 },
                 {
+                    name: 'd_item.unit',
+                    th: 'Satuan',
+                    render: ({ d_item }) => d_item.unit
+                },
+                {
                     th: 'Label',
                     render: ({ }) => {
                         return `<span class="badge bg-primary">Purchasing Order</span>`

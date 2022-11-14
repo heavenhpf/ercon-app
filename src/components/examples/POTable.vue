@@ -147,9 +147,9 @@ export default {
                     render: ({ d_order }) => d_order.quantity
                 },
                 {
-                    name: 'd_order.unit',
+                    name: 'd_order.d_item.unit',
                     th: 'Satuan',
-                    render: ({ d_order }) => d_order.unit
+                    render: ({ d_order }) => d_order.d_item.unit
                 },
                 {
                     name: 'progress',

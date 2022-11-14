@@ -113,18 +113,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$list_inbox', 'g$detail', 'g$progress']),
+        ...mapState(d$po, ['g$list_inbox']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
         await this.a$listInbox();
-        await this.a$listPoDetail({ id_po: this.$route.params.id });
-        // console.log(this.g$po)
     },
     methods: {
-        ...mapActions(d$po, ['a$listAllPo', 'a$listInbox', 'a$listPoDetail', 'a$getPoDetail',]),
+        ...mapActions(d$po, ['a$listInbox']),
 
         clear() {
             this.input = {

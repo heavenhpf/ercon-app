@@ -161,6 +161,14 @@ export default {
             }
         },
 
+        async triggerOptions() {
+            try {
+                await this.a$listMyPo({status: Number(this.input.status)});
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
         async triggerDetail({ id_po }) {
             try {
                 this.input = {

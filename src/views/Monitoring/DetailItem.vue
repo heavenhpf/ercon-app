@@ -8,7 +8,7 @@
                             <div class="col-9 p-1">
                                 <h3 class="font-weight-bolder text-dark">{{ g$item.name }}</h3>
                             </div>
-                            <div class="col-3 p-1 ps-6">
+                            <div class="col-3 p-1 ps-5">
                                 <span>
                                     <argon-button @click="triggerEditItem()" size="sm" color="primary">
                                         <span class="fa fa-pencil-square-o fa-md me-2" />
@@ -104,8 +104,8 @@
                                                 <img src="@/assets/img/illustrations/box.png" alt="warning"
                                                     style="width: 80%; height: 80%;">
                                             </div>
-                                            <h4 class="row justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}
-                                            </h4>
+                                            <h5 class="d-flex justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -135,24 +135,24 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="row mb-3">
-                                <div class="col-9">
-                                    <div class="mb-3 col-9">
+                                <div class="">
+                                    <div class="mb-3">
                                         <select v-model.number="input.id_category"
                                             class="form-select form-select-md mb-3"
                                             aria-label=".form-select-lg example">
                                             <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3 col-9">
+                                    <div class="mb-3">
                                         <argon-input v-model="input.name" isRequired="true" />
                                     </div>
-                                    <div class="mb-3 col-9">
+                                    <div class="mb-3">
                                         <argon-input v-model="input.desc" isRequired="true" />
                                     </div>
-                                    <div class="mb-3 col-9">
+                                    <div class="mb-3">
                                         <argon-input v-model="input.serial_number" isRequired="true" />
                                     </div>
-                                    <div class="mb-3 col-9">
+                                    <div class="mb-3">
                                         <argon-input v-model="input.unit" isRequired="true" />
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@ export default {
                     serial_number,
                 };
                 await this.a$editItem(this.$route.params.id, data);
-                this.$router.push({ name: 'Gudang Saya' })
+                this.modal.editItem = false;
             } catch (error) {
                 throw error;
             } finally {

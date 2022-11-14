@@ -4,6 +4,28 @@
             style="background-color: #3B82F6; margin-right: -24px; margin-left: -34%;">
         </div>
         <div class="card shadow-lg mt-n6 p-1 w-60 mx-auto">
+            <div id="liveToast"
+                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Password Berhasil di Update
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            <div id="ToastProfil"
+                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Profile Berhasil di Update
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
             <div class="card-body p-4">
                 <div class="row gx-4">
                     <div class="mb-0">
@@ -79,6 +101,7 @@ import ArgonButton from "@/components/ArgonButton.vue";
 import ArgonTextarea from "@/components/ArgonTextarea.vue";
 import d$company from '@/stores/dashboard/company';
 import d$user from '@/stores/dashboard/user';
+import d$auth from '@/stores/auth.d';
 import { mapActions, mapState } from "pinia";
 
 export default {
@@ -100,11 +123,12 @@ export default {
 
     computed: {
         ...mapState(d$company, ['g$getMyCompany', 'g$list']),
-        ...mapState(d$user, ['g$username'])
+        ...mapState(d$user, ['g$username']),
     },
     methods: {
         ...mapActions(d$company, ['a$getMyCompany', 'a$editMyCompany']),
         ...mapActions(d$user, ['a$username', 'a$editPassword']),
+        ...mapActions(d$auth, ['a$logout']),
 
         async init() {
             try {
@@ -122,8 +146,12 @@ export default {
                     address, phone
                 };
                 await this.a$editMyCompany(data);
-                console.log(`Edit Company Succeed!`);
-                // this.modal.detail = false;
+                const ToastProfil = document.getElementById('ToastProfil')
+                const toast2 = new bootstrap.Toast(ToastProfil)
+                toast2.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Perusahaan Saya' });
+                }, 2000);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -137,12 +165,17 @@ export default {
                     cur_password, new_password
                 };
                 await this.a$editPassword(data);
-                console.log(`Edit Password Succeed!`);
-                // this.modal.detail = false;
+                await this.a$logout();
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'LogIn' });
+                }, 1000);
             } catch (e) {
                 console.error(e);
             } finally {
-                // await this.init();
+                await this.init();
             }
         },
     },
