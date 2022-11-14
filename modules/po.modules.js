@@ -340,7 +340,8 @@ class _po {
                             d_item: {
                                 select: {
                                     name: true,
-                                    serial_number: true
+                                    serial_number: true,
+                                    unit: true
                                 }
                             }
                         }

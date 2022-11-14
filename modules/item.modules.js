@@ -267,6 +267,11 @@ class _item {
                     id_item: body.id_item
                 },
                 include: {
+                    d_item: {
+                        select: {
+                            unit: true
+                        }
+                    },
                     d_po_detail: {
                         select: {
                             quantity: true,
