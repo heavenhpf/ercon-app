@@ -8,10 +8,11 @@ const d$po = defineStore({
         list_my_po: [],
         list_inbox: [],
         list_po_detail: [],
+        list_po_terdekat: [],
+        list_po_selesai_terbaru: [],
         get_po_detail: {},
         po: {},
         detail: {},
-        docPO: null,
         status: null,
     }),
     actions: {
@@ -72,6 +73,13 @@ const d$po = defineStore({
             }
         },
 
+        async a$addPo(body) {
+            try {
+                await s$po.addPo(body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         async a$inquiryDetail(id) {
             try {
                 this.detail = {};
@@ -83,32 +91,9 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
-        async a$inquiryAddPO(body) {
+        async a$editPoDetail(options, body) {
             try {
-                const { data } = await s$po.addPO(body);
-                this.po = data ?? {};
-            } catch ({ error, message }) {
-                throw error ?? message;
-            }
-        },
-        async a$inquiryAddDocPO(body) {
-            try {
-                const { data } = await s$po.addDocPO(body);
-                this.docPO = data;
-            } catch ({ error, message }) {
-                throw error ?? message;
-            }
-        },
-        async a$inquiryEdit(id, body) {
-            try {
-                await s$po.update(id, body);
-            } catch ({ error, message }) {
-                throw error ?? message;
-            }
-        },
-        async a$inquiryDel(id) {
-            try {
-                await s$po.del(id);
+                await s$po.editPoDetail(options, body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -116,14 +101,14 @@ const d$po = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$AddPO: ({ po }) => po,
-        g$DocPO: ({ docPO }) => docPO,
-        g$list_po_detail: ({ list_po_detail }) => list_po_detail,
         g$po: ({ po }) => po,
-        g$list_po: ({ list_po }) => list_po,
+        g$list_po_detail: ({ list_po_detail }) => list_po_detail,
+        g$list_po: ({ list_po }) => list_po, //list all po
         g$list_inbox: ({ list_inbox }) => list_inbox,
         g$list_my_po: ({ list_my_po }) => list_my_po,
         g$get_po_detail: ({ get_po_detail }) => get_po_detail,
+        g$list_po_terdekat: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7),
+        g$list_po_selesai_terbaru: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7 && item.status == 1),
         g$detail: ({ detail }) => detail,
     },
 });

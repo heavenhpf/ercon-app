@@ -86,35 +86,46 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Nama Perusahaan :</h6>
+                            <div class="col-4">
+                                <h6>Nama Perusahaan</h6>
                             </div>
-                            <div class="col-6">
-                                <argon-input type="text" v-model="g$item.s_company.name" readonly></argon-input>
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
+                                <input class="form-control" type="text" v-model="g$item.s_company.name" readonly>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Nama Barang :</h6>
+                            <div class="col-4">
+                                <h6>Nama Barang</h6>
                             </div>
-                            <div class="col-6">
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
                                 <input class="form-control" type="text" v-model="input.name" readonly>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Jenis Barang :</h6>
+                            <div class="col-4">
+                                <h6>Jenis Barang</h6>
                             </div>
-                            <div class="col-6">
-                                <!-- <input class="form-control" type="text" v-model="g$item.ref_category.name" readonly> -->
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
                                 {{ input.id_item === g$item.id_item ? g$item.ref_category.name :
                                         g$item.ref_category.name
                                 }}
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Jumlah Barang :</h6>
+                            <div class="col-4">
+                                <h6>Jumlah Barang</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
                             </div>
                             <div class="col-6">
                                 <argon-input v-model.number="input.jml_barang" type="number" placeholder="Jumlah Barang"

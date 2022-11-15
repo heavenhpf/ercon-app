@@ -64,7 +64,7 @@
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
                                 <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
-                                        g$get_po_detail.note_po?? ""
+                                        g$get_po_detail.note_po?? "-"
                                 }}</h6>
                             </div>
                         </div>
