@@ -8,8 +8,6 @@
                         aria-label=".form-select-lg example">
                         <option v-bind:value="1" >Tier 2</option>
                         <option v-bind:value="2">Tier 3</option>
-                        <!-- <option v-for="n in 3" v-bind:value="n">Tier {{n}}</option> -->
-                        <!-- tier 1 harusnya diiliangin karena masuk tracking saya, table untuk tier 1 2 3 dibedain karena gaada tier -->
                     </select>
                 </div>
                 <div class="col-4 mt-4 ms-4">
@@ -72,6 +70,7 @@ export default {
             name: '',
         },
         filter: {
+            
         },
         // DataTable
         dt: {
@@ -141,7 +140,7 @@ export default {
         }
     },
     async mounted() {
-        this.filter.tier = this.g$user.role + 1
+        this.filter.tier = this.g$user.role + 1;
         await this.a$listAllPo(this.filter);
         // console.log(this.g$po)
     },
@@ -231,10 +230,17 @@ export default {
         },
         async triggerOptions() {
             try {
-                this.filter = {
+                if (this.g$user.role === 0) {
+                    this.filter = {
                     tier: Number(this.input.tier),
                     status: Number(this.input.status)
-                }
+                    }
+                } else {
+                    this.filter = {
+                        tier: this.g$user.role + 1,
+                        status: Number(this.input.status)
+                    };
+                };
                 await this.a$listAllPo(this.filter);
             } catch (e) {
                 console.error(e);

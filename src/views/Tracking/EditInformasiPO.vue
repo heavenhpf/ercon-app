@@ -26,15 +26,15 @@
                 <hr>
                 <div class="p-1 col-10">
                     <h5 class="text-dark mb-2">Informasi untuk Pemesan:</h5>
-                    <ArgonInput v-model="input.note" type="text"
+                    <argon-input v-model="input.note" type="text"
                         placeholder="Contoh: Barang sedang dalam proses pembuatan komponen mur di PT Mur Nasional"
-                        name="informasi" size="md"></ArgonInput>
+                        name="informasi" size="md"></argon-input>
                 </div>
                 <hr>
                 <div class="p-1 col-6">
                     <h5 class="text-dark mb-2">Nomor PO Terkait (Opsional):</h5>
-                    <ArgonInput v-model="input.note_po" type="text" placeholder="Contoh: PO0037895" name="informasi"
-                        size="md"></ArgonInput>
+                    <argon-input v-model="input.note_po" type="text" placeholder="Contoh: PO0037895" name="informasi"
+                        size="md"></argon-input>
                 </div>
                 <div class="row">
                     <div class="col-auto">

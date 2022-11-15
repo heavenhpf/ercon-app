@@ -5,7 +5,7 @@
                 <h4 class="font-weight-bolder text-dark">Monitoring Item</h4>
             </div>
             <div class="div">
-                <TableMonitoringAdmin />
+                <table-monitoring-admin />
             </div>
         </div>
     </div>
@@ -13,9 +13,6 @@
 
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
-import Carousel from "@/components/examples//Carousel.vue";
-import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
 
 export default {
@@ -39,9 +36,6 @@ export default {
     },
     components: {
         Card2,
-        GradientLineChart,
-        Carousel,
-        CategoriesCard,
         TableMonitoringAdmin,
     },
 };

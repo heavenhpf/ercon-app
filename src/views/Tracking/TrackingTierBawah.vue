@@ -5,7 +5,7 @@
                 <h4 class="font-weight-bolder text-dark">Tracking Tier Bawah</h4>
             </div>
             <div>
-                <TrackingTierBawahTable />
+                <tracking-tier-bawah-table />
             </div>
         </div>
     </div>

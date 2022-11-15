@@ -101,11 +101,6 @@ import { mapActions, mapState } from 'pinia';
 import d$company from '@/stores/dashboard/company';
 import auth from '@/router/routes/auth';
 
-// const statusColor = {
-//     0: "belim deadline",
-//     1: "diproses",
-// }
-
 export default {
     name: 'Company',
     data: () => ({
@@ -118,10 +113,6 @@ export default {
         // DataTable
         dt: {
             column: [
-                // {
-                //     name: 'id_company',
-                //     th: 'no',
-                // },
                 {
                     name: 'name',
                     th: 'Nama Perusahaan',
@@ -136,12 +127,10 @@ export default {
                     th: 'Username',
                     render: ({ auth_user }) => auth_user.username
                 },
-
                 {
                     name: 'address',
                     th: 'alamat',
                 },
-
                 {
                     name: 'phone',
                     th: 'Nomor telepon',
@@ -206,6 +195,7 @@ export default {
                 await this.init();
             }
         },
+        
         async editInquiry() {
             try {
                 const { id, name, address, phone } = this.input;
@@ -222,6 +212,7 @@ export default {
                 await this.init();
             }
         },
+        
         async delInquiry() {
             try {
                 const { id_company } = this.input;

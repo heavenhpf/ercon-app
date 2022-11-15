@@ -75,13 +75,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-8">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
                                 <argon-input v-model='input.phone' type="text" />
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-12 mb-2">
+                            <div class="col-8 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
                                 <argon-input v-model='input.address' type="text" />
                             </div>

@@ -155,7 +155,7 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'Monitoring',
+        pageTitle: 'table-monitoring-admin',
         // Input
         input: {
             text: ``,
@@ -176,6 +176,10 @@ export default {
                     th: 'No',
                 },
                 {
+                    name: 'name',
+                    th: 'Nama Item',
+                },
+                {
                     name: 's_company.name',
                     th: 'Nama Perusahaan',
                     render: ({ s_company }) => s_company.name
@@ -184,10 +188,6 @@ export default {
                     name: 's_company.auth_user.level',
                     th: 'Tier',
                     render: ({ s_company }) => s_company.auth_user.level
-                },
-                {
-                    name: 'name',
-                    th: 'Nama Item',
                 },
                 {
                     name: 'quantity',
@@ -290,14 +290,6 @@ export default {
                 // category: 1
             };
         },
-
-        // async init() {
-        //     try {
-        //         await this.a$listAllItem();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
         async addInquiry() {
             try {
                 const { id_item, no_order, jml_barang } = this.input;
@@ -343,7 +335,6 @@ export default {
                 console.error(e);
             }
         },
-
         async triggerDetail({ id_item, name, desc, quantity, s_company, ref_category }) {
             try {
                 this.input = {
@@ -370,7 +361,6 @@ export default {
                 console.error(e);
             }
         },
-
         async triggerOptions() {
             try {
                 const { selectedCategory } = this.filterCategory;

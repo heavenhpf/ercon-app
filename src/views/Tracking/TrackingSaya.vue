@@ -9,8 +9,7 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <card2 :title="stats.belum.title" :value="g$countStatus.progress"
                             :cardBackground="stats.belum.cardBackground"
-                            :textPosition="stats.belum.textPosition" :iconPosition="stats.belum.iconPosition"
-                            :iconClass="stats.belum.iconClass">
+                            :textPosition="stats.belum.textPosition" :iconPosition="stats.belum.iconPosition">
                         </card2>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
@@ -35,9 +34,6 @@
 </template>
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
-import Carousel from "@/components/examples//Carousel.vue";
-import CategoriesCard from "@/components/examples/CategoriesCard.vue";
 import TrackingSayaTable from "@/components/examples/TrackingSayaTable.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
@@ -71,9 +67,6 @@ export default {
     },
     components: {
         Card2,
-        GradientLineChart,
-        Carousel,
-        CategoriesCard,
         TrackingSayaTable,
     },
     computed: {
