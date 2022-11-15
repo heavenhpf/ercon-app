@@ -32,7 +32,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
-import auth from '../../router/routes/auth';
 
 const statusPO = {
     '0': "Belum Deadline",
@@ -41,7 +40,7 @@ const statusPO = {
 }
 
 export default {
-    name: 'tracking-po-terdekat',
+    name: 'tracking-po-terdekat-table',
     data: () => ({
         pageTitle: 'Tracking',
         // Input

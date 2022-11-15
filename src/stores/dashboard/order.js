@@ -6,6 +6,7 @@ const d$order = defineStore({
     state: () => ({
         list_po: [],
         list_po_detail: [],
+        getOrder: {},
         po: {},
         detail: {},
         status: null,
@@ -19,13 +20,26 @@ const d$order = defineStore({
                 throw error ?? message;
             }
         },
-        // async a$inquiryEdit(id, body) {
-        //     try {
-        //         await s$po.update(id, body);
-        //     } catch ({ error, message }) {
-        //         throw error ?? message;
-        //     }
-        // },
+        async a$getOrder(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$order.getOrder(options);
+                console.log("data",data);
+
+                this.getOrder = data ?? {};
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
+        async a$inquiryEditOrder(id, body) {
+            try {
+                await s$order.updateOrder(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         // async a$inquiryDel(id) {
         //     try {
         //         await s$po.del(id);
@@ -40,6 +54,7 @@ const d$order = defineStore({
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
         g$list_po: ({ list_po }) => list_po,
         g$detail: ({ detail }) => detail,
+        g$getOrder: ({ getOrder }) => getOrder,
     },
 });
 

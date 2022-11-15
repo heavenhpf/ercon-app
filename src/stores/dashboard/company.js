@@ -87,7 +87,7 @@ const d$company = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$list: ({ company }) => company,
+        g$listCompany: ({ company }) => company,
         g$name: ({ name }) => name,
         g$detail: ({ detail }) => detail,
         g$getMyCompany: ({ getmyCompany }) => getmyCompany,
