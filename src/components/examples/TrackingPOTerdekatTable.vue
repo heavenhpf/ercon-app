@@ -2,7 +2,7 @@
     <div class="table-responsive p-0">
         <div class="card">
             <!-- {{g$list_po_terdekat[0].id_po}} -->
-            <data-table style="text-align:center ;" :index="false" :data="g$list_po_terdekat" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$list_po_terdekat" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" />
         </div>
         <modal-comp v-model:show="modal.add">

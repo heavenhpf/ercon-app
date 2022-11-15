@@ -13,7 +13,7 @@
                     </select>
                 </div>
             </div>
-            <data-table style="text-align:center ;" :index="false" :data="g$list_my_po" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$list_my_po" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" />
         </div>
         <modal-comp v-model:show="modal.add">

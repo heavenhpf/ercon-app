@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$label" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$label" :columns="dt.column"
                 :actions="dt.action" @edit="triggerEdit" />
         </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$myItem" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$myItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.confirm">

@@ -24,7 +24,7 @@
                 </div>
                 <h4>{{ g$listCategory[selectedCategory] }}</h4>
             </div>
-            <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp size="xl" v-model:show="modal.detail">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-9 float-lg-start">
-                        <data-table style="text-align:center ;" :index="false" :data="g$label" :columns="dt1.column"
+                        <data-table style="text-align:center ;" index="false" :data="g$label" :columns="dt1.column"
                             @detail="triggerDetail" @delete="triggerDelete" />
                     </div>
                     <div class="col-3 row align-items-center" style="padding: 5%;">
@@ -178,10 +178,6 @@ export default {
         // DataTable
         dt: {
             column: [
-                {
-                    name: 'id_item',
-                    th: 'No',
-                },
                 {
                     name: 's_company.name',
                     th: 'Nama Perusahaan',
