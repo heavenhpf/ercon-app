@@ -56,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"{{toyotaUsername}}\",\r\n    \"password\": \"{{toyotaPassword}}\"\r\n}",
+							"raw": "{\r\n    \"username\": \"toyota\",\r\n    \"password\": \"toyota\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2089,6 +2089,38 @@
 								"dashboard",
 								"count",
 								"item"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "GET NOTIFICATION",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/notification",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notification"
 							]
 						}
 					},
