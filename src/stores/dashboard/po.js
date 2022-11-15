@@ -11,6 +11,7 @@ const d$po = defineStore({
         get_po_detail: {},
         po: {},
         detail: {},
+        docPO: null,
         status: null,
     }),
     actions: {
@@ -82,9 +83,18 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
-        async a$inquiryAdd(body) {
+        async a$inquiryAddPO(body) {
             try {
-                await s$po.add(body);
+                const {data} = await s$po.addPO(body);
+                this.po = data ?? {};
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$inquiryAddDocPO(body) {
+            try {
+                const { data } = await s$po.addDocPO(body);
+                this.docPO = data;
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -106,7 +116,8 @@ const d$po = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$po: ({ po }) => po,
+        g$AddPO: ({ po }) => po,
+        g$DocPO: ({ docPO }) => docPO,
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
         g$list_po: ({ list_po }) => list_po,
         g$list_inbox: ({ list_inbox }) => list_inbox,

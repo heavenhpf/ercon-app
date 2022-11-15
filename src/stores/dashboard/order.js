@@ -33,13 +33,13 @@ const d$order = defineStore({
                 throw error ?? message;
             }
         },
-        // async a$inquiryEdit(id, body) {
-        //     try {
-        //         await s$po.update(id, body);
-        //     } catch ({ error, message }) {
-        //         throw error ?? message;
-        //     }
-        // },
+        async a$inquiryEditOrder(id, body) {
+            try {
+                await s$order.updateOrder(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         // async a$inquiryDel(id) {
         //     try {
         //         await s$po.del(id);
