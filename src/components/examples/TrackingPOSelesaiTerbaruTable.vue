@@ -1,8 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list_my_po" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
+            <data-table style="text-align:center ;" index="false" :data="g$list_po_selesai_terbaru"
+                :columns="dt.column" :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
             <template #header>
@@ -31,7 +31,7 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
-import d$auth from '@/stores/auth.d';
+import auth from '@/router/routes/auth';
 
 const statusPO = {
     '0': "Belum Deadline",
@@ -40,16 +40,13 @@ const statusPO = {
 }
 
 export default {
-    name: 'Tracking',
+    name: 'tracking-po-selesai-terbaru',
     data: () => ({
         pageTitle: 'Tracking',
         // Input
         input: {
             id: null,
             name: '',
-        },
-        filterDetail: {
-            id_po: 1,
         },
         // DataTable
         dt: {
@@ -83,7 +80,7 @@ export default {
                     render: ({ status }) => {
                         if (status == 0) {
                             return `<span class="badge badge-pill badge-info">${statusPO[status]}</span>`
-                        } else if (status == 1) {
+                        } if (status == 1) {
                             return `<span class="badge badge-pill badge-success">${statusPO[status]}</span>`
                         } else {
                             return `<span class="badge badge-pill badge-danger">${statusPO[status]}</span>`
@@ -112,25 +109,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$po', 'g$list_po_detail', 'g$list_po', 'g$detail', 'g$progress', 'g$list_my_po']),
-        ...mapState(d$auth, ['g$user']),
+        ...mapState(d$po, ['g$po', 'g$detail', 'g$progress', 'g$list_my_po', 'g$list_po_terdekat', 'g$list_po_selesai_terbaru']),
         modals() {
             return Object.values(this.modal).includes(true);
-        },
-        filter() {
-            return {
-                tier: this.g$user.role + 1,
-            }
         }
     },
     async mounted() {
-        await this.a$listAllPo(this.filter);
         await this.a$listMyPo();
-        await this.a$listPoDetail(this.filterDetail);
-        // console.log(this.g$po)
     },
     methods: {
-        ...mapActions(d$po, ['a$listAllPo', 'a$listPoDetail', 'a$listMyPo', 'a$inquiryEdit', 'a$inquiryDelete', 'a$inquiryDetail']),
+        ...mapActions(d$po, ['a$listMyPo', 'a$inquiryDetail', 'a$listPoSelesaiTerbaru']),
 
         clear() {
             this.input = {
@@ -143,75 +131,20 @@ export default {
 
         async init() {
             try {
-                await this.a$listAllPo();
-                await this.a$listPoDetail();
                 await this.a$listMyPo();
                 // console.log(this.g$po)
             } catch (e) {
                 console.error(e);
             }
         },
-
-        async addInquiry() {
-            try {
-                const { name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryAdd(data);
-                this.modal.add = false;
-                console.log(`Add ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async editInquiry() {
-            try {
-                const { id, name } = this.input;
-                const data = {
-                    name,
-                };
-                await this.a$inquiryEdit(id, data);
-                this.modal.detail = false;
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-        async delInquiry() {
-            try {
-                const { id } = this.input;
-                await this.a$inquiryDel(id);
-                this.modal.confirm = false;
-                console.log(`Delete ${this.pageTitle} Succeed!`);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await this.init();
-            }
-        },
-
         async triggerDetail({ id_po }) {
             try {
                 this.input = {
                     id: id_po,
                 };
                 this.modal.detail = false;
-                this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
+                this.$router.push({ name: 'TrackingDetail', params: { id: id_po } })
                 console.log(this.$route.params.id);
-            } catch (e) {
-                console.error(e);
-            }
-        },
-        async triggerDelete({ id }) {
-            try {
-                await this.a$inquiryDetail(id);
-                this.input = this.g$detail;
-                this.modal.confirm = true;
             } catch (e) {
                 console.error(e);
             }
@@ -223,4 +156,4 @@ export default {
         }
     },
 };
-</script>  
+</script>

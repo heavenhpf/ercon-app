@@ -2,19 +2,16 @@
     <div class="table-responsive p-0">
         <div class="card">
             <div class=" col-9 row">
-                <div class="col-4 mt-4 ms-4">
+                <!-- <div class="col-4 mt-4 ms-4">
                     <label>Filter Tier</label>
                     <select v-model.number="filterTier.selectedTier" @change="triggerOptions()"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
                         placeholder="-- Tier --">
-                        <option selected>
-                        <option>-- Pilih Tier --</option>
-                        </option>
                         <option v-for='tier in 3' v-bind:value="Number(tier)">
                         <option>{{ tier }}</option>
                         </option>
                     </select>
-                </div>
+                </div> -->
                 <div class="col-4 mt-4 ms-4">
                     <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
@@ -27,7 +24,7 @@
                 </div>
                 <h4>{{ g$listCategory[selectedCategory] }}</h4>
             </div>
-            <data-table style="text-align:center ;" :index="false" :data="g$listItem" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp size="xl" v-model:show="modal.detail">
@@ -42,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-9 float-lg-start">
-                        <data-table style="text-align:center ;" :index="false" :data="g$label" :columns="dt1.column"
+                        <data-table style="text-align:center ;" index="false" :data="g$label" :columns="dt1.column"
                             @detail="triggerDetail" @delete="triggerDelete" />
                     </div>
                     <div class="col-3 row align-items-center" style="padding: 5%;">
@@ -62,7 +59,7 @@
                     Order
                 </argon-button>
                 <argon-button color="secondary" @click="modal.detail = false">
-                    Close
+                    Tutup
                 </argon-button>
             </template>
         </modal-comp>
@@ -137,18 +134,17 @@
                 </div>
             </template>
             <template #footer>
+                <argon-button color="secondary" @click="toggleOrderBack()">
+                    Kembali
+                </argon-button>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
                     Order
-                </argon-button>
-                <argon-button color="secondary" @click="toogleOrderBack()">
-                    Kembali
                 </argon-button>
             </template>
         </modal-comp>
     </div>
     <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
 </template>
-
 
 <script>
 import { mapActions, mapState } from 'pinia';
@@ -183,10 +179,6 @@ export default {
         dt: {
             column: [
                 {
-                    name: 'id_item',
-                    th: 'No',
-                },
-                {
                     name: 's_company.name',
                     th: 'Nama Perusahaan',
                     render: ({ s_company }) => s_company.name
@@ -203,6 +195,10 @@ export default {
                 {
                     name: 'quantity',
                     th: 'Jumlah Item',
+                },
+                {
+                    name: 'unit',
+                    th: 'Satuan',
                 },
             ],
             action: [
@@ -313,7 +309,7 @@ export default {
                 console.error(e);
             }
         },
-        async toogleOrderBack() {
+        async toggleOrderBack() {
             try {
                 this.modal.order = false;
                 this.modal.detail = true;

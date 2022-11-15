@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list_po_detail" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp size="lg" v-model:show="modal.detail">
@@ -27,7 +27,7 @@
         </modal-comp>
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <div class="col-6 modal-title">
+                <div class="col-6 modal-title mt-3">
                     <h5>Serial Number</h5>
                     <div>
                         <h6 class="mt-2">{{ g$get_po_detail.d_order?.d_item.serial_number }}</h6>
@@ -47,24 +47,26 @@
             <!-- buat ngerubah detail -->
             <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
-                    <h3 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
-                    </h3>
+                    <h4 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
+                    </h4>
+                    <h6>Deskripsi Item</h6>
                     <p>{{ g$get_po_detail.d_order.d_item.desc }}</p>
                 </div>
                 <div>
-                    <h5>Informasi Item</h5>
+                    <h6>Informasi Item</h6>
                 </div>
                 <div>
                     <p>{{ g$get_po_detail.note }} </p>
                 </div>
                 <div class="mt-2">
-                    <h5>Nomor PO</h5>
+                    <h6>Nomor PO Terkait</h6>
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
-                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
-                                        g$po.po_number
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" @click.stop.prevent="copyTestingCode">{{
+                                        text
                                 }}</h6>
+                                <input type="hidden" id="testing-code" :value="text">
                             </div>
                         </div>
                         <div class="col-auto">
@@ -75,9 +77,11 @@
                                     <div class="toast-body" style="text-align:center">
                                         Nomor PO disimpan pada clipboard
                                     </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
                                 </div>
                             </div>
-                            <argon-button id="showToast" data-bs-toggle="modal"
+                            <argon-button @click="copyTestingCode()" data-bs-toggle="modal"
                                 style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
                                 <span class="fa fa-files-o fa-lg text-dark" />
                             </argon-button>
@@ -123,6 +127,9 @@ export default {
             id: null,
             name: '',
         },
+
+        text: '',
+        
         filter: {
             id_po: null,
             id_po_detail: null
@@ -144,6 +151,11 @@ export default {
                     name: 'd_order.quantity',
                     th: 'Jumlah Pesanan',
                     render: ({ d_order }) => d_order.quantity
+                },
+                {
+                    name: 'd_order.d_item.unit',
+                    th: 'Satuan',
+                    render: ({ d_order }) => d_order.d_item.unit
                 },
                 {
                     name: 'progress',
@@ -207,6 +219,37 @@ export default {
     methods: {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
+        // getPOValue(){
+        //     this.$refs.clone.focus();
+        //     document.execCommand("copy");
+
+        //     const toastLiveExample = document.getElementById('liveToast')
+        //     const toast = new bootstrap.Toast(toastLiveExample)
+        //     toast.show()
+        // },
+        copyTestingCode() {
+          let testingCodeToCopy = document.querySelector('#testing-code')
+          testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+          testingCodeToCopy.select()
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                // alert('Testing code was copied ' + msg);
+                const toastLiveExample = document.getElementById('showToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Tracking Tier Bawah' });
+                }, 1000);
+            } catch (err) {
+                alert('Oops, unable to copy');
+            }
+
+            /* unselect the range */
+            testingCodeToCopy.setAttribute('type', 'hidden')
+            window.getSelection().removeAllRanges()
+        },
         async triggerDetail({ id_po_detail, id_po }) {
             try {
                 this.filter_po_detail = {
@@ -214,6 +257,7 @@ export default {
                     id_po_detail: Number(id_po_detail)
                 }
                 await this.a$getPoDetail(this.filter_po_detail);
+                this.text = this.g$get_po_detail.note_po;
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

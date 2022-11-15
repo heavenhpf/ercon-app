@@ -2,15 +2,12 @@
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" v-bind="$attrs"
     id="navbarBlur" data-scroll="true">
     <div class="px-3 py-1 container-fluid">
-      <breadcrumbs :currentPage="currentRouteName" textWhite="text-dark" />
+      <!-- <breadcrumbs :currentPage="currentRouteName" textWhite="text-dark" /> -->
       <div class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4" id="navbar">
         <div class="pe-md-3 d-flex align-items-center ms-md-auto">
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <router-link :to="{ name: 'LogIn' }" class="px-0 nav-link font-weight-bold text-dark">
-                <i class="fa fa-user me-sm-2"></i>
-                <span class="d-sm-inline d-none">Log Out</span>
-              </router-link>
+              <Profile />
             </li>
             <!-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="#" @click="toggleSidebar" class="p-0 nav-link text-dark" id="iconNavbarSidenav">
@@ -30,7 +27,8 @@
               <a href="#" class="p-0 nav-link text-dark" :class="[showMenu ? 'show' : '']" id="dropdownMenuButton"
                 data-bs-toggle="dropdown" aria-expanded="false" @click="showMenu = !showMenu">
                 <i class="cursor-pointer fa fa-bell">
-                  <span class="position-absolute top-20 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
+                  <span
+                    class="position-absolute top-20 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>
                   </span>
                 </i>
@@ -118,9 +116,11 @@
     </div>
   </nav>
 </template>
+
 <script>
 import Breadcrumbs from "../Breadcrumbs.vue";
 import { mapMutations, mapActions } from "vuex";
+import Profile from '@/examples/Navbars/Profile.vue';
 
 export default {
   name: "navbar",
@@ -140,10 +140,11 @@ export default {
     toggleSidebar() {
       this.toggleSidebarColor("bg-white");
       this.navbarMinimize();
-    }
+    },
   },
   components: {
-    Breadcrumbs
+    Breadcrumbs,
+    Profile,
   },
   computed: {
     currentRouteName() {

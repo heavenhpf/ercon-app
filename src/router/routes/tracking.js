@@ -38,6 +38,12 @@ const tracking = {
             component: () => import('@/views/Tracking/PesananMasukDetail.vue'),
             meta: { auth: true },
         },
+        {
+            path: 'edit-info-po/:id_po/:id_po_detail',
+            name: 'Edit Informasi PO',
+            component: () => import('@/views/Tracking/EditInformasiPO.vue'),
+            meta: { auth: true },
+        },
     ],
 };
 

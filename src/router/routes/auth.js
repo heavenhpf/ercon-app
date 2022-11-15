@@ -5,7 +5,7 @@ const auth = {
   name: 'Auth',
   beforeEnter: (to, from, next) => {
     const { id } = certCookies();
-    if (!to.matched.some(({ path }) => path.includes('auth')) && !id) next({ name: 'Dashboard' });
+    if (!to.matched.some(({ path }) => path.includes('auth')) && !id) next({ name: 'LogIn' });
     else if (to.path === '/' && id !== undefined) next({ name: 'Default' });
     else next();
   },

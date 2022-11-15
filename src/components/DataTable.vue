@@ -52,7 +52,7 @@
                 asc: sortColumn === '#' && asc,
                 desc: sortColumn === '#' && !asc,
               }" @click="sortIndex()">
-                #
+                No
               </th>
               <!-- Display All Parsed Headers -->
               <th v-for="(th, i) in tableHeaders" :key="i" class="sortable text-dark text-sm font-weight-bolder" :class="{

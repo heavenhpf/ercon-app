@@ -36,7 +36,6 @@
                                     </div>
                                     <div class="col-md-2">
                                         <input type="radio" v-model="input.level" id="tier" value="2" name="tier"> Tier 2
-
                                     </div>
                                     <div class="col-md-2">
                                         <input type="radio" v-model="input.level" id="tier" value="3" name="tier"> Tier 3

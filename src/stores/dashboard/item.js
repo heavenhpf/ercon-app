@@ -35,13 +35,6 @@ const d$item = defineStore({
             }
         },
 
-        async a$deleteItem(id) {
-            try {
-                await s$item.delItem(id);
-            } catch ({ error, message }) {
-                throw error ?? message;
-            }
-        },
         async a$inquirygetItem(options) {
             try {
                 this.item = {};
@@ -55,6 +48,26 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
+        async a$item(body) {
+            try {
+                await s$item.addItem(body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$itemDetail(options) {
+            try {
+                this.status = null;
+                const { data, status } = await s$item.itemDetail(options);
+                this.item = data.item ?? [];
+                this.label = data.label ?? {};
+                this.status = status;
+                console.log(this.myItem);
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
         async a$inquiryAdd(body) {
             try {
                 await s$item.addItem(body);
@@ -62,13 +75,42 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
-        async a$inquiryEdit(id, body) {
+        async a$inquiryAdd(body) {
             try {
-                await s$item.update(id, body);
+                await s$item.addItem(body);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
         },
+        async a$deleteItem(id) {
+            try {
+                await s$item.delItem(id);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$editItem(id, body) {
+            try {
+                await s$item.editItem(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$editItemQuantity(id, body) {
+            try {
+                await s$item.editItemQuantity(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+        async a$editBuffer(id, body) {
+            try {
+                await s$item.editBuffer(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+
 
     },
     getters: {

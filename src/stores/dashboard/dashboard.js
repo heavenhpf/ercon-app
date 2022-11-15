@@ -12,6 +12,7 @@ const d$dashboard = defineStore({
         countStatus: {},
         countItem: {},
         countInbox: {},
+        countInboxStatus: {},
     }),
     actions: {
         async a$countSupplier() {
@@ -58,6 +59,17 @@ const d$dashboard = defineStore({
                 throw error ?? message;
             }
         },
+        async a$countInboxStatus() {
+            try {
+                this.status = null;
+                const { data, status } = await s$dashboard.countInboxStatus();
+                this.countInboxStatus = data ?? {};
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
+        },
         async a$countDN() {
             try {
                 this.status = null;
@@ -90,6 +102,7 @@ const d$dashboard = defineStore({
         g$countStatus: ({ countStatus }) => countStatus,
         g$countItem: ({ countItem }) => countItem,
         g$countInbox: ({ countInbox }) => countInbox,
+        g$countInboxStatus: ({ countInboxStatus }) => countInboxStatus,
     },
 });
 

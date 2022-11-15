@@ -1,7 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" index="false" :data="g$list_inbox" :columns="dt.column"
+            <!-- {{g$list_po_terdekat[0].id_po}} -->
+            <data-table style="text-align:center ;" index="false" :data="g$list_po_terdekat" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" />
         </div>
         <modal-comp v-model:show="modal.add">
@@ -40,17 +41,13 @@ const statusPO = {
 }
 
 export default {
-    name: 'Tracking',
+    name: 'tracking-po-terdekat',
     data: () => ({
         pageTitle: 'Tracking',
         // Input
         input: {
             id: null,
             name: '',
-        },
-        filter: {
-            id_po: null,
-            id_po_detail: null
         },
         // DataTable
         dt: {
@@ -60,22 +57,22 @@ export default {
                     th: 'Nomor PO',
                 },
                 {
-                    name: 's_company_d_po_order_fromTos_company.name',
-                    th: 'Pemesan',
-                    render: ({ s_company_d_po_order_fromTos_company }) => s_company_d_po_order_fromTos_company.name
-                },
-                {
-                    name: 'deadline',
-                    th: 'Deadline',
-                    render: ({ deadline }) => {
-                        return new Date(deadline).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })
-                    }
+                    name: 's_company_d_po_order_toTos_company.name',
+                    th: 'Nama Perusahaan',
+                    render: ({ s_company_d_po_order_toTos_company }) => s_company_d_po_order_toTos_company.name
                 },
                 {
                     name: 'progress',
                     th: 'Capaian',
                     render: ({ progress }) => {
                         return `<progress  value="${progress}" max="1">${progress}%</progress>`
+                    }
+                },
+                {
+                    name: 'deadline',
+                    th: 'Deadline',
+                    render: ({ deadline }) => {
+                        return new Date(deadline).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })
                     }
                 },
                 {
@@ -113,16 +110,16 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$po, ['g$list_inbox']),
+        ...mapState(d$po, ['g$detail', 'g$progress', 'g$list_my_po', 'g$list_po_terdekat']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listInbox();
+        await this.a$listMyPo();
     },
     methods: {
-        ...mapActions(d$po, ['a$listInbox']),
+        ...mapActions(d$po, ['a$listMyPo', 'a$inquiryDetail', 'a$listPoTerdekat']),
 
         clear() {
             this.input = {
@@ -135,8 +132,7 @@ export default {
 
         async init() {
             try {
-                await this.a$listInbox();
-                // console.log(this.g$po)
+                await this.a$listMyPo();
             } catch (e) {
                 console.error(e);
             }
@@ -148,7 +144,7 @@ export default {
                     id: id_po,
                 };
                 this.modal.detail = false;
-                this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: id_po } })
+                this.$router.push({ name: 'Tracking Detail', params: { id: id_po } })
                 console.log(this.$route.params.id);
             } catch (e) {
                 console.error(e);

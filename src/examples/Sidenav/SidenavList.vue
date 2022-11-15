@@ -13,23 +13,27 @@
           Tracking
         </h6>
       </li>
-      <li class="nav-item">
-        <sidenav-item url="/tracking/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''"
-          navText="Tracking Saya">
-          <template v-slot:icon>
-            <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''"
-          navText="Tracking Tier Bawah">
-          <template v-slot:icon>
-            <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <template v-if="this.g$user.role === 1 && 2">
+      <template v-if="this.g$user.role === 0 || this.g$user.role === 1 || this.g$user.role === 2">
+        <li class="nav-item">
+          <sidenav-item url="/tracking/tracking-saya" :class="getRoute() === 'tracking-saya' ? 'active' : ''"
+            navText="Tracking Saya">
+            <template v-slot:icon>
+              <i class="fa fa-paper-plane-o mb-2 text-success text-sm opacity-10"></i>
+            </template>
+          </sidenav-item>
+        </li>
+      </template>
+      <template v-if="this.g$user.role === 0 || this.g$user.role === 1">
+        <li class="nav-item">
+          <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''"
+            navText="Tracking Tier Bawah">
+            <template v-slot:icon>
+              <i class="fa fa-archive mb-2 text-success text-sm opacity-10"></i>
+            </template>
+          </sidenav-item>
+        </li>
+      </template>
+      <template v-if="this.g$user.role === 1 || this.g$user.role === 2 || this.g$user.role === 3">
         <li class="nav-item">
           <sidenav-item url="/tracking/pesanan-masuk" :class="getRoute() === 'pesanan-masuk' ? 'active' : ''"
             navText="Pesanan Masuk">
@@ -44,7 +48,7 @@
           Monitoring
         </h6>
       </li>
-      <template v-if="this.g$user.role === 1 && 2">
+      <template v-if="this.g$user.role === 1 || this.g$user.role === 2 || this.g$user.role === 3">
         <li class="nav-item">
           <sidenav-item url="/monitoring/gudang-saya" :class="getRoute() === 'gudang-saya' ? 'active' : ''"
             navText="Gudang Saya">
@@ -54,26 +58,30 @@
           </sidenav-item>
         </li>
       </template>
-      <li class="nav-item">
-        <sidenav-item url="/monitoring/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
-          navText="Monitoring Item">
-          <template v-slot:icon>
-            <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="mt-3 nav-item">
-        <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
-          Purchasing Order (PO)
-        </h6>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/po/ajukan-po" :class="getRoute() === 'ajukan-po' ? 'active' : ''" navText="Ajukan PO">
-          <template v-slot:icon>
-            <i class="ni ni-tag text-info text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
+      <template v-if="this.g$user.role === 0 || this.g$user.role === 1 || this.g$user.role === 2">
+        <li class="nav-item">
+          <sidenav-item url="/monitoring/monitoring-item" :class="getRoute() === 'monitoring-item' ? 'active' : ''"
+            navText="Monitoring Item">
+            <template v-slot:icon>
+              <i class="ni ni-ui-04 text-warning text-sm opacity-10"></i>
+            </template>
+          </sidenav-item>
+        </li>
+      </template>
+      <template v-if="this.g$user.role === 0 ||this.g$user.role === 1 || this.g$user.role === 2">
+        <li class="mt-3 nav-item">
+          <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
+            Purchasing Order (PO)
+          </h6>
+        </li>
+        <li class="nav-item">
+          <sidenav-item url="/po/ajukan-po" :class="getRoute() === 'ajukan-po' ? 'active' : ''" navText="Ajukan PO">
+            <template v-slot:icon>
+              <i class="ni ni-tag text-info text-sm opacity-10"></i>
+            </template>
+          </sidenav-item>
+        </li>
+      </template>
       <li class="mt-3 nav-item">
         <h6 class="text-uppercase text-xs ps-4 font-weight-bolder ms-2">
           Manajemen Akun
@@ -96,18 +104,20 @@
           </sidenav-item>
         </li>
       </template>
+      <!-- </template> -->
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
     <sidenav-card :class="cardBg" textPrimary="Need Help?" textSecondary="Please check our docs" />
   </div>
 </template>
+
 <script>
+import { mapActions, mapState } from 'pinia';
 import SidenavItem from "./SidenavItem.vue";
 import SidenavCard from "./SidenavCard.vue";
 import ArgonRadio from "@/components/ArgonRadio.vue";
 import d$auth from '@/stores/auth.d';
-import { mapActions, mapState } from 'pinia';
 
 export default {
   name: "SidenavList",

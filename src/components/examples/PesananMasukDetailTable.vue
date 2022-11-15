@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <data-table style="text-align:center ;" :index="false" :data="g$list_po_detail" :columns="dt.column"
+            <data-table style="text-align:center ;" index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp size="lg" v-model:show="modal.detail">
@@ -62,9 +62,7 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
-                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
-                                        g$po.po_number
-                                }}</h6>
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{ g$get_po_detail.note_po }}</h6>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -136,10 +134,6 @@ export default {
                     render: ({ d_order }) => d_order.d_item.serial_number
                 },
                 {
-                    name: 'id_order',
-                    th: 'ID Order',
-                },
-                {
                     name: 'd_order.d_item.name',
                     th: 'nama item',
                     render: ({ d_order }) => d_order.d_item.name
@@ -148,6 +142,11 @@ export default {
                     name: 'd_order.quantity',
                     th: 'Jumlah Pesanan',
                     render: ({ d_order }) => d_order.quantity
+                },
+                {
+                    name: 'd_order.d_item.unit',
+                    th: 'Satuan',
+                    render: ({ d_order }) => d_order.d_item.unit
                 },
                 {
                     name: 'progress',
@@ -209,7 +208,7 @@ export default {
     //     }
     // },
     methods: {
-        ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
+        ...mapActions(d$po, ['a$listPoDetail']),
 
         async triggerDetail({ id_po_detail, id_po }) {
             try {
@@ -217,8 +216,7 @@ export default {
                     id_po: Number(id_po),
                     id_po_detail: Number(id_po_detail)
                 }
-                await this.a$getPoDetail(this.filter_po_detail);
-                this.modal.detail = true;
+                this.$router.push({ name: 'Edit Informasi PO', params: { id_po, id_po_detail} })
             } catch (e) {
                 console.error(e);
             }

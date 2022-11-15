@@ -5,18 +5,18 @@
                 <h4 class="font-weight-bolder text-dark">Tracking Tier Bawah</h4>
             </div>
             <div>
-                <TrackingTable />
+                <tracking-tier-bawah-table />
             </div>
         </div>
     </div>
 </template>
 <script>
-import TrackingTable from "@/components/examples/TrackingTable.vue";
+import TrackingTierBawahTable from "@/components/examples/TrackingTierBawahTable.vue";
 
 export default {
     name: "tracking-tier-bawah",
     components: {
-        TrackingTable,
+        TrackingTierBawahTable,
     },
 };
 </script>

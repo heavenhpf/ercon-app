@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import * as s$auth from '@/services/auth';
-import { setCookies, certCookies } from '@/utils/cookies';
+import { delCookies, setCookies, certCookies } from '@/utils/cookies';
 
 import { parseISO } from 'date-fns';
 
@@ -36,6 +36,14 @@ const d$auth = defineStore({
         throw message ?? error;
       }
     },
+    async a$logout() {
+      try {
+        delCookies('CERT');
+        return true;
+      } catch ({ message }) {
+        throw message;
+      }
+    }
   },
   getters: {
     g$user: ({ id, name, role }) => ({ id, name, role }),
