@@ -81,7 +81,6 @@
   import d$company from '@/stores/dashboard/company';
   import d$dashboard from "@/stores/dashboard/dashboard";
   import { mapActions, mapState } from "pinia";
-  import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
   import TrackingPOTerdekatTable from "@/components/examples/TrackingPOTerdekatTable.vue";
   import TrackingPOSelesaiTerbaruTable from "@/components/examples/TrackingPOSelesaiTerbaruTable.vue";
   
@@ -127,7 +126,6 @@
     components: {
       Card,
       DoughnutTrackingChart,
-      TableMonitoringAdmin,
       TrackingPOTerdekatTable,
       TrackingPOSelesaiTerbaruTable,
     },

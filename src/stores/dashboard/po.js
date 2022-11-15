@@ -116,10 +116,10 @@ const d$po = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
+        g$po: ({ po }) => po,
         g$AddPO: ({ po }) => po,
         g$DocPO: ({ docPO }) => docPO,
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
-        g$po: ({ po }) => po,
         g$list_po: ({ list_po }) => list_po,
         g$list_inbox: ({ list_inbox }) => list_inbox,
         g$list_my_po: ({ list_my_po }) => list_my_po,

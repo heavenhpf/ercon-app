@@ -16,13 +16,11 @@
                     <label>Filter Kategori</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                        <option v-for='items in g$listCategory'
-                            v-bind:value="{ id_category: items.id_category, name: items.name }" selected>
-                        <option>{{ items.name }}</option>
+                        <option>-- Semua Kategori --</option>
+                        <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}
                         </option>
                     </select>
                 </div>
-                <h4>{{ g$listCategory[selectedCategory] }}</h4>
             </div>
             <data-table style="text-align:center ;" index="false" :data="g$listItem" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
@@ -49,17 +47,17 @@
                                 style="width: 80%; height: 80%;">
                         </div>
                         <div class="mt-2 mb-2">
-                            <h4 class="row justify-content-center">{{ input.quantity }}</h4>
+                            <h5 class="row justify-content-center">{{ input.quantity }} {{ g$item.unit }}</h5>
                         </div>
                     </div>
                 </div>
             </template>
             <template #footer>
+                <argon-button color="secondary" @click="modal.detail = false">
+                    Close
+                </argon-button>
                 <argon-button color="primary" @click="triggerOrder()">
                     Order
-                </argon-button>
-                <argon-button color="secondary" @click="modal.detail = false">
-                    Tutup
                 </argon-button>
             </template>
         </modal-comp>
@@ -88,35 +86,46 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Nama Perusahaan :</h6>
+                            <div class="col-4">
+                                <h6>Nama Perusahaan</h6>
                             </div>
-                            <div class="col-6">
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
                                 <input class="form-control" type="text" v-model="g$item.s_company.name" readonly>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Nama Barang :</h6>
+                            <div class="col-4">
+                                <h6>Nama Barang</h6>
                             </div>
-                            <div class="col-6">
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
                                 <input class="form-control" type="text" v-model="input.name" readonly>
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Jenis Barang :</h6>
+                            <div class="col-4">
+                                <h6>Jenis Barang</h6>
                             </div>
-                            <div class="col-6">
-                                <!-- <input class="form-control" type="text" v-model="g$item.ref_category.name" readonly> -->
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
+                            </div>
+                            <div class="col-7">
                                 {{ input.id_item === g$item.id_item ? g$item.ref_category.name :
                                         g$item.ref_category.name
                                 }}
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-5">
-                                <h6>Jumlah Barang :</h6>
+                            <div class="col-4">
+                                <h6>Jumlah Barang</h6>
+                            </div>
+                            <div class="col-1">
+                                <h6 class="text-end">:</h6>
                             </div>
                             <div class="col-6">
                                 <argon-input v-model.number="input.jml_barang" type="number" placeholder="Jumlah Barang"
@@ -151,33 +160,32 @@ import { mapActions, mapState } from 'pinia';
 import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
 import d$category from '@/stores/dashboard/category';
+import d$auth from '@/stores/auth.d';
 import auth from '../../router/routes/auth';
 
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'Monitoring',
+        pageTitle: 'table-monitoring-admin',
         // Input
         input: {
             text: ``,
             value: ``,
         },
-        filter: {
-            tier: 2,
-            category: 2,
-        },
         filter_detail: {
             id: null,
         },
         filterCategory: {
-            value: ``,
         },
         filterTier: {
-            value: ``,
         },
         // DataTable
         dt: {
             column: [
+                {
+                    name: 'name',
+                    th: 'Nama Item',
+                },
                 {
                     name: 's_company.name',
                     th: 'Nama Perusahaan',
@@ -187,10 +195,6 @@ export default {
                     name: 's_company.auth_user.level',
                     th: 'Tier',
                     render: ({ s_company }) => s_company.auth_user.level
-                },
-                {
-                    name: 'name',
-                    th: 'Nama Item',
                 },
                 {
                     name: 'quantity',
@@ -232,6 +236,11 @@ export default {
                     render: ({ d_po_detail }) => d_po_detail.d_order.quantity
                 },
                 {
+                    name: 'd_item.unit',
+                    th: 'Satuan',
+                    render: ({ d_item }) => d_item.unit
+                },
+                {
                     th: 'Label',
                     render: ({ }) => {
                         return `<span class="badge bg-primary">Purchasing Order</span>`
@@ -255,9 +264,17 @@ export default {
     computed: {
         ...mapState(d$category, ['g$listCategory']),
         ...mapState(d$item, ['g$listItem', 'g$item', 'g$label']),
+        ...mapState(d$auth, ['g$user']),
         modals() {
             return Object.values(this.modal).includes(true);
-        }
+        },
+
+        filter() {
+            return {
+                tier: this.g$user.role + 1,
+                category: null,
+            }
+        },
     },
     async mounted() {
         await this.a$categoryList();
@@ -280,14 +297,6 @@ export default {
                 // category: 1
             };
         },
-
-        // async init() {
-        //     try {
-        //         await this.a$listAllItem();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
         async addInquiry() {
             try {
                 const { id_item, no_order, jml_barang } = this.input;
@@ -333,7 +342,6 @@ export default {
                 console.error(e);
             }
         },
-
         async triggerDetail({ id_item, name, desc, quantity, s_company, ref_category }) {
             try {
                 this.input = {
@@ -360,14 +368,13 @@ export default {
                 console.error(e);
             }
         },
-
         async triggerOptions() {
             try {
                 const { selectedCategory } = this.filterCategory;
                 const { selectedTier } = this.filterTier;
                 const data = {
-                    tier: selectedTier,
-                    category: selectedCategory.id_category,
+                    tier: this.g$user.role + 1,
+                    category: selectedCategory,
                 };
                 // console.log(data.id_category);
                 // console.log(data);

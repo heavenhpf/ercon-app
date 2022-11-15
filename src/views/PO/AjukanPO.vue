@@ -7,7 +7,6 @@
                         <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
                     </div>
                 </div>
-
                 <modal-comp size="md" v-model:show="modal.editQuantity">
                     <template #header>
                         <h4 class="modal-title">Edit Jumlah Barang</h4>
@@ -77,7 +76,7 @@
                                         <tr v-for="(item, index) in filterOrder.order" :key="index">
                                             <th scope="row">{{ index + 1 }}</th>
                                             <td>{{ item.order_number }}</td>
-                                            <td>{{item.d_item.name}}</td>
+                                            <td>{{item.d_item?.name}}</td>
                                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td>{{ item.quantity}}</td>
                                             <td>
@@ -231,7 +230,7 @@ export default {
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
         ...mapState(d$order, ['g$getOrder']),
-        ...mapState(d$company, ['g$listCompany']),
+        ...mapState(d$company, ['g$listCompanyBelow']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
         modals() {
             return Object.values(this.modal).includes(true);
@@ -240,14 +239,14 @@ export default {
     async mounted() {
         // await this.a$inquiryList();
         // console.log(this.g$getOrder);
-        await this.a$inquiryList();
+        await this.a$listCompanyBelow();
         
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
         ...mapActions(d$order, ['a$getOrder', 'a$inquiryEditOrder', 'a$inquiryAddPO']),
         ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO']),
-        ...mapActions(d$company, ['a$inquiryList']),
+        ...mapActions(d$company, ['a$listCompanyBelow']),
 
         nameWithLang ({ name }) {
             return `${name}`
@@ -443,12 +442,11 @@ export default {
         },
         async triggerOptions() {
             try {
-                this.temp = this.g$listCompany;
+                this.temp = this.g$listCompanyBelow;
                 this.temp = this.temp.map((item) => {
                     return {
                         id_company: item.id_company,
                         name: item.name,
-                        level: item.auth_user.level,
                     }
                 });
                 this.options = this.temp.filter((item) => {
