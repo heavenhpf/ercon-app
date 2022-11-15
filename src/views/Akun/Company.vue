@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="card">
-            <data-table style="text-align: center;" index="false" :data="g$list" :columns="dt.column"
+            <data-table style="text-align: center;" index="false" :data="g$listCompany" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
         </div>
         <modal-comp v-model:show="modal.add">
@@ -152,7 +152,7 @@ export default {
         },
     }),
     computed: {
-        ...mapState(d$company, ['g$list', 'g$detail']),
+        ...mapState(d$company, ['g$listCompany', 'g$detail']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
