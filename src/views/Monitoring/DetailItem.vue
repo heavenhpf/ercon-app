@@ -65,7 +65,7 @@
             </div>
             <h5 class="font-weight-bolder">Pesanan Item yang Masuk</h5>
             <div class="mb-3 p-2">
-                <item-table />
+                <ItemTable />
             </div>
             <router-link to="/monitoring/gudang-saya" tag="button">
                 <span>

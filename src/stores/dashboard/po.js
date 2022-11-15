@@ -85,7 +85,7 @@ const d$po = defineStore({
         },
         async a$inquiryAddPO(body) {
             try {
-                const {data} = await s$po.addPO(body);
+                const { data } = await s$po.addPO(body);
                 this.po = data ?? {};
             } catch ({ error, message }) {
                 throw error ?? message;

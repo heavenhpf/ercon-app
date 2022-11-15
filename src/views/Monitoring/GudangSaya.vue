@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div>
-                <gudang-saya-table />
+                <GudangSayaTable />
             </div>
         </div>
     </div>

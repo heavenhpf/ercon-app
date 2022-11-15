@@ -183,8 +183,6 @@ export default {
         try {
             await this.a$getMyCompany();
             await this.a$username();
-            this.input.address = this.g$getMyCompany.address;
-            this.input.phone = this.g$getMyCompany.phone;
         } catch (e) {
         }
     }

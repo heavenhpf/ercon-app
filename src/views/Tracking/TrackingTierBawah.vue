@@ -10,7 +10,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import TrackingTierBawahTable from "@/components/examples/TrackingTierBawahTable.vue";
 

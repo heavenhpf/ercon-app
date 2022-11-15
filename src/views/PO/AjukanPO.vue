@@ -7,6 +7,7 @@
                         <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
                     </div>
                 </div>
+
                 <modal-comp size="md" v-model:show="modal.editQuantity">
                     <template #header>
                         <h4 class="modal-title">Edit Jumlah Barang</h4>
