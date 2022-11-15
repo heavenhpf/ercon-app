@@ -386,6 +386,34 @@
 					"response": []
 				},
 				{
+					"name": "LIST COMPANY BELOW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/companies/below",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"companies",
+								"below"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET MY COMPANY",
 					"event": [
 						{

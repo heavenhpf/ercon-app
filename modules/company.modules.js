@@ -33,6 +33,31 @@ class _company {
         }
     }
 
+    listCompanyBelow = async (level) => {
+        try {
+            const list = await prisma.s_company.findMany({
+                where: {
+                    deleted_at: null,
+                    auth_user: {
+                        level: level + 1
+                    }
+                }
+            })
+
+            return {
+                status: true,
+                data: list
+            }
+        } catch (error) {
+            console.error('listCompanyBelow module error ', error)
+
+            return {
+                status: false,
+                error
+            }
+        }
+    }
+
     getName = async (id_user) => {
         try {
             const schema = Joi.number().required()

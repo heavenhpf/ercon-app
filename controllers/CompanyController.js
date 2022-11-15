@@ -9,6 +9,10 @@ app.get('/', userSession, verifyAdmin, async (req, res, next) => {
     response.sendResponse(res, await modules.listCompany())
 })
 
+app.get('/below', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listCompanyBelow(req.user.level))
+})
+
 app.get('/name', userSession, async (req, res, next) => {
     response.sendResponse(res, await modules.getName(req.user.id))
 })
