@@ -5,7 +5,7 @@
                 <h4 class="font-weight-bolder text-dark">Monitoring Item</h4>
             </div>
             <div class="div">
-                <table-monitoring-admin />
+                <MonitoringTable />
             </div>
         </div>
     </div>
@@ -13,10 +13,10 @@
 
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
+import MonitoringTable from "@/components/examples/MonitoringTable.vue";
 
 export default {
-    name: "monitoring-item",
+    name: "monitoring-table",
     data() {
         return {
             stats: {
@@ -36,7 +36,7 @@ export default {
     },
     components: {
         Card2,
-        TableMonitoringAdmin,
+        MonitoringTable,
     },
 };
 </script>

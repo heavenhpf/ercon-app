@@ -166,7 +166,7 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'table-monitoring-admin',
+        pageTitle: 'monitoring-table',
         // Input
         input: {
             text: ``,
