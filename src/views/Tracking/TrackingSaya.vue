@@ -34,7 +34,7 @@
 </template>
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import TrackingSayaTable from "@/components/examples/TrackingSayaTable.vue";
+import TrackingSayaTable from "@/components/tables/TrackingSayaTable.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
 

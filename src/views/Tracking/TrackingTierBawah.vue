@@ -10,8 +10,9 @@
         </div>
     </div>
 </template>
+
 <script>
-import TrackingTierBawahTable from "@/components/examples/TrackingTierBawahTable.vue";
+import TrackingTierBawahTable from "@/components/tables/TrackingTierBawahTable.vue";
 
 export default {
     name: "tracking-tier-bawah",

@@ -63,9 +63,10 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
-                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
-                                        g$get_po_detail.note_po?? "-"
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" @click.stop.prevent="copyTestingCode">{{
+                                        text ?? "-"
                                 }}</h6>
+                                <input type="hidden" id="testing-code" :value="text">
                             </div>
                         </div>
                         <div class="col-auto">
@@ -76,9 +77,11 @@
                                     <div class="toast-body" style="text-align:center">
                                         Nomor PO disimpan pada clipboard
                                     </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
                                 </div>
                             </div>
-                            <argon-button id="showToast" data-bs-toggle="modal"
+                            <argon-button @click="copyTestingCode()" data-bs-toggle="modal"
                                 style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
                                 <span class="fa fa-files-o fa-lg text-dark" />
                             </argon-button>
@@ -124,6 +127,9 @@ export default {
             id: null,
             name: '',
         },
+
+        text: '',
+        
         filter: {
             id_po: null,
             id_po_detail: null
@@ -213,6 +219,37 @@ export default {
     methods: {
         ...mapActions(d$po, ['a$listPoDetail', 'a$getPoDetail']),
 
+        // getPOValue(){
+        //     this.$refs.clone.focus();
+        //     document.execCommand("copy");
+
+        //     const toastLiveExample = document.getElementById('liveToast')
+        //     const toast = new bootstrap.Toast(toastLiveExample)
+        //     toast.show()
+        // },
+        copyTestingCode() {
+          let testingCodeToCopy = document.querySelector('#testing-code')
+          testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+          testingCodeToCopy.select()
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                // alert('Testing code was copied ' + msg);
+                const toastLiveExample = document.getElementById('showToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Tracking Tier Bawah' });
+                }, 1000);
+            } catch (err) {
+                alert('Oops, unable to copy');
+            }
+
+            /* unselect the range */
+            testingCodeToCopy.setAttribute('type', 'hidden')
+            window.getSelection().removeAllRanges()
+        },
         async triggerDetail({ id_po_detail, id_po }) {
             try {
                 this.filter_po_detail = {
@@ -220,6 +257,7 @@ export default {
                     id_po_detail: Number(id_po_detail)
                 }
                 await this.a$getPoDetail(this.filter_po_detail);
+                this.text = this.g$get_po_detail.note_po;
                 this.modal.detail = true;
             } catch (e) {
                 console.error(e);

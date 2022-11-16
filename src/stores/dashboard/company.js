@@ -5,6 +5,7 @@ const d$company = defineStore({
     id: 'company',
     state: () => ({
         company: [],
+        companyBelow: [],
         getmyCompany: {},
         name: '',
         detail: {},
@@ -84,6 +85,14 @@ const d$company = defineStore({
                 throw error ?? message;
             }
         },
+        async a$listCompanyBelow() {
+            try {
+                const { data } = await s$company.companyBelow();
+                this.companyBelow = data;
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        }
     },
     getters: {
         g$status: ({ status }) => status,
@@ -91,6 +100,7 @@ const d$company = defineStore({
         g$name: ({ name }) => name,
         g$detail: ({ detail }) => detail,
         g$getMyCompany: ({ getmyCompany }) => getmyCompany,
+        g$listCompanyBelow: ({ companyBelow }) => companyBelow,
     },
 });
 

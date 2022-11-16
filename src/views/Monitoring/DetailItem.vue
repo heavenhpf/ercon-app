@@ -65,7 +65,7 @@
             </div>
             <h5 class="font-weight-bolder">Pesanan Item yang Masuk</h5>
             <div class="mb-3 p-2">
-                <ItemTable />
+                <item-table />
             </div>
             <router-link to="/monitoring/gudang-saya" tag="button">
                 <span>
@@ -186,7 +186,7 @@
 import d$item from '@/stores/dashboard/item';
 import d$category from '@/stores/dashboard/category';
 import { mapActions, mapState } from "pinia";
-import ItemTable from "@/components/examples/ItemTable.vue";
+import ItemTable from "@/components/tables/ItemTable.vue";
 import ArgonButton from '@/components/ArgonButton.vue';
 
 export default {

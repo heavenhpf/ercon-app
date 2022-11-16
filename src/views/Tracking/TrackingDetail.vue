@@ -8,12 +8,9 @@
                         <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
                     </div>
                     <div class="col-4">
-                        <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                                Date(g$po.deadline).toLocaleDateString("id-ID", {
-                                    weekday: 'long', year: 'numeric', month:
-                                        'long', day: 'numeric'
-                                })
-                        }}</p>
+                        <p class="font-weight-bolder text-danger float-end">Deadline: {{new
+                        Date(g$po.deadline).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month:
+                        'long', day: 'numeric' })}}</p>
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -23,7 +20,7 @@
                         <h6 class="text-dark">Progress</h6>
                         <div class="progress" style="height: 20px; width: 70%;">
                             <div class="progress-bar bg-success" role="progressbar"
-                                :style="{ width: g$po.progress * 100 + '%' }" aria-valuenow="{{g$po.progress * 100}}"
+                                :style="{width: g$po.progress * 100 + '%'}" aria-valuenow="{{g$po.progress * 100}}"
                                 aria-valuemin="0" aria-valuemax="100">{{ g$po.progress * 100 }}%
                             </div>
                         </div>
@@ -57,7 +54,7 @@
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
-import POTable from "@/components/examples/POTable.vue";
+import POTable from "@/components/tables/POTable.vue";
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from "pinia";
 

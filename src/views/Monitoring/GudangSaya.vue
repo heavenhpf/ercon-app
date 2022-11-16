@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div>
-                <GudangSayaTable />
+                <gudang-saya-table />
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
 import Card2 from "@/examples/Cards/Card2.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
-import GudangSayaTable from "@/components/examples/GudangSayaTable.vue";
+import GudangSayaTable from "@/components/tables/GudangSayaTable.vue";
 
 export default {
     name: "gudang-saya",

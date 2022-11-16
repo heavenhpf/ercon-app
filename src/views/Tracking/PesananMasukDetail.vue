@@ -9,10 +9,10 @@
                     </div>
                     <div class="col-4">
                         <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                        Date(g$po.deadline).toLocaleDateString("id-ID", {
-                        weekday: 'long', year: 'numeric', month:
-                        'long', day: 'numeric'
-                        })
+                                Date(g$po.deadline).toLocaleDateString("id-ID", {
+                                    weekday: 'long', year: 'numeric', month:
+                                        'long', day: 'numeric'
+                                })
                         }}</p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                 </div>
                                 <div>
                                     <label class="form-control-label text-sm">Dokumen Delivery Note</label>
-                                    <argon-input type="file" id="file" @change="changeFile($event)" :accept="accepts" />
+                                    <argon-input type="file" id="file" />
                                 </div>
                             </div>
                         </div>
@@ -91,17 +91,6 @@
                         </span>
                     </router-link>
                 </div>
-                <div id="toastDn"
-                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
-                    role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Delivery Note Berhasil ditambahkan
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -110,18 +99,13 @@
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
 import d$po from '@/stores/dashboard/po';
-import d$dn from '@/stores/dashboard/dn';
 import { mapActions, mapState } from "pinia";
-import PesananMasukDetailTable from "@/components/examples/PesananMasukDetailTable.vue";
+import PesananMasukDetailTable from "@/components/tables/PesananMasukDetailTable.vue";
 
 export default {
     name: "pesanan-masuk-detail",
     data: () => ({
         input: {
-
-        },
-        file: {
-
         },
         modal: {
             addDN: false,
@@ -139,39 +123,13 @@ export default {
     },
     computed: {
         ...mapState(d$po, ['g$po']),
-        ...mapState(d$dn, ['g$dn', 'g$doc']),
     },
     methods: {
-        ...mapActions(d$dn, ['a$addDn', 'a$addDocDn']),
         async addDN() {
             try {
                 this.modal.addDN = true;
             } catch (error) {
                 throw error
-            }
-        },
-
-        async changeFile(event) {
-            const files = event.target.files[0];
-            this.name = files.name;
-            this.type = files.type;
-            this.file = event.target.files[0];
-            this.objectURL = URL.createObjectURL(files);
-            if (this.type == "application/pdf") {
-                let data = new FormData();
-                data.append('file', this.file);
-                await this.a$addDocDn(data);
-                await this.a$addDn({ id_doc: this.g$doc.id_doc, id_po: Number(this.$route.params.id) })
-                const toastBerhasil = document.getElementById('toastDn')
-                const toast = new bootstrap.Toast(toastBerhasil)
-                toast.show()
-            } else {
-                this.input.file = null;
-                this.file = null;
-
-                const toastLiveExample = document.getElementById('liveToastError')
-                const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()
             }
         },
         async addInquiry() {
