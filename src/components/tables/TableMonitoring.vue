@@ -53,11 +53,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="triggerOrder()">
                     Order
+                </argon-button>
+                <argon-button color="secondary" @click="modal.detail = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -143,11 +143,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="toggleOrderBack()">
-                    Kembali
-                </argon-button>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
                     Order
+                </argon-button>
+                <argon-button color="secondary" @click="toggleOrderBack()">
+                    Kembali
                 </argon-button>
             </template>
         </modal-comp>
@@ -166,7 +166,7 @@ import auth from '../../router/routes/auth';
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'monitoring-table',
+        pageTitle: 'table-monitoring-admin',
         // Input
         input: {
             text: ``,

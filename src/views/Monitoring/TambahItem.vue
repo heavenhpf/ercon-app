@@ -59,20 +59,17 @@
                                         data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>
-                            <!-- </router-link> -->
+                            <argon-button id="showToastb" href="/monitoring/gudang-saya" @click="addInquiry()" size="md"
+                                color="primary" data-bs-toggle="modal" class="me-2">
+                                Tambah
+                            </argon-button>
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
-                                    <argon-button size="md" color="warning" class="me-2">
+                                    <argon-button size="md" color="warning">
                                         Kembali
                                     </argon-button>
                                 </span>
                             </router-link>
-                            <!-- <router-link to="/monitoring/gudang-saya"> -->
-                            <argon-button id="showToastb" href="/monitoring/gudang-saya" @click="addInquiry()" size="md"
-                                color="primary" data-bs-toggle="modal">
-                                Tambah
-                            </argon-button>
-                            <!-- </router-link> -->
                         </div>
                     </div>
                 </div>

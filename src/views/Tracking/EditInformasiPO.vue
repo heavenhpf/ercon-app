@@ -38,6 +38,13 @@
                 </div>
                 <div class="row">
                     <div class="col-auto">
+                        <span>
+                            <argon-button @click="triggerEdit()" size="md" color="primary">
+                                Simpan
+                            </argon-button>
+                        </span>
+                    </div>
+                    <div class="col-auto">
                         <router-link :to="{ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } }"
                             tag="button">
                             <span>
@@ -46,13 +53,6 @@
                                 </argon-button>
                             </span>
                         </router-link>
-                    </div>
-                    <div class="col-auto">
-                        <span>
-                            <argon-button @click="triggerEdit()" size="md" color="primary">
-                                Simpan
-                            </argon-button>
-                        </span>
                     </div>
                 </div>
                 <div id="liveToast"

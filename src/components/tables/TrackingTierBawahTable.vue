@@ -37,11 +37,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
+                </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -137,6 +137,11 @@ export default {
         ...mapState(d$auth, ['g$user']),
         modals() {
             return Object.values(this.modal).includes(true);
+        },
+        filter() {
+            return {
+                tier: this.g$user.role + 1,
+            }
         }
     },
     async mounted() {

@@ -84,7 +84,7 @@
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
                                                 </argon-button>
-                                                <argon-button size="md" color="danger" class="ms-2">
+                                                <argon-button @click="triggerDeleteOrder()" size="md" color="danger" class="ms-2">
                                                     <span class="fa fa-trash fa-sm me-2" />
                                                     Hapus
                                                 </argon-button>
@@ -114,6 +114,42 @@
                                 <label for="example-text-input" class="form-control-label text-sm">Dokumen
                                     PO</label>
                                 <argon-input type="file" v-model="input.file" id="file" @change="changeFile($event)" :accept="accepts" />
+                            </div>
+                            <div id="liveToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        {{ input.po_number }} Berhasil Ditambahkan
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
+                            
+                            <div id="liveToastError"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        File Harus PDF
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
+                            <div class="col-lg-8 col-md-9 mb-5 mt-4">
+                                <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
+                            </div>
+                            
+                            <div class="mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Username</label>
+                                <argon-input v-model="input.username" type="text" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="example-text-input" class="form-control-label text-sm">Password</label>
+                                <argon-input v-model="input.password" type="text" />
                             </div>
                             <div id="liveToast"
                                 class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
@@ -338,6 +374,14 @@ export default {
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
             console.log(this.quantity);
+        },
+        async triggerDeleteOrder(){
+            this.filterOrder.order.forEach((item, index) => {
+                if(item.id == this.filterOrder.selectedOrder.id){
+                    this.filterOrder.order.splice(index, 1);
+                }
+            });
+            console.log(this.filterOrder.order);
         },
         async searchOrder(){
             try {

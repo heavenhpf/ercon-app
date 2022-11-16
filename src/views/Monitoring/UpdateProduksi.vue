@@ -71,6 +71,11 @@
                         </div>
                         <div class="row">
                             <div class="col-auto">
+                                <span>
+                                    <argon-button @click="addItemQuantity()" size="md" color="primary" class="me-2">
+                                        Simpan
+                                    </argon-button>
+                                </span>
                                 <router-link :to="{name: 'Detail Item', params: {id: this.$route.params.id_item}}" tag="button">
                                     <span>
                                         <argon-button size="md" color="warning" class="me-2">
@@ -78,11 +83,6 @@
                                         </argon-button>
                                     </span>
                                 </router-link>
-                                <span>
-                                    <argon-button @click="addItemQuantity()" size="md" color="primary" class="me-2">
-                                        Simpan
-                                    </argon-button>
-                                </span>
                             </div>
                         </div>
                     </div>

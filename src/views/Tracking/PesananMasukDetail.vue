@@ -67,13 +67,13 @@
                     </template>
                     <template #footer>
                         <span>
-                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                                Kembali
+                            <argon-button @click="addInquiry()" size="md" color="primary" class="me-2">
+                                Simpan Perubahan
                             </argon-button>
                         </span>
                         <span>
-                            <argon-button @click="addInquiry()" size="md" color="primary" class="me-2">
-                                Simpan Perubahan
+                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                                Kembali
                             </argon-button>
                         </span>
                     </template>

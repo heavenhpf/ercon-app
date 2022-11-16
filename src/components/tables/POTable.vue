@@ -17,11 +17,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
+                </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -93,14 +93,14 @@
                 <!-- <argon-button color="danger" @click="editInquiry()">
                     Kembali
                 </argon-button> -->
-                <argon-button color="danger" @click="modal.detail = false">
-                    Kembali
-                </argon-button>
                 <router-link class="nav-link" to="/tracking/tracking-tier-bawah">
                     <argon-button color="primary" @click="modal.detail = false">
                         Cari PO
                     </argon-button>
                 </router-link>
+                <argon-button color="danger" @click="modal.detail = false">
+                    Kembali
+                </argon-button>
             </template>
         </modal-comp>
     </div>

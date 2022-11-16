@@ -15,8 +15,8 @@ const addDocPO = (body) => baseApi.post(`/doc${api}`, body, {
         'Content-Type': 'multipart/form-data'
     }
 });
-const update = (id, body) => baseApi.put(`${api}/${id}`, body);
 const del = (id) => baseApi.delete(`${api}/${id}`);
+const update = (id, body) => baseApi.put(`${api}/${id}`, body);
 
 export {
     listAllPo, detail, addPO, addDocPO, update, del, listPoDetail, getPoDetail, listMyPo, listInbox, editPoDetail

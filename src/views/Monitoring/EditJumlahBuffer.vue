@@ -15,15 +15,15 @@
                     </div>
                     <router-link to="/monitoring/detail-item" tag="button">
                         <span>
-                            <argon-button size="md" color="warning" class="me-2">
-                                Kembali
+                            <argon-button size="md" color="primary" class="me-2">
+                                Simpan Perubahan
                             </argon-button>
                         </span>
                     </router-link>
                     <router-link to="/monitoring/detail-item" tag="button">
                         <span>
-                            <argon-button size="md" color="primary" class="me-2">
-                                Simpan Perubahan
+                            <argon-button size="md" color="warning" class="me-2">
+                                Kembali
                             </argon-button>
                         </span>
                     </router-link>

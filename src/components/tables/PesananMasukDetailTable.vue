@@ -17,11 +17,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
+                </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -35,12 +35,12 @@
                 </div>
                 <div class="mt-3">
                     <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                        Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
-                        weekday: 'long', year:
-                        'numeric', month:
-                        'long', day: 'numeric'
-                        })
-                        }}</p>
+                            Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
+                                weekday: 'long', year:
+                                    'numeric', month:
+                                    'long', day: 'numeric'
+                            })
+                    }}</p>
                 </div>
             </template>
 
@@ -75,25 +75,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <argon-button id="showToast" data-bs-toggle="modal" style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
-                                <span class="fa fa-files-o fa-lg text-dark"/>
+                            <argon-button id="showToast" data-bs-toggle="modal"
+                                style="background-color: rgba(217, 217, 217);" title="Copy to Clipboard">
+                                <span class="fa fa-files-o fa-lg text-dark" />
                             </argon-button>
                         </div>
                     </div>
                 </div>
             </template>
             <template #footer>
-                <!-- <argon-button color="danger" @click="editInquiry()">
-                    Kembali
-                </argon-button> -->
-                <argon-button color="danger" @click="modal.detail = false">
-                    Kembali
-                </argon-button>
                 <router-link class="nav-link" to="/tracking/tracking-tier-bawah">
                     <argon-button color="primary" @click="modal.detail = false">
                         Cari PO
                     </argon-button>
                 </router-link>
+                <argon-button color="danger" @click="modal.detail = false">
+                    Kembali
+                </argon-button>
             </template>
         </modal-comp>
     </div>
