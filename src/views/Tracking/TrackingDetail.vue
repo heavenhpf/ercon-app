@@ -42,7 +42,7 @@
                         <template v-if="modal.add" #body>
                             <div class="row">
                                 <div class="col-12">
-                                    <iframe ref="DownloadComp" id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
+                                    <iframe ref="DownloadComp" id="preview"  style="width:100%; height: 400px;" :src="objectURL"></iframe>
                                 </div>
                             </div>
                         </template>
@@ -122,23 +122,17 @@ export default {
             // if (this.objectURL) {
             //     URL.revokeObjectURL(this.objectURL);
             // }
-            this.modal.preview = true;
             const value = Number(this.g$po.id_doc);
             const obj = {
                 id_doc: value,
             }
             await this.a$getDocPO(obj);
-            console.log("getDoc",this.g$getDocPO);
-            const data = this.utf8_to_b64(this.g$getDocPO);
-            console.log("data:",data);
-            const blob = new Blob([data], { type: 'application/pdf' });
-            console.log(blob)
-            this.objectURL = URL.createObjectURL(data);
+            const blob = new Blob([this.g$getDocPO], { type: 'application/pdf' });
+            console.log(blob);
+            this.objectURL = URL.createObjectURL(blob);
+            window.open(this.objectURL);
+            
         },
-        utf8_to_b64( str ) {
-            return window.btoa(unescape(encodeURIComponent( str )));
-        },
-
 
         // b64toBlob(b64Data, contentType, sliceSize) {
         //     contentType = contentType || '';

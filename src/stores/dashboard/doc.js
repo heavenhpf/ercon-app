@@ -8,10 +8,10 @@ const d$doc = defineStore({
         doc: [],
     }),
     actions: {
-        async a$getDocPO(options,body) {
+        async a$getDocPO(options) {
             try {
-                const { data } = await s$doc.getDocPO(options,body);
-                this.doc = data;
+                 
+                this.doc = await s$doc.getDocPO(options);
             } catch ({ error, message }) {
                 this.doc = [];
                 throw error ?? message;
