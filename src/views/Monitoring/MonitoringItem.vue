@@ -13,7 +13,7 @@
 
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import TableMonitoring from "@/components/examples/TableMonitoring.vue";
+import TableMonitoring from "@/components/tables/TableMonitoring.vue";
 
 export default {
     name: "monitoring-item",

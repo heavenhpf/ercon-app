@@ -81,8 +81,8 @@
   import d$company from '@/stores/dashboard/company';
   import d$dashboard from "@/stores/dashboard/dashboard";
   import { mapActions, mapState } from "pinia";
-  import TrackingPOTerdekatTable from "@/components/examples/TrackingPOTerdekatTable.vue";
-  import TrackingPOSelesaiTerbaruTable from "@/components/examples/TrackingPOSelesaiTerbaruTable.vue";
+  import TrackingPOTerdekatTable from "@/components/tables/TrackingPOTerdekatTable.vue";
+  import TrackingPOSelesaiTerbaruTable from "@/components/tables/TrackingPOSelesaiTerbaruTable.vue";
   
   const date = new Date;
   let hours = date.getHours();

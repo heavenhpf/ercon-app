@@ -34,7 +34,7 @@
 </template>
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import PesananMasukTable from "@/components/examples/PesananMasukTable.vue";
+import PesananMasukTable from "@/components/tables/PesananMasukTable.vue";
 import d$dashboard from '@/stores/dashboard/dashboard';
 import { mapActions, mapState } from "pinia";
 import POTable from "../../components/examples/POTable.vue";

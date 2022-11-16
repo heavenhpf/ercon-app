@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import CompanyTable from "@/components/examples/CompanyTable.vue";
+import CompanyTable from "@/components/tables/CompanyTable.vue";
 import auth from '@/router/routes/auth';
 
 export default {

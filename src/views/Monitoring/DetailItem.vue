@@ -186,7 +186,7 @@
 import d$item from '@/stores/dashboard/item';
 import d$category from '@/stores/dashboard/category';
 import { mapActions, mapState } from "pinia";
-import ItemTable from "@/components/examples/ItemTable.vue";
+import ItemTable from "@/components/tables/ItemTable.vue";
 import ArgonButton from '@/components/ArgonButton.vue';
 
 export default {

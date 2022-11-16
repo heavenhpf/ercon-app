@@ -77,7 +77,7 @@
 
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
-import POTable from "@/components/examples/POTable.vue";
+import POTable from "@/components/tables/POTable.vue";
 import d$po from '@/stores/dashboard/po';
 import d$doc from '@/stores/dashboard/doc';
 import { mapActions, mapState } from "pinia";

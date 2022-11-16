@@ -100,7 +100,7 @@
 import ArgonButton from "@/components/ArgonButton.vue";
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from "pinia";
-import PesananMasukDetailTable from "@/components/examples/PesananMasukDetailTable.vue";
+import PesananMasukDetailTable from "@/components/tables/PesananMasukDetailTable.vue";
 
 export default {
     name: "pesanan-masuk-detail",
