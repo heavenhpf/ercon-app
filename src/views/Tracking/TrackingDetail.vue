@@ -28,12 +28,34 @@
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Purchasing Order:</h6>
                         <span>
-                            <argon-button size="md me-2" color="primary">
+                            <argon-button @click="triggerClick()" size="md me-2" color="primary">
                                 <span class="ni ni-single-copy-04 fa-lg me-2" />
                                 Lihat PDF
                             </argon-button>
                         </span>
                     </div>
+
+                    <modal-comp size="lg" v-model:show="modal.preview">
+                        <template #header>
+                            <h3 class="modal-title">Preview Purchasing Order</h3>
+                        </template>
+                        <template v-if="modal.add" #body>
+                            <div class="row">
+                                <div class="col-12">
+                                    <iframe ref="DownloadComp" id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
+                                </div>
+                            </div>
+                        </template>
+                        <template #footer>
+                            <argon-button color="secondary" @click="modal.add = false">
+                                Close
+                            </argon-button>
+                            <argon-button color="primary" @click="addInquiry()">
+                                Save Changes
+                            </argon-button>
+                        </template>
+                    </modal-comp>
+
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Delivery Note:</h6>
                         <span>
@@ -44,6 +66,7 @@
                         </span>
                     </div>
                 </div>
+                <!-- <iframe ref="DownloadComp" id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe> -->
                 <div>
                     <POTable />
                 </div>
@@ -56,7 +79,10 @@
 import ArgonButton from "@/components/ArgonButton.vue";
 import POTable from "@/components/examples/POTable.vue";
 import d$po from '@/stores/dashboard/po';
+import d$doc from '@/stores/dashboard/doc';
 import { mapActions, mapState } from "pinia";
+
+
 
 export default {
     name: "tracking-detail",
@@ -65,6 +91,10 @@ export default {
             post: {},
             po_detail: [],
             errors: [],
+            modal: {
+                preview: false,
+            },
+            objectURL: null,
         }
     },
     components: {
@@ -82,8 +112,70 @@ export default {
 
     computed: {
         ...mapState(d$po, ['g$po']),
+        ...mapState(d$doc, ['g$getDocPO']),
     },
     methods: {
+        ...mapActions(d$po, ['a$listPoDetail']),
+        ...mapActions(d$doc, ['a$getDocPO']),
+
+        async triggerClick(){
+            // if (this.objectURL) {
+            //     URL.revokeObjectURL(this.objectURL);
+            // }
+            this.modal.preview = true;
+            const value = Number(this.g$po.id_doc);
+            const obj = {
+                id_doc: value,
+            }
+            await this.a$getDocPO(obj);
+            console.log("getDoc",this.g$getDocPO);
+            const data = this.utf8_to_b64(this.g$getDocPO);
+            console.log("data:",data);
+            const blob = new Blob([data], { type: 'application/pdf' });
+            console.log(blob)
+            this.objectURL = URL.createObjectURL(data);
+        },
+        utf8_to_b64( str ) {
+            return window.btoa(unescape(encodeURIComponent( str )));
+        },
+
+
+        // b64toBlob(b64Data, contentType, sliceSize) {
+        //     contentType = contentType || '';
+        //     sliceSize = sliceSize || 512;
+
+        //     var byteCharacters = atob(b64Data);
+        //     var byteArrays = [];
+
+        //     for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        //         var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        //         var byteNumbers = new Array(slice.length);
+        //         for (var i = 0; i < slice.length; i++) {
+        //             byteNumbers[i] = slice.charCodeAt(i);
+        //         }
+
+        //         var byteArray = new Uint8Array(byteNumbers);
+
+        //         byteArrays.push(byteArray);
+        //     }
+
+        //     var blob = new Blob(byteArrays, { type: contentType });
+        //     return blob;
+
+            // var blobObj = new Blob([atob(this.g$getDocPO)], { type: 'application/pdf' });
+            // var byteCharacters = atob(this.g$getDocPO);
+            // var byteNumbers = new Array(byteCharacters.length);
+            // for (var i = 0; i < byteCharacters.length; i++) {
+            //     byteNumbers[i] = byteCharacters.charCodeAt(i);
+            // }
+            // var byteArray = new Uint8Array(byteNumbers);
+            // var blob = new Blob([byteArray], { type: "application/pdf" });
+            // this.objectURL = URL.createObjectURL(blob);
+           
+
+
+        // },
     },
     async mounted() {
         try {
