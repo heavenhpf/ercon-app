@@ -84,7 +84,7 @@
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
                                                 </argon-button>
-                                                <argon-button size="md" color="danger" class="ms-2">
+                                                <argon-button @click="triggerDeleteOrder()" size="md" color="danger" class="ms-2">
                                                     <span class="fa fa-trash fa-sm me-2" />
                                                     Hapus
                                                 </argon-button>
@@ -374,6 +374,14 @@ export default {
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
             console.log(this.quantity);
+        },
+        async triggerDeleteOrder(){
+            this.filterOrder.order.forEach((item, index) => {
+                if(item.id == this.filterOrder.selectedOrder.id){
+                    this.filterOrder.order.splice(index, 1);
+                }
+            });
+            console.log(this.filterOrder.order);
         },
         async searchOrder(){
             try {
