@@ -64,7 +64,7 @@
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
                                 <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" @click.stop.prevent="copyTestingCode">{{
-                                        text
+                                        text ?? "-"
                                 }}</h6>
                                 <input type="hidden" id="testing-code" :value="text">
                             </div>
