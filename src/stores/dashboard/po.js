@@ -8,8 +8,6 @@ const d$po = defineStore({
         list_my_po: [],
         list_inbox: [],
         list_po_detail: [],
-        list_po_terdekat: [],
-        list_po_selesai_terbaru: [],
         get_po_detail: {},
         Addpo: {},
         detail: {},
@@ -75,13 +73,6 @@ const d$po = defineStore({
             }
         },
 
-        async a$addPo(body) {
-            try {
-                await s$po.addPo(body);
-            } catch ({ error, message }) {
-                throw error ?? message;
-            }
-        },
         async a$inquiryDetail(id) {
             try {
                 this.detail = {};
@@ -96,7 +87,7 @@ const d$po = defineStore({
         async a$inquiryAddPO(body) {
             try {
                 const {data} = await s$po.addPO(body);
-                this.Addpo = data ?? {};
+                this.po = data ?? {};
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -116,9 +107,9 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
-        async a$editPoDetail(options, body) {
+        async a$inquiryDel(id) {
             try {
-                await s$po.editPoDetail(options, body);
+                await s$po.del(id);
             } catch ({ error, message }) {
                 throw error ?? message;
             }
@@ -126,16 +117,14 @@ const d$po = defineStore({
     },
     getters: {
         g$status: ({ status }) => status,
-        g$po : ({ po }) => po,
+        g$po: ({ po }) => po,
         g$AddPO: ({ po }) => po,
         g$DocPO: ({ docPO }) => docPO,
         g$list_po_detail: ({ list_po_detail }) => list_po_detail,
-        g$list_po: ({ list_po }) => list_po, //list all po
+        g$list_po: ({ list_po }) => list_po,
         g$list_inbox: ({ list_inbox }) => list_inbox,
         g$list_my_po: ({ list_my_po }) => list_my_po,
         g$get_po_detail: ({ get_po_detail }) => get_po_detail,
-        g$list_po_terdekat: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7),
-        g$list_po_selesai_terbaru: ({ list_my_po }) => list_my_po.filter((item) => item.day_count < 7 && item.status == 1),
         g$detail: ({ detail }) => detail,
     },
 });

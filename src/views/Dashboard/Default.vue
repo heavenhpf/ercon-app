@@ -42,7 +42,7 @@
                 </div>
               </div>
               <div>
-                <TrackingPOTerdekatTable />
+                <tracking-pO-terdekat-table />
               </div>
             </div>
             <div class="mb-5">
@@ -66,18 +66,8 @@
               </div>
               <!-- mengambil dari store po -->
               <div>
-                <TrackingPOSelesaiTerbaruTable />
+                <tracking-pO-selesai-terbaru-table />
               </div>
-            </div>
-            <div class="pb-0 row">
-              <div class="pb-0 text-start mb-2">
-                <h5 class="text-black font-weight-bolder">History Monitoring</h5>
-              </div>
-            </div>
-  
-            <!-- mengambil dari store item-->
-            <div>
-              <TableMonitoringAdmin />
             </div>
           </div>
         </div>
@@ -91,7 +81,6 @@
   import d$company from '@/stores/dashboard/company';
   import d$dashboard from "@/stores/dashboard/dashboard";
   import { mapActions, mapState } from "pinia";
-  import TableMonitoringAdmin from "@/components/examples/TableMonitoringAdmin.vue";
   import TrackingPOTerdekatTable from "@/components/examples/TrackingPOTerdekatTable.vue";
   import TrackingPOSelesaiTerbaruTable from "@/components/examples/TrackingPOSelesaiTerbaruTable.vue";
   
@@ -137,7 +126,6 @@
     components: {
       Card,
       DoughnutTrackingChart,
-      TableMonitoringAdmin,
       TrackingPOTerdekatTable,
       TrackingPOSelesaiTerbaruTable,
     },

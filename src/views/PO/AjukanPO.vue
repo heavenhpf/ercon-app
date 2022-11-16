@@ -7,7 +7,6 @@
                         <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
                     </div>
                 </div>
-
                 <modal-comp size="md" v-model:show="modal.editQuantity">
                     <template #header>
                         <h4 class="modal-title">Edit Jumlah Barang</h4>
@@ -59,7 +58,7 @@
                                     <argon-input v-model="filterOrder.selectedOrder" type="text" />
                                 </div>
                                 <div class="col-2">
-                                    <argon-button @click="searchOrder()" size="md" color="primary" type="button">Cari</argon-button>
+                                    <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
                                 </div>
                                 <div class="col-11">
                                     <table class="table table-hover text-center align-items-center">
@@ -77,7 +76,7 @@
                                         <tr v-for="(item, index) in filterOrder.order" :key="index">
                                             <th scope="row">{{ index + 1 }}</th>
                                             <td>{{ item.order_number }}</td>
-                                            <td>{{item.d_item.name}}</td>
+                                            <td>{{item.d_item?.name}}</td>
                                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td>{{ item.quantity}}</td>
                                             <td>
@@ -144,7 +143,7 @@
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
                             
-                            <!-- <div class="mb-2">
+                            <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Username</label>
                                 <argon-input v-model="input.username" type="text" />
                             </div>
@@ -152,60 +151,38 @@
                                 <label for="example-text-input" class="form-control-label text-sm">Password</label>
                                 <argon-input v-model="input.password" type="text" />
                             </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Nama
-                                    Perusahaan</label>
-                                <argon-input v-model="input.name" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm mb-2">Tingkat
-                                    Perusahaan </label>
-                                <div class="row p-2">
-                                    <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="1" name="tier">
-                                        Tier 1
+                            <div id="liveToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        {{ input.po_number }} Berhasil Ditambahkan
                                     </div>
-                                    <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="2" name="tier">Tier 2
-
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="radio" v-model="input.level" id="tier" value="3" name="tier">Tier 3
-
-                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
                                 </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
-                                <argon-input v-model="input.address" type="text" />
+                            <div id="liveToastError"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        File Harus PDF
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
-                                <argon-input v-model="input.phone" type="text" />
-                            </div> -->
+                            <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
+                            <div class="col-lg-8 col-md-9 mb-5 mt-4">
+                                <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
+                            </div>
                         </div>
                         <div class="col-lg-8 col-md-9">
                             <argon-button @click="addPO()" size="md" color="primary">
                                 Buat PO
                             </argon-button>
                         </div>
-                        <!-- <modal-comp v-model:show="modal.confirm">
-                            <template #header>
-                                <h3 class="modal-title">Confirm</h3>
-                            </template>
-                            <template v-if="modal.confirm" #body>
-                                <p>
-                                    Are you sure you want to create new user <strong>{{ pageTitle }}: {{ input.name
-                                    }}</strong>?
-                                </p>
-                            </template>
-                            <template #footer>
-                                <argon-button color="secondary" @click="modal.confirm = false">
-                                    Close
-                                </argon-button>
-                                <argon-button color="danger" @click="addInquiry()">Save </argon-button>
-                            </template>
-                        </modal-comp> -->
                     </div>
                 </div>
             </div>
@@ -214,7 +191,6 @@
    
 </template>
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-
 
 <script>
 import ArgonInput from '@/components/ArgonInput.vue';
@@ -228,8 +204,6 @@ import d$company from '@/stores/dashboard/company';
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from 'pinia';
 import VueMultiselect from 'vue-multiselect'
-
-
 
 export default {
     name: 'ajukan-po',
@@ -292,7 +266,7 @@ export default {
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
         ...mapState(d$order, ['g$getOrder']),
-        ...mapState(d$company, ['g$listCompany']),
+        ...mapState(d$company, ['g$listCompanyBelow']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
         modals() {
             return Object.values(this.modal).includes(true);
@@ -301,14 +275,14 @@ export default {
     async mounted() {
         // await this.a$inquiryList();
         // console.log(this.g$getOrder);
-        await this.a$inquiryList();
+        await this.a$listCompanyBelow();
         
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
         ...mapActions(d$order, ['a$getOrder', 'a$inquiryEditOrder', 'a$inquiryAddPO']),
         ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO']),
-        ...mapActions(d$company, ['a$inquiryList']),
+        ...mapActions(d$company, ['a$listCompanyBelow']),
 
         nameWithLang ({ name }) {
             return `${name}`
@@ -504,12 +478,11 @@ export default {
         },
         async triggerOptions() {
             try {
-                this.temp = this.g$listCompany;
+                this.temp = this.g$listCompanyBelow;
                 this.temp = this.temp.map((item) => {
                     return {
                         id_company: item.id_company,
                         name: item.name,
-                        level: item.auth_user.level,
                     }
                 });
                 this.options = this.temp.filter((item) => {

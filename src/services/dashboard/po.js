@@ -9,16 +9,15 @@ const listPoDetail = (options) => baseApi.get(`${api}/detail/${options.id_po}`);
 const getPoDetail = (options) => baseApi.get(`${api}/detail/${options.id_po}/${options.id_po_detail}`); //nullish coalescing
 const detail = (id) => baseApi.get(`${api}/${id}`);
 const addPO = (body) => baseApi.post(`${api}`, body);
+const editPoDetail = (options, body) => baseApi.put(`${api}/detail/${options.id_po}/${options.id_po_detail}`, body);
 const addDocPO = (body) => baseApi.post(`/doc${api}`, body, {
-    headers : {
+    headers: {
         'Content-Type': 'multipart/form-data'
     }
 });
-const editPoDetail = (options, body) => baseApi.put(`${api}/detail/${options.id_po}/${options.id_po_detail}`, body);
 const del = (id) => baseApi.delete(`${api}/${id}`);
 const update = (id, body) => baseApi.put(`${api}/${id}`, body);
 
 export {
-    listAllPo, detail, addPO, addDocPO, update , del, listPoDetail, getPoDetail, listMyPo, listInbox, editPoDetail
+    listAllPo, detail, addPO, addDocPO, update, del, listPoDetail, getPoDetail, listMyPo, listInbox, editPoDetail
 };
-
