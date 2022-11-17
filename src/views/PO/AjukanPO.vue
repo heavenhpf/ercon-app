@@ -80,11 +80,11 @@
                                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td>{{ item.quantity}}</td>
                                             <td>
-                                                <argon-button  @click="triggerEditQuantity()" size="md" color="primary">
+                                                <argon-button  @click="triggerEditQuantity(item.order_number)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
                                                 </argon-button>
-                                                <argon-button @click="triggerDeleteOrder()" size="md" color="danger" class="ms-2">
+                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger" class="ms-2">
                                                     <span class="fa fa-trash fa-sm me-2" />
                                                     Hapus
                                                 </argon-button>
@@ -141,15 +141,6 @@
                             <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
                             <div class="col-lg-8 col-md-9 mb-5 mt-4">
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
-                            </div>
-                            
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Username</label>
-                                <argon-input v-model="input.username" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Password</label>
-                                <argon-input v-model="input.password" type="text" />
                             </div>
                             <div id="liveToast"
                                 class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
@@ -370,17 +361,20 @@ export default {
         //         await this.init();
         //     }
         // },
-        async triggerEditQuantity(){
+        async triggerEditQuantity(order_number){
+            await this.a$getOrder({order_number});
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
-            console.log(this.quantity);
         },
-        async triggerDeleteOrder(){
-            this.filterOrder.order.forEach((item, index) => {
-                if(item.id == this.filterOrder.selectedOrder.id){
-                    this.filterOrder.order.splice(index, 1);
-                }
-            });
+        async triggerDeleteOrder(id_order){
+            // this.filterOrder.order.forEach((item, index) => {
+            //     if(item.id == this.filterOrder.selectedOrder.id){
+            //         this.filterOrder.order.splice(index, 1);
+            //     }
+            // });
+            // console.log(this.filterOrder.order);
+            this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
+
             console.log(this.filterOrder.order);
         },
         async searchOrder(){

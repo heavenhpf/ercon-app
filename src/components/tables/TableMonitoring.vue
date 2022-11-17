@@ -115,9 +115,7 @@
                                 <h6 class="text-end">:</h6>
                             </div>
                             <div class="col-7">
-                                {{ input.id_item === g$item.id_item ? g$item.ref_category.name :
-                                        g$item.ref_category.name
-                                }}
+                                {{ g$item.ref_category?.name }}
                             </div>
                         </div>
                         <div class="row align-items-center mt-4 mb-4">
