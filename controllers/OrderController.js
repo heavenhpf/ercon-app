@@ -5,8 +5,8 @@ const { userSession } = require('../helpers/middleware')
 
 const app = Router()
 
-app.get('/:order_number', userSession, async (req, res, next) => {
-    response.sendResponse(res, await modules.getOrder(req.user.id, String(req.params.order_number)))
+app.get('/:order_to', userSession, async (req, res, next) => {
+    response.sendResponse(res, await modules.listOrder(req.user.id, Number(req.params.order_to)))
 })
 
 app.post('/:id', userSession, async (req, res, next) => {

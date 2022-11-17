@@ -2,16 +2,16 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _order {
-    getOrder = async (id_user, order_number) => {
+    listOrder = async (id_user, order_to) => {
         try {
             const body = {
                 id_user,
-                order_number
+                order_to
             }
 
             const schema = Joi.object({
                 id_user: Joi.number().required(),
-                order_number: Joi.string().required()
+                order_to: Joi.number().required()
             })
 
             const validation = schema.validate(body)
@@ -44,28 +44,21 @@ class _order {
                 }
             }
 
-            const get = await prisma.d_order.findFirst({
+            const list = await prisma.d_order.findMany({
                 where: {
-                    order_number: body.order_number,
                     order_from: check.id_company,
+                    order_to: body.order_to,
                     processed: false,
                     deleted_at: null
-                },
-                include: {
-                    d_item: {
-                        select: {
-                            name: true
-                        }
-                    }
                 }
             })
 
             return {
                 status: true,
-                data: get
+                data: list
             }
         } catch (error) {
-            console.error('getOrder module error ', error)
+            console.error('listOrder module error ', error)
 
             return {
                 status: false,
