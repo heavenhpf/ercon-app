@@ -1,10 +1,6 @@
 <template>
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="d-flex justify-content-center mt-5 mb-5">
-                <argon-progress color="success" :percentage="100" />
-                <argon-progress color="success" :percentage="0" />
-            </div>
             <div class="col-lg-12">
                 <div class="row">
                     <div class="pb-0 text-start mb-3">
@@ -29,6 +25,7 @@
                         </argon-button>
                     </template>
                 </modal-comp>  
+
                 <div class="card">
                     <!-- <div class="card">
                         <data-table :index="false" :data="g$list" @detail="triggerDetail" @delete="triggerDelete" />
@@ -190,7 +187,6 @@
 import ArgonInput from '@/components/ArgonInput.vue';
 import ArgonButton from '@/components/ArgonButton.vue';
 import ArgonRadio from "@/components/ArgonRadio.vue";
-import ArgonProgress from "@/components/ArgonProgress.vue";
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import d$user from '@/stores/dashboard/user';
@@ -254,7 +250,6 @@ export default {
         ArgonInput,
         ArgonButton,
         ArgonRadio,
-        ArgonProgress,
         flatPicker,
         VueMultiselect,
     },

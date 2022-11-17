@@ -23,19 +23,21 @@
                       <argon-input v-model="input.password" type="password" placeholder="Password" name="password"
                         size="lg" isRequired="true" />
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-6">
                         <argon-switch v-model="input.remember" id="rememberMe">Remember me</argon-switch>
                       </div>
-                      <div class="col-6">
+                    </div> -->
+                    <div class="text-center">
+                      <argon-button class="mb-2" color="primary" fullWidth size="lg" type="submit">
+                        Sign in</argon-button>
+                    </div>
+                    <div class="row">
+                      <div class="col-auto">
                         <a href="https://www.google.com">
                           <p class="mb-0 float-end">Lupa kata sandi?</p>
                         </a>
                       </div>
-                    </div>
-                    <div class="text-center">
-                      <argon-button class="mt-4" color="primary" fullWidth size="lg" type="submit">
-                        Sign in</argon-button>
                     </div>
                   </form>
                 </div>
