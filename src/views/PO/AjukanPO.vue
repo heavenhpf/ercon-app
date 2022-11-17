@@ -80,11 +80,11 @@
                                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td>{{ item.quantity}}</td>
                                             <td>
-                                                <argon-button  @click="triggerEditQuantity()" size="md" color="primary">
+                                                <argon-button  @click="triggerEditQuantity(item.order_number)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
                                                 </argon-button>
-                                                <argon-button @click="triggerDeleteOrder()" size="md" color="danger" class="ms-2">
+                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger" class="ms-2">
                                                     <span class="fa fa-trash fa-sm me-2" />
                                                     Hapus
                                                 </argon-button>
@@ -370,17 +370,20 @@ export default {
         //         await this.init();
         //     }
         // },
-        async triggerEditQuantity(){
+        async triggerEditQuantity(order_number){
+            await this.a$getOrder({order_number});
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
-            console.log(this.quantity);
         },
-        async triggerDeleteOrder(){
-            this.filterOrder.order.forEach((item, index) => {
-                if(item.id == this.filterOrder.selectedOrder.id){
-                    this.filterOrder.order.splice(index, 1);
-                }
-            });
+        async triggerDeleteOrder(id_order){
+            // this.filterOrder.order.forEach((item, index) => {
+            //     if(item.id == this.filterOrder.selectedOrder.id){
+            //         this.filterOrder.order.splice(index, 1);
+            //     }
+            // });
+            // console.log(this.filterOrder.order);
+            this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
+
             console.log(this.filterOrder.order);
         },
         async searchOrder(){
