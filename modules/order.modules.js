@@ -50,6 +50,14 @@ class _order {
                     order_to: body.order_to,
                     processed: false,
                     deleted_at: null
+                },
+                include: {
+                    d_item: {
+                        select: {
+                            name: true,
+                            unit: true
+                        }
+                    }
                 }
             })
 

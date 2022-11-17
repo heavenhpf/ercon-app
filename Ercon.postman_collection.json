@@ -1314,6 +1314,40 @@
 			"name": "Orders",
 			"item": [
 				{
+					"name": "LIST ORDER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/orders/:order_to",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								":order_to"
+							],
+							"variable": [
+								{
+									"key": "order_to",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "ADD ORDER",
 					"request": {
 						"auth": {
@@ -1350,52 +1384,6 @@
 								{
 									"key": "id_item",
 									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET ORDER",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/orders/:order_number",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"orders",
-								":order_number"
-							],
-							"variable": [
-								{
-									"key": "order_number",
-									"value": ""
 								}
 							]
 						}
