@@ -2,8 +2,11 @@
     <a href="#" class="p-0 nav-link text-dark" :class="[showMenu ? 'show' : '']" id="dropdownMenuButton"
         data-bs-toggle="dropdown" aria-expanded="false" @click="showMenu = !showMenu">
         <i class="cursor-pointer fa fa-bell">
-            <span
+            <!-- <span
                 class="position-absolute top-20 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+            </span> -->
+            <span>
                 <span class="visually-hidden">New alerts</span>
             </span>
         </i>

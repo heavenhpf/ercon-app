@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
-                    <argon-button color="primary">
+                    <argon-button color="warning">
                         Kembali
                     </argon-button>
                 </router-link>

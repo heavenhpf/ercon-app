@@ -58,7 +58,7 @@
                 </div>
                 <div class="row">
                     <div class="mb-2">
-                        <p class="text-sm mb-0">(Centang order yang Anda pilih)</p>
+                        <p class="text-sm mb-0">(Centang order yang akan Anda masukkan)</p>
                     </div>
                     <div class="col-11">
                         <div class="card">
