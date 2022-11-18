@@ -75,7 +75,7 @@
           </h6>
         </li>
         <li class="nav-item">
-          <sidenav-item url="/po/ajukan-po" :class="getRoute() === 'ajukan-po' ? 'active' : ''" navText="Ajukan PO">
+          <sidenav-item url="/po/ajukan-po-1" :class="getRoute() === 'ajukan-po-1' ? 'active' : ''" navText="Ajukan PO">
             <template v-slot:icon>
               <i class="ni ni-tag text-info text-sm opacity-10"></i>
             </template>

@@ -13,7 +13,7 @@
                     </select>
                 </div> -->
                 <div class="col-4 mt-4 ms-4">
-                    <label>Filter Kategori</label>
+                    <label>Filter Kategori Item</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                         <option>-- Semua Kategori --</option>

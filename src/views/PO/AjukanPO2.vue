@@ -3,8 +3,13 @@
         <div class="row">
             <div class="col-lg-12">
                  <div class="pb-0 text-start mb-4">
-                    <h4 class="font-weight-bolder text-dark">Buat PO</h4>
+                    <h4 class="font-weight-bolder text-dark">Ajukan PO</h4>
                 </div>
+                <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
+                    <argon-button color="primary">
+                        Kembali
+                    </argon-button>
+                </router-link>
                 <!-- <div id="progress">
                     <div id="progress-bar"></div>
                     <ul id="progress-num">
@@ -303,7 +308,7 @@ import VueMultiselect from 'vue-multiselect';
 // };
 
 export default {
-    name: 'ajukan-po',
+    name: 'ajukan-po-2',
     data: () => ({
         pageTitle: 'po',
         // Input
