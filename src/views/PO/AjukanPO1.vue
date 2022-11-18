@@ -60,7 +60,9 @@
                         </div>
                     </div>
                     <div class="col-1 mt-6">
-                        <argon-checkbox id="checkboxId"></argon-checkbox>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 30px; height: 30px;">
+                        </div>
                     </div>
                 </div>
             </div>
