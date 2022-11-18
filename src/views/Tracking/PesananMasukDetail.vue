@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
-                    <argon-button size="md me-2" color="primary" @click="addDN()">
+                    <argon-button id="hidden" size="md me-2" color="primary" hidden @click="addDN()">
                         <span class="fa fa-pencil-square-o fa-md me-2" />
                         Buat Delivery Note
                     </argon-button>
@@ -124,7 +124,17 @@ export default {
     computed: {
         ...mapState(d$po, ['g$po']),
     },
+    mounted() {
+        let element = document.getElementById('hidden')
+        setTimeout(() => {
+            if (this.g$po.progress === 1) {
+                // element.setAttribute("hidden", "hidden");
+                element.removeAttribute("hidden")
+            }
+        }, 500);
+    },
     methods: {
+
         async addDN() {
             try {
                 this.modal.addDN = true;

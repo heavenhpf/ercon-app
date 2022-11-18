@@ -1,17 +1,22 @@
 <template>
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="d-flex justify-content-center mt-5 mb-5">
-                <argon-progress color="success" :percentage="100" />
-                <argon-progress color="success" :percentage="0" />
-            </div>
             <div class="col-lg-12">
-                <div class="row">
-                    <div class="pb-0 text-start mb-3">
-                        <h4 class="font-weight-bolder text-dark">Purchasing Order</h4>
-                    </div>
+                 <div class="pb-0 text-start mb-4">
+                    <h4 class="font-weight-bolder text-dark">Buat PO</h4>
                 </div>
-                <modal-comp size="md" v-model:show="modal.editQuantity">
+                <!-- <div id="progress">
+                    <div id="progress-bar"></div>
+                    <ul id="progress-num">
+                        <li class="step active">1</li>
+                        <li class="step">2</li>
+                    </ul>
+                </div>    
+
+                <button id="progress-prev" class="btn" disabled>Prev</button>
+                <button id="progress-next" class="btn">Next</button> -->
+
+                <!-- <modal-comp size="md" v-model:show="modal.editQuantity">
                     <template #header>
                         <h4 class="modal-title">Edit Jumlah Barang</h4>
                     </template>
@@ -28,7 +33,7 @@
                             Close
                         </argon-button>
                     </template>
-                </modal-comp>  
+                </modal-comp>   -->
                 <div class="card">
                     <!-- <div class="card">
                         <data-table :index="false" :data="g$list" @detail="triggerDetail" @delete="triggerDelete" />
@@ -39,10 +44,9 @@
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor PO</label>
                                 <argon-input v-model="input.po_number" type="text" />
                             </div>
-                            <div class="mb-4">
+                            <!-- <div class="mb-4">
                                 <label for="example-text-input" class="form-control-label text-sm">Tujuan
                                     Pemesanan</label>
-                                <!-- <argon-input v-model="input.s_company_d_po_order_toTos_company" type="text" /> -->
                                 <VueMultiselect
                                 @click="triggerOptions()"
                                 v-model="selected"
@@ -53,16 +57,15 @@
                                 track-by="name">
                                 </VueMultiselect>
                                 <span >{{selected}}</span>
-
-                            </div>
+                            </div> -->
                             <div class="row col-12 mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
+                                <!-- <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
                                 <div class="col-10">
                                     <argon-input v-model="filterOrder.selectedOrder" type="text" />
                                 </div>
                                 <div class="col-2">
                                     <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
-                                </div>
+                                </div> -->
                                 <div class="col-11">
                                     <table class="table table-hover text-center align-items-center">
                                         <thead>
@@ -182,9 +185,63 @@
             </div>
         </div>
     </div>
-   
 </template>
+
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<!-- <style>
+#progress {
+  position: relative;
+  margin-bottom: 30px;   
+}
+
+#progress-bar {
+  position: absolute;
+  background: lightseagreen;
+  height: 5px;
+  width: 0%;
+  top: 50%;
+  left: 0;
+}
+
+#progress-num {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+#progress-num::before {
+  content: "";
+  background-color: lightgray;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  z-index: -1;
+}
+
+#progress-num .step {
+  border: 3px solid lightgray;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background-color: #fff;
+  font-family: sans-serif;
+  font-size: 14px;    
+  position: relative;
+  z-index: 1;
+}
+
+#progress-num .step.active {
+  border-color: lightseagreen;
+  background-color: lightseagreen;
+  color: #fff;
+}
+</style> -->
 
 <script>
 import ArgonInput from '@/components/ArgonInput.vue';
@@ -198,7 +255,52 @@ import d$order from '@/stores/dashboard/order';
 import d$company from '@/stores/dashboard/company';
 import d$po from '@/stores/dashboard/po';
 import { mapActions, mapState } from 'pinia';
-import VueMultiselect from 'vue-multiselect'
+import VueMultiselect from 'vue-multiselect';
+
+// const progressBar = document.getElementById("progress-bar");
+// const progressNext = document.getElementById("progress-next");
+// const progressPrev = document.getElementById("progress-prev");
+// const steps = document.querySelectorAll(".step");
+// let active = 1;
+
+// progressNext.addEventListener("click", () => {
+//   active++;
+//   if (active > steps.length) {
+//     active = steps.length;
+//   }
+//   updateProgress();
+// });
+
+// progressPrev.addEventListener("click", () => {
+//   active--;
+//   if (active < 1) {
+//     active = 1;
+//   }
+//   updateProgress();
+// });
+
+// const updateProgress = () => {
+//   // toggle active class on list items
+//   steps.forEach((step, i) => {
+//     if (i < active) {
+//       step.classList.add("active");
+//     } else {
+//       step.classList.remove("active");
+//     }
+//   });
+//   // set progress bar width  
+//   progressBar.style.width = 
+//     ((active - 1) / (steps.length - 1)) * 100 + "%";
+//   // enable disable prev and next buttons
+//   if (active === 1) {
+//     progressPrev.disabled = true;
+//   } else if (active === steps.length) {
+//     progressNext.disabled = true;
+//   } else {
+//     progressPrev.disabled = false;
+//     progressNext.disabled = false;
+//   }
+// };
 
 export default {
     name: 'ajukan-po',

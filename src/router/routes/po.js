@@ -8,6 +8,12 @@ const po = {
         component: () => import('@/views/PO/AjukanPO.vue'),
         meta: { auth: true },
       },
+      {
+        path: 'pilih-order',
+        name: 'Pilih Order',
+        component: () => import('@/views/PO/PilihOrder.vue'),
+        meta: { auth: true },
+      },
     ],
   };
   

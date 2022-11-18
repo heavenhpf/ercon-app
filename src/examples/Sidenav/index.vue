@@ -36,7 +36,7 @@
           alt="main_logo"
         /> -->
         <div class="p-2 bg-white text-white rounded-pill">
-          <img src="@/assets/img/ercon-logo.png" class="rounded mx-auto w-75 d-block m-0 w-60">
+          <img src="@/assets/img/ercon-logo.png" class="rounded mx-auto w-75 d-block m-0">
         </div>
       </router-link>
     </div>

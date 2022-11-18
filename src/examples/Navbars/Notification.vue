@@ -13,8 +13,11 @@
         <li class="mb-2" v-for="data in g$listNotification">
             <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="py-1 d-flex">
-                    <div class="my-auto">
-                        <img src="@/assets/img/tazki-ngeri.jpeg" class="avatar avatar-sm me-3" alt="user image" />
+                    <div class="my-auto me-3" v-if="data.d_notification_object.entity_type === 1">
+                        <i class="fas fa-cart-plus text-lg text-success cursor-pointer"></i>
+                    </div>
+                    <div class="my-auto me-3" v-if="data.d_notification_object.entity_type === 2">
+                        <i class="fas fa-envelope-open text-lg text-info cursor-pointer"></i>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-1 text-sm font-weight-normal" v-if="data.d_notification_object.entity_type === 1">
