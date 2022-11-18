@@ -2,14 +2,47 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-12">
-                 <div class="pb-0 text-start mb-4">
+                <div class="pb-0 text-start mb-4">
                     <h4 class="font-weight-bolder text-dark">Pilih Order</h4>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="row">
+                        <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
+                        <div class="d-flex justify-content-center">
+                            <hr class="col-2 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="d-flex justify-content-center">
+                                            <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                id="radioNoLabel1" value="" aria-label="..." checked
+                                                style="width: 35px; height: 35px; opacity: 1;" disabled>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="text-dark">Pilih Order</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="d-flex justify-content-center">
+                                            <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                id="radioNoLabel1" value="" aria-label="..."
+                                                style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="text-dark">Buat PO</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
                         <label>Filter Berdasarkan Company</label>
-                        <select
-                            class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                             <option> PT Sugiti Indonesia </option>
                             <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}
                             </option>
@@ -61,7 +94,8 @@
                     </div>
                     <div class="col-1 mt-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 30px; height: 30px;">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                style="width: 30px; height: 30px;">
                         </div>
                     </div>
                 </div>

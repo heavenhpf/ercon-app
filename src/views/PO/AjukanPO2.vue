@@ -3,7 +3,41 @@
         <div class="row">
             <div class="col-lg-12">
                  <div class="pb-0 text-start mb-4">
-                    <h4 class="font-weight-bolder text-dark">Ajukan PO</h4>
+                    <h4 class="font-weight-bolder text-dark">Buat PO</h4>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="row">
+                        <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
+                        <div class="d-flex justify-content-center">
+                            <hr class="col-2 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="d-flex justify-content-center">
+                                            <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                id="radioNoLabel1" value="" aria-label="..."
+                                                style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="text-dark">Pilih Order</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="d-flex justify-content-center">
+                                            <input class="form-check-input" type="radio" name="radioNoLabel"
+                                                id="radioNoLabel1" value="" aria-label="..." checked
+                                                style="width: 35px; height: 35px; opacity: 1;" disabled>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="text-dark">Buat PO</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
                     <argon-button color="primary">
