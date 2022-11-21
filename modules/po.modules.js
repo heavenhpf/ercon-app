@@ -336,6 +336,7 @@ class _po {
                     quantity: true,
                     d_order: {
                         select: {
+                            id_item: true,
                             quantity: true,
                             d_item: {
                                 select: {
