@@ -43,8 +43,7 @@
                     <div class="col-4">
                         <label>Filter Berdasarkan Company</label>
                         <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                            <option> PT Sugiti Indonesia </option>
-                            <option v-for='items in g$listCategory' v-bind:value="items.id_category">{{ items.name }}
+                            <option v-for='company in g$listCompanyBelow' v-bind:value="company.id_company">{{ company.name }}
                             </option>
                         </select>
                     </div>
@@ -105,7 +104,13 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
+import d$company from '@/stores/dashboard/company';
+import d$order from '@/stores/dashboard/order';
+import d$category from '@/stores/dashboard/category';
+import d$auth from '@/stores/auth.d';
+import auth from '@/router/routes/auth';
 
 export default {
     name: "ajukan-po-1",
@@ -113,8 +118,39 @@ export default {
         return {
         };
     },
+    computed: {
+        ...mapState(d$company, ['g$listCompanyBelow']),
+        ...mapState(d$order, ['g$listOrder']),
+        modals() {
+            return Object.values(this.modal).includes(true);
+        },
+
+        filter() {
+            return {
+                tier: this.g$user.role + 1,
+                category: null,
+            }
+        },
+    },
     components: {
         ArgonCheckbox,
+    },
+    modals() {
+            return Object.values(this.modal).includes(true);
+    },
+    async mounted() {
+        await this.a$listCompanyBelow();
+        await this.a$listOrder();
+    },
+    methods: {
+        ...mapActions(d$company, ['a$listCompanyBelow']),
+        ...mapActions(d$order, ['a$listOrder']),
+
+        watch: {
+        modals(val) {
+            if (!val) this.clear();
+        }
+    },
     },
 };
 </script>

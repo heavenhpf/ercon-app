@@ -267,7 +267,6 @@ export default {
         // await this.a$inquiryList();
         // console.log(this.g$getOrder);
         await this.a$listCompanyBelow();
-        
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),

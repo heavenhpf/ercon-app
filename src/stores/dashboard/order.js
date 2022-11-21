@@ -12,7 +12,6 @@ const d$order = defineStore({
         status: null,
     }),
     actions: {
-
         async a$inquiryAddOrder(id,body) {
             try {
                 await s$order.add(id,body);

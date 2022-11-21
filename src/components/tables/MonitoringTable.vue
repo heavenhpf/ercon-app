@@ -159,12 +159,12 @@ import d$item from '@/stores/dashboard/item';
 import d$order from '@/stores/dashboard/order';
 import d$category from '@/stores/dashboard/category';
 import d$auth from '@/stores/auth.d';
-import auth from '../../router/routes/auth';
+import auth from '@/router/routes/auth';
 
 export default {
     // name: 'Monitoring',
     data: () => ({
-        pageTitle: 'table-monitoring-admin',
+        pageTitle: 'table-monitoring',
         // Input
         input: {
             text: ``,
