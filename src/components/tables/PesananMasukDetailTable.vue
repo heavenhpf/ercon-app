@@ -4,7 +4,18 @@
             <data-table style="text-align:center ;" index="false" :data="g$list_po_detail" :columns="dt.column"
                 :actions="dt.action" @detail="triggerDetail" @edit="triggerEdit" />
         </div>
-        <modal-comp size="lg" v-model:show="modal.detail">
+        <div id="liveToastError"
+            class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Progress Sudah Mencapai 100%!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <!-- <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
@@ -24,8 +35,8 @@
                     Close
                 </argon-button>
             </template>
-        </modal-comp>
-        <modal-comp size="lg" v-model:show="modal.detail">
+        </modal-comp> -->
+        <!-- <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <div class="col-6 modal-title">
                     <h5>Serial Number</h5>
@@ -44,7 +55,6 @@
                 </div>
             </template>
 
-            <!-- buat ngerubah detail -->
             <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
                     <h3 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
@@ -95,7 +105,7 @@
                     Kembali
                 </argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
     </div>
 </template>
 
@@ -105,6 +115,7 @@ import d$item from '@/stores/dashboard/item';
 import ArgonButton from '@/components/ArgonButton.vue';
 import { mapActions, mapState } from "pinia";
 import auth from '../../router/routes/auth';
+import { Toast } from 'bootstrap';
 
 export default {
     name: 'POTable',
@@ -200,12 +211,19 @@ export default {
                 console.error(e);
             }
         },
-        async triggerEdit() {
+        async triggerEdit({ d_order, d_item_detail }) {
             try {
-                this.modal.edit = false;
-                this.$router.push({ name: 'Update Produksi', params: { id_item: this.g$label.id_item, id_item_detail: this.g$label.id_item_detail } })
+                const data = {
+                    id_po: this.g$po.id_po,
+                    id_item: d_order.id_item,
+                    id_item_detail: d_item_detail[0].id_item_detail,
+                }
+                this.$router.push({ name: 'Update Produksi', params: data })
             } catch (e) {
                 console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
             }
         },
     },

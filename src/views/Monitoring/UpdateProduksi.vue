@@ -10,29 +10,6 @@
             <div class="mb-2">
                 <p class="text-dark">{{g$item.desc}}</p>
             </div>
-            <!-- <div>
-                <div class="pb-0 row mb-4">
-                    <div class="col-auto">
-                        <router-link to="/monitoring/gudang-saya" tag="button">
-                        <span>
-                            <argon-button size="md" color="warning">
-                                Kembali
-                            </argon-button>
-                        </span>
-                    </router-link>
-                    </div>
-                    <div class="col-auto">
-                        <router-link to="/monitoring/edit-jumlah-buffer" tag="button">
-                        <span>
-                            <argon-button size="md me-2" color="primary">
-                                <span class="fa fa-pencil-square-o fa-md me-2" />
-                                Edit Jumlah Buffer
-                            </argon-button>
-                        </span>
-                    </router-link>
-                    </div>
-                </div>
-            </div> -->
             <div class="p-4 row mb-3">
                 <div class="col-9">
                     <div class="row">
@@ -76,7 +53,7 @@
                                         Simpan
                                     </argon-button>
                                 </span>
-                                <router-link :to="{name: 'Detail Item', params: {id: this.$route.params.id_item}}" tag="button">
+                                <router-link :to="{name: 'Pesanan Masuk Detail', params: {id: this.$route.params.id_po}}" tag="button">
                                     <span>
                                         <argon-button size="md" color="warning" class="me-2">
                                             Kembali

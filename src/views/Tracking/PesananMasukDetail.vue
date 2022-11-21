@@ -124,6 +124,7 @@ export default {
             addDN: false,
         },
         file: null,
+        fileData: null,
     }),
     components: {
         ArgonButton,
@@ -142,7 +143,7 @@ export default {
     mounted() {
         let element = document.getElementById('hidden')
         setTimeout(() => {
-            if (this.g$po.progress === 1) {
+            if (this.g$po.progress === 1 && this.g$po.finished_at === null) {
                 // element.setAttribute("hidden", "hidden");
                 element.removeAttribute("hidden")
             }
@@ -153,9 +154,8 @@ export default {
 
         async submitFile(event) {
             this.file = event.target.files[0]
-            let data = new FormData();
-            data.append('file', this.file);
-            await this.a$addDocDN(data);
+            this.fileData = new FormData();
+            this.fileData.append('file', this.file);
         },
 
         async triggerAddDN() {
@@ -167,6 +167,7 @@ export default {
         },
         async addDN() {
             try {
+                await this.a$addDocDN(data);
                 const data = {
                     id_po: Number(this.g$po.id_po),
                     id_doc: Number(this.g$DocDN.id_doc)
