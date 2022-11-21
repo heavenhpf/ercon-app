@@ -42,7 +42,7 @@
                 <div class="row mb-4">
                     <div class="col-4">
                         <label>Filter Berdasarkan Company</label>
-                        <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                        <select @change="triggerChange()" v-model="input.company" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                             <option v-for='company in g$listCompanyBelow' v-bind:value="company.id_company">{{ company.name }}
                             </option>
                         </select>
@@ -59,42 +59,44 @@
                     <div class="mb-2">
                         <p class="text-sm mb-0">(Centang order yang akan Anda masukkan)</p>
                     </div>
-                    <div class="col-11">
-                        <div class="card">
-                            <div class="card-header p-3 pb-0">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="text-dark text-sm mb-0">Nomor Order</p>
-                                        <h5 class="text-dark">ORDER0015</h5>
+                    <div class="mb-3" v-for='order in g$listOrder' v-bind:value="company.id_company">
+                        <div class="col-11">
+                            <div class="card">
+                                <div class="card-header p-3 pb-0">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="text-dark text-sm mb-0">Nomor Order</p>
+                                            <h5 class="text-dark">ORDER0015</h5>
+                                        </div>
+                                        <div class="col-6 d-flex flex-row-reverse bd-highlight">
+                                            <p class="text-dark text-sm mb-0">18 November 2022</p>
+                                        </div>
                                     </div>
-                                    <div class="col-6 d-flex flex-row-reverse bd-highlight">
-                                        <p class="text-dark text-sm mb-0">18 November 2022</p>
-                                    </div>
+                                    <hr class="w-100 d-flex justify-content-center mt-1 mb-2">
                                 </div>
-                                <hr class="w-100 d-flex justify-content-center mt-1 mb-2">
-                            </div>
-                            <div class="card-body p-3 pt-0 pb-0">
-                                <div class="row">
-                                    <div class="col-9">
-                                        <h6 class="text-dark mb-0">Roda Eco Tire</h6>
-                                        <p class="text-dark"><b>1000</b> Unit</p>
-                                    </div>
-                                    <div class="col-3 mt-3">
-                                        <argon-button color="primary" class="me-3">
-                                            Edit
-                                        </argon-button>
-                                        <argon-button color="danger" size="md">
-                                            Hapus
-                                        </argon-button>
+                                <div class="card-body p-3 pt-0 pb-0">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <h6 class="text-dark mb-0">Roda Eco Tire</h6>
+                                            <p class="text-dark"><b>1000</b> Unit</p>
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            <argon-button color="primary" class="me-3">
+                                                Edit
+                                            </argon-button>
+                                            <argon-button color="danger" size="md">
+                                                Hapus
+                                            </argon-button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-1 mt-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                style="width: 30px; height: 30px;">
+                        <div class="col-1 mt-5">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                    style="width: 30px; height: 30px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,10 +116,12 @@ import auth from '@/router/routes/auth';
 
 export default {
     name: "ajukan-po-1",
-    data() {
-        return {
-        };
-    },
+    data: () => ({
+        // Input
+        input: {
+            
+        },
+    }),
     computed: {
         ...mapState(d$company, ['g$listCompanyBelow']),
         ...mapState(d$order, ['g$listOrder']),
@@ -125,12 +129,12 @@ export default {
             return Object.values(this.modal).includes(true);
         },
 
-        filter() {
-            return {
-                tier: this.g$user.role + 1,
-                category: null,
-            }
-        },
+        // filter() {
+        //     return {
+        //         tier: this.g$user.role + 1,
+        //         category: null,
+        //     }
+        // },
     },
     components: {
         ArgonCheckbox,
@@ -140,11 +144,18 @@ export default {
     },
     async mounted() {
         await this.a$listCompanyBelow();
-        await this.a$listOrder();
     },
     methods: {
         ...mapActions(d$company, ['a$listCompanyBelow']),
         ...mapActions(d$order, ['a$listOrder']),
+
+        async triggerChange() {
+            try {
+                await this.a$listOrder(Number(this.input.company));
+            } catch (e) {
+                console.error(e);
+            }
+        },
 
         watch: {
         modals(val) {

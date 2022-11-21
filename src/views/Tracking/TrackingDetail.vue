@@ -8,9 +8,12 @@
                         <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
                     </div>
                     <div class="col-4">
-                        <p class="font-weight-bolder text-danger float-end">Deadline: {{new
-                        Date(g$po.deadline).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month:
-                        'long', day: 'numeric' })}}</p>
+                        <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
+                                Date(g$po.deadline).toLocaleDateString("id-ID", {
+                                    weekday: 'long', year: 'numeric', month:
+                                        'long', day: 'numeric'
+                                })
+                        }}</p>
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -20,15 +23,15 @@
                         <h6 class="text-dark">Progress</h6>
                         <div class="progress" style="height: 20px; width: 70%;">
                             <div class="progress-bar bg-success" role="progressbar"
-                                :style="{width: g$po.progress * 100 + '%'}" aria-valuenow="{{g$po.progress * 100}}"
-                                aria-valuemin="0" aria-valuemax="100">{{ g$po.progress * 100 }}%
+                                :style="{ width: g$po.progress * 100 + '%' }" aria-valuenow="{{g$po.progress * 100}}"
+                                aria-valuemin="0" aria-valuemax="100">{{ (g$po.progress * 100).toFixed(1) }}%
                             </div>
                         </div>
                     </div>
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Purchasing Order:</h6>
                         <span>
-                            <argon-button @click="triggerClick()" size="md me-2" color="primary">
+                            <argon-button @click="triggerClickPO()" size="md me-2" color="primary">
                                 <span class="ni ni-single-copy-04 fa-lg me-2" />
                                 Lihat PDF
                             </argon-button>
@@ -41,28 +44,34 @@
                         <template v-if="modal.add" #body>
                             <div class="row">
                                 <div class="col-12">
-                                    <iframe ref="DownloadComp" id="preview"  style="width:100%; height: 400px;" :src="objectURL"></iframe>
+                                    <iframe ref="DownloadComp" id="preview" style="width:100%; height: 400px;"
+                                        :src="objectURL"></iframe>
                                 </div>
                             </div>
-                        </template>
-                        <template #footer>
-                            <argon-button color="primary" @click="addInquiry()">
-                                Save Changes
-                            </argon-button>
-                            <argon-button color="secondary" @click="modal.add = false">
-                                Close
-                            </argon-button>
                         </template>
                     </modal-comp>
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Delivery Note:</h6>
                         <span>
-                            <argon-button size="md me-2" color="success">
+                            <argon-button @click="triggerClickDN()" size="md me-2" color="success">
                                 <span class="ni ni-single-copy-04 fa-lg me-2" />
                                 Lihat PDF
                             </argon-button>
                         </span>
                     </div>
+                    <modal-comp size="lg" v-model:show="modal.preview">
+                        <template #header>
+                            <h3 class="modal-title">Preview Delivery Note</h3>
+                        </template>
+                        <template v-if="modal.add" #body>
+                            <div class="row">
+                                <div class="col-12">
+                                    <iframe ref="DownloadComp" id="preview" style="width:100%; height: 400px;"
+                                        :src="objectURL"></iframe>
+                                </div>
+                            </div>
+                        </template>
+                    </modal-comp>
                 </div>
                 <!-- <iframe ref="DownloadComp" id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe> -->
                 <div>
@@ -108,13 +117,13 @@ export default {
 
     computed: {
         ...mapState(d$po, ['g$po']),
-        ...mapState(d$doc, ['g$getDocPO']),
+        ...mapState(d$doc, ['g$getDoc']),
     },
     methods: {
         ...mapActions(d$po, ['a$listPoDetail']),
-        ...mapActions(d$doc, ['a$getDocPO']),
+        ...mapActions(d$doc, ['a$getDoc']),
 
-        async triggerClick(){
+        async triggerClickPO() {
             // if (this.objectURL) {
             //     URL.revokeObjectURL(this.objectURL);
             // }
@@ -122,12 +131,27 @@ export default {
             const obj = {
                 id_doc: value,
             }
-            await this.a$getDocPO(obj);
-            const blob = new Blob([this.g$getDocPO], { type: 'application/pdf' });
+            await this.a$getDoc(obj);
+            const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
             console.log(blob);
             this.objectURL = URL.createObjectURL(blob);
             window.open(this.objectURL);
-            
+
+        },
+        async triggerClickDN() {
+            // if (this.objectURL) {
+            //     URL.revokeObjectURL(this.objectURL);
+            // }
+            const value = Number(this.g$po.d_dn[0].id_doc);
+            const obj = {
+                id_doc: value,
+            }
+            await this.a$getDoc(obj);
+            const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
+            console.log(blob);
+            this.objectURL = URL.createObjectURL(blob);
+            window.open(this.objectURL);
+
         },
     },
     async mounted() {

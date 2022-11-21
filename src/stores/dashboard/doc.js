@@ -8,18 +8,26 @@ const d$doc = defineStore({
         doc: [],
     }),
     actions: {
-        async a$getDocPO(options) {
+        async a$getDoc(options) {
             try {
-                 
-                this.doc = await s$doc.getDocPO(options);
+
+                this.doc = await s$doc.getDoc(options);
             } catch ({ error, message }) {
                 this.doc = [];
                 throw error ?? message;
             }
-        }
+        },
+        async a$addDN(body) {
+            try {
+                await s$doc.addDN(body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+
     },
     getters: {
-        g$getDocPO: ({doc}) => doc,
+        g$getDoc: ({ doc }) => doc,
     },
 });
 

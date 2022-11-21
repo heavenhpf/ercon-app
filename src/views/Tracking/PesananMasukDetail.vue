@@ -5,11 +5,11 @@
                 <div class="row">
                     <h5 class="text-dark">Nomor PO:</h5>
                     <div class="col-8 pb-0 mb-3">
-                        <h4 class="font-weight-bolder text-dark">{{ g$po.po_number }}</h4>
+                        <h4 class="font-weight-bolder text-dark">{{ g$po?.po_number }}</h4>
                     </div>
                     <div class="col-4">
                         <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                                Date(g$po.deadline).toLocaleDateString("id-ID", {
+                                Date(g$po?.deadline).toLocaleDateString("id-ID", {
                                     weekday: 'long', year: 'numeric', month:
                                         'long', day: 'numeric'
                                 })
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
-                    <argon-button id="hidden" size="md me-2" color="primary" hidden @click="addDN()">
+                    <argon-button id="hidden" size="md me-2" color="primary" hidden @click="triggerAddDN()">
                         <span class="fa fa-pencil-square-o fa-md me-2" />
                         Buat Delivery Note
                     </argon-button>
@@ -60,14 +60,15 @@
                                 </div>
                                 <div>
                                     <label class="form-control-label text-sm">Dokumen Delivery Note</label>
-                                    <argon-input type="file" id="file" />
+                                    <argon-input type="file" id="file" v-model="input.file"
+                                        @change="submitFile($event)" />
                                 </div>
                             </div>
                         </div>
                     </template>
                     <template #footer>
                         <span>
-                            <argon-button @click="addInquiry()" size="md" color="primary" class="me-2">
+                            <argon-button @click="addDN()" size="md" color="primary" class="me-2">
                                 Simpan Perubahan
                             </argon-button>
                         </span>
@@ -91,6 +92,17 @@
                         </span>
                     </router-link>
                 </div>
+                <div id="liveToast"
+                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Delivery Note Berhasil diupdate
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -99,6 +111,7 @@
 <script>
 import ArgonButton from "@/components/ArgonButton.vue";
 import d$po from '@/stores/dashboard/po';
+import d$dn from '@/stores/dashboard/dn';
 import { mapActions, mapState } from "pinia";
 import PesananMasukDetailTable from "@/components/tables/PesananMasukDetailTable.vue";
 
@@ -110,6 +123,7 @@ export default {
         modal: {
             addDN: false,
         },
+        file: null,
     }),
     components: {
         ArgonButton,
@@ -123,6 +137,7 @@ export default {
     },
     computed: {
         ...mapState(d$po, ['g$po']),
+        ...mapState(d$dn, ['g$DocDN']),
     },
     mounted() {
         let element = document.getElementById('hidden')
@@ -134,17 +149,35 @@ export default {
         }, 500);
     },
     methods: {
+        ...mapActions(d$dn, ['a$addDN', 'a$addDocDN']),
 
-        async addDN() {
+        async submitFile(event) {
+            this.file = event.target.files[0]
+            let data = new FormData();
+            data.append('file', this.file);
+            await this.a$addDocDN(data);
+        },
+
+        async triggerAddDN() {
             try {
                 this.modal.addDN = true;
             } catch (error) {
                 throw error
             }
         },
-        async addInquiry() {
+        async addDN() {
             try {
+                const data = {
+                    id_po: Number(this.g$po.id_po),
+                    id_doc: Number(this.g$DocDN.id_doc)
+                }
+                await this.a$addDN(data)
                 this.modal.addDN = false;
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                }, 1000);
             } catch (error) {
                 throw error
             }
