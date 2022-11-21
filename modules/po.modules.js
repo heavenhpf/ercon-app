@@ -312,6 +312,11 @@ class _po {
                         select: {
                             name: true
                         }
+                    },
+                    d_dn: {
+                        select: {
+                            id_doc: true
+                        }
                     }
                 }
             })
