@@ -9,7 +9,7 @@
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
                         <div class="d-flex justify-content-center">
-                            <hr class="col-2 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
+                            <hr class="col-1 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">

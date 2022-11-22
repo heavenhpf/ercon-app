@@ -9,7 +9,7 @@
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
                         <div class="d-flex justify-content-center">
-                            <hr class="col-2 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
+                            <hr class="col-1 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">
@@ -59,14 +59,15 @@
                     <div class="mb-2">
                         <p class="text-sm mb-0">(Centang order yang akan Anda masukkan)</p>
                     </div>
-                    <div class="mb-3" v-for='order in g$listOrder' v-bind:value="company.id_company">
+                    <!-- <div class="mb-3" v-for='order in g$listOrder' v-bind:value="company.id_company"> -->
+                    <div class="mb-3">
                         <div class="col-11">
                             <div class="card">
                                 <div class="card-header p-3 pb-0">
                                     <div class="row">
                                         <div class="col-6">
                                             <p class="text-dark text-sm mb-0">Nomor Order</p>
-                                            <h5 class="text-dark">ORDER0015</h5>
+                                            <h5 class="text-dark">{{ g$d_order?.order_number }}</h5>
                                         </div>
                                         <div class="col-6 d-flex flex-row-reverse bd-highlight">
                                             <p class="text-dark text-sm mb-0">18 November 2022</p>
