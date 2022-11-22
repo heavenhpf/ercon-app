@@ -221,9 +221,9 @@ export default {
                 this.$router.push({ name: 'Update Produksi', params: data })
             } catch (e) {
                 console.error(e);
-                const toastLiveExample = document.getElementById('liveToastError')
-                const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         },
     },

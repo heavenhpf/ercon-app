@@ -6,10 +6,10 @@
           <div class="row">
             <div class="mx-auto col-xl-5 col-lg-5 col-md-6 d-flex flex-column mx-lg-0">
               <div class="card card-plain">
-                <div class="pb-0 card-header">
-                  <img src="../../assets/img/ercon-logo.png" class="col-6">
+                <div class="card-header">
+                    <img src="@/assets/img/ercon-logo.png" class="w-40">
                 </div>
-                <div class="pb-0 card-body text-start">
+                <div class="pt-0 pb-0 card-body text-start">
                   <h4 class="font-weight-bolder">Selamat Datang</h4>
                   <p class="mb-0">Silakan masukkan username dan password Anda untuk Sign In.</p>
                 </div>

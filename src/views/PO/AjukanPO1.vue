@@ -61,6 +61,9 @@
                     </div>
                     <!-- <div class="mb-3" v-for='order in g$listOrder' v-bind:value="company.id_company"> -->
                     <div class="row mb-3" v-for='order in g$listOrder'>
+                        <div class="row mb-3" v-if='order.length === 0'>
+                            <h1>kosong</h1>
+                        </div>
                         <div class="col-11">
                             <div class="card">
                                 <div class="card-header p-3 pb-0">

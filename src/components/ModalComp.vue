@@ -21,13 +21,13 @@
       ]"
     >
       <div
-        class="modal-content"
+        class="card modal-content"
         :class="[
           gradient ? `bg-gradient-${gradient}` : '',
           modalContentClasses,
         ]"
       >
-        <div v-if="$slots.header" class="modal-header align-items-center" :class="[headerClasses]">
+        <div v-if="$slots.header" class="card-header modal-header align-items-center" :class="[headerClasses]">
           <slot name="header"></slot>
           <slot name="close-button">
             <button

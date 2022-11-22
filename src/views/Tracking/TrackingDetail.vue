@@ -72,6 +72,17 @@
                             </div>
                         </template>
                     </modal-comp>
+                    <div id="liveToastError"
+                        class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                        role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Dokumen Belum Tersedia!
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
                 </div>
                 <!-- <iframe ref="DownloadComp" id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe> -->
                 <div>
@@ -124,34 +135,40 @@ export default {
         ...mapActions(d$doc, ['a$getDoc']),
 
         async triggerClickPO() {
-            // if (this.objectURL) {
-            //     URL.revokeObjectURL(this.objectURL);
-            // }
-            const value = Number(this.g$po.id_doc);
-            const obj = {
-                id_doc: value,
+            try {
+                const value = Number(this.g$po.id_doc);
+                const obj = {
+                    id_doc: value,
+                }
+                await this.a$getDoc(obj);
+                const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
+                console.log(blob);
+                this.objectURL = URL.createObjectURL(blob);
+                window.open(this.objectURL);
+            } catch (e) {
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
-            await this.a$getDoc(obj);
-            const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
-            console.log(blob);
-            this.objectURL = URL.createObjectURL(blob);
-            window.open(this.objectURL);
-
         },
         async triggerClickDN() {
-            // if (this.objectURL) {
-            //     URL.revokeObjectURL(this.objectURL);
-            // }
-            const value = Number(this.g$po.d_dn[0].id_doc);
-            const obj = {
-                id_doc: value,
+            try {
+                const value = Number(this.g$po.d_dn[0].id_doc);
+                const obj = {
+                    id_doc: value,
+                };
+                await this.a$getDoc(obj);
+                const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
+                console.log(blob);
+                this.objectURL = URL.createObjectURL(blob);
+                window.open(this.objectURL);
+            } catch (e) {
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
-            await this.a$getDoc(obj);
-            const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
-            console.log(blob);
-            this.objectURL = URL.createObjectURL(blob);
-            window.open(this.objectURL);
-
         },
     },
     async mounted() {

@@ -31,11 +31,22 @@
                     <div class="col-2 pb-0 mb-3">
                         <h6 class="text-dark text-sm">Purchasing Order:</h6>
                         <span>
-                            <argon-button size="md me-2" color="primary">
+                            <argon-button @click="triggerClickPO()" size="md me-2" color="primary">
                                 <span class="ni ni-single-copy-04 fa-lg me-2" />
                                 Lihat PDF
                             </argon-button>
                         </span>
+                    </div>
+                </div>
+                <div id="liveToastError"
+                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Dokumen Belum Tersedia!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
@@ -44,7 +55,6 @@
                         Buat Delivery Note
                     </argon-button>
                 </div>
-
                 <modal-comp size="lg" v-model:show="modal.addDN">
                     <template #header>
                         <div class="row">
@@ -79,7 +89,6 @@
                         </span>
                     </template>
                 </modal-comp>
-
                 <div class="mb-3">
                     <PesananMasukDetailTable />
                 </div>
@@ -151,13 +160,11 @@ export default {
     },
     methods: {
         ...mapActions(d$dn, ['a$addDN', 'a$addDocDN']),
-
         async submitFile(event) {
             this.file = event.target.files[0]
             this.fileData = new FormData();
             this.fileData.append('file', this.file);
         },
-
         async triggerAddDN() {
             try {
                 this.modal.addDN = true;
@@ -179,8 +186,26 @@ export default {
                 toast.show()
                 setTimeout(() => {
                 }, 1000);
-            } catch (error) {
-                throw error
+            } catch (e) {
+                console.error(e);
+            }
+        },
+        async triggerClickPO() {
+            try {
+                const value = Number(this.g$po.id_doc);
+                const obj = {
+                    id_doc: value,
+                }
+                await this.a$getDoc(obj);
+                const blob = new Blob([this.g$getDoc], { type: 'application/pdf' });
+                console.log(blob);
+                this.objectURL = URL.createObjectURL(blob);
+                window.open(this.objectURL);
+            } catch (e) {
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         },
         async toggleBack() {
