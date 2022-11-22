@@ -351,6 +351,11 @@ class _po {
                                 }
                             }
                         }
+                    },
+                    d_item_detail: {
+                        select: {
+                            id_item_detail: true,
+                        }
                     }
                 }
             })
