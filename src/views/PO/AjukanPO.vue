@@ -142,15 +142,6 @@
                             <div class="col-lg-8 col-md-9 mb-5 mt-4">
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
-                            
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Username</label>
-                                <argon-input v-model="input.username" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Password</label>
-                                <argon-input v-model="input.password" type="text" />
-                            </div>
                             <div id="liveToast"
                                 class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
@@ -376,14 +367,7 @@ export default {
             this.quantity = this.g$getOrder;
         },
         async triggerDeleteOrder(id_order){
-            // this.filterOrder.order.forEach((item, index) => {
-            //     if(item.id == this.filterOrder.selectedOrder.id){
-            //         this.filterOrder.order.splice(index, 1);
-            //     }
-            // });
-            // console.log(this.filterOrder.order);
             this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
-
             console.log(this.filterOrder.order);
         },
         async searchOrder(){
