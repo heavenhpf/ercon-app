@@ -118,20 +118,20 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="(item, index) in filterOrder.order" :key="index">
+                                        <tr v-for="(item, index) in filterOrder" :key="index">
                                             <th scope="row">{{ index + 1 }}</th>
                                             <td>{{ item.order_number }}</td>
-                                            <td>{{item.d_item?.name}}</td>
+                                            <td>{{ item.d_item?.name }}</td>
                                             <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td>{{ item.quantity}}</td>
                                             <td>
-                                                <argon-button  @click="triggerEditQuantity(item.order_number)" size="md" color="primary">
+                                                <!-- <argon-button  @click="triggerEditQuantity(item.id_order)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
-                                                </argon-button>
+                                                </argon-button> -->
                                                 <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger" class="ms-2">
                                                     <span class="fa fa-trash fa-sm me-2" />
-                                                    Hapus
+                                                    Batal
                                                 </argon-button>
                                             </td>
                                         </tr>
@@ -353,10 +353,7 @@ export default {
             deadline: '',
             file: null,
         },
-        filterOrder: {
-            selectedOrder: '',
-            order: [],
-        },
+        filterOrder: [],
         quantity:{},
         selectQuantity: {},
         selected: null,
@@ -402,7 +399,7 @@ export default {
 
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
-        ...mapState(d$order, ['g$getOrder']),
+        ...mapState(d$order, ['g$getOrder', 'g$listSelectedOrder']),
         ...mapState(d$company, ['g$listCompanyBelow']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
         modals() {
@@ -413,7 +410,7 @@ export default {
         // await this.a$inquiryList();
         // console.log(this.g$getOrder);
         await this.a$listCompanyBelow();
-        
+        this.filterOrder = this.g$listSelectedOrder;
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
@@ -507,8 +504,7 @@ export default {
         //         await this.init();
         //     }
         // },
-        async triggerEditQuantity(order_number){
-            await this.a$getOrder({order_number});
+        async triggerEditQuantity(id_order){
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
         },
@@ -519,9 +515,7 @@ export default {
             //     }
             // });
             // console.log(this.filterOrder.order);
-            this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
-
-            console.log(this.filterOrder.order);
+            this.filterOrder = this.filterOrder.filter(item => item.id_order != id_order);
         },
         async searchOrder(){
             try {
@@ -557,9 +551,9 @@ export default {
             try {
                 const data = {
                     po_number: this.input.po_number,
-                    order_to: this.selected.id_company,
+                    order_to: Number(this.$route.params.order_to),
                     id_doc: this.g$DocPO.id_doc,
-                    order: this.filterOrder.order,
+                    order: this.filterOrder,
                     deadline: this.deadline,
                 };
                 console.log(data);
@@ -567,7 +561,7 @@ export default {
                 console.log(`Add ${this.pageTitle} Succeed!`);
                 const toastLiveExample = document.getElementById('liveToast')
                 const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()       
+                toast.show()   
             } catch (e) {
                 console.error(e);
             } 

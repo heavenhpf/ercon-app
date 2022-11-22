@@ -107,6 +107,13 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
+        async a$editPoDetail(id, body) {
+            try {
+                await s$po.editPoDetail(id, body);
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
         async a$inquiryDel(id) {
             try {
                 await s$po.del(id);

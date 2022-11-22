@@ -48,11 +48,9 @@
                         </select>
                     </div>
                     <div class="col-8 mt-4 d-flex flex-row-reverse bd-highlight">
-                        <router-link class="nav-link" to="/po/ajukan-po-2">
-                            <argon-button color="primary">
+                            <argon-button color="primary" @click="nextStep()">
                                 Selanjutnya
                             </argon-button>
-                        </router-link>
                     </div>
                 </div>
                 <div class="row">
@@ -61,9 +59,6 @@
                     </div>
                     <!-- <div class="mb-3" v-for='order in g$listOrder' v-bind:value="company.id_company"> -->
                     <div class="row mb-3" v-for='order in g$listOrder'>
-                        <div class="row mb-3" v-if='order.length === 0'>
-                            <h1>kosong</h1>
-                        </div>
                         <div class="col-11">
                             <div class="card">
                                 <div class="card-header p-3 pb-0">
@@ -92,10 +87,10 @@
                                             <p class="text-dark"><b>{{ order.quantity }}</b> {{ order.d_item.unit }}</p>
                                         </div>
                                         <div class="col-3 mt-3">
-                                            <argon-button color="primary" class="me-3" @click="triggerEditQuantity(order.order_number)">
+                                            <argon-button color="primary" class="me-3" @click="triggerEditQuantity(order.id_order, order.quantity)">
                                                 Edit
                                             </argon-button>
-                                            <argon-button color="danger" size="md">
+                                            <argon-button color="danger" size="md" @click="triggerDeleteOrder(order.id_order)">
                                                 Hapus
                                             </argon-button>
                                         </div>
@@ -105,8 +100,7 @@
                         </div>
                         <div class="col-1 mt-5 d-flex justify-content-center">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                    style="width: 30px; height: 30px;">
+                                <input class="form-check-input" type="checkbox" :value="order.id_order" style="width: 30px; height: 30px;">
                             </div>
                         </div>
                     </div>
@@ -116,8 +110,8 @@
                         </template>
                         <template v-if="modal.editQuantity" #body>
                             <label for="example-text-input" class="form-control-label text-sm">Jumlah Barang</label>
-                            <argon-input v-model.number="quantity.quantity" type="text" />
-                            <argon-input v-model.number="quantity.id_order" type="text" hidden/>
+                            <argon-input v-model.number="quantity.quantity" type="number" />
+                            <argon-input v-model.number="quantity.id_order" type="number" hidden/>
                         </template>
                         <template #footer>
                             <argon-button color="primary" @click="editOrder()">
@@ -137,7 +131,6 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
-import ArgonButton from '@/components/ArgonButton.vue';
 import d$company from '@/stores/dashboard/company';
 import d$order from '@/stores/dashboard/order';
 import d$category from '@/stores/dashboard/category';
@@ -149,7 +142,7 @@ export default {
     data: () => ({
         // Input
         input: {
-            
+            listSelectedOrder: [],
         },
         modal: {
             editQuantity: false,
@@ -157,7 +150,7 @@ export default {
     }),
     computed: {
         ...mapState(d$company, ['g$listCompanyBelow']),
-        ...mapState(d$order, ['g$listOrder']),
+        ...mapState(d$order, ['g$listOrder', 'g$listSelectedOrder']),
         modals() {
             return Object.values(this.modal).includes(true);
         },
@@ -171,7 +164,6 @@ export default {
     },
     components: {
         ArgonCheckbox,
-        ArgonButton,
     },
     modals() {
             return Object.values(this.modal).includes(true);
@@ -181,7 +173,15 @@ export default {
     },
     methods: {
         ...mapActions(d$company, ['a$listCompanyBelow']),
-        ...mapActions(d$order, ['a$listOrder']),
+        ...mapActions(d$order, ['a$listOrder', 'a$addSelectedOrder', 'a$inquiryEditOrder', 'a$inquiryDelOrder']),
+
+        async init() {
+            try {
+                await this.a$listOrder(Number(this.input.company));
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
         async triggerChange() {
             try {
@@ -191,26 +191,64 @@ export default {
             }
         },
 
-        async triggerEditQuantity(order_number){
-            await this.a$listOrder({order_number});
+        async triggerEditQuantity(id_order, quantity){
             this.modal.editQuantity = true;
-            this.quantity = this.g$listOrder;
+            this.quantity = {
+                id_order,
+                quantity,
+            }
+        },
+
+        async triggerDeleteOrder(id_order){
+            try {
+                await this.a$inquiryDelOrder(id_order);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                await this.init();
+            }
         },
 
         async editOrder(){
             try {
                 const { quantity, id_order } = this.quantity;
                 const data = {
-                    quantity: parseInt(quantity),
+                    quantity: Number(quantity),
                 };
-                // console.log(data.id_order);
                 await this.a$inquiryEditOrder(id_order, data);
-                console.log(`Edit ${this.pageTitle} Succeed!`);
-                // console.log(this.filterOrder.order);
-                
+                this.modal.editQuantity = false;
             } catch (e) {
                 console.error(e);
-            } 
+            } finally {
+                await this.init();
+            }
+        },
+
+        async nextStep() {
+            try {
+                this.input.listSelectedOrder = [];
+                var checkboxes = document.getElementsByClassName("form-check-input");
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == "checkbox" && checkboxes[i].checked == true) {
+                        this.input.listSelectedOrder.push({
+                            id_order: Number(checkboxes[i].value)
+                        });
+                    }
+                }
+
+                for (var i = 0; i < this.input.listSelectedOrder.length; i++) {
+                    for (var j = 0; j < this.g$listOrder.length; j++) {
+                        if (this.input.listSelectedOrder[i].id_order == this.g$listOrder[j].id_order) {
+                            this.input.listSelectedOrder[i] = this.g$listOrder[j];
+                        }
+                    }
+                }
+
+                this.a$addSelectedOrder(this.input.listSelectedOrder);
+                this.$router.push({ name: 'Ajukan PO 2', params: { order_to: this.input.company } });
+            } catch (e) {
+                console.error(e);
+            }
         },
 
         watch: {
