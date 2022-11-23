@@ -8,22 +8,10 @@ const monitoring = {
             component: () => import('@/views/Monitoring/GudangSaya.vue'),
             meta: { auth: true },
         },
-        // {
-        //     path: 'detail-item/:id',
-        //     name: 'Detail Item',
-        //     component: () => import('@/views/Monitoring/DetailItem.vue'),
-        //     meta: { auth: true },
-        // },
         {
             path: 'detail-item/:id',
             name: 'Detail Item',
             component: () => import('@/views/Monitoring/DetailItem.vue'),
-            meta: { auth: true },
-        },
-        {
-            path: 'update-produksi/:id_po/:id_item/:id_item_detail',
-            name: 'Update Produksi',
-            component: () => import('@/views/Monitoring/UpdateProduksi.vue'),
             meta: { auth: true },
         },
         {

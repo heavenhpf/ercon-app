@@ -103,8 +103,8 @@ export default {
             const toast = new bootstrap.Toast(toastLiveExample)
             toast.show()
             setTimeout(() => {
-                this.$router.push({ name: 'Edit Informasi PO', params: { id_po: this.$route.params.id_po, id_po_detail: this.$route.params.id_po_detail } });
-            }, 2000);
+                this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } });
+            }, 1000);
         }
     },
     async mounted() {

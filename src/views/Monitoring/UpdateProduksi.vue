@@ -61,6 +61,28 @@
                                     </span>
                                 </router-link>
                             </div>
+                            <div id="liveToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Pesanan Berhasil Diupdate!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <div id="liveToastError"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3 align-items-center text-white bg-danger"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Gagal Menambahkan Jumlah Item Pesanan!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,9 +137,17 @@ export default {
                     quantity,
                 };
                 await this.a$editItemQuantity(this.g$label.id_item_detail, data);
-                this.$router.push('/monitoring/gudang-saya');
-            } catch (error) {
-                throw error;
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push('/tracking/pesanan-masuk/:id');
+                }, 1000);
+            } catch (e) {
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         }
     },
