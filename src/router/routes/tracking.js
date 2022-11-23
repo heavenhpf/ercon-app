@@ -20,16 +20,16 @@ const tracking = {
             component: () => import('@/views/Tracking/TrackingDetail.vue'),
             meta: { auth: true },
         },
-        // {
-        //     path: 'tracking-detail/:id',
-        //     name: 'Tracking Detail',
-        //     component: () => import('@/views/Tracking/TrackingDetail.vue'),
-        //     meta: { auth: true, role: [0, 1, 2] },
-        // },
         {
             path: 'pesanan-masuk',
             name: 'Pesanan Masuk',
             component: () => import('@/views/Tracking/PesananMasuk.vue'),
+            meta: { auth: true },
+        },
+        {
+            path: 'update-produksi/:id_po/:id_item/:id_item_detail',
+            name: 'Update Produksi',
+            component: () => import('@/views/Monitoring/UpdateProduksi.vue'),
             meta: { auth: true },
         },
         {

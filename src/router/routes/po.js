@@ -9,8 +9,8 @@ const po = {
         meta: { auth: true },
       },
       {
-        path: 'ajukan-po-2',
-        name: 'Ajukan PO 2/:order_to',
+        path: 'ajukan-po-2/:order_to',
+        name: 'Ajukan PO 2',
         component: () => import('@/views/PO/AjukanPO2.vue'),
         meta: { auth: true },
       },

@@ -561,7 +561,10 @@ export default {
                 console.log(`Add ${this.pageTitle} Succeed!`);
                 const toastLiveExample = document.getElementById('liveToast')
                 const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()   
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Default' });
+                }, 1000);
             } catch (e) {
                 console.error(e);
             } 

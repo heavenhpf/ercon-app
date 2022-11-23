@@ -121,6 +121,7 @@
 import ArgonButton from "@/components/ArgonButton.vue";
 import d$po from '@/stores/dashboard/po';
 import d$dn from '@/stores/dashboard/dn';
+import d$doc from "../../stores/dashboard/doc";
 import { mapActions, mapState } from "pinia";
 import PesananMasukDetailTable from "@/components/tables/PesananMasukDetailTable.vue";
 
@@ -148,6 +149,7 @@ export default {
     computed: {
         ...mapState(d$po, ['g$po']),
         ...mapState(d$dn, ['g$DocDN']),
+        ...mapState(d$doc, ['g$getDoc']),
     },
     mounted() {
         let element = document.getElementById('hidden')
@@ -160,6 +162,7 @@ export default {
     },
     methods: {
         ...mapActions(d$dn, ['a$addDN', 'a$addDocDN']),
+        ...mapActions(d$doc, ['a$getDoc']),
         async submitFile(event) {
             this.file = event.target.files[0]
             this.fileData = new FormData();
@@ -174,7 +177,7 @@ export default {
         },
         async addDN() {
             try {
-                await this.a$addDocDN(data);
+                await this.a$addDocDN(this.fileData);
                 const data = {
                     id_po: Number(this.g$po.id_po),
                     id_doc: Number(this.g$DocDN.id_doc)
@@ -185,6 +188,7 @@ export default {
                 const toast = new bootstrap.Toast(toastLiveExample)
                 toast.show()
                 setTimeout(() => {
+                    this.$router.push({ name: 'Pesanan Masuk'})
                 }, 1000);
             } catch (e) {
                 console.error(e);

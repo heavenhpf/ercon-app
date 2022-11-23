@@ -23,7 +23,7 @@
           </sidenav-item>
         </li>
       </template>
-      <template v-if="this.g$user.role === 0 || this.g$user.role === 1">
+      <template v-if="this.g$user.role === 0 || this.g$user.role === 1 || this.g$user.role === 2">
         <li class="nav-item">
           <sidenav-item url="/tracking/tracking-tier-bawah" :class="getRoute() === 'tracking-tier-bawah' ? 'active' : ''"
             navText="Tracking Tier Bawah">

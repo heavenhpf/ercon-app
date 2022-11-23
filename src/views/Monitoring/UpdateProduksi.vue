@@ -1,14 +1,14 @@
- <template>
+<template>
     <div class="py-4 container-fluid">
         <div class="row">
             <div class="text-start mb-1">
-                <h4 class="font-weight-bolder text-dark">{{g$label.d_po_detail?.d_po.po_number}}</h4>
+                <h4 class="font-weight-bolder text-dark">{{ g$label.d_po_detail?.d_po.po_number }}</h4>
             </div>
             <div class="text-start mb-1">
-                <h2 class="font-weight-bolder text-dark">{{g$item.name}}</h2>
+                <h2 class="font-weight-bolder text-dark">{{ g$item.name }}</h2>
             </div>
             <div class="mb-2">
-                <p class="text-dark">{{g$item.desc}}</p>
+                <p class="text-dark">{{ g$item.desc }}</p>
             </div>
             <div class="p-4 row mb-3">
                 <div class="col-9">
@@ -16,14 +16,18 @@
                         <div class="row mb-4">
                             <div class="col-4 me-5">
                                 <div class="row">
-                                    <label for="example-text-input" class="form-control-label text-sm">Produksi Saat Ini</label>
-                                    <p class="p-3 card text-dark text-lg bg-gray-400">{{g$label.d_po_detail?.quantity}}  {{g$item.unit}}</p>
+                                    <label for="example-text-input" class="form-control-label text-sm">Produksi Saat
+                                        Ini</label>
+                                    <p class="p-3 card text-dark text-lg bg-gray-400">{{ g$label.d_po_detail?.quantity }}
+                                        {{ g$item.unit }}</p>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="row">
-                                    <label for="example-text-input" class="form-control-label text-sm">Jumlah yang Dipesan</label>
-                                    <p class="p-3 card text-dark text-lg bg-gray-400">{{g$label.d_po_detail?.d_order.quantity}}  {{g$item.unit}}</p>
+                                    <label for="example-text-input" class="form-control-label text-sm">Jumlah yang
+                                        Dipesan</label>
+                                    <p class="p-3 card text-dark text-lg bg-gray-400">
+                                        {{ g$label.d_po_detail?.d_order.quantity }} {{ g$item.unit }}</p>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +45,8 @@
                             </div>
                         </div>
                         <div class="ps-0 mb-4">
-                            <label for="example-text-input" class="form-control-label text-sm">Jumlah Item yang Ditambahkan:</label>
+                            <label for="example-text-input" class="form-control-label text-sm">Jumlah Item yang
+                                Ditambahkan:</label>
                             <div class="col-10">
                                 <argon-input v-model.number="input.quantity" type="number" isRequired="true" />
                             </div>
@@ -53,13 +58,37 @@
                                         Simpan
                                     </argon-button>
                                 </span>
-                                <router-link :to="{name: 'Pesanan Masuk Detail', params: {id: this.$route.params.id_po}}" tag="button">
+                                <router-link
+                                    :to="{ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } }"
+                                    tag="button">
                                     <span>
                                         <argon-button size="md" color="warning" class="me-2">
                                             Kembali
                                         </argon-button>
                                     </span>
                                 </router-link>
+                            </div>
+                            <div id="liveToast"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Pesanan Berhasil Diupdate!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                        data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <div id="liveToastError"
+                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3 align-items-center text-white bg-danger"
+                                role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Gagal Menambahkan Jumlah Item Pesanan!
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                        data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,7 +103,7 @@
                                 <img src="@/assets/img/illustrations/box.png" alt="warning"
                                     style="width: 80%; height: 80%;">
                             </div>
-                            <h4 class="row justify-content-center">{{g$item.quantity}}  {{g$item.unit}}</h4>
+                            <h4 class="row justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}</h4>
                         </div>
                     </div>
                 </div>
@@ -102,7 +131,7 @@ export default {
         ArgonRadio,
     },
     computed: {
-        ...mapState(d$item, ['g$item','g$label']),
+        ...mapState(d$item, ['g$item', 'g$label']),
     },
     methods: {
         ...mapActions(d$item, ['a$itemDetail', 'a$editItemQuantity']),
@@ -115,9 +144,17 @@ export default {
                     quantity,
                 };
                 await this.a$editItemQuantity(this.g$label.id_item_detail, data);
-                this.$router.push('/monitoring/gudang-saya');
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } });
+                }, 1000);                
             } catch (error) {
-                throw error;
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         }
     },
