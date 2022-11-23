@@ -21,6 +21,12 @@ const tracking = {
             meta: { auth: true },
         },
         {
+            path: 'update-produksi/:id_po/:id_item/:id_item_detail',
+            name: 'Update Produksi',
+            component: () => import('@/views/Monitoring/UpdateProduksi.vue'),
+            meta: { auth: true },
+        },
+        {
             path: 'pesanan-masuk',
             name: 'Pesanan Masuk',
             component: () => import('@/views/Tracking/PesananMasuk.vue'),

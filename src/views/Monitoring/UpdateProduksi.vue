@@ -75,8 +75,8 @@
                                     <div class="toast-body">
                                         Pesanan Berhasil Diupdate!
                                     </div>
-                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                                        data-bs-dismiss="toast" aria-label="Close"></button>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
                                 </div>
                             </div>
                             <div id="liveToastError"
@@ -86,8 +86,8 @@
                                     <div class="toast-body">
                                         Gagal Menambahkan Jumlah Item Pesanan!
                                     </div>
-                                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                                        data-bs-dismiss="toast" aria-label="Close"></button>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
                                 </div>
                             </div>
                         </div>
@@ -144,17 +144,9 @@ export default {
                     quantity,
                 };
                 await this.a$editItemQuantity(this.g$label.id_item_detail, data);
-                const toastLiveExample = document.getElementById('liveToast')
-                const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()
-                setTimeout(() => {
-                    this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } });
-                }, 1000);                
+                this.$router.push('/monitoring/gudang-saya');
             } catch (error) {
-                console.error(e);
-                const toastLiveExample = document.getElementById('liveToastError');
-                const toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
+                throw error;
             }
         }
     },
