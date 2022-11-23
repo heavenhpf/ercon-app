@@ -144,9 +144,17 @@ export default {
                     quantity,
                 };
                 await this.a$editItemQuantity(this.g$label.id_item_detail, data);
-                this.$router.push('/monitoring/gudang-saya');
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } });
+                }, 1000);
             } catch (error) {
-                throw error;
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         }
     },
