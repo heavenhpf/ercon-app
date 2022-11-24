@@ -1,7 +1,7 @@
 # Ercon App
 
 ## Made by Ercon Team (Batch 3)
-| Nama | Posisi |
+| Anggota Tim | Posisi |
 | ------ | ------ |
 | Heaven Happyna Putra Febriyono | Project Manager & Front-End Dev |
 | Tazki Hanifan Amri | Back-End Dev |
