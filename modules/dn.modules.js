@@ -145,7 +145,7 @@ class _dn {
                 }
             })
 
-            await notify(2, add.id_dn, checkCompany.id_company, checkPo.order_from)
+            await notify(2, add.id_po, checkCompany.id_company, checkPo.order_from)
 
             return {
                 status: true,

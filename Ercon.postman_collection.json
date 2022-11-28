@@ -2116,7 +2116,7 @@
 			"name": "Notification",
 			"item": [
 				{
-					"name": "GET NOTIFICATION",
+					"name": "LIST NOTIFICATION",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2137,6 +2137,40 @@
 							],
 							"path": [
 								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ NOTIFICATION",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/notification/:id_notification",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notification",
+								":id_notification"
+							],
+							"variable": [
+								{
+									"key": "id_notification",
+									"value": ""
+								}
 							]
 						}
 					},

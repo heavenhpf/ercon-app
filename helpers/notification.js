@@ -21,7 +21,7 @@ const notify = async (entity_type, entity_id, actor, notifier) => {
         data: {
             id_notification_object: notifObject.id_notification_object,
             id_company: notifier,
-            status: 1
+            status: 0
         }
     })
 }
