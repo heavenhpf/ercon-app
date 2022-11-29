@@ -2,6 +2,11 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _order {
+    /**
+     * List all order of the user logged in filtered by company
+     * @param {number} id_user - id of user
+     * @param {number} order_to - company filter
+     */
     listOrder = async (id_user, order_to) => {
         try {
             const body = {
@@ -75,6 +80,13 @@ class _order {
         }
     }
 
+    /**
+     * Add new order to specific item
+     * @param {number} id_user - id of user
+     * @param {number} level - level of user
+     * @param {number} id_item - id of item
+     * @param {*} body - order data
+     */
     addOrder = async (id_user, level, id_item, body) => {
         try {
             body = {
@@ -187,6 +199,12 @@ class _order {
         }
     }
 
+    /**
+     * Edit specific order
+     * @param {number} id_user - id of user
+     * @param {number} id_order - id of order
+     * @param {*} body - order data
+     */
     editOrder = async (id_user, id_order, body) => {
         try {
             body = {
@@ -263,6 +281,11 @@ class _order {
         }
     }
 
+    /**
+     * Remove specific order
+     * @param {number} id_user - id of user
+     * @param {number} id_order - id of order
+     */
     deleteOrder = async (id_user, id_order) => {
         try {
             const body = {

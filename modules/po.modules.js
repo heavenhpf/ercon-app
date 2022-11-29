@@ -3,6 +3,12 @@ const Joi = require('joi')
 const { notify } = require('../helpers/notification')
 
 class _po {
+    /**
+     * List all Purchase Order filtered by tier and status, only shows Purchase Order below the level of the user logged in
+     * @param {number} level - level of user
+     * @param {number} tier - tier filter
+     * @param {number} status - status filter
+     */
     listAllPo = async (level, tier, status) => {
         try {
             const body = {
@@ -103,6 +109,11 @@ class _po {
         }
     }
 
+    /**
+     * List all Purchase Order of the user logged in filtered by status
+     * @param {number} id_user - id of user
+     * @param {number} status - status filter
+     */
     listMyPo = async (id_user, status) => {
         try {
             const body = {
@@ -192,6 +203,11 @@ class _po {
         }
     }
 
+    /**
+     * List all incoming Purchase Order to the user logged in filtered by status
+     * @param {number} id_user - id of user
+     * @param {number} status - status filter
+     */
     listIncomingPo = async (id_user, status) => {
         try {
             const body = {
@@ -281,6 +297,10 @@ class _po {
         }
     }
 
+    /**
+     * List all Purchase Order detail (items ordered) of specific Purchase Order
+     * @param {number} id_po - id of Purchase Order
+     */
     listPoDetail = async (id_po) => {
         try {
             const schema = Joi.number().required()
@@ -391,6 +411,11 @@ class _po {
         }
     }
 
+    /**
+     * Get detail of specific items ordered in Purchase Order
+     * @param {number} id_po - id of Purchase Order
+     * @param {number} id_po_detail - id of Purchase Order detail
+     */
     getPoDetail = async (id_po, id_po_detail) => {
         try {
             const body = {
@@ -472,6 +497,13 @@ class _po {
         }
     }
 
+    /**
+     * Edit specific items ordered in Purchase Order
+     * @param {number} id_user - id of user
+     * @param {number} id_po - id of Purchase Order
+     * @param {number} id_po_detail - id of Purchase Order detail
+     * @param {*} body - Purchase Order detail data
+     */
     editPoDetail = async (id_user, id_po, id_po_detail, body) => {
         try {
             body = {
@@ -559,6 +591,11 @@ class _po {
         }
     }
 
+    /**
+     * Add new Purchase Order
+     * @param {number} id_user - id of user
+     * @param {*} body - Purchase Order data
+     */
     addPo = async (id_user, body) => {
         try {
             body = {

@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 class _user {
+    /**
+     * Get username of the user logged in
+     * @param {string} username - username of the user
+     */
     getUsername = async (username) => {
         try {
             const schema = Joi.string().required()
@@ -33,6 +37,11 @@ class _user {
         }
     }
 
+    /**
+     * Edit password of the user logged in
+     * @param {number} id_user - id of user
+     * @param {*} body - password data
+     */
     editPassword = async (id_user, body) => {
         try {
             body = {

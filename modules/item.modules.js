@@ -2,6 +2,12 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _item {
+    /**
+     * List all items filtered by level and category
+     * @param {number} level_user - level user
+     * @param {number} tier - tier filter
+     * @param {number} id_category - category filter
+     */
     listItem = async (level_user, tier, id_category) => {
         try {
             const body = {
@@ -94,6 +100,11 @@ class _item {
         }
     }
 
+    /**
+     * List all items of the user logged in filtered by category
+     * @param {number} id_user - id user
+     * @param {number} id_category - category filter
+     */
     listMyItem = async (id_user, id_category) => {
         try {
             const body = {
@@ -185,6 +196,12 @@ class _item {
         }
     }
 
+    /**
+     * Get item data of the user logged in
+     * @param {number} id_user - id user
+     * @param {number} level_user - level user
+     * @param {number} id_item - id item
+     */
     getItem = async (id_user, level_user, id_item) => {
         try {
             const body = {
@@ -312,6 +329,10 @@ class _item {
         }
     }
 
+    /**
+     * Get item detail data
+     * @param {number} id_item_detail - id item detail
+     */
     getItemDetail = async (id_item_detail) => {
         try {
             const schema = Joi.number().required()
@@ -400,6 +421,11 @@ class _item {
         }
     }
 
+    /**
+     * Add new item
+     * @param {number} id_user - id user
+     * @param {*} body - item data
+     */
     addItem = async (id_user, body) => {
         try {
             body = {
@@ -480,6 +506,11 @@ class _item {
         }
     }
 
+    /**
+     * Remove item of the user logged in
+     * @param {number} id_user - id user
+     * @param {number} id_item - id item
+     */
     deleteItem = async (id_user, id_item) => {
         try {
             const body = {
@@ -560,6 +591,12 @@ class _item {
         }
     }
 
+    /**
+     * Edit item of the user logged in
+     * @param {number} id_user - id user
+     * @param {number} id_item - id item
+     * @param {*} body - item data
+     */
     editItem = async (id_user, id_item, body) => {
         try {
             body = {
@@ -650,6 +687,12 @@ class _item {
         }
     }
 
+    /**
+     * Edit item quantity (specific label) of the user logged in
+     * @param {number} id_user - id user
+     * @param {number} id_item_detail - id item detail
+     * @param {*} body - item detail data
+     */
     editItemQuantity = async (id_user, id_item_detail, body) => {
         try {
             body = {
@@ -791,6 +834,12 @@ class _item {
         }
     }
 
+    /**
+     * Edit item quantity (buffer) of the user logged in
+     * @param {number} id_user - id user
+     * @param {number} id_item - id item
+     * @param {*} body - item data
+     */
     editBufferQuantity = async (id_user, id_item, body) => {
         try {
             body = {

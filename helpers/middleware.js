@@ -2,6 +2,12 @@ const prisma = require('../helpers/database')
 const config = require('../config/app.config.json')
 const jwt = require('jsonwebtoken')
 
+/**
+ * Authorize user logged in
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const userSession = async (req, res, next) => {
   let token
 
@@ -46,6 +52,12 @@ const userSession = async (req, res, next) => {
   }
 }
 
+/**
+ * Verify user level is admin
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const verifyAdmin = async (req, res, next) => {
   try {
     if (req.user.level === 0) {

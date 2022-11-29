@@ -3,6 +3,11 @@ const Joi = require('joi')
 const { notify } = require('../helpers/notification')
 
 class _dn {
+    /**
+     * Add new Delivery Note
+     * @param {number} id_user - id user
+     * @param {*} body - delivery note data
+     */
     addDn = async (id_user, body) => {
         try {
             body = {

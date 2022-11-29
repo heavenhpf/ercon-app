@@ -3,6 +3,11 @@ const path = require('path')
 
 const fileName = ['application/pdf']
 
+/**
+ * Upload file to server
+ * @param {string} dest - destination folder
+ * @param {string} name - name of file
+ */
 const upload = (dest, name) => {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {

@@ -2,6 +2,9 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _category {
+    /**
+     * List all categories
+     */
     listCategory = async () => {
         try {
             const list = await prisma.ref_category.findMany({
@@ -24,6 +27,10 @@ class _category {
         }
     }
 
+    /**
+     * Add new category
+     * @param {*} body - category data
+     */
     addCategory = async (body) => {
         try {
             const schema = Joi.object({
@@ -62,6 +69,10 @@ class _category {
         }
     }
 
+    /**
+     * Remove category
+     * @param {number} id - id of category
+     */
     deleteCategory = async (id) => {
         try {
             const schema = Joi.number().required()
@@ -116,6 +127,11 @@ class _category {
         }
     }
 
+    /**
+     * Edit category
+     * @param {number} id - id of category
+     * @param {*} body - category data
+     */
     editCategory = async (id, body) => {
         try {
             body = {

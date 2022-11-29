@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 class _company {
+    /**
+     * List all companies
+     */
     listCompany = async () => {
         try {
             const list = await prisma.s_company.findMany({
@@ -33,6 +36,10 @@ class _company {
         }
     }
 
+    /**
+     * List all companies below the level of the user logged in
+     * @param {number} level - user level
+     */
     listCompanyBelow = async (level) => {
         try {
             const list = await prisma.s_company.findMany({
@@ -58,6 +65,10 @@ class _company {
         }
     }
 
+    /**
+     * Get company name of the user logged in
+     * @param {number} id_user - id of user that logged in
+     */
     getName = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -97,6 +108,10 @@ class _company {
         }
     }
 
+    /**
+     * Get company data of the user logged in
+     * @param {number} id_user - id of user that logged in
+     */
     getMyCompany = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -133,6 +148,10 @@ class _company {
         }
     }
 
+    /**
+     * Add new company
+     * @param {*} body - company data
+     */
     addCompany = async (body) => {
         try {
             const schema = Joi.object({
@@ -213,6 +232,11 @@ class _company {
         }
     }
 
+    /**
+     * Edit company data of the user logged in
+     * @param {number} id_user - id of user that logged in
+     * @param {*} body - company data
+     */
     editMyCompany = async (id_user, body) => {
         try {
             body = {
@@ -280,6 +304,10 @@ class _company {
         }
     }
 
+    /**
+     * Remove company and user data
+     * @param {number} id - id of company
+     */
     deleteCompany = async (id) => {
         try {
             const schema = Joi.number().required()

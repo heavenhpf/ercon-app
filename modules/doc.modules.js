@@ -2,6 +2,10 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _document {
+    /**
+     * Download a document
+     * @param {number} id_doc - id document
+     */
     getDoc = async (id_doc) => {
         try {
             const schema = Joi.number().required()
@@ -46,6 +50,10 @@ class _document {
         }
     }
 
+    /**
+     * Add new document
+     * @param {File} file - file
+     */
     addDoc = async (file) => {
         try {
             const add = await prisma.d_doc.create({

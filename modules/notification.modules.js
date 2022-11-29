@@ -2,6 +2,10 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _notification {
+    /**
+     * List 5 latest notifications, there are 2 types of notifications: entity_type=1 is for new purchase order, entity_type=2 is for new delivery note
+     * @param {number} id_user - id of user that logged in
+     */
     listNotification = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -63,7 +67,7 @@ class _notification {
                         }
                     }
                 },
-                take: 3
+                take: 5
             })
 
             return {
@@ -80,6 +84,11 @@ class _notification {
         }
     }
 
+    /**
+     * Change notification status to viewed
+     * @param {number} id_user - id of user that logged in
+     * @param {number} id_notification - id of notification
+     */
     readNotification = async (id_user, id_notification) => {
         try {
             const schema = Joi.object({

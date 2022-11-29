@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 
 class _auth {
+    /**
+     * Login user
+     * @param {*} body - user credentials
+     */
     login = async (body) => {
         try {
             const schema = Joi.object({

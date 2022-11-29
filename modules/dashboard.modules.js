@@ -2,6 +2,10 @@ const prisma = require('../helpers/database')
 const Joi = require('joi')
 
 class _dashboard {
+    /**
+     * Count all Purchase Order of the user logged in
+     * @param {number} id_user - id of user
+     */
     countPo = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -57,6 +61,10 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all Purchase Order per status of the user logged in
+     * @param {number} id_user - id of user
+     */
     countPoStatus = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -133,6 +141,10 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all incoming Purchase Order of the user logged in
+     * @param {number} id_user - id of user
+     */
     countIncomingPo = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -188,6 +200,10 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all incoming Purchase Order per status of the user logged in
+     * @param {number} id_user - id of user
+     */
     countIncomingPoStatus = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -264,6 +280,10 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all Delivery Note of the user logged in
+     * @param {number} id_user - id of user
+     */
     countDn = async (id_user) => {
         try {
             const schema = Joi.number().required()
@@ -321,6 +341,11 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all suppliers below the user logged in
+     * @param {number} id_user - id of user
+     * @param {number} level - level of user
+     */
     countSupplier = async (id_user, level) => {
         try {
             const body = {
@@ -387,6 +412,10 @@ class _dashboard {
         }
     }
 
+    /**
+     * Count all items of the user logged in
+     * @param {number} id_user - id of user
+     */
     countItem = async (id_user) => {
         try {
             const schema = Joi.number().required()
