@@ -10,7 +10,7 @@
             <div class="mb-2">
                 <p class="text-dark text-sm">{{ g$item.desc }}</p>
             </div>
-            <div class="mb-2">
+            <div class="mb-2 col-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-center">
                         <span class="badge text-dark text-lg"
