@@ -2,12 +2,12 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-lg-12">
-                <div class="row">
+                <div class="row mb-3">
                     <h5 class="text-dark">Nomor PO:</h5>
-                    <div class="col-8 pb-0 mb-3">
+                    <div class="col-5 pb-0 mb-3">
                         <h4 class="font-weight-bolder text-dark">{{ g$po?.po_number }}</h4>
                     </div>
-                    <div class="col-4">
+                    <div class="col-7">
                         <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
                                 Date(g$po?.deadline).toLocaleDateString("id-ID", {
                                     weekday: 'long', year: 'numeric', month:
@@ -16,8 +16,8 @@
                         }}</p>
                     </div>
                 </div>
-                <div class="row mb-5">
-                    <div class="col-10 pb-0 mb-3">
+                <div class="row mb-3">
+                    <div class="col-lg-10 col-md-10 col-12 mb-lg-6 pb-0 mb-4">
                         <h5 class="font-weight-bolder text-dark">{{ g$po.s_company_d_po_order_fromTos_company?.name }}
                         </h5>
                         <h6 class="text-dark">Progress</h6>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 pb-0 mb-3">
+                    <div class="col-lg-2 col-md-2 col-6 pb-0 mb-md-3 mb-lg-3">
                         <h6 class="text-dark text-sm">Purchasing Order:</h6>
                         <span>
                             <argon-button @click="triggerClickPO()" size="md me-2" color="primary">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div id="liveToastError"
-                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
@@ -78,13 +78,13 @@
                     </template>
                     <template #footer>
                         <span>
-                            <argon-button @click="addDN()" size="md" color="primary" class="me-2">
-                                Simpan Perubahan
+                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                                Kembali
                             </argon-button>
                         </span>
                         <span>
-                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                                Kembali
+                            <argon-button @click="addDN()" size="md" color="primary" class="me-2">
+                                Simpan Perubahan
                             </argon-button>
                         </span>
                     </template>
@@ -102,7 +102,7 @@
                     </router-link>
                 </div>
                 <div id="liveToast"
-                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">

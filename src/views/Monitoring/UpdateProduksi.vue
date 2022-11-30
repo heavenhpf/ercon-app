@@ -4,35 +4,49 @@
             <div class="text-start mb-1">
                 <h4 class="font-weight-bolder text-dark">{{ g$label.d_po_detail?.d_po.po_number }}</h4>
             </div>
-            <div class="text-start mb-1">
+            <div class="text-start mb-3">
                 <h2 class="font-weight-bolder text-dark">{{ g$item.name }}</h2>
             </div>
             <div class="mb-2">
-                <p class="text-dark">{{ g$item.desc }}</p>
+                <p class="text-dark text-sm">{{ g$item.desc }}</p>
             </div>
-            <div class="p-4 row mb-3">
-                <div class="col-9">
+            <div class="mb-2">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-center">
+                        <span class="badge text-dark text-lg"
+                            style="background-color: yellow;">Buffer</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <img src="@/assets/img/illustrations/box.png" alt="warning"
+                                style="width: 25%; height: 25%;">
+                        </div>
+                        <h5 class="d-flex justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="ps-4 row mb-3">
+                <div class="col-md-9 col-lg-9 col-12">
                     <div class="row">
                         <div class="row mb-4">
-                            <div class="col-4 me-5">
+                            <div class="col-md-4 col-lg-4 col-6 pe-4">
                                 <div class="row">
-                                    <label for="example-text-input" class="form-control-label text-sm">Produksi Saat
-                                        Ini</label>
+                                    <label for="example-text-input" class="form-control-label text-sm">Input saat ini</label>
                                     <p class="p-3 card text-dark text-lg bg-gray-400">{{ g$label.d_po_detail?.quantity }}
                                         {{ g$item.unit }}</p>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-lg-4 col-6">
                                 <div class="row">
-                                    <label for="example-text-input" class="form-control-label text-sm">Jumlah yang
-                                        Dipesan</label>
+                                    <label for="example-text-input" class="form-control-label text-sm">Jumlah Pesanan</label>
                                     <p class="p-3 card text-dark text-lg bg-gray-400">
                                         {{ g$label.d_po_detail?.d_order.quantity }} {{ g$item.unit }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <p class="row font-weight-bolder text-dark text-sm">Masukkan Item ke PO dari:</p>
+                            <p class="row font-weight-bolder text-dark text-sm mb-2">Masukkan Item ke PO dari:</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <input type="radio" v-model="input.is_buffer" v-bind:value="false">
@@ -69,7 +83,7 @@
                                 </router-link>
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -80,7 +94,7 @@
                                 </div>
                             </div>
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3 align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -93,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 d-none d-md-block d-lg-block">
                     <div class="card">
                         <div class="card-header d-flex justify-content-center">
                             <span class="badge text-dark text-lg" style="background-color: yellow;">Buffer</span>
@@ -151,7 +165,7 @@ export default {
                     this.$router.push({ name: 'Pesanan Masuk Detail', params: { id: this.$route.params.id_po } });
                 }, 1000);
             } catch (error) {
-                console.error(e);
+                console.error(error);
                 const toastLiveExample = document.getElementById('liveToastError');
                 const toast = new bootstrap.Toast(toastLiveExample);
                 toast.show();

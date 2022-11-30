@@ -40,12 +40,12 @@
           <div class="mb-5">
             <div class="pb-0 row">
               <div class="row mb-0">
-                <div class="col-10">
+                <div class="col-7">
                   <div class="pb-0 text-start">
-                    <h5 class="text-black font-weight-bolder">PO Seminggu Terakhir Saya</h5>
+                    <h6 class="text-dark font-weight-bolder">PO Seminggu Terakhir Saya</h6>
                   </div>
                 </div>
-                <div class="col-2 d-flex justify-content-end mt-1">
+                <div class="col-5 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
                     <router-link to="/tracking/tracking-saya" tag="button">
                       <span>
@@ -63,12 +63,12 @@
           <div class="mb-5">
             <div class="pb-0 row">
               <div class="row mb-0">
-                <div class="col-10">
+                <div class="col-7">
                   <div class="pb-0 text-start">
-                    <h5 class="text-black font-weight-bolder">PO Selesai dalam Seminggu Terakhir</h5>
+                    <h6 class="text-dark font-weight-bolder">PO Selesai dalam Seminggu Terakhir</h6>
                   </div>
                 </div>
-                <div class="col-2 d-flex justify-content-end mt-1">
+                <div class="col-5 d-flex justify-content-end mt-1">
                   <div class="pb-0 text-start">
                     <router-link to="/tracking/tracking-saya" tag="button">
                       <span>

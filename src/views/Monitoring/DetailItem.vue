@@ -109,20 +109,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
                 </template>
                 <template #footer>
                     <span>
-                        <argon-button @click="editBuffer()" size="md" color="primary" class="me-2">
-                            Simpan Perubahan
+                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                            Kembali
                         </argon-button>
                     </span>
                     <span>
-                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                            Kembali
+                        <argon-button @click="editBuffer()" size="md" color="primary" class="me-2">
+                            Simpan Perubahan
                         </argon-button>
                     </span>
                 </template>
@@ -167,13 +166,13 @@
                 </template>
                 <template #footer>
                     <span>
-                        <argon-button @click="editItem()" size="md" color="primary" class="me-2">
-                            Simpan Perubahan
+                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                            Kembali
                         </argon-button>
                     </span>
                     <span>
-                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                            Kembali
+                        <argon-button @click="editItem()" size="md" color="primary" class="me-2">
+                            Simpan Perubahan
                         </argon-button>
                     </span>
                 </template>

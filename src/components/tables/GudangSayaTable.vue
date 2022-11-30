@@ -14,10 +14,10 @@
                 </p>
             </template>
             <template #footer>
-                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
                 <argon-button color="secondary" @click="modal.confirm = false">
                     Close
                 </argon-button>
+                <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
             </template>
         </modal-comp>
     </div>

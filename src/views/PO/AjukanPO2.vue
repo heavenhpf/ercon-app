@@ -161,7 +161,7 @@
                                 <argon-input type="file" v-model="input.file" id="file" @change="changeFile($event)" :accept="accepts" />
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -173,7 +173,7 @@
                             </div>
                             
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -188,7 +188,7 @@
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -199,7 +199,7 @@
                                 </div>
                             </div>
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -563,7 +563,7 @@ export default {
                 const toast = new bootstrap.Toast(toastLiveExample)
                 toast.show()
                 setTimeout(() => {
-                    this.$router.push({ name: 'Default' });
+                    this.$router.push({ name: 'Tracking Saya' });
                 }, 1000);
             } catch (e) {
                 console.error(e);

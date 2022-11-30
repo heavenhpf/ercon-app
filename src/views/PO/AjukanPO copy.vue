@@ -17,11 +17,11 @@
                         <argon-input v-model.number="quantity.id_order"  type="text" hidden/>
                     </template>
                     <template #footer>
-                        <argon-button color="primary" @click="editOrder()">
-                            Order
-                        </argon-button>
                         <argon-button color="secondary" @click="modal.editQuantity = false">
                             Close
+                        </argon-button>
+                        <argon-button color="primary" @click="editOrder()">
+                            Order
                         </argon-button>
                     </template>
                 </modal-comp>  
@@ -116,7 +116,7 @@
                                 <argon-input type="file" v-model="input.file" id="file" @change="changeFile($event)" :accept="accepts" />
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -128,7 +128,7 @@
                             </div>
                             
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -143,7 +143,7 @@
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">

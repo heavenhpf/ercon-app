@@ -114,11 +114,11 @@
                             <argon-input v-model.number="quantity.id_order" type="number" hidden/>
                         </template>
                         <template #footer>
-                            <argon-button color="primary" @click="editOrder()">
-                                Order
-                            </argon-button>
                             <argon-button color="secondary" @click="modal.editQuantity = false">
                                 Close
+                            </argon-button>
+                            <argon-button color="primary" @click="editOrder()">
+                                Order
                             </argon-button>
                         </template>
                     </modal-comp>  

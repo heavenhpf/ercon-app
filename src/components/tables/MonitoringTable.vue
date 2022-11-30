@@ -53,11 +53,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="primary" @click="triggerOrder()">
-                    Order
-                </argon-button>
                 <argon-button color="secondary" @click="modal.detail = false">
                     Close
+                </argon-button>
+                <argon-button color="primary" @click="triggerOrder()">
+                    Order
                 </argon-button>
             </template>
         </modal-comp>
@@ -71,11 +71,22 @@
                     </div>
                 </div>
                 <div id="liveToast"
-                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
-                            {{ input.name }} Berhasil di Order
+                            {{ input.name }} Berhasil di Order!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+                <div id="liveToastError"
+                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Nomor Order sudah Pernah Digunakan!
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                             aria-label="Close"></button>
@@ -141,11 +152,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
-                    Order
-                </argon-button>
                 <argon-button color="secondary" @click="toggleOrderBack()">
                     Kembali
+                </argon-button>
+                <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
+                    Order
                 </argon-button>
             </template>
         </modal-comp>
@@ -305,15 +316,18 @@ export default {
                 // const id = this.g$item.id_item;
                 await this.a$inquiryAddOrder(id_item, data);
                 this.modal.add = false;
-                const toastLiveExample = document.getElementById('liveToast')
-                const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()
+                const toastLiveExample = document.getElementById('liveToast');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
                 setTimeout(() => {
                     this.$router.push({ name: 'Default' });
                 }, 1000);
             }
             catch (e) {
                 console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         },
         async toggleOrderBack() {

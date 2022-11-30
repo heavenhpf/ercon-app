@@ -18,11 +18,11 @@
         </div>
       </template>
       <template #footer>
-        <argon-button color="primary" @click="addInquiry()">
-          Save Changes
-        </argon-button>
         <argon-button color="secondary" @click="modal.add = false">
           Close
+        </argon-button>
+        <argon-button color="primary" @click="addInquiry()">
+          Save Changes
         </argon-button>
       </template>
     </modal-comp>
@@ -45,11 +45,11 @@
         </div> -->
       </template>
       <template #footer>
-        <argon-button color="primary" @click="editInquiry()">
-          Save Changes
-        </argon-button>
         <argon-button color="secondary" @click="modal.detail = false">
           Close
+        </argon-button>
+        <argon-button color="primary" @click="editInquiry()">
+          Save Changes
         </argon-button>
       </template>
     </modal-comp>
@@ -63,10 +63,10 @@
         </p>
       </template>
       <template #footer>
-        <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
         <argon-button color="secondary" @click="modal.confirm = false">
           Close
         </argon-button>
+        <argon-button color="danger" @click="delInquiry()">Delete</argon-button>
       </template>
     </modal-comp>
   </div>
