@@ -5,7 +5,7 @@
                 <h4 class="font-weight-bolder text-dark">Monitoring Item</h4>
             </div>
             <div class="div">
-                <table-monitoring />
+                <monitoring-table />
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
 import Card2 from "@/examples/Cards/Card2.vue";
-import TableMonitoring from "@/components/tables/TableMonitoring.vue";
+import MonitoringTable from "@/components/tables/MonitoringTable.vue";
 
 export default {
     name: "monitoring-item",
@@ -36,7 +36,7 @@ export default {
     },
     components: {
         Card2,
-        TableMonitoring,
+        MonitoringTable,
     },
 };
 </script>

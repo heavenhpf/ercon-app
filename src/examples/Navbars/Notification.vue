@@ -6,6 +6,9 @@
                 class="position-absolute top-20 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
             </span>
+            <!-- <span>
+                <span class="visually-hidden">New alerts</span>
+            </span> -->
         </i>
     </a>
     <ul class="px-2 py-3 dropdown-menu dropdown-menu-end me-sm-n4" :class="showMenu ? 'show' : ''"
@@ -13,10 +16,13 @@
         <li class="mb-2" v-for="data in g$listNotification">
             <a class="dropdown-item border-radius-md" href="javascript:;">
                 <div class="py-1 d-flex">
-                    <div class="my-auto">
-                        <img src="@/assets/img/tazki-ngeri.jpeg" class="avatar avatar-sm me-3" alt="user image" />
+                    <div class="my-auto me-3" v-if="data.d_notification_object.entity_type === 1">
+                        <i class="fas fa-cart-plus text-sm text-success cursor-pointer"></i>
                     </div>
-                    <div class="d-flex flex-column justify-content-center">
+                    <div class="my-auto me-3" v-if="data.d_notification_object.entity_type === 2">
+                        <i class="fas fa-envelope-open text-sm text-info cursor-pointer"></i>
+                    </div>
+                    <div class="d-flex  flex-column justify-content-center">
                         <h6 class="mb-1 text-sm font-weight-normal" v-if="data.d_notification_object.entity_type === 1">
                             <span class="font-weight-bold">New Purchase Order</span> from
                             {{ data.d_notification_object.d_notification_change[0].s_company.name }}
@@ -47,6 +53,13 @@ export default {
     },
     methods: {
         ...mapActions(d$notification, ['a$listNotification']),
+
+        async updateNotification(){
+            await this.a$listNotification();
+            if(this.g$listNotification.length > 0){
+                this.showMenu = true;
+            }
+        },
     },
     async mounted() {
         await this.a$listNotification();

@@ -18,11 +18,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
+                </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>

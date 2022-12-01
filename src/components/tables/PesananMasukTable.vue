@@ -17,11 +17,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
+                </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -31,6 +31,7 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import d$po from '@/stores/dashboard/po';
+import d$item from '@/stores/dashboard/item';
 import auth from '../../router/routes/auth';
 
 const statusPO = {
@@ -50,7 +51,7 @@ export default {
         },
         filter: {
             id_po: null,
-            id_po_detail: null
+            id_po_detail: null,
         },
         // DataTable
         dt: {
@@ -110,10 +111,12 @@ export default {
             add: false,
             detail: false,
             confirm: false,
+            edit: false,
         },
     }),
     computed: {
         ...mapState(d$po, ['g$list_inbox']),
+        ...mapState(d$item, ['g$label', 'g$item']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
@@ -154,6 +157,7 @@ export default {
                 console.error(e);
             }
         },
+
     },
     watch: {
         modals(val) {

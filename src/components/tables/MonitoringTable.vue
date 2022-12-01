@@ -162,6 +162,7 @@ import d$auth from '@/stores/auth.d';
 import auth from '../../router/routes/auth';
 
 export default {
+    
     // name: 'Monitoring',
     data: () => ({
         pageTitle: 'table-monitoring',

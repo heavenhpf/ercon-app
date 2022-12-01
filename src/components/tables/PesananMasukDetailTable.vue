@@ -2,9 +2,20 @@
     <div class="table-responsive p-0">
         <div class="card">
             <data-table style="text-align:center ;" index="false" :data="g$list_po_detail" :columns="dt.column"
-                :actions="dt.action" @detail="triggerDetail" @delete="triggerDelete" />
+                :actions="dt.action" @detail="triggerDetail" @edit="triggerEdit" />
         </div>
-        <modal-comp size="lg" v-model:show="modal.detail">
+        <div id="liveToastError"
+            class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Progress Sudah Mencapai 100%!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <!-- <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <h2 class="modal-title">Add New {{ pageTitle }}</h2>
             </template>
@@ -17,15 +28,15 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.add = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="addInquiry()">
                     Save Changes
                 </argon-button>
+                <argon-button color="secondary" @click="modal.add = false">
+                    Close
+                </argon-button>
             </template>
-        </modal-comp>
-        <modal-comp size="lg" v-model:show="modal.detail">
+        </modal-comp> -->
+        <!-- <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
                 <div class="col-6 modal-title">
                     <h5>Serial Number</h5>
@@ -44,7 +55,6 @@
                 </div>
             </template>
 
-            <!-- buat ngerubah detail -->
             <template size="lg" v-if="modal.detail" #body>
                 <div class="row">
                     <h3 class="col-12">{{ g$get_po_detail.d_order?.d_item.name }}
@@ -62,7 +72,9 @@
                     <div class="row">
                         <div class="col-auto">
                             <div class="rounded" style="background-color: rgba(59, 130, 246, 0.4);">
-                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{ g$get_po_detail.note_po }}</h6>
+                                <h6 class="p-2 ps-4 pe-4 text-dark font-weight-bolder text-center" id="NomorPO">{{
+                                g$get_po_detail.note_po
+                                }}</h6>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -84,33 +96,26 @@
                 </div>
             </template>
             <template #footer>
-                <!-- <argon-button color="danger" @click="editInquiry()">
-                    Kembali
-                </argon-button> -->
-                <argon-button color="danger" @click="modal.detail = false">
-                    Kembali
-                </argon-button>
                 <router-link class="nav-link" to="/tracking/tracking-tier-bawah">
                     <argon-button color="primary" @click="modal.detail = false">
                         Cari PO
                     </argon-button>
                 </router-link>
+                <argon-button color="danger" @click="modal.detail = false">
+                    Kembali
+                </argon-button>
             </template>
-        </modal-comp>
+        </modal-comp> -->
     </div>
 </template>
 
 <script>
 import d$po from '@/stores/dashboard/po';
+import d$item from '@/stores/dashboard/item';
 import ArgonButton from '@/components/ArgonButton.vue';
 import { mapActions, mapState } from "pinia";
 import auth from '../../router/routes/auth';
-
-// const progress = {
-//     0: "Belum Deadline",
-//     1: "Melewati Deadline",
-//     2: "Progress Selesai"
-// }
+import { Toast } from 'bootstrap';
 
 export default {
     name: 'POTable',
@@ -125,6 +130,10 @@ export default {
             id_po: null,
             id_po_detail: null
         },
+        // filterDetailItem: {
+        //     id_item: null,
+        //     id_item_detail: null
+        // },
         // DataTable
         dt: {
             column: [
@@ -158,6 +167,11 @@ export default {
             ],
             action: [
                 {
+                    text: 'Edit',
+                    color: 'primary',
+                    event: 'edit',
+                },
+                {
                     text: 'Detail',
                     color: 'warning',
                     event: 'detail',
@@ -167,6 +181,7 @@ export default {
 
         // UI
         modal: {
+            edit: false,
             add: false,
             detail: false,
             confirm: false,
@@ -174,6 +189,7 @@ export default {
     }),
     computed: {
         ...mapState(d$po, ['g$list_po_detail', 'g$get_po_detail', 'g$po']),
+        ...mapState(d$item, ['g$item', 'g$label']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
@@ -181,32 +197,6 @@ export default {
     async mounted() {
         await this.a$listPoDetail({ id_po: this.$route.params.id });
     },
-    // async addInquiry() {
-    //     // Get the text field
-    //     var copyText = document.getElementById("myInput");
-
-    //     // Select the text field
-    //     copyText.select();
-    //     copyText.setSelectionRange(0, 99999); // For mobile devices
-
-    //     // Copy the text inside the text field
-    //     navigator.clipboard.writeText(copyText.value);
-
-    //     // Alert the copied text
-    //     alert("Copied the text: " + copyText.value);
-    // },
-
-    // async copy() {
-    //     try {
-    //         const toastLiveExample = document.getElementById('showToast').value
-    //         const toast = new bootstrap.Toast(toastLiveExample)
-    //         toast.show()
-    //     } catch (e) {
-    //         console.error(e);
-    //     } finally {
-    //         // await this.init();
-    //     }
-    // },
     methods: {
         ...mapActions(d$po, ['a$listPoDetail']),
 
@@ -216,9 +206,24 @@ export default {
                     id_po: Number(id_po),
                     id_po_detail: Number(id_po_detail)
                 }
-                this.$router.push({ name: 'Edit Informasi PO', params: { id_po, id_po_detail} })
+                this.$router.push({ name: 'Edit Informasi PO', params: { id_po, id_po_detail } })
             } catch (e) {
                 console.error(e);
+            }
+        },
+        async triggerEdit({ d_order, d_item_detail }) {
+            try {
+                const data = {
+                    id_po: this.g$po.id_po,
+                    id_item: d_order.id_item,
+                    id_item_detail: d_item_detail[0].id_item_detail,
+                }
+                this.$router.push({ name: 'Update Produksi', params: data })
+            } catch (e) {
+                console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
             }
         },
     },

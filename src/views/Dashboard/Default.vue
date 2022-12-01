@@ -95,7 +95,7 @@
     status = "Selamat Sore"
   } else {
     status = "Selamat Malam"
-  }
+  };
   
   export default {
     name: "default",

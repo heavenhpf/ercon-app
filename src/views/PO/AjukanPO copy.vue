@@ -267,7 +267,6 @@ export default {
         // await this.a$inquiryList();
         // console.log(this.g$getOrder);
         await this.a$listCompanyBelow();
-        
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
@@ -367,7 +366,14 @@ export default {
             this.quantity = this.g$getOrder;
         },
         async triggerDeleteOrder(id_order){
+            // this.filterOrder.order.forEach((item, index) => {
+            //     if(item.id == this.filterOrder.selectedOrder.id){
+            //         this.filterOrder.order.splice(index, 1);
+            //     }
+            // });
+            // console.log(this.filterOrder.order);
             this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
+
             console.log(this.filterOrder.order);
         },
         async searchOrder(){

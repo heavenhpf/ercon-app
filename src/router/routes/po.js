@@ -3,9 +3,15 @@ const po = {
     name: 'AjukanPO',
     children: [
       {
-        path: 'ajukan-po',
-        name: 'Ajukan PO',
-        component: () => import('@/views/PO/AjukanPO.vue'),
+        path: 'ajukan-po-1',
+        name: 'Ajukan PO 1',
+        component: () => import('@/views/PO/AjukanPO1.vue'),
+        meta: { auth: true },
+      },
+      {
+        path: 'ajukan-po-2',
+        name: 'Ajukan PO 2',
+        component: () => import('@/views/PO/AjukanPO2.vue'),
         meta: { auth: true },
       },
     ],

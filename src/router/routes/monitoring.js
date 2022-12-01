@@ -21,13 +21,7 @@ const monitoring = {
             meta: { auth: true },
         },
         {
-            path: 'edit-jumlah-buffer',
-            name: 'Edit Jumlah Buffer',
-            component: () => import('@/views/Monitoring/EditJumlahBuffer.vue'),
-            meta: { auth: true },
-        },
-        {
-            path: 'update-produksi/:id_item/:id_item_detail',
+            path: 'update-produksi/:id_po/:id_item/:id_item_detail',
             name: 'Update Produksi',
             component: () => import('@/views/Monitoring/UpdateProduksi.vue'),
             meta: { auth: true },

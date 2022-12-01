@@ -63,10 +63,10 @@
                     </div>
                 </div>
             </div>
-            <h5 class="font-weight-bolder">Pesanan Item yang Masuk</h5>
+            <!-- <h5 class="font-weight-bolder">Pesanan Item yang Masuk</h5>
             <div class="mb-3 p-2">
                 <item-table />
-            </div>
+            </div> -->
             <router-link to="/monitoring/gudang-saya" tag="button">
                 <span>
                     <argon-button size="md" color="warning" class="me-2">
@@ -116,13 +116,13 @@
                 </template>
                 <template #footer>
                     <span>
-                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                            Kembali
+                        <argon-button @click="editBuffer()" size="md" color="primary" class="me-2">
+                            Simpan Perubahan
                         </argon-button>
                     </span>
                     <span>
-                        <argon-button @click="editBuffer()" size="md" color="primary" class="me-2">
-                            Simpan Perubahan
+                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                            Kembali
                         </argon-button>
                     </span>
                 </template>
@@ -167,13 +167,13 @@
                 </template>
                 <template #footer>
                     <span>
-                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
-                            Kembali
+                        <argon-button @click="editItem()" size="md" color="primary" class="me-2">
+                            Simpan Perubahan
                         </argon-button>
                     </span>
                     <span>
-                        <argon-button @click="editItem()" size="md" color="primary" class="me-2">
-                            Simpan Perubahan
+                        <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                            Kembali
                         </argon-button>
                     </span>
                 </template>
@@ -186,7 +186,7 @@
 import d$item from '@/stores/dashboard/item';
 import d$category from '@/stores/dashboard/category';
 import { mapActions, mapState } from "pinia";
-import ItemTable from "@/components/tables/ItemTable.vue";
+// import ItemTable from "@/components/tables/ItemTable.vue";
 import ArgonButton from '@/components/ArgonButton.vue';
 
 export default {
@@ -200,7 +200,7 @@ export default {
         },
     }),
     components: {
-        ItemTable,
+        // ItemTable,
         ArgonButton,
     },
     filter: {

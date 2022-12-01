@@ -54,15 +54,15 @@
                         <div class="col-lg-8 col-md-9">
                             <router-link to="/akun/company" tag="button">
                                 <span>
-                                    <argon-button size="md" color="warning" class="me-2">
-                                        Kembali
+                                    <argon-button @click="addInquiry()" class="me-2" size="md" color="primary">
+                                        Tambah
                                     </argon-button>
                                 </span>
                             </router-link>
                             <router-link to="/akun/company" tag="button">
                                 <span>
-                                    <argon-button @click="addInquiry()" size="md" color="primary">
-                                        Tambah
+                                    <argon-button size="md" color="warning">
+                                        Kembali
                                     </argon-button>
                                 </span>
                             </router-link>
