@@ -105,7 +105,7 @@
                                                 <h6 class="text-dark mb-0">{{ order.d_item.name }}</h6>
                                                 <p class="text-dark"><b>{{ order.quantity }}</b> {{ order.d_item.unit }}</p>
                                             </div>
-                                            <div class="col-6 mt-2 text-end">
+                                            <div class="col-6 text-end">
                                                 <argon-button color="primary" size="md" class="mb-lg-0 mb-md-0 mb-2 me-3" @click="triggerEditQuantity(order.id_order, order.quantity)">
                                                     Edit
                                                 </argon-button>
@@ -149,7 +149,7 @@
                                         </div>
                                         <hr class="w-100 d-flex justify-content-center mt-1 mb-2">
                                     </div>
-                                    <div class="card-body p-3 pt-0 pb-lg-0 pb-md-0 pb-2">
+                                    <div class="card-body p-3 pt-0 pb-lg-0 pb-md-0 pb-3">
                                         <div class="row">
                                             <div class="col-6">
                                                 <h6 class="text-dark text-sm mb-0">{{ order.d_item.name }}</h6>

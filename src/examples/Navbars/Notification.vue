@@ -7,7 +7,7 @@
             </span>
         </i>
     </a>
-    <ul class="px-2 py-3 dropdown-menu dropdown-menu-end me-sm-n4" :class="showMenu ? 'show' : ''" aria-labelledby="dropdownMenuButton" v-if="g$listNotification">
+    <ul class="px-1 py-2 dropdown-menu dropdown-menu-end me-n4" :class="showMenu ? 'show' : ''" aria-labelledby="dropdownMenuButton" v-if="g$listNotification">
         <li class="mb-2 d-lg-block d-md-block d-none" v-for="data in g$listNotification">
             <a class="dropdown-item border-radius-md bg-gray-200" v-if="(data.status === 0)"
                 :href="$router.resolve({ name: 'Tracking Detail', params: { id: data.d_notification_object.entity_id } }).href" @click="readNotification(data.id_notification)">
@@ -68,7 +68,6 @@
                 </div>
             </a>
         </li>
-
         <li class="mb-2 d-lg-none d-md-none d-block" v-for="data in g$listNotification">
             <a class="dropdown-item border-radius-md bg-gray-200" v-if="(data.status === 0)"
                 :href="$router.resolve({ name: 'Tracking Detail', params: { id: data.d_notification_object.entity_id } }).href" @click="readNotification(data.id_notification)">
