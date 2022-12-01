@@ -9,13 +9,8 @@
                     <div class="mb-0">
                         <h5>{{ g$getMyCompany.name }}</h5>
                     </div>
-                    <div class="mb-2">
-                        <h6 class="font-weight-bold text-sm">{{ g$username }}</h6>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <p class="mb-0">{{ g$getMyCompany.address }}</p>
-                        <p class="mb-0 ms-auto">{{ g$getMyCompany.phone }}</p>
-                    </div>
+                    <p class="mb-1">{{ g$getMyCompany.address }}</p>
+                    <p class="mb-0">{{ g$getMyCompany.phone }}</p>
                 </div>
             </div>
         </div>
@@ -29,12 +24,12 @@
                     </div>
                     <div class="card-body">
                         <div class="row mb-2">
-                            <div class="col-6">
+                            <div class="col-lg-6 col-md-6 col-12">
                                 <label for="example-text-input" class="form-control-label text-sm">Current
                                     Password</label>
                                 <argon-input v-model='input.cur_password' type="text" />
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6 col-md-6 col-12">
                                 <label for="example-text-input" class="form-control-label text-sm">New Password</label>
                                 <argon-input v-model='input.new_password' type="text" />
                             </div>

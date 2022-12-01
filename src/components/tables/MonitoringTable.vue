@@ -1,8 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class=" col-9 row">
-                <div class="col-lg-4 col-md-4 col-8 mt-4 ms-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-10 mt-4 ms-4">
                     <label>Filter Kategori Item</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">

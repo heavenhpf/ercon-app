@@ -5,11 +5,11 @@
                 <div class="pb-0 text-start mb-4">
                     <h4 class="font-weight-bolder text-dark">Buat PO</h4>
                 </div>
-                <div class="d-flex justify-content-center mb-6">
+                <div class="d-flex justify-content-center mb-4">
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
                         <div class="d-flex justify-content-center">
-                            <hr class="col-1 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
+                            <hr class="col-lg-1 col-md-1 col-3 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">
@@ -107,26 +107,26 @@
                                 <div class="col-2">
                                     <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
                                 </div> -->
-                                <div class="col-12">
-                                    <table class="table-responsive table-hover text-center align-items-center">
+                                <div class="col-12" style="overflow-x:scroll;">
+                                    <table class="table table-hover text-center align-items-center">
                                         <thead>
                                         <tr>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">No</th>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Nomor Order</th>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Nama Barang</th>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Tanggal Order</th>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Total</th>
-                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Aksi</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">No</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Nomor Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Nama Barang</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Tanggal Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Total</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr v-for="(item, index) in filterOrder" :key="index">
                                             <th scope="row" class="p-lg-3 p-md-3 p-1 text-sm">{{ index + 1 }}</th>
-                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.order_number }}</td>
-                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.d_item?.name }}</td>
-                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
-                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.quantity}}</td>
-                                            <td class="p-lg-3 p-md-3 p-1 text-sm">
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.order_number }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.d_item?.name }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.quantity}}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">
                                                 <!-- <argon-button  @click="triggerEditQuantity(item.id_order)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit

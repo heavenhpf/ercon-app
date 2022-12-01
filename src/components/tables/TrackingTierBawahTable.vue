@@ -2,7 +2,7 @@
     <div class="table-responsive p-0">
         <div class="card">
             <div class="row">
-                <div class="col-md-3 col-lg-3 col-6 mt-4 ms-4" v-if="this.g$user.role === 0">
+                <div class="col-md-3 col-lg-3 col-10 mt-4 ms-4" v-if="this.g$user.role === 0">
                     <label>Filter Tier</label>
                     <select @change="triggerOptions()" v-model="input.tier" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
@@ -10,7 +10,7 @@
                         <option v-bind:value="2">Tier 3</option>
                     </select>
                 </div>
-                <div class="col-md-3 col-lg-3 col-6 mt-4 ms-4">
+                <div class="col-md-3 col-lg-3 col-10 mt-4 ms-4">
                     <label>Filter Status</label>
                     <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
