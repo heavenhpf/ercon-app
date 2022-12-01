@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="cardBackground">
-    <div class="card-body p-2">
+    <div class="card-body p-0 p-md-2">
       <div class="row" :class="contentClass">
         <div :class="textPosition">
           <p class="mb-0 text-md text-white font-weight-bold" :class="titleColor">{{ title }}</p>
@@ -8,14 +8,14 @@
         </div>
         <div :class="iconPosition">
           <div class="text-center icon icon-shape">
-            <i :class="iconClass" aria-hidden="true"></i>
+            <i :class="iconClass" style="height: 50%;" aria-hidden="true"></i>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
 export default {
   name: "card2",

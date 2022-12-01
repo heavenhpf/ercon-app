@@ -10,19 +10,21 @@
             <div class="mb-2">
                 <p class="text-dark text-sm">{{ g$item.desc }}</p>
             </div>
-            <div class="mb-2 col-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-center">
-                        <span class="badge text-dark text-lg"
-                            style="background-color: yellow;">Buffer</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <img src="@/assets/img/illustrations/box.png" alt="warning"
-                                style="width: 25%; height: 25%;">
+            <div class="d-flex justify-content-center d-block d-sm-none d-md-none d-lg-none d-xl-none">
+                <div class="mb-4 col-6">
+                    <div class="card">
+                        <div class="card-header p-2 d-flex justify-content-center">
+                            <span class="badge text-dark text-sm"
+                                style="background-color: yellow;">Buffer</span>
                         </div>
-                        <h5 class="d-flex justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}
-                        </h5>
+                        <div class="card-body p-2">
+                            <div class="d-flex justify-content-center">
+                                <img src="@/assets/img/illustrations/box.png" alt="warning"
+                                    style="width: 30%; height: 30%;">
+                            </div>
+                            <h6 class="d-flex justify-content-center">{{ g$item.quantity }} {{ g$item.unit }}
+                            </h6>
+                        </div>
                     </div>
                 </div>
             </div>

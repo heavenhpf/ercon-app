@@ -235,8 +235,17 @@
     }
 
     &.fixed-start+.main-content {
-      margin-left: $navbar-vertical-open-width + 1.5;
+      margin-left: $navbar-vertical-open-width - 9.5;
+      transition: 0.3s ease-in-out;
     }
+
+    &.fixed+.main-content {
+      margin-left: $navbar-vertical-open-width + 1.5;
+      transition: 0.3s ease-in-out;
+      
+    }
+
+
 
     &.fixed-end+.main-content {
       margin-right: $navbar-vertical-open-width + 1.5;
@@ -306,6 +315,7 @@
         margin-left: 0 !important;
       }
     }
+    
 
     &.g-sidenav-pinned {
       .sidenav {

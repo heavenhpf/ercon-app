@@ -50,7 +50,7 @@ export default {
                 {
                     th: 'Label',
                     render: ({ }) => {
-                        return `<span class="badge bg-primary">Purchasing Order</span>`
+                        return `<span class="badge bg-info">Purchasing Order</span>`
                     }
                 },
             ],

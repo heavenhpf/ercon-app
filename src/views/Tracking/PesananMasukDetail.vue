@@ -78,7 +78,7 @@
                     </template>
                     <template #footer>
                         <span>
-                            <argon-button @click="toggleBack()" size="md" color="warning" class="me-2">
+                            <argon-button @click="toggleBack()" size="md" color="secondary" class="me-2">
                                 Kembali
                             </argon-button>
                         </span>

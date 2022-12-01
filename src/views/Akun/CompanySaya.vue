@@ -3,29 +3,7 @@
         <div class="page-header min-height-200"
             style="background-color: #3B82F6; margin-right: -24px; margin-left: -34%;">
         </div>
-        <div class="card shadow-lg mt-n6 p-1 w-60 mx-auto">
-            <div id="liveToast"
-                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
-                role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        Password Berhasil di Update
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
-                </div>
-            </div>
-            <div id="ToastProfil"
-                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
-                role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        Profile Berhasil di Update
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
-                </div>
-            </div>
+        <div class="card shadow-lg mt-n6 p-1 w-lg-60 w-md-80 w-80 mx-auto mb-3">
             <div class="card-body p-4">
                 <div class="row gx-4">
                     <div class="mb-0">
@@ -41,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="py-4 container-fluid">
+        <div class="py-3 container-fluid">
             <div class="row">
                 <div class="card">
                     <div class="card-header pb-0">
@@ -75,13 +53,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-lg-8 col-md-8 col-12">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor Telepon</label>
                                 <argon-input v-model='input.phone' type="text" />
                             </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-8 mb-2">
+                            <div class="col-lg-8 col-md-8 col-12 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Alamat</label>
                                 <argon-input v-model='input.address' type="text" />
                             </div>
@@ -90,6 +68,28 @@
                         </argon-button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="liveToast"
+            class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Password Berhasil di Update
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+        <div id="ToastProfil"
+            class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Profile Berhasil di Update
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
     </div>

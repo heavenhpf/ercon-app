@@ -65,7 +65,7 @@
                             </argon-button>
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
-                                    <argon-button size="md" color="warning">
+                                    <argon-button size="md" color="secondary">
                                         Kembali
                                     </argon-button>
                                 </span>

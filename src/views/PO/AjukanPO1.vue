@@ -40,15 +40,15 @@
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-4">
+                    <div class="col-lg-3 col-md-3 col-6">
                         <label>Filter Berdasarkan Company</label>
                         <select @change="triggerChange()" v-model="input.company" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                             <option v-for='company in g$listCompanyBelow' v-bind:value="company.id_company">{{ company.name }}
                             </option>
                         </select>
                     </div>
-                    <div class="col-8 mt-4 d-flex flex-row-reverse bd-highlight">
-                            <argon-button color="primary" @click="nextStep()">
+                    <div class="col-lg-9 col-md-9 col-6 mt-4 text-end">
+                            <argon-button color="primary" size="md" @click="nextStep()">
                                 Selanjutnya
                             </argon-button>
                     </div>
@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <p class="text-dark text-sm mb-0">Nomor Order</p>
-                                            <h5 class="text-dark">{{ order.order_number }}</h5>
+                                            <h6 class="text-dark">{{ order.order_number }}</h6>
                                         </div>
                                         <div class="col-6 d-flex flex-row-reverse bd-highlight">
                                             <p class="text-dark text-sm mb-0">
@@ -80,14 +80,14 @@
                                     </div>
                                     <hr class="w-100 d-flex justify-content-center mt-1 mb-2">
                                 </div>
-                                <div class="card-body p-3 pt-0 pb-0">
+                                <div class="card-body p-3 pt-0 pb-lg-0 pb-md-0 pb-2">
                                     <div class="row">
-                                        <div class="col-9">
+                                        <div class="col-6">
                                             <h6 class="text-dark mb-0">{{ order.d_item.name }}</h6>
                                             <p class="text-dark"><b>{{ order.quantity }}</b> {{ order.d_item.unit }}</p>
                                         </div>
-                                        <div class="col-3 mt-3">
-                                            <argon-button color="primary" class="me-3" @click="triggerEditQuantity(order.id_order, order.quantity)">
+                                        <div class="col-6 mt-2 text-end">
+                                            <argon-button color="primary" size="md" class="mb-lg-0 mb-md-0 mb-2 me-3" @click="triggerEditQuantity(order.id_order, order.quantity)">
                                                 Edit
                                             </argon-button>
                                             <argon-button color="danger" size="md" @click="triggerDeleteOrder(order.id_order)">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-1 mt-5 d-flex justify-content-center">
+                        <div class="col-1 d-flex justify-content-center align-items-center">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" :value="order.id_order" style="width: 30px; height: 30px;">
                             </div>

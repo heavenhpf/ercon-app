@@ -2,10 +2,10 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-12">
-                 <div class="pb-0 text-start mb-4">
+                <div class="pb-0 text-start mb-4">
                     <h4 class="font-weight-bolder text-dark">Buat PO</h4>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
+                <div class="d-flex justify-content-center mb-6">
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
                         <div class="d-flex justify-content-center">
@@ -39,11 +39,13 @@
                         </div>
                     </div>
                 </div>
-                <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
-                    <argon-button color="warning">
-                        Kembali
-                    </argon-button>
-                </router-link>
+                <div class="row p-2">
+                    <router-link class="col-auto nav-link p-0 mb-3" to="/po/ajukan-po-1">
+                        <argon-button color="warning">
+                            Kembali
+                        </argon-button>
+                    </router-link>
+                </div>
                 <!-- <div id="progress">
                     <div id="progress-bar"></div>
                     <ul id="progress-num">
@@ -105,32 +107,32 @@
                                 <div class="col-2">
                                     <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
                                 </div> -->
-                                <div class="col-11">
-                                    <table class="table table-hover text-center align-items-center">
+                                <div class="col-12">
+                                    <table class="table-responsive table-hover text-center align-items-center">
                                         <thead>
                                         <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Nomor Order</th>
-                                            <th scope="col">Nama Barang</th>
-                                            <th scope="col">Tanggal Order</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Aksi</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">No</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Nomor Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Nama Barang</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Tanggal Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Total</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-1 text-sm">Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr v-for="(item, index) in filterOrder" :key="index">
-                                            <th scope="row">{{ index + 1 }}</th>
-                                            <td>{{ item.order_number }}</td>
-                                            <td>{{ item.d_item?.name }}</td>
-                                            <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
-                                            <td>{{ item.quantity}}</td>
-                                            <td>
+                                            <th scope="row" class="p-lg-3 p-md-3 p-1 text-sm">{{ index + 1 }}</th>
+                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.order_number }}</td>
+                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.d_item?.name }}</td>
+                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
+                                            <td class="p-lg-3 p-md-3 p-1 text-sm">{{ item.quantity}}</td>
+                                            <td class="p-lg-3 p-md-3 p-1 text-sm">
                                                 <!-- <argon-button  @click="triggerEditQuantity(item.id_order)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
                                                 </argon-button> -->
-                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger" class="ms-2">
-                                                    <span class="fa fa-trash fa-sm me-2" />
+                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger">
+                                                    <span class="fa fa-trash fa-sm me-lg-2 me-md-2" />
                                                     Batal
                                                 </argon-button>
                                             </td>
@@ -210,7 +212,7 @@
                                 </div>
                             </div>
                             <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
-                            <div class="col-lg-8 col-md-9 mb-5 mt-4">
+                            <div class="col-lg-8 col-md-9 mb-3 mt-0">
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
                         </div>

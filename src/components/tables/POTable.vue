@@ -93,7 +93,7 @@
                 <!-- <argon-button color="danger" @click="editInquiry()">
                     Kembali
                 </argon-button> -->
-                <argon-button color="danger" @click="modal.detail = false">
+                <argon-button color="secondary" @click="modal.detail = false">
                     Kembali
                 </argon-button>
                 <router-link class="nav-link" to="/tracking/tracking-tier-bawah">

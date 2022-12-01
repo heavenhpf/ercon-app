@@ -11,7 +11,7 @@
     </div>
     <div class="p-3 card-body">
       <div class="row">
-        <div class="text-center col-5">
+        <div class="text-center col-lg-5 col-md-5 col-12 mb-lg-0 mb-md-0 mb-7">
           <div class="chart">
             <canvas id="chart-consumption" class="chart-canvas" height="197"></canvas>
           </div>
@@ -20,7 +20,7 @@
             <span class="text-sm d-block text-body">Total Purchasing Order</span>
           </h4>
         </div>
-        <div class="col-7">
+        <div class="col-lg-7 col-md-7 col-12">
           <h5 class="mb-0">Rekap PO Saya</h5>
           <div class="table-responsive">
             <table class="table mt-3 mb-0 align-items-center">

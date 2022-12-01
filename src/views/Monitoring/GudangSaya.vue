@@ -4,9 +4,9 @@
             <div class="pb-0 text-start">
                 <h4 class="font-weight-bolder text-dark">Gudang Saya</h4>
             </div>
-            <div class="p-4 col-lg-12 mb-3">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8 col-md-8 col-12">
+            <div class="p-4 mb-4">
+                <div class="row">
+                    <div class="d-flex justify-content-center">
                         <card2 :title="stats.jenisItem.title" :value="g$countItem.item"
                             :cardBackground="stats.jenisItem.cardBackground" :iconClass="stats.jenisItem.iconClass"
                             :textPosition="stats.jenisItem.textPosition" :iconPosition="stats.jenisItem.iconPosition">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <div class="pb-0 col-auto mb-lg-3 mb-2 col-3">
+                <div class="pb-0 col-auto mb-2">
                     <router-link to="/monitoring/tambah-item" tag="button">
                         <span>
                             <argon-button size="md me-2" color="primary">
@@ -46,10 +46,10 @@ export default {
             stats: {
                 jenisItem: {
                     title: "Total Jenis Item",
-                    cardBackground: "bg-primary",
-                    iconClass: "fa-6x opacity-9 fa fa-archive",
-                    textPosition: "p-4 ps-5 col-9",
-                    iconPosition: "p-1 col-3",
+                    cardBackground: "bg-primary col-lg-6 col-md-8 col-12",
+                    iconClass: "fa-5x opacity-9 fa fa-archive",
+                    textPosition: "p-4 ps-5 col-lg-9 col-md-8 col-7",
+                    iconPosition: "p-2 col-lg-3 float-end col-md-4 col-5",
                 },
             },
             data: [],
