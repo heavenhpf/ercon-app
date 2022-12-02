@@ -8,31 +8,42 @@
                 <div class="d-flex justify-content-center mb-4">
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
-                        <div class="d-flex justify-content-center">
-                            <hr class="col-lg-1 col-md-1 col-3 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="d-flex justify-content-center">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel1" value="" aria-label="..." checked
-                                                style="width: 35px; height: 35px; opacity: 1;" disabled>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="text-dark">Pilih Order</h6>
-                                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..." checked
+                                            style="width: 35px; height: 35px; opacity: 1;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Pilih Order</h6>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="d-flex justify-content-center">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel1" value="" aria-label="..."
-                                                style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="text-dark">Buat PO</h6>
-                                        </div>
+                            </div>
+                            <hr class="col-1 mt-3" style="border-top: 4px dotted;">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..."
+                                            style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Input Order</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="col-1 mt-3" style="border-top: 4px dotted;">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..."
+                                            style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Preview PDF</h6>
                                     </div>
                                 </div>
                             </div>

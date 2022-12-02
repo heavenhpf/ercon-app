@@ -14,6 +14,12 @@ const po = {
       component: () => import('@/views/PO/AjukanPO2.vue'),
       meta: { auth: true },
     },
+    {
+      path: 'ajukan-po-3',
+      name: 'Ajukan PO 3',
+      component: () => import('@/views/PO/AjukanPO3.vue'),
+      meta: { auth: true },
+    },
   ],
 };
 
