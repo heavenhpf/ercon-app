@@ -24,7 +24,7 @@
       </div>
       <hr class="my-1 horizontal dark" />
       <div class="pt-0 card-body pt-sm-3">
-        <div class="mt-2 mb-5 d-flex">
+        <div class="mt-2 mb-3 d-flex">
           <h6 class="mb-0">
             Light Mode / Dark Mode
           </h6>
@@ -34,6 +34,18 @@
               type="checkbox"
               :checked="this.$store.state.darkMode"
               @click="setDarkMode"
+            />
+          </div>
+        </div>
+        <div class="d-flex">
+          <h6 class="mb-0">Navbar Fixed</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input
+              class="mt-1 form-check-input ms-auto"
+              type="checkbox"
+              id="navbarFixed"
+              :checked="this.$store.state.isNavFixed"
+              @click="setNavbarFixed"
             />
           </div>
         </div>
