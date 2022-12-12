@@ -236,6 +236,7 @@
                                 Buat PO
                             </argon-button>
                         </div> -->
+                        <argon-button @click="generatePDF()">Test Generate PDF</argon-button>
                     </div>
                 </div>
             </div>
@@ -244,60 +245,6 @@
 </template>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-<!-- <style>
-#progress {
-  position: relative;
-  margin-bottom: 30px;   
-}
-
-#progress-bar {
-  position: absolute;
-  background: lightseagreen;
-  height: 5px;
-  width: 0%;
-  top: 50%;
-  left: 0;
-}
-
-#progress-num {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
-
-#progress-num::before {
-  content: "";
-  background-color: lightgray;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  z-index: -1;
-}
-
-#progress-num .step {
-  border: 3px solid lightgray;
-  border-radius: 100%;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  background-color: #fff;
-  font-family: sans-serif;
-  font-size: 14px;    
-  position: relative;
-  z-index: 1;
-}
-
-#progress-num .step.active {
-  border-color: lightseagreen;
-  background-color: lightseagreen;
-  color: #fff;
-}
-</style> -->
 
 <script>
 import ArgonInput from '@/components/ArgonInput.vue';
@@ -310,53 +257,12 @@ import d$user from '@/stores/dashboard/user';
 import d$order from '@/stores/dashboard/order';
 import d$company from '@/stores/dashboard/company';
 import d$po from '@/stores/dashboard/po';
+import d$item from '@/stores/dashboard/item';
 import { mapActions, mapState } from 'pinia';
 import VueMultiselect from 'vue-multiselect';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
-// const progressBar = document.getElementById("progress-bar");
-// const progressNext = document.getElementById("progress-next");
-// const progressPrev = document.getElementById("progress-prev");
-// const steps = document.querySelectorAll(".step");
-// let active = 1;
-
-// progressNext.addEventListener("click", () => {
-//   active++;
-//   if (active > steps.length) {
-//     active = steps.length;
-//   }
-//   updateProgress();
-// });
-
-// progressPrev.addEventListener("click", () => {
-//   active--;
-//   if (active < 1) {
-//     active = 1;
-//   }
-//   updateProgress();
-// });
-
-// const updateProgress = () => {
-//   // toggle active class on list items
-//   steps.forEach((step, i) => {
-//     if (i < active) {
-//       step.classList.add("active");
-//     } else {
-//       step.classList.remove("active");
-//     }
-//   });
-//   // set progress bar width  
-//   progressBar.style.width = 
-//     ((active - 1) / (steps.length - 1)) * 100 + "%";
-//   // enable disable prev and next buttons
-//   if (active === 1) {
-//     progressPrev.disabled = true;
-//   } else if (active === steps.length) {
-//     progressNext.disabled = true;
-//   } else {
-//     progressPrev.disabled = false;
-//     progressNext.disabled = false;
-//   }
-// };
 
 export default {
     name: 'ajukan-po-2',
@@ -371,6 +277,7 @@ export default {
             file: null,
         },
         filterOrder: [],
+        filterItem: [],
         quantity:{},
         selectQuantity: {},
         selected: null,
@@ -379,7 +286,7 @@ export default {
         objectURL: null,
         accepts: ["application/pdf"].join(","),
         file : null,
-        
+        orientation: null,
         // dt: {
         //     action: [
         //         {
@@ -417,23 +324,28 @@ export default {
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
         ...mapState(d$order, ['g$getOrder', 'g$listSelectedOrder']),
-        ...mapState(d$company, ['g$listCompanyBelow']),
+        ...mapState(d$company, ['g$listCompanyBelow', 'g$getMyCompany']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
+        ...mapState(d$item, ['g$item', 'g$listDataItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        // await this.a$inquiryList();
-        // console.log(this.g$getOrder);
         await this.a$listCompanyBelow();
+        await this.a$getMyCompany();
         this.filterOrder = this.g$listSelectedOrder;
+        this.filterItem = this.g$listDataItem;
+        
+        // console.log(this.g$item);
+        console.log("fILTER ORDER", this.filterOrder);
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
         ...mapActions(d$order, ['a$getOrder', 'a$inquiryEditOrder', 'a$inquiryAddPO']),
         ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO']),
-        ...mapActions(d$company, ['a$listCompanyBelow']),
+        ...mapActions(d$company, ['a$listCompanyBelow','a$getMyCompany']),
+        ...mapActions(d$item, ['a$inquirygetItem']),
 
         nameWithLang ({ name }) {
             return `${name}`
@@ -496,7 +408,87 @@ export default {
                 const toast = new bootstrap.Toast(toastLiveExample)
                 toast.show()
             }
+            
         },
+
+        async generatePDF(){
+            const doc = new jsPDF('landscape', 'pt', 'a4');
+            doc.setFontSize(14).setFont('undefined','bold').text(40, 40, 'Purchase Order  '+ this.input.po_number)
+            doc.setFontSize(12).setFont('undefined','regular').text(40, 70, this.g$getMyCompany.name)
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 90, 'Attn:')
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 105, this.g$getMyCompany.name)
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 120, this.g$getMyCompany.address)
+
+            const companyTo = {
+                name: '',
+                address: '',
+                phone: '',
+            }
+
+            for(let i = 0; i < this.g$listCompanyBelow.length; i++){
+                if(this.g$listCompanyBelow[i].id_company == this.filterOrder[0].order_to){
+                    companyTo.name = this.g$listCompanyBelow[i].name;
+                    companyTo.address = this.g$listCompanyBelow[i].address;
+                    companyTo.phone = this.g$listCompanyBelow[i].phone;
+                }
+            }
+
+            doc.setFontSize(14).setFont('undefined','bold').text(650, 40, companyTo.name);
+            doc.setFontSize(12).setFont('undefined','normal').text(650, 60, companyTo.address);
+            doc.setFontSize(12).setFont('undefined','normal').text(650, 90, 'Telp   : '+ companyTo.phone);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            doc.setFontSize(12).setFont('undefined','normal').text(550, 180, 'Tanggal Dikeluarkan :  ' + new Date().toLocaleDateString("id-ID", options));
+
+            const data = []
+            for(let i = 0; i < this.filterOrder.length; i++){
+                data.push([
+                    i+1,
+                    this.filterOrder[i].order_number,
+                    this.filterItem[i].serial_number,
+                    this.filterItem[i].name,
+                    this.input.deadline,
+                    this.filterOrder[i].quantity,
+                    this.filterItem[i].unit,
+                ])
+            }       
+
+            doc.autoTable({
+                head: [['No', 'Nomor Order', 'Nomor Item' , 'Nama Barang', 'Tanggal Deadline', 'Qty Order', 'Satuan']],
+                body: data,
+                startY: 200,
+                theme: 'grid',
+                styles: {
+                    fontSize: 12,
+                    cellPadding: 5,
+                    halign: 'center',
+                    valign: 'middle',
+                    hcolor: 'black',
+                    lineWidth: 1,
+                    lineColor: [0, 0, 0],
+                    textColor: 'black',
+                },
+                headStyles: {
+                    fillColor: [255, 255, 255],
+                    textColor: 'black',
+                    fontStyle: 'bold',
+                    fontSize: 12,
+                },
+                columnStyles: {
+                    0: {cellWidth: 30},
+                    1: {cellWidth: 100},
+                    2: {cellWidth: 200},
+                    3: {cellWidth: 200},
+                    4: {cellWidth: 100},
+                    5: {cellWidth: 50},
+                },
+            });
+
+            doc.rect(15, 15, doc.internal.pageSize.width - 30, doc.internal.pageSize.height - 30, 'S');
+
+            window.open(doc.output('bloburl'), '_blank');
+           
+        },
+
 
         // async init() {
         //     try {

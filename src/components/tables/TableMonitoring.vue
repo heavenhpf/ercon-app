@@ -1,8 +1,18 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-10 mt-4 ms-4">
+            <div class=" col-9 row">
+                <!-- <div class="col-4 mt-4 ms-4">
+                    <label>Filter Tier</label>
+                    <select v-model.number="filterTier.selectedTier" @change="triggerOptions()"
+                        class="form-select form-select-md mb-3" aria-label=".form-select-lg example"
+                        placeholder="-- Tier --">
+                        <option v-for='tier in 3' v-bind:value="Number(tier)">
+                        <option>{{ tier }}</option>
+                        </option>
+                    </select>
+                </div> -->
+                <div class="col-4 mt-4 ms-4">
                     <label>Filter Kategori Item</label>
                     <select @change="triggerOptions()" v-model.number="filterCategory.selectedCategory"
                         class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
@@ -25,25 +35,13 @@
                         <p>{{ input.desc }}</p>
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-8 d-lg-none d-md-none row align-items-center" style="padding: 5%;">
-                        <span class="badge text-dark" style="background-color: yellow;">Buffer</span>
-                        <div class="d-flex justify-content-center mt-2">
-                            <img src="@/assets/img/illustrations/box.png" alt="warning"
-                                style="width: 50%; height: 50%;">
-                        </div>
-                        <div class="mt-2 mb-2">
-                            <h5 class="row justify-content-center">{{ input.quantity }} {{ g$item.unit }}</h5>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 col-12 float-lg-start">
+                    <div class="col-9 float-lg-start">
                         <data-table style="text-align:center ;" index="false" :data="g$label" :columns="dt1.column"
                             @detail="triggerDetail" @delete="triggerDelete" />
                     </div>
-                    <div class="col-3 d-lg-block d-md-block d-none row align-items-center" style="padding: 5%;">
-                        <span class="badge text-dark" style="background-color: yellow;">Buffer</span>
+                    <div class="col-3 row align-items-center" style="padding: 5%;">
+                        <span class=" badge text-dark" style="background-color: yellow;">Buffer</span>
                         <div class="d-flex justify-content-center mt-2">
                             <img src="@/assets/img/illustrations/box.png" alt="warning"
                                 style="width: 80%; height: 80%;">
@@ -55,11 +53,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="modal.detail = false">
-                    Close
-                </argon-button>
                 <argon-button color="primary" @click="triggerOrder()">
                     Order
+                </argon-button>
+                <argon-button color="secondary" @click="modal.detail = false">
+                    Close
                 </argon-button>
             </template>
         </modal-comp>
@@ -73,22 +71,11 @@
                     </div>
                 </div>
                 <div id="liveToast"
-                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
+                    class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
                     role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
-                            {{ input.name }} Berhasil di Order!
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
-                    </div>
-                </div>
-                <div id="liveToastError"
-                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
-                    role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Nomor Order sudah Pernah Digunakan!
+                            {{ input.name }} Berhasil di Order
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                             aria-label="Close"></button>
@@ -97,9 +84,9 @@
             </template>
             <template v-if="modal.order" #body>
                 <div class="row">
-                    <div class="col-lg-10 col-md-10 col-12">
+                    <div class="col-10">
                         <div class="row align-items-center mt-4 mb-4">
-                            <div class="col-4 pe-0">
+                            <div class="col-4">
                                 <h6>Nama Perusahaan</h6>
                             </div>
                             <div class="col-1">
@@ -145,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 d-lg-block d-md-block d-none row align-items-center mr-4">
+                    <div class="col-2 row align-items-center mr-4">
                         <div class="mt-2 mb-2">
                             <img src="../../assets/img/illustrations/order.png" alt="warning"
                                 style="width: 110px; height: 110px;">
@@ -154,11 +141,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="secondary" @click="toggleOrderBack()">
-                    Kembali
-                </argon-button>
                 <argon-button id="liveToastBtn" color="primary" @click="addInquiry()">
                     Order
+                </argon-button>
+                <argon-button color="secondary" @click="toggleOrderBack()">
+                    Kembali
                 </argon-button>
             </template>
         </modal-comp>
@@ -175,7 +162,6 @@ import d$auth from '@/stores/auth.d';
 import auth from '../../router/routes/auth';
 
 export default {
-    
     // name: 'Monitoring',
     data: () => ({
         pageTitle: 'table-monitoring',
@@ -319,18 +305,15 @@ export default {
                 // const id = this.g$item.id_item;
                 await this.a$inquiryAddOrder(id_item, data);
                 this.modal.add = false;
-                const toastLiveExample = document.getElementById('liveToast');
-                const toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
+                const toastLiveExample = document.getElementById('liveToast')
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
                 setTimeout(() => {
-                    this.$router.push({ name: 'Monitoring Item' });
+                    this.$router.push({ name: 'Default' });
                 }, 1000);
             }
             catch (e) {
                 console.error(e);
-                const toastLiveExample = document.getElementById('liveToastError');
-                const toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
             }
         },
         async toggleOrderBack() {

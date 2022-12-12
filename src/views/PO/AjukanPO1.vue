@@ -1,7 +1,9 @@
 <template>
+    <link rel="stylesheet" href="/home/anmistrz/STECHOQ/Ercon-App/FE/src/assets/css/stepProgress.css">
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-12">
+            <fieldset>
                 <div class="pb-0 text-start mb-4">
                     <h4 class="font-weight-bolder text-dark">Pilih Order</h4>
                 </div>
@@ -82,6 +84,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="mb-2">
                         <p class="text-sm mb-0">(Centang order yang akan Anda masukkan)</p>
@@ -206,6 +209,7 @@
                         </template>
                     </modal-comp>  
                 </div>
+            </fieldset>
             </div>
         </div>
     </div>
@@ -216,9 +220,12 @@ import { mapActions, mapState } from "pinia";
 import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
 import d$company from '@/stores/dashboard/company';
 import d$order from '@/stores/dashboard/order';
+import d$item from '@/stores/dashboard/item';
 import d$category from '@/stores/dashboard/category';
 import d$auth from '@/stores/auth.d';
 import auth from '@/router/routes/auth';
+
+
 
 export default {
     name: "ajukan-po-1",
@@ -227,6 +234,9 @@ export default {
         input: {
             listSelectedOrder: [],
         },
+        item: {
+            listDataItem: [],
+        },
         modal: {
             editQuantity: false,
         },
@@ -234,6 +244,7 @@ export default {
     computed: {
         ...mapState(d$company, ['g$listCompanyBelow']),
         ...mapState(d$order, ['g$listOrder', 'g$listSelectedOrder']),
+        ...mapState(d$item, ['g$item', 'g$listDataItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         },
@@ -253,10 +264,12 @@ export default {
     },
     async mounted() {
         await this.a$listCompanyBelow();
+
     },
     methods: {
         ...mapActions(d$company, ['a$listCompanyBelow']),
         ...mapActions(d$order, ['a$listOrder', 'a$addSelectedOrder', 'a$inquiryEditOrder', 'a$inquiryDelOrder']),
+        ...mapActions(d$item, ['a$inquirygetItem', 'a$addDataItem' ]),
 
         async init() {
             try {
@@ -327,6 +340,14 @@ export default {
                     }
                 }
 
+                for (var i = 0; i < this.input.listSelectedOrder.length; i++) {
+                    await this.a$inquirygetItem({ id: this.input.listSelectedOrder[i].id_item});
+                    this.item.listDataItem.push(this.g$item);
+                }
+
+                console.log("list Item:",this.item.listDataItem);
+                this.a$addDataItem(this.item.listDataItem);
+                console.log("List item store :", this.g$listDataItem)
                 this.a$addSelectedOrder(this.input.listSelectedOrder);
                 this.$router.push({ name: 'Ajukan PO 2', params: { order_to: this.input.company } });
             } catch (e) {

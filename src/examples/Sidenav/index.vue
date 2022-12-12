@@ -9,7 +9,7 @@
     ? 'bg-transparent shadow-none'
     : ' '
   } ${this.$store.state.sidebarType}`" id="sidenav-main">
-    <div class="sidenav-header mb-4">
+    <div class="sidenav-header mb-6 ">
       <i class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute end-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
       <div class="d-flex align-items-center">

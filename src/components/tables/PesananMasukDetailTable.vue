@@ -46,11 +46,11 @@
                 </div>
                 <div class="mt-3">
                     <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
-                    Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
-                    weekday: 'long', year:
-                    'numeric', month:
-                    'long', day: 'numeric'
-                    })
+                            Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
+                                weekday: 'long', year:
+                                    'numeric', month:
+                                    'long', day: 'numeric'
+                            })
                     }}</p>
                 </div>
             </template>

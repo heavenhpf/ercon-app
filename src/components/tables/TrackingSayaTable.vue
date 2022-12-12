@@ -1,7 +1,7 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class=" col-9 row">
+            <div class="row">
                 <div class="col-lg-4 col-md-6 col-10 mt-4 ms-4">
                     <label>Filter Status</label>
                     <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"

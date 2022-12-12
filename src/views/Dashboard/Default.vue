@@ -7,6 +7,7 @@
             <h5 class="text-dark">{{ status }}</h5>
             <h4 class="font-weight-bolder text-dark">{{ g$name.name }}</h4>
           </div>
+
           <!-- khusus tier 3 -->
           <div v-if="this.g$user.role === 3" class="col-lg-6 col-md-6 col-12">
             <card :title="stats.po.title" :value="g$countPO" :iconClass="stats.po.iconClass"
@@ -144,6 +145,18 @@ export default {
     TrackingPOTerdekatTable,
     TrackingPOSelesaiTerbaruTable,
   },
+
+  // created() {
+  //   baseApi.get(`/users/username`)
+  //     .then(response => {
+  //       // JSON responses are automatically parsed.
+  //       this.posts = response.data
+  //       console.log(this.posts)
+  //     })
+  //     .catch(e => {
+  //       this.errors.push(e)
+  //     })
+  // },
   async created() {
     try {
       const { data } = await baseApi.get(`/companies/name`);

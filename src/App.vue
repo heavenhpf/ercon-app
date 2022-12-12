@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 <template>
   <div
     v-show="this.$store.state.layout === 'landing'"
-    class="landing-bg h-100 bg-gradient-primary position-fixed w-100"
+    class="landing-bg h-100 bg-gradient-primary position-fixed"
   ></div>
   <sidenav
     :custom_class="this.$store.state.mcolor"
