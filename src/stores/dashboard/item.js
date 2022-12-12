@@ -8,6 +8,7 @@ const d$item = defineStore({
         myItem: [],
         item: {},
         label: [],
+        listDataItem: [],
         status: null,
     }),
     actions: {
@@ -48,6 +49,15 @@ const d$item = defineStore({
                 throw error ?? message;
             }
         },
+
+        async a$addDataItem(item){
+            try {
+                this.listDataItem = item
+            } catch ({ error, message }) {
+                throw error ?? message;
+            }
+        },
+
         async a$item(body) {
             try {
                 await s$item.addItem(body);
@@ -119,6 +129,7 @@ const d$item = defineStore({
         g$label: ({ label }) => label,
         g$item: ({ item }) => item,
         g$myItem: ({ myItem }) => myItem,
+        g$listDataItem: ({ listDataItem }) => listDataItem,
         // g$detail: ({ detail }) => detail,
     },
 });

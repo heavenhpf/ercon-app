@@ -2,48 +2,66 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-12">
-                 <div class="pb-0 text-start mb-4">
+                <div class="pb-0 text-start mb-4">
                     <h4 class="font-weight-bolder text-dark">Buat PO</h4>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
+                <div class="d-flex justify-content-center mb-4">
                     <div class="row">
                         <h5 class="font-weight-bolder text-dark d-flex justify-content-center mb-4">Step Progress</h5>
-                        <div class="d-flex justify-content-center">
-                            <hr class="col-1 mt-3" style="z-index:-99; position:absolute; border-top: 4px dotted;">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="d-flex justify-content-center">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel1" value="" aria-label="..."
-                                                style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="text-dark">Pilih Order</h6>
-                                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..." 
+                                            style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Pilih Order</h6>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="d-flex justify-content-center">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel"
-                                                id="radioNoLabel1" value="" aria-label="..." checked
-                                                style="width: 35px; height: 35px; opacity: 1;" disabled>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="text-dark">Buat PO</h6>
-                                        </div>
+                            </div>
+                            <hr class="col-1 mt-3" style="border-top: 4px dotted;">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..." checked
+                                            style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Input Order</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="col-1 mt-3" style="border-top: 4px dotted;">
+                            <div class="col-2 p-0">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel1" value="" aria-label="..."
+                                            style="width: 35px; height: 35px; opacity: 1; border-style: solid; border-width: 5px; border-color: #3B82F6;" disabled>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <h6 class="text-dark text-center text-sm">Preview PDF</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
-                    <argon-button color="warning">
-                        Kembali
-                    </argon-button>
-                </router-link>
+                <div class="p-2 d-flex justify-content-between">
+                    <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-1">
+                        <argon-button color="warning">
+                            Kembali
+                        </argon-button>
+                    </router-link>
+                    <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-3">
+                        <argon-button color="primary">
+                            Selanjutnya
+                        </argon-button>
+                    </router-link>
+                </div>
                 <!-- <div id="progress">
                     <div id="progress-bar"></div>
                     <ul id="progress-num">
@@ -105,33 +123,33 @@
                                 <div class="col-2">
                                     <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
                                 </div> -->
-                                <div class="col-11">
+                                <div class="col-12" style="overflow-x:scroll;">
                                     <table class="table table-hover text-center align-items-center">
                                         <thead>
                                         <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Nomor Order</th>
-                                            <th scope="col">Nama Barang</th>
-                                            <th scope="col">Tanggal Order</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Aksi</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">No</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Nomor Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Nama Barang</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Tanggal Order</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Total</th>
+                                            <th scope="col" class="p-lg-3 p-md-3 p-2 text-sm">Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="(item, index) in filterOrder.order" :key="index">
-                                            <th scope="row">{{ index + 1 }}</th>
-                                            <td>{{ item.order_number }}</td>
-                                            <td>{{item.d_item?.name}}</td>
-                                            <td>{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
-                                            <td>{{ item.quantity}}</td>
-                                            <td>
-                                                <argon-button  @click="triggerEditQuantity(item.order_number)" size="md" color="primary">
+                                        <tr v-for="(item, index) in filterOrder" :key="index">
+                                            <th scope="row" class="p-lg-3 p-md-3 p-1 text-sm">{{ index + 1 }}</th>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.order_number }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.d_item?.name }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.quantity}}</td>
+                                            <td class="p-lg-3 p-md-3 p-2 text-sm">
+                                                <!-- <argon-button  @click="triggerEditQuantity(item.id_order)" size="md" color="primary">
                                                     <span class="fa fa-pen fa-sm me-2"/>
                                                     Edit
-                                                </argon-button>
-                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger" class="ms-2">
-                                                    <span class="fa fa-trash fa-sm me-2" />
-                                                    Hapus
+                                                </argon-button> -->
+                                                <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger">
+                                                    <span class="fa fa-trash fa-sm me-lg-2 me-md-2" />
+                                                    Batal
                                                 </argon-button>
                                             </td>
                                         </tr>
@@ -155,13 +173,13 @@
                                     </flat-picker>
                                 </base-input>
                             </div>
-                            <div class="col-12 mb-2">
+                            <!-- <div class="col-12 mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Dokumen
                                     PO</label>
                                 <argon-input type="file" v-model="input.file" id="file" @change="changeFile($event)" :accept="accepts" />
-                            </div>
-                            <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                            </div> -->
+                            <!-- <div id="liveToast"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -171,9 +189,8 @@
                                         aria-label="Close"></button>
                                 </div>
                             </div>
-                            
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -188,7 +205,7 @@
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
                             </div>
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -199,7 +216,7 @@
                                 </div>
                             </div>
                             <div id="liveToastError"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-danger"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -210,15 +227,16 @@
                                 </div>
                             </div>
                             <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
-                            <div class="col-lg-8 col-md-9 mb-5 mt-4">
+                            <div class="col-lg-8 col-md-9 mb-3 mt-0">
                                 <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-lg-8 col-md-9">
+                        <!-- <div class="col-lg-8 col-md-9">
                             <argon-button @click="addPO()" size="md" color="primary">
                                 Buat PO
                             </argon-button>
-                        </div>
+                        </div> -->
+                        <argon-button @click="generatePDF()">Test Generate PDF</argon-button>
                     </div>
                 </div>
             </div>
@@ -227,60 +245,6 @@
 </template>
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-<!-- <style>
-#progress {
-  position: relative;
-  margin-bottom: 30px;   
-}
-
-#progress-bar {
-  position: absolute;
-  background: lightseagreen;
-  height: 5px;
-  width: 0%;
-  top: 50%;
-  left: 0;
-}
-
-#progress-num {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-}
-
-#progress-num::before {
-  content: "";
-  background-color: lightgray;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  z-index: -1;
-}
-
-#progress-num .step {
-  border: 3px solid lightgray;
-  border-radius: 100%;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  background-color: #fff;
-  font-family: sans-serif;
-  font-size: 14px;    
-  position: relative;
-  z-index: 1;
-}
-
-#progress-num .step.active {
-  border-color: lightseagreen;
-  background-color: lightseagreen;
-  color: #fff;
-}
-</style> -->
 
 <script>
 import ArgonInput from '@/components/ArgonInput.vue';
@@ -293,53 +257,12 @@ import d$user from '@/stores/dashboard/user';
 import d$order from '@/stores/dashboard/order';
 import d$company from '@/stores/dashboard/company';
 import d$po from '@/stores/dashboard/po';
+import d$item from '@/stores/dashboard/item';
 import { mapActions, mapState } from 'pinia';
 import VueMultiselect from 'vue-multiselect';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
-// const progressBar = document.getElementById("progress-bar");
-// const progressNext = document.getElementById("progress-next");
-// const progressPrev = document.getElementById("progress-prev");
-// const steps = document.querySelectorAll(".step");
-// let active = 1;
-
-// progressNext.addEventListener("click", () => {
-//   active++;
-//   if (active > steps.length) {
-//     active = steps.length;
-//   }
-//   updateProgress();
-// });
-
-// progressPrev.addEventListener("click", () => {
-//   active--;
-//   if (active < 1) {
-//     active = 1;
-//   }
-//   updateProgress();
-// });
-
-// const updateProgress = () => {
-//   // toggle active class on list items
-//   steps.forEach((step, i) => {
-//     if (i < active) {
-//       step.classList.add("active");
-//     } else {
-//       step.classList.remove("active");
-//     }
-//   });
-//   // set progress bar width  
-//   progressBar.style.width = 
-//     ((active - 1) / (steps.length - 1)) * 100 + "%";
-//   // enable disable prev and next buttons
-//   if (active === 1) {
-//     progressPrev.disabled = true;
-//   } else if (active === steps.length) {
-//     progressNext.disabled = true;
-//   } else {
-//     progressPrev.disabled = false;
-//     progressNext.disabled = false;
-//   }
-// };
 
 export default {
     name: 'ajukan-po-2',
@@ -353,10 +276,8 @@ export default {
             deadline: '',
             file: null,
         },
-        filterOrder: {
-            selectedOrder: '',
-            order: [],
-        },
+        filterOrder: [],
+        filterItem: [],
         quantity:{},
         selectQuantity: {},
         selected: null,
@@ -365,7 +286,7 @@ export default {
         objectURL: null,
         accepts: ["application/pdf"].join(","),
         file : null,
-        
+        orientation: null,
         // dt: {
         //     action: [
         //         {
@@ -402,24 +323,29 @@ export default {
 
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
-        ...mapState(d$order, ['g$getOrder']),
-        ...mapState(d$company, ['g$listCompanyBelow']),
+        ...mapState(d$order, ['g$getOrder', 'g$listSelectedOrder']),
+        ...mapState(d$company, ['g$listCompanyBelow', 'g$getMyCompany']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
+        ...mapState(d$item, ['g$item', 'g$listDataItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        // await this.a$inquiryList();
-        // console.log(this.g$getOrder);
         await this.a$listCompanyBelow();
+        await this.a$getMyCompany();
+        this.filterOrder = this.g$listSelectedOrder;
+        this.filterItem = this.g$listDataItem;
         
+        // console.log(this.g$item);
+        console.log("fILTER ORDER", this.filterOrder);
     },
     methods: {
         // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
         ...mapActions(d$order, ['a$getOrder', 'a$inquiryEditOrder', 'a$inquiryAddPO']),
         ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO']),
-        ...mapActions(d$company, ['a$listCompanyBelow']),
+        ...mapActions(d$company, ['a$listCompanyBelow','a$getMyCompany']),
+        ...mapActions(d$item, ['a$inquirygetItem']),
 
         nameWithLang ({ name }) {
             return `${name}`
@@ -482,7 +408,87 @@ export default {
                 const toast = new bootstrap.Toast(toastLiveExample)
                 toast.show()
             }
+            
         },
+
+        async generatePDF(){
+            const doc = new jsPDF('landscape', 'pt', 'a4');
+            doc.setFontSize(14).setFont('undefined','bold').text(40, 40, 'Purchase Order  '+ this.input.po_number)
+            doc.setFontSize(12).setFont('undefined','regular').text(40, 70, this.g$getMyCompany.name)
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 90, 'Attn:')
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 105, this.g$getMyCompany.name)
+            doc.setFontSize(12).setFont('undefined','normal').text(40, 120, this.g$getMyCompany.address)
+
+            const companyTo = {
+                name: '',
+                address: '',
+                phone: '',
+            }
+
+            for(let i = 0; i < this.g$listCompanyBelow.length; i++){
+                if(this.g$listCompanyBelow[i].id_company == this.filterOrder[0].order_to){
+                    companyTo.name = this.g$listCompanyBelow[i].name;
+                    companyTo.address = this.g$listCompanyBelow[i].address;
+                    companyTo.phone = this.g$listCompanyBelow[i].phone;
+                }
+            }
+
+            doc.setFontSize(14).setFont('undefined','bold').text(650, 40, companyTo.name);
+            doc.setFontSize(12).setFont('undefined','normal').text(650, 60, companyTo.address);
+            doc.setFontSize(12).setFont('undefined','normal').text(650, 90, 'Telp   : '+ companyTo.phone);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            doc.setFontSize(12).setFont('undefined','normal').text(550, 180, 'Tanggal Dikeluarkan :  ' + new Date().toLocaleDateString("id-ID", options));
+
+            const data = []
+            for(let i = 0; i < this.filterOrder.length; i++){
+                data.push([
+                    i+1,
+                    this.filterOrder[i].order_number,
+                    this.filterItem[i].serial_number,
+                    this.filterItem[i].name,
+                    this.input.deadline,
+                    this.filterOrder[i].quantity,
+                    this.filterItem[i].unit,
+                ])
+            }       
+
+            doc.autoTable({
+                head: [['No', 'Nomor Order', 'Nomor Item' , 'Nama Barang', 'Tanggal Deadline', 'Qty Order', 'Satuan']],
+                body: data,
+                startY: 200,
+                theme: 'grid',
+                styles: {
+                    fontSize: 12,
+                    cellPadding: 5,
+                    halign: 'center',
+                    valign: 'middle',
+                    hcolor: 'black',
+                    lineWidth: 1,
+                    lineColor: [0, 0, 0],
+                    textColor: 'black',
+                },
+                headStyles: {
+                    fillColor: [255, 255, 255],
+                    textColor: 'black',
+                    fontStyle: 'bold',
+                    fontSize: 12,
+                },
+                columnStyles: {
+                    0: {cellWidth: 30},
+                    1: {cellWidth: 100},
+                    2: {cellWidth: 200},
+                    3: {cellWidth: 200},
+                    4: {cellWidth: 100},
+                    5: {cellWidth: 50},
+                },
+            });
+
+            doc.rect(15, 15, doc.internal.pageSize.width - 30, doc.internal.pageSize.height - 30, 'S');
+
+            window.open(doc.output('bloburl'), '_blank');
+           
+        },
+
 
         // async init() {
         //     try {
@@ -507,8 +513,7 @@ export default {
         //         await this.init();
         //     }
         // },
-        async triggerEditQuantity(order_number){
-            await this.a$getOrder({order_number});
+        async triggerEditQuantity(id_order){
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
         },
@@ -519,9 +524,7 @@ export default {
             //     }
             // });
             // console.log(this.filterOrder.order);
-            this.filterOrder.order = this.filterOrder.order.filter(item => item.id_order != id_order);
-
-            console.log(this.filterOrder.order);
+            this.filterOrder = this.filterOrder.filter(item => item.id_order != id_order);
         },
         async searchOrder(){
             try {
@@ -557,9 +560,9 @@ export default {
             try {
                 const data = {
                     po_number: this.input.po_number,
-                    order_to: this.selected.id_company,
+                    order_to: Number(this.$route.params.order_to),
                     id_doc: this.g$DocPO.id_doc,
-                    order: this.filterOrder.order,
+                    order: this.filterOrder,
                     deadline: this.deadline,
                 };
                 console.log(data);
@@ -567,7 +570,10 @@ export default {
                 console.log(`Add ${this.pageTitle} Succeed!`);
                 const toastLiveExample = document.getElementById('liveToast')
                 const toast = new bootstrap.Toast(toastLiveExample)
-                toast.show()       
+                toast.show()
+                setTimeout(() => {
+                    this.$router.push({ name: 'Tracking Saya' });
+                }, 1000);
             } catch (e) {
                 console.error(e);
             } 

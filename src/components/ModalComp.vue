@@ -21,15 +21,15 @@
       ]"
     >
       <div
-        class="modal-content"
+        class="card modal-content"
         :class="[
           gradient ? `bg-gradient-${gradient}` : '',
           modalContentClasses,
         ]"
       >
-        <div v-if="$slots.header" class="modal-header align-items-center" :class="[headerClasses]">
+        <div v-if="$slots.header" class="card-header modal-header align-items-center" :class="[headerClasses]">
           <slot name="header"></slot>
-          <slot name="close-button">
+          <!-- <slot name="close-button">
             <button
               v-if="showClose"
               type="button"
@@ -38,9 +38,9 @@
               aria-label="Close"
               @click="closeHandler()"
             >
-              <span :aria-hidden="!show">×</span>
+              <span :aria-hidden="!show">x</span>
             </button>
-          </slot>
+          </slot> -->
         </div>
 
         <div class="modal-body" :class="bodyClasses">

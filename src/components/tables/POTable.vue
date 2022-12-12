@@ -17,24 +17,24 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="primary" @click="addInquiry()">
-                    Save Changes
-                </argon-button>
                 <argon-button color="secondary" @click="modal.add = false">
                     Close
+                </argon-button>
+                <argon-button color="primary" @click="addInquiry()">
+                    Save Changes
                 </argon-button>
             </template>
         </modal-comp>
         <modal-comp size="lg" v-model:show="modal.detail">
             <template #header>
-                <div class="col-6 modal-title mt-3">
+                <div class="col-6 mt-3">
                     <h5>Serial Number</h5>
                     <div>
                         <h6 class="mt-2">{{ g$get_po_detail.d_order?.d_item.serial_number }}</h6>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <p class="font-weight-bolder text-danger float-end">Deadline: {{ new
+                    <p class="font-weight-bolder text-danger float-end text-md-lg d-none d-sm-block d-md-block d-lg-block d-xl-block">Deadline: {{ new
                             Date(g$get_po_detail.d_po?.deadline).toLocaleDateString("id-ID", {
                                 weekday: 'long', year:
                                     'numeric', month:
@@ -93,14 +93,14 @@
                 <!-- <argon-button color="danger" @click="editInquiry()">
                     Kembali
                 </argon-button> -->
+                <argon-button color="secondary" @click="modal.detail = false">
+                    Kembali
+                </argon-button>
                 <router-link class="nav-link" to="/tracking/tracking-tier-bawah">
                     <argon-button color="primary" @click="modal.detail = false">
                         Cari PO
                     </argon-button>
                 </router-link>
-                <argon-button color="danger" @click="modal.detail = false">
-                    Kembali
-                </argon-button>
             </template>
         </modal-comp>
     </div>

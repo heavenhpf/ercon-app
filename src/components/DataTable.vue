@@ -5,7 +5,7 @@
       <div class="table-responsive-loading-text">Loading Data</div>
     </div>
     <div v-else class="table-responsive-inner">
-      <div v-if="header" class="d-flex justify-content-between mx-2 px-3">
+      <div v-if="header" class="d-flex justify-content-between px-2 px-md-3">
         <div v-if="limitable" class="">
           <div :class="['form-group', 'my-3', { 'form-dark': $store.darkMode }]">
             <label class="m-0 text-sm">
@@ -15,7 +15,7 @@
                 <option value="50">50</option>
                 <option value="100">100</option>
               </select>
-              <span class="ms-2">Entries per page</span>
+              <span class="ms-2">Data</span>
             </label>
           </div>
         </div>

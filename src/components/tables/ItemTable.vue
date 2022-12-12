@@ -2,7 +2,7 @@
     <div class="table-responsive p-0">
         <div class="card">
             <data-table style="text-align:center ;" index="false" :data="g$label" :columns="dt.column"
-                :actions="dt.action" @edit="triggerEdit" />
+                :actions="dt.action" />
         </div>
     </div>
 </template>
@@ -50,15 +50,8 @@ export default {
                 {
                     th: 'Label',
                     render: ({ }) => {
-                        return `<span class="badge bg-primary">Purchasing Order</span>`
+                        return `<span class="badge bg-info">Purchasing Order</span>`
                     }
-                },
-            ],
-            action: [
-                {
-                    text: 'Edit',
-                    color: 'primary',
-                    event: 'edit',
                 },
             ],
         },

@@ -1,8 +1,8 @@
 <template>
     <div class="table-responsive p-0">
         <div class="card">
-            <div class=" col-9 row">
-                <div class="col-4 mt-4 ms-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-10 mt-4 ms-4">
                     <label>Filter Status</label>
                     <select @change="triggerOptions()" v-model="input.status" class="form-select form-select-md mb-3"
                         aria-label=".form-select-lg example">
@@ -29,11 +29,11 @@
                 </div>
             </template>
             <template #footer>
-                <argon-button color="primary" @click="addInquiry()">
-                    Save Changes
-                </argon-button>
                 <argon-button color="secondary" @click="modal.add = false">
                     Close
+                </argon-button>
+                <argon-button color="primary" @click="addInquiry()">
+                    Save Changes
                 </argon-button>
             </template>
         </modal-comp>

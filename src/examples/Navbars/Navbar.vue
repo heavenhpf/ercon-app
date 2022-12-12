@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" v-bind="$attrs"
     id="navbarBlur" data-scroll="true">
-    <button type="button" class="btn btn-default" @click="toogleSideNav()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-default mt-lg-1" @click="toogleSideNav()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
     <div class="d-flex d-lg-none">
       <ul class="d-flex list-unstyled">
               <li class="nav-item px-3 ">

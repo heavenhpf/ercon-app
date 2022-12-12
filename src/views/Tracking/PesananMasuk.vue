@@ -6,19 +6,19 @@
             </div>
             <div class="p-4 col-lg-12">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12 mb-3">
                         <card2 :title="stats.belum.title" :value="g$countInbox.progress"
                             :cardBackground="stats.belum.cardBackground" :textPosition="stats.belum.textPosition"
                             :iconPosition="stats.belum.iconPosition">
                         </card2>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12 mb-3">
                         <card2 :title="stats.lewat.title" :value="g$countInbox.deadline"
                             :cardBackground="stats.lewat.cardBackground" :textPosition="stats.lewat.textPosition"
                             :iconPosition="stats.lewat.iconPosition">
                         </card2>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12 mb-3">
                         <card2 :title="stats.selesai.title" :value="g$countInbox.done"
                             :cardBackground="stats.selesai.cardBackground" :textPosition="stats.selesai.textPosition"
                             :iconPosition="stats.selesai.iconPosition">

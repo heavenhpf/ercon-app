@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: 'LogIn' }" class="px-0 nav-link font-weight-bold text-dark" @click="delCookies()">
-        <i class="fa fa-user me-sm-3"></i>
+        <i class="fa fa-user me-1"></i>
         <span class="d-lg-inline">Log Out</span>
     </router-link>
 </template>

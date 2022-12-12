@@ -49,7 +49,7 @@
                         <div class="col-lg-8 col-md-9">
                             <!-- <router-link to="/monitoring/gudang-saya"> -->
                             <div id="liveToast"
-                                class="toast position-fixed top-0 start-50 translate-middle-x mt-3  align-items-center text-white bg-success"
+                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
@@ -65,7 +65,7 @@
                             </argon-button>
                             <router-link to="/monitoring/gudang-saya" tag="button">
                                 <span>
-                                    <argon-button size="md" color="warning">
+                                    <argon-button size="md" color="secondary">
                                         Kembali
                                     </argon-button>
                                 </span>

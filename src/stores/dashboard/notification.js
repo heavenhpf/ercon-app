@@ -17,6 +17,16 @@ const d$notification = defineStore({
                 this.status = false;
                 throw error ?? message;
             }
+        },
+
+        async a$readNotification(id_notification) {
+            try {
+                const { status } = await s$notification.readNotification(id_notification);
+                this.status = status;
+            } catch ({ error, message }) {
+                this.status = false;
+                throw error ?? message;
+            }
         }
     },
     getters: {
