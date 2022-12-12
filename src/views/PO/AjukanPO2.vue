@@ -56,73 +56,19 @@
                             Kembali
                         </argon-button>
                     </router-link>
-                    <router-link class="nav-link p-0 mb-3" to="/po/ajukan-po-3">
-                        <argon-button color="primary">
+
+                        <argon-button color="primary" @click="nextStep()">
                             Selanjutnya
                         </argon-button>
-                    </router-link>
                 </div>
-                <!-- <div id="progress">
-                    <div id="progress-bar"></div>
-                    <ul id="progress-num">
-                        <li class="step active">1</li>
-                        <li class="step">2</li>
-                    </ul>
-                </div>    
-
-                <button id="progress-prev" class="btn" disabled>Prev</button>
-                <button id="progress-next" class="btn">Next</button> -->
-
-                <!-- <modal-comp size="md" v-model:show="modal.editQuantity">
-                    <template #header>
-                        <h4 class="modal-title">Edit Jumlah Barang</h4>
-                    </template>
-                    <template v-if="modal.editQuantity" #body>
-                        <label for="example-text-input" class="form-control-label text-sm">Jumlah Barang</label>
-                        <argon-input v-model.number="quantity.quantity"  type="text" />
-                        <argon-input v-model.number="quantity.id_order"  type="text" hidden/>
-                    </template>
-                    <template #footer>
-                        <argon-button color="primary" @click="editOrder()">
-                            Order
-                        </argon-button>
-                        <argon-button color="secondary" @click="modal.editQuantity = false">
-                            Close
-                        </argon-button>
-                    </template>
-                </modal-comp>   -->
                 <div class="card">
-                    <!-- <div class="card">
-                        <data-table :index="false" :data="g$list" @detail="triggerDetail" @delete="triggerDelete" />
-                    </div> -->
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-2">
                                 <label for="example-text-input" class="form-control-label text-sm">Nomor PO</label>
                                 <argon-input v-model="input.po_number" type="text" />
                             </div>
-                            <!-- <div class="mb-4">
-                                <label for="example-text-input" class="form-control-label text-sm">Tujuan
-                                    Pemesanan</label>
-                                <VueMultiselect
-                                @click="triggerOptions()"
-                                v-model="selected"
-                                :options="options"
-                                :custom-label="nameWithLang"
-                                placeholder="Select one"
-                                label="name"
-                                track-by="name">
-                                </VueMultiselect>
-                                <span >{{selected}}</span>
-                            </div> -->
                             <div class="row col-12 mb-2">
-                                <!-- <label for="example-text-input" class="form-control-label text-sm">Nomor Order</label>
-                                <div class="col-10">
-                                    <argon-input v-model="filterOrder.selectedOrder" type="text" />
-                                </div>
-                                <div class="col-2">
-                                    <argon-button @click="searchOrder()" size="md" color="primary" type="button">Tambah</argon-button>
-                                </div> -->
                                 <div class="col-12" style="overflow-x:scroll;">
                                     <table class="table table-hover text-center align-items-center">
                                         <thead>
@@ -143,10 +89,6 @@
                                             <td class="p-lg-3 p-md-3 p-2 text-sm">{{ new Date(item.created_at).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' }) }}</td>
                                             <td class="p-lg-3 p-md-3 p-2 text-sm">{{ item.quantity}}</td>
                                             <td class="p-lg-3 p-md-3 p-2 text-sm">
-                                                <!-- <argon-button  @click="triggerEditQuantity(item.id_order)" size="md" color="primary">
-                                                    <span class="fa fa-pen fa-sm me-2"/>
-                                                    Edit
-                                                </argon-button> -->
                                                 <argon-button @click="triggerDeleteOrder(item.id_order)" size="md" color="danger">
                                                     <span class="fa fa-trash fa-sm me-lg-2 me-md-2" />
                                                     Batal
@@ -161,7 +103,7 @@
                                 <label for="example-text-input" class="form-control-label text-sm">Deadline
                                     Pembuatan</label>
                                 <base-input label="Date picker">
-                                    <flat-picker  placeholder="yyyy-mm-dd" slot-scope="{focus, blur}"
+                                    <flat-picker placeholder="yyyy-mm-dd" slot-scope="{focus, blur}"
                                                 @on-open="focus"
                                                 @on-close="blur"
                                                 :config="{allowInput: true}"
@@ -173,37 +115,8 @@
                                     </flat-picker>
                                 </base-input>
                             </div>
-                            <!-- <div class="col-12 mb-2">
-                                <label for="example-text-input" class="form-control-label text-sm">Dokumen
-                                    PO</label>
-                                <argon-input type="file" v-model="input.file" id="file" @change="changeFile($event)" :accept="accepts" />
-                            </div> -->
-                            <!-- <div id="liveToast"
-                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
-                                role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="d-flex">
-                                    <div class="toast-body">
-                                        {{ input.po_number }} Berhasil Ditambahkan
-                                    </div>
-                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                                        aria-label="Close"></button>
-                                </div>
-                            </div>
-                            <div id="liveToastError"
-                                class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
-                                role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="d-flex">
-                                    <div class="toast-body">
-                                        File Harus PDF
-                                    </div>
-                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                                        aria-label="Close"></button>
-                                </div>
-                            </div>
-                            <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
-                            <div class="col-lg-8 col-md-9 mb-5 mt-4">
-                                <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
-                            </div>
+
+
                             <div id="liveToast"
                                 class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-success"
                                 role="alert" aria-live="assertive" aria-atomic="true">
@@ -220,23 +133,13 @@
                                 role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="d-flex">
                                     <div class="toast-body">
-                                        File Harus PDF
+                                        Form Harus Diisi
                                     </div>
                                     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                                         aria-label="Close"></button>
                                 </div>
                             </div>
-                            <iframe id="preview" hidden style="width:100%; height: 400px;" :src="objectURL"></iframe>
-                            <div class="col-lg-8 col-md-9 mb-3 mt-0">
-                                <argon-button id="buttonFile" hidden @click="submitFile" size="md" color="primary" type="button">Simpan</argon-button>
-                            </div> -->
                         </div>
-                        <!-- <div class="col-lg-8 col-md-9">
-                            <argon-button @click="addPO()" size="md" color="primary">
-                                Buat PO
-                            </argon-button>
-                        </div> -->
-                        <argon-button @click="generatePDF()">Test Generate PDF</argon-button>
                     </div>
                 </div>
             </div>
@@ -255,14 +158,9 @@ import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import d$user from '@/stores/dashboard/user';
 import d$order from '@/stores/dashboard/order';
-import d$company from '@/stores/dashboard/company';
 import d$po from '@/stores/dashboard/po';
-import d$item from '@/stores/dashboard/item';
 import { mapActions, mapState } from 'pinia';
 import VueMultiselect from 'vue-multiselect';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-
 
 export default {
     name: 'ajukan-po-2',
@@ -277,7 +175,6 @@ export default {
             file: null,
         },
         filterOrder: [],
-        filterItem: [],
         quantity:{},
         selectQuantity: {},
         selected: null,
@@ -324,28 +221,17 @@ export default {
     computed: {
         ...mapState(d$user, ['g$list', 'g$detail']),
         ...mapState(d$order, ['g$getOrder', 'g$listSelectedOrder']),
-        ...mapState(d$company, ['g$listCompanyBelow', 'g$getMyCompany']),
         ...mapState(d$po, ['g$DocPO', 'g$AddPO']),
-        ...mapState(d$item, ['g$item', 'g$listDataItem']),
         modals() {
             return Object.values(this.modal).includes(true);
         }
     },
     async mounted() {
-        await this.a$listCompanyBelow();
-        await this.a$getMyCompany();
         this.filterOrder = this.g$listSelectedOrder;
-        this.filterItem = this.g$listDataItem;
-        
-        // console.log(this.g$item);
-        console.log("fILTER ORDER", this.filterOrder);
     },
     methods: {
-        // ...mapActions(d$user, ['a$inquiryList', 'a$inquiryEdit', 'a$inquiryDel', 'a$inquiryDetail', 'a$inquiryAdd']),
         ...mapActions(d$order, ['a$getOrder', 'a$inquiryEditOrder', 'a$inquiryAddPO']),
-        ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO']),
-        ...mapActions(d$company, ['a$listCompanyBelow','a$getMyCompany']),
-        ...mapActions(d$item, ['a$inquirygetItem']),
+        ...mapActions(d$po, ['a$inquiryAddDocPO', 'a$inquiryAddPO', 'a$storePoData']),
 
         nameWithLang ({ name }) {
             return `${name}`
@@ -363,6 +249,7 @@ export default {
             this.deadline = convertDate.toISOString();
             console.log(this.deadline);
         },
+
         async changeFile(event){
             if (this.objectURL) {
                 URL.revokeObjectURL(this.objectURL);
@@ -411,119 +298,34 @@ export default {
             
         },
 
-        async generatePDF(){
-            const doc = new jsPDF('landscape', 'pt', 'a4');
-            doc.setFontSize(14).setFont('undefined','bold').text(40, 40, 'Purchase Order  '+ this.input.po_number)
-            doc.setFontSize(12).setFont('undefined','regular').text(40, 70, this.g$getMyCompany.name)
-            doc.setFontSize(12).setFont('undefined','normal').text(40, 90, 'Attn:')
-            doc.setFontSize(12).setFont('undefined','normal').text(40, 105, this.g$getMyCompany.name)
-            doc.setFontSize(12).setFont('undefined','normal').text(40, 120, this.g$getMyCompany.address)
-
-            const companyTo = {
-                name: '',
-                address: '',
-                phone: '',
-            }
-
-            for(let i = 0; i < this.g$listCompanyBelow.length; i++){
-                if(this.g$listCompanyBelow[i].id_company == this.filterOrder[0].order_to){
-                    companyTo.name = this.g$listCompanyBelow[i].name;
-                    companyTo.address = this.g$listCompanyBelow[i].address;
-                    companyTo.phone = this.g$listCompanyBelow[i].phone;
+        async nextStep() {
+            try {
+                const data = {
+                    po_number: this.input.po_number,
+                    order_to: Number(this.$route.params.order_to),
+                    order: this.filterOrder,
+                    deadline: this.deadline,
+                };
+                if(this.input.po_number == '' || this.deadline == ''){
+                    const toastLiveExample = document.getElementById('liveToastError')
+                    const toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show()
+                }else{
+                    await this.a$storePoData(data);
+                    this.$router.push({ name: 'Ajukan PO 3'});
                 }
+            } catch (error) {
+                console.error(error);
+                
             }
-
-            doc.setFontSize(14).setFont('undefined','bold').text(650, 40, companyTo.name);
-            doc.setFontSize(12).setFont('undefined','normal').text(650, 60, companyTo.address);
-            doc.setFontSize(12).setFont('undefined','normal').text(650, 90, 'Telp   : '+ companyTo.phone);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            doc.setFontSize(12).setFont('undefined','normal').text(550, 180, 'Tanggal Dikeluarkan :  ' + new Date().toLocaleDateString("id-ID", options));
-
-            const data = []
-            for(let i = 0; i < this.filterOrder.length; i++){
-                data.push([
-                    i+1,
-                    this.filterOrder[i].order_number,
-                    this.filterItem[i].serial_number,
-                    this.filterItem[i].name,
-                    this.input.deadline,
-                    this.filterOrder[i].quantity,
-                    this.filterItem[i].unit,
-                ])
-            }       
-
-            doc.autoTable({
-                head: [['No', 'Nomor Order', 'Nomor Item' , 'Nama Barang', 'Tanggal Deadline', 'Qty Order', 'Satuan']],
-                body: data,
-                startY: 200,
-                theme: 'grid',
-                styles: {
-                    fontSize: 12,
-                    cellPadding: 5,
-                    halign: 'center',
-                    valign: 'middle',
-                    hcolor: 'black',
-                    lineWidth: 1,
-                    lineColor: [0, 0, 0],
-                    textColor: 'black',
-                },
-                headStyles: {
-                    fillColor: [255, 255, 255],
-                    textColor: 'black',
-                    fontStyle: 'bold',
-                    fontSize: 12,
-                },
-                columnStyles: {
-                    0: {cellWidth: 30},
-                    1: {cellWidth: 100},
-                    2: {cellWidth: 200},
-                    3: {cellWidth: 200},
-                    4: {cellWidth: 100},
-                    5: {cellWidth: 50},
-                },
-            });
-
-            doc.rect(15, 15, doc.internal.pageSize.width - 30, doc.internal.pageSize.height - 30, 'S');
-
-            window.open(doc.output('bloburl'), '_blank');
-           
         },
 
-
-        // async init() {
-        //     try {
-        //         await this.a$inquiryList();
-        //     } catch (e) {
-        //         console.error(e);
-        //     }
-        // },
-
-        // async addInquiry() {
-        //     try {
-        //         const { username, password, name, level, address, phone } = this.input;
-        //         const data = {
-        //             username, password, level: parseInt(level), name, address, phone
-        //         };
-        //         await this.a$inquiryAdd(data);
-        //         this.modal.add = false;
-        //         console.log(`Add ${this.pageTitle} Succeed!`);
-        //     } catch (e) {
-        //         console.error(e);
-        //     } finally {
-        //         await this.init();
-        //     }
-        // },
+        
         async triggerEditQuantity(id_order){
             this.modal.editQuantity = true;
             this.quantity = this.g$getOrder;
         },
         async triggerDeleteOrder(id_order){
-            // this.filterOrder.order.forEach((item, index) => {
-            //     if(item.id == this.filterOrder.selectedOrder.id){
-            //         this.filterOrder.order.splice(index, 1);
-            //     }
-            // });
-            // console.log(this.filterOrder.order);
             this.filterOrder = this.filterOrder.filter(item => item.id_order != id_order);
         },
         async searchOrder(){

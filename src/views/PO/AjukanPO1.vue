@@ -62,10 +62,21 @@
                             </select>
                         </div>
                         <div class="col-9 mt-4 text-end">
-                                <argon-button color="primary" size="md" @click="nextStep()">
-                                    Selanjutnya
-                                </argon-button>
+                            <argon-button color="primary" size="md" @click="nextStep()">
+                                Selanjutnya
+                            </argon-button>
                         </div>
+                    </div>
+                </div>
+                <div id="liveToastError"
+                    class="w-75 w-md-30 w-lg-30 toast position-fixed top-5 start-50 translate-middle-x align-items-center text-white bg-danger"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Pilih Perusahaan/Order Terlebih Dahulu!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="d-lg-none d-md-none d-block">
@@ -352,6 +363,9 @@ export default {
                 this.$router.push({ name: 'Ajukan PO 2', params: { order_to: this.input.company } });
             } catch (e) {
                 console.error(e);
+                const toastLiveExample = document.getElementById('liveToastError');
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
             }
         },
 

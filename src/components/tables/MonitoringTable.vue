@@ -145,11 +145,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 d-lg-block d-md-block d-none row align-items-center mr-4">
-                        <div class="mt-2 mb-2">
-                            <img src="../../assets/img/illustrations/order.png" alt="warning"
-                                style="width: 110px; height: 110px;">
-                        </div>
+                    <div class="col-2 d-lg-block d-md-block d-none align-self-center">
+                        <img src="@/assets/img/illustrations/order.png" alt="warning" style="width: 110px; height: 110px;">
                     </div>
                 </div>
             </template>
@@ -318,12 +315,11 @@ export default {
                 };
                 // const id = this.g$item.id_item;
                 await this.a$inquiryAddOrder(id_item, data);
-                this.modal.add = false;
                 const toastLiveExample = document.getElementById('liveToast');
                 const toast = new bootstrap.Toast(toastLiveExample);
                 toast.show();
                 setTimeout(() => {
-                    this.$router.push({ name: 'Monitoring Item' });
+                    this.modal.order = false;
                 }, 1000);
             }
             catch (e) {

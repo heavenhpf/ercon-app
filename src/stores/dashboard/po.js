@@ -121,6 +121,13 @@ const d$po = defineStore({
                 throw error ?? message;
             }
         },
+        async a$storePoData(data) {
+            try {
+                this.po = data ?? {}
+            } catch (error) {
+                throw error;
+            }
+        },
     },
     getters: {
         g$status: ({ status }) => status,
